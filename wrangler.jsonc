@@ -3,7 +3,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
 
   // Name of your worker
-  "name": "__change_me__",
+  "name": "redwoodsdk",
+  "routes": [
+    {
+      "pattern": "rwsdk.com",
+      "custom_domain": true
+    }
+  ],
 
   // Entry point for your worker
   "main": "src/worker.tsx",
