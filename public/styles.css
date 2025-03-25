@@ -21,7 +21,7 @@
 }
 
 @utility bullet {
-  @apply block w-1 h-1 rounded-full bg-mySin;
+  @apply block size-1 rounded-full bg-mySin;
 }
 
 @utility field {
