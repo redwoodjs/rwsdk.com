@@ -64,7 +64,6 @@ export function Home() {
           <p>To fully pursue this vision, we're launching Redwood SDK, a new framework that will become the foundation for this personal software revolution. We'll be sharing more about this in the weeks to come.</p>
 
           <p>At the same time, we deeply value the users and teams who've invested heavily in Redwood. To minimize disruption and provide clarity going forward, we're renaming the existing RedwoodJS framework to Redwood GraphQL, reflecting its strength as a mature, stable framework built around GraphQL.</p>
-          <p>At the same time, we deeply value the users and teams who’ve invested heavily in Redwood. To minimize disruption and provide clarity going forward, we’re renaming the existing RedwoodJS framework to Redwood GraphQL, reflecting its strength as a mature, stable framework built around GraphQL.</p>
 
           <h3>What this means for current Redwood users:</h3>
 
