@@ -1,11 +1,11 @@
 import Constants from '../lib/Constants';
-import GithubButton from '../components/GithubButton';
+import GithubButton from '../components/GitHubButton';
 
 
 function Home() {
     const getCurrentYear = () => {
       return new Date().getFullYear();
-    };  
+    };
 
   return (
     <div>
