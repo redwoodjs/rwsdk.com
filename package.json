@@ -29,6 +29,7 @@
     "tailwindcss": "^4.0.15"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.13.11",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

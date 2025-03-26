@@ -67,3 +67,59 @@ footer {
   @apply text-sm md:text-base;
   a { @apply hover:text-mySin;}
 }
+
+@layer base {
+  body {
+    @apply bg-alpine text-white;
+  }
+}
+
+@layer components {
+  .page {
+    @apply max-w-[1200px] mx-auto px-4 md:px-8;
+  }
+
+  .bullet {
+    @apply w-1.5 h-1.5 bg-mySin rounded-full;
+  }
+
+  .field {
+    @apply flex flex-col gap-2;
+  }
+
+  .field label {
+    @apply text-sm md:text-base font-mono font-bold uppercase;
+  }
+
+  .field input {
+    @apply bg-alpine border-[3px] border-mySin px-4 py-2 text-sm md:text-base;
+  }
+
+  .letter {
+    @apply max-w-none;
+  }
+
+  .letter h2 {
+    @apply text-2xl md:text-3xl font-bold mt-8 mb-4;
+  }
+
+  .letter h3 {
+    @apply text-xl md:text-2xl font-bold mt-6 mb-3;
+  }
+
+  .letter p {
+    @apply text-sm md:text-base mb-4;
+  }
+
+  .letter ul {
+    @apply list-none pl-0 mb-4;
+  }
+
+  .letter li {
+    @apply text-sm md:text-base mb-4;
+  }
+
+  .letter strong {
+    @apply text-mySin;
+  }
+}

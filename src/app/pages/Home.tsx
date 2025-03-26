@@ -1,3 +1,4 @@
+import GithubStartButton from '../components/GithubStartButton';
 import Constants from '../lib/Constants';
 
 export function Home() {
@@ -8,7 +9,7 @@ export function Home() {
   return (
     <div>
       <header>
-        <nav className="p-8">
+        <nav className="p-8 md:pr-32">
           <ul className="flex items-center uppercase font-mono font-bold gap-2 md:gap-4 text-sm md:text-base">
             <li className="hidden md:block"><div className="bullet"></div></li>
             <li><a className="hover:text-mySin" href={Constants.QUICK_START_URL}>Quick Start</a></li>
@@ -17,14 +18,15 @@ export function Home() {
             <li><div className="bullet"></div></li>
             <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL}>Tutorial</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
+            <li className="ml-auto">
+              <GithubStartButton />
+            </li>
           </ul>
         </nav>
 
-        <div className="fixed right-0 top-0">
-          <a href={Constants.GITHUB_REPO}>
-            <img src="/images/github-corner.svg" alt="GitHub" />
-          </a>
-        </div>
+        <a href={Constants.GITHUB_REPO} className="fixed right-0 top-0 hidden md:block">
+          <img src="/images/github-corner.svg" alt="GitHub" />
+        </a>
       </header>
       <main className="page">
         <img src="/images/logo--dark.svg" alt="RedwoodSDK" className="mx-auto mb-[60px]" />
@@ -88,7 +90,7 @@ export function Home() {
 
           <p>This is more than just technology. It's about rethinking how software gets created and shared. It's a commitment to making software personal again.</p>
 
-          <p>We’ll share more about the Redwood SDK in the coming weeks. Until then, those of you are currently using Redwood GraphQL can rest assured - our intention is to ensure that it remains secure, reliable, and ready to power your projects long-term.</p>
+          <p>We'll share more about the Redwood SDK in the coming weeks. Until then, those of you are currently using Redwood GraphQL can rest assured - our intention is to ensure that it remains secure, reliable, and ready to power your projects long-term.</p>
 
           <p>Thanks for your continued support and excitement for the journey ahead.</p>
 
