@@ -102,7 +102,7 @@ export function Home() {
 
       <footer className="page text-center mb-10">
         <hr />
-        <p className="mb-5">Copyright &copy; {getCurrentYear()}. RedwoodJS. All Rights Reserved.</p>
+        <p className="mb-5">Copyright &copy; {getCurrentYear()}. RedwoodJS Inc. All Rights Reserved.</p>
         <ul className="flex justify-center items-center uppercase font-mono font-bold gap-4 flex-wrap md:flex-nowrap">
           <li><div className="bullet"></div></li>
           <li><a href={Constants.GITHUB_REPO}>GITHUB</a></li>
