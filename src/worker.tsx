@@ -15,9 +15,23 @@ export default defineApp<Context>([
   },
   layout(Document, [
     index([Home]),
+    route("/docs", async () => {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          "Location": "https://docs.rwsdk.com",
+        },
+      });
+    }),
+    route("/docs/getting-started/quick-start/", async () => {
+      return new Response(null, {
+        status: 301,
+        headers: {
+          "Location": "https://docs.rwsdk.com/getting-started/quick-start/",
+        },
+      });
+    }),
     route("/sitemap.xml", async () => {
-      
-
       return new Response(sitemap, {
         status: 200,
         headers: {

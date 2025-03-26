@@ -7,22 +7,13 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://docs.redwoodjs.com</loc>
-    <name>Docs</name>
+    <loc>https://rwsdk.com/docs</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://docs.rwsdk.com/getting-started/quick-start/</loc>
-    <name>Quick Start</name>
-    <lastmod>${new Date().toISOString()}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
-    <loc>https://redwoodjs.com</loc>
-    <name>RedwoodJS</name>
+    <loc>https://rwsdk.com/docs/getting-started/quick-start/</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>
