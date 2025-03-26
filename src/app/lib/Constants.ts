@@ -6,6 +6,7 @@ const Constants = Object.freeze({
   GITHUB_URL: 'https://github.com/redwoodjs',
   BLUESKY_URL: 'https://bsky.app/profile/redwoodjs.com',
   DISCORD_URL: 'https://discord.gg/redwoodjs',
+  REDWOODJS_URL: 'https://redwoodjs.com',
 });
 
 export default Constants;
