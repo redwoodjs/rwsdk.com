@@ -5,10 +5,14 @@
   // Name of your worker
   "name": "redwoodsdk",
   "routes": [
-    {
-      "pattern": "rwsdk.com",
-      "custom_domain": true
-    }
+      {
+        "pattern": "rwsdk.com",
+        "custom_domain": true
+      },
+      {
+        "pattern": "www.rwsdk.com",
+        "custom_domain": true
+      }
   ],
 
   // Entry point for your worker

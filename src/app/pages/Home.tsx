@@ -107,10 +107,6 @@ export function Home() {
           <li><div className="bullet"></div></li>
           <li><a href={Constants.GITHUB_REPO}>GITHUB</a></li>
           <li><div className="bullet"></div></li>
-          <li><a href={Constants.LINKEDIN_URL}>LINKEDIN</a></li>
-          <li><div className="bullet"></div></li>
-          <li><a href={Constants.YOUTUBE_URL}>YOUTUBE</a></li>
-          <li><div className="bullet"></div></li>
           <li><a href={Constants.BLUESKY_URL}>BLUESKY</a></li>
           <li><div className="bullet"></div></li>
           <li><a href={Constants.DISCORD_URL}>DISCORD</a></li>
