@@ -1,10 +1,11 @@
-import GithubStartButton from '../components/GithubStartButton';
 import Constants from '../lib/Constants';
+import GithubButton from '../components/GithubButton';
 
-export function Home() {
-  const getCurrentYear = () => {
-    return new Date().getFullYear();
-  };
+
+function Home() {
+    const getCurrentYear = () => {
+      return new Date().getFullYear();
+    };  
 
   return (
     <div>
@@ -19,7 +20,7 @@ export function Home() {
             <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL}>Tutorial</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
             <li className="ml-auto">
-              <GithubStartButton />
+              <GithubButton href="https://github.com/redwoodjs/sdk" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-size="large" data-show-count="true" aria-label="Star redwoodjs/sdk on GitHub">Star</GithubButton>
             </li>
           </ul>
         </nav>
@@ -118,3 +119,5 @@ export function Home() {
     </div>
   );
 }
+
+export default Home;

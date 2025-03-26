@@ -27,6 +27,6 @@ export const setCommonHeaders =
     // Defines trusted sources for content loading and script execution:
     headers.set(
       "Content-Security-Policy",
-      `default-src 'self'; script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com; frame-src https://challenges.cloudflare.com; object-src 'none';`,
+      `default-src 'self'; script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io http://localhost:2332; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com; frame-src https://challenges.cloudflare.com; object-src 'none';`,
     );
   };
