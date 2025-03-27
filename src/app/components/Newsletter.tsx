@@ -1,6 +1,14 @@
 "use client"
 
+import { useEffect } from "react";
+//@ts-ignore
+import kwesforms from 'kwesforms';
 const Newsletter = () => {
+
+  useEffect(() => {
+    kwesforms.init();
+  }, []);   
+  
   return (
     <div className="border-mySin border-[3px] mb-10 md:mb-[100px]">
       <header className="px-4 py-5 md:p-10 pt-6 md:pt-12 relative border-b-[3px] border-mySin">

@@ -16,7 +16,7 @@ export const setCommonHeaders =
     headers.set("X-Content-Type-Options", "nosniff");
 
     // Stops browsers from sending the referring webpage URL in HTTP headers
-    headers.set("Referrer-Policy", "no-referrer");
+    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
 
     // Explicitly disables access to specific browser features/APIs
     headers.set(
@@ -27,6 +27,8 @@ export const setCommonHeaders =
     // Defines trusted sources for content loading and script execution:
     headers.set(
       "Content-Security-Policy",
-      `default-src 'self'; script-src 'self' 'nonce-${nonce}' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com; frame-src https://tagmanager.google.com; object-src 'none';`,
+      "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/*; frame-src https://tagmanager.google.com; object-src 'none';",
     );
+
+    headers.set("X-Frame-Options", "DENY");
   };
