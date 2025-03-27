@@ -1,10 +1,24 @@
 import stylesUrl from "./styles.css?url";
-import { Analytics } from "./components/Analytics";
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag: (...args: any[]) => void;
+  }
+}
 
 const GA_ID = import.meta.env.VITE_GA_ID;
 
+const gaScript = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${GA_ID}');
+`;
+
 export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> = ({
-  children
+  children,
+  nonce
 }) => (
   <html lang="en">
     <head>
@@ -22,17 +36,17 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       <meta name="alexa" content="index, follow" />
       <meta name="yandex" content="index, follow" />
       <meta name="sitemap" content="/sitemap.xml" />
-      <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com/api/foreign/forms/* https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz/favicon https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz; frame-src https://tagmanager.google.com; object-src 'none';" />
+      <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com; frame-src https://tagmanager.google.com; object-src 'none';" />
       <title>RedwoodSDK</title>
       <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-      <script type="module" src="/src/client.tsx"></script>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} nonce={nonce}></script>
+      <script dangerouslySetInnerHTML={{ __html: gaScript }} nonce={nonce} />
+      <script type="module" src="/src/client.tsx" nonce={nonce}></script>
       <link rel="stylesheet" href={stylesUrl} />
     </head>
     <body>
       <div id="root">
         {children}
-        <Analytics />
         <script src="https://kwesforms.com/v2/kf-script.js" defer></script>
       </div>
     </body>
