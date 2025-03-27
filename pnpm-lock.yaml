@@ -14,9 +14,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.15
         version: 4.0.15(vite@6.2.3(@types/node@22.13.13)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3)(yaml@2.7.0))
-      kwesforms:
-        specifier: ^2.2.9
-        version: 2.2.9
       react:
         specifier: 19.0.0-rc-f2df5694-20240916
         version: 19.0.0-rc-f2df5694-20240916
@@ -1932,9 +1929,6 @@ packages:
 
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
-
-  kwesforms@2.2.9:
-    resolution: {integrity: sha512-qMz+jZYRZQ4u7RfOEld7vq0M7fw85aP2rwuTQelNoKusiY4k8fT8SMBlf1SeqvM2HobRjCogHQL8JiwYkWrhKw==}
 
   kysely-codegen@0.17.0:
     resolution: {integrity: sha512-C36g6epial8cIOSBEWGI9sRfkKSsEzTcivhjPivtYFQnhMdXnrVFaUe7UMZHeSdXaHiWDqDOkReJgWLD8nPKdg==}
@@ -4757,8 +4751,6 @@ snapshots:
       graceful-fs: 4.2.11
 
   kolorist@1.8.0: {}
-
-  kwesforms@2.2.9: {}
 
   kysely-codegen@0.17.0(kysely@0.27.6):
     dependencies:

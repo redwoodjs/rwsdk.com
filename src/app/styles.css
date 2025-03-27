@@ -15,6 +15,7 @@
   --color-mySin: #ffad48;
   --color-alpine: #af7b3c;
   --color-cinnabar: #e73c37;
+  --color-medium-aquamarine: #5dd697;
 
   --font-mono: 'Roboto Mono', monospace;
   --font-chicago: 'Chicago', sans-serif;
@@ -25,7 +26,7 @@
 }
 
 @utility field {
-  @apply pt-7 pb-0 md:pb-10 relative;
+  @apply pt-7 pb-0 md:pb-10 relative flex flex-col gap-2;
   &:last-of-type { @apply !pb-7; }
   &:before { @apply h-4 border-l-[2px] border-mySin w-[1px] content-[''] absolute left-0 top-0 hidden md:block;}
   &:after { @apply h-4 border-l-[2px] border-mySin w-[1px] content-[''] absolute left-0 bottom-0 hidden md:block;}
@@ -37,89 +38,61 @@
   @apply max-w-[760px] mx-auto px-5 md:px-0;
 }
 
-label {
-  @apply font-bold uppercase text-white bg-[url('/images/dash.svg')] bg-repeat-x bg-left-bottom w-full pb-3 block mb-3;
-}
-
-input[type="text"],
-input[type="email"] {
-  @apply bg-white text-black uppercase font-bold px-2 h-9 w-full outline-mySin focus:outline-mySin;
-}
-
-body {
-  @apply bg-black text-white font-mono;
-}
-
-.letter {
-  @apply mb-12 md:mb-20;
-  h2 { @apply text-2xl md:text-3xl font-chicago text-mySin mb-10 pt-5; }
-  h3 { @apply text-lg md:text-xl font-chicago text-mySin mb-10 pt-5; }
-  ul { @apply list-disc pl-6; }
-  li,
-  p { @apply mb-5 md:mb-10 text-sm md:text-lg leading-relaxed; }
-}
-
-hr {
-  @apply bg-[url('/images/plus.svg')] bg-repeat-x bg-[center-center] w-full h-4 border-none mb-12 md:mb-20;
-}
-
-footer {
-  @apply text-sm md:text-base;
-  a { @apply hover:text-mySin;}
-}
+@layer base, components;
 
 @layer base {
   body {
     @apply bg-alpine text-white;
   }
+
+  label {
+    @apply text-sm md:text-base font-mono font-bold uppercase text-white bg-[url('/images/dash.svg')] bg-repeat-x bg-left-bottom w-full pb-3 block mb-3;
+  }
+
+  input[type="text"],
+  input[type="email"] {
+    @apply bg-white border-[3px] border-white text-black uppercase font-bold px-2 text-sm md:text-base h-9 w-full outline-mySin focus:outline-mySin;
+  }
+
+  body {
+    @apply bg-black text-white font-mono;
+  }
+
+  .letter {
+    @apply mb-12 md:mb-20 max-w-none;
+    h2 { @apply text-2xl md:text-3xl font-chicago font-bold text-mySin mt-8 mb-4 pt-5; }
+    h3 { @apply text-lg md:text-2xl font-chicago text-mySin mt-6 mb-3 pt-5; }
+    ul { @apply list-disc mb-4 pl-5; }
+    li,
+    p { @apply mb-4 md:mb-10 text-sm md:text-base leading-relaxed; }
+    strong { @apply text-mySin; }
+  }
+
+  hr {
+    @apply bg-[url('/images/plus.svg')] bg-repeat-x bg-[center-center] w-full h-4 border-none mb-12 md:mb-20;
+  }
+
+  footer {
+    @apply text-sm md:text-base;
+    a { @apply hover:text-mySin; }
+  }
 }
 
 @layer components {
-  .page {
-    @apply max-w-[1200px] mx-auto px-4 md:px-8;
-  }
-
   .bullet {
     @apply w-1.5 h-1.5 bg-mySin rounded-full;
   }
 
-  .field {
-    @apply flex flex-col gap-2;
+  /* Kwes Form */
+  .kw-alert {
+    @apply col-span-2 mx-10 my-3 !w-[calc(100%-80px)];
   }
 
-  .field label {
-    @apply text-sm md:text-base font-mono font-bold uppercase;
+  .kw-alert-error {
+    @apply !bg-cinnabar !text-white !rounded-none;
   }
 
-  .field input {
-    @apply bg-alpine border-[3px] border-mySin px-4 py-2 text-sm md:text-base;
-  }
-
-  .letter {
-    @apply max-w-none;
-  }
-
-  .letter h2 {
-    @apply text-2xl md:text-3xl font-bold mt-8 mb-4;
-  }
-
-  .letter h3 {
-    @apply text-xl md:text-2xl font-bold mt-6 mb-3;
-  }
-
-  .letter p {
-    @apply text-sm md:text-base mb-4;
-  }
-
-  .letter ul {
-    @apply list-none pl-0 mb-4;
-  }
-
-  .letter li {
-    @apply text-sm md:text-base mb-4;
-  }
-
-  .letter strong {
-    @apply text-mySin;
+  .kw-alert-success {
+    @apply !bg-medium-aquamarine !text-black !rounded-none;
   }
 }
