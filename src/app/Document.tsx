@@ -10,7 +10,7 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content="RedwoodSDK is a React framework for building webapps. It’s optimized for the Cloudflare Development Platform, which means you can build your webapp with a database, queues, storage, and much more! All in one place, without having to worry about the underlying infrastructure." />
+      <meta name="description" content="RedwoodSDK is a React framework for building webapps. It's optimized for the Cloudflare Development Platform, which means you can build your webapp with a database, queues, storage, and much more! All in one place, without having to worry about the underlying infrastructure." />
       <meta name="author" content="RedwoodJS  " />
       <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK" />
       <meta name="sitemap" content="/sitemap.xml" />
@@ -22,7 +22,7 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       <meta name="alexa" content="index, follow" />
       <meta name="yandex" content="index, follow" />
       <meta name="sitemap" content="/sitemap.xml" />
-      <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com; frame-src https://tagmanager.google.com; object-src 'none';" />
+      <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com/api/foreign/forms/* https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz/favicon https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz; frame-src https://tagmanager.google.com; object-src 'none';" />
       <title>RedwoodSDK</title>
       <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
       <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
@@ -33,7 +33,6 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       <div id="root">
         {children}
         <Analytics />
-        <script src="https://kwesforms.com/v2/kf-script.js" defer></script>
       </div>
     </body>
   </html>
