@@ -24,7 +24,7 @@ export default function ReadMe() {
                 <main className="flex-1 overflow-y-auto px-6 md:pr-16 py-8 space-y-12">
                     <section className="space-y-6">
                         <h1 className="font-jersey-charted text-[40px] md:text-[100px] leading-[107%] tracking-normal antialiased">
-                            <div>It started with a blinking cursor <span className="text-orange cursor-blink"> / {' '}</span></div>
+                            <div>It started with a blinking cursor <span className="text-orange cursor-blink"> █ {' '}</span></div>
                         </h1>
 
                         <div>
