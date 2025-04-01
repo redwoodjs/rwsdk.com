@@ -1,13 +1,38 @@
 "use client"
 
+import { useEffect, useRef } from 'react';
+
+declare global {
+  interface Window {
+    __kwesformsScriptAdded?: boolean;
+  }
+}
+
 const Newsletter = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (!window.__kwesformsScriptAdded) {
+      const script = document.createElement('script');
+      script.src = 'https://kwesforms.com/v2/kf-script.js';
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+      window.__kwesformsScriptAdded = true;
+    }
+  }, []);
+
   return (
     <div className="border-mySin border-[3px] mb-10 md:mb-[100px]">
       <header className="px-4 py-5 md:p-10 pt-6 md:pt-12 relative border-b-[3px] border-mySin">
         <h2 className="font-bold uppercase bg-mySin text-black px-5 leading-[1.75] inline-block absolute left-1/2 -translate-x-1/2 -top-4 whitespace-nowrap">BE THE FIRST TO KNOW</h2>
         <p className="text-sm md:text-base">Sign up for our newsletter to receive exclusive updates on our progress, early access opportunities, and comprehensive guides as we approach launch. Be among the first to try RedwoodSDK and see how it makes your development workflow faster and more enjoyable.</p>
       </header>
-      <form action="https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz" className="kf-form grid grid-cols-1 md:grid-cols-2 gap-x-[72px]">
+      <form 
+        ref={formRef}
+        action="https://kwesforms.com/api/foreign/forms/j3K2Y919pleglPFXuuAz" 
+        className="kf-form grid grid-cols-1 md:grid-cols-2 gap-x-[72px]"
+      >
         <div className="field mx-5 md:ml-10 md:mr-0">
           <label htmlFor="name">Name</label>
           <input type="text" id="name" name="name" data-kw-rules="required" />

@@ -67,7 +67,6 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       </noscript>
       <div id="root">
         {children}
-        <script src="https://kwesforms.com/v2/kf-script.js" defer></script>
       </div>
     </body>
   </html>
