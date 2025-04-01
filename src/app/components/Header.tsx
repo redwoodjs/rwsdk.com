@@ -12,7 +12,9 @@ export default function Header() {
           README | {formattedDate}
         </span>
       </div>
-      <img src="/images/logo--light.svg" alt="RedwoodSDK" className="h-10" />
+      <a href="/" aria-label="RedwoodSDK">
+        <img src="/images/logo--light.svg" alt="RedwoodSDK" className="h-10" />
+      </a>
       <div className="block md:hidden w-full">
         <img src="/images/hero-small.png" alt="Hero Image" className="w-full h-full" />
       </div>
