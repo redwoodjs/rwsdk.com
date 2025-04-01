@@ -1,28 +1,26 @@
 "use client"
 import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
-import { useEffect } from 'react';
+
+export const meta = {
+    title: "Personal Software | RedwoodSDK",
+    description: "The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK.",
+    ogTitle: "The Personal Software Revolution | RedwoodSDK",
+    ogDescription: "Software can be personal again. Not just technically, but philosophically. Owned. Forkable. Shareable. Local. Beautiful. Built for use, not for scale. Built with love, not venture funding.",
+    ogUrl: "https://rwsdk.com/personal-software"
+};
 
 export default function PersonalSoftware() {
-    useEffect(() => {
-        document.title = 'Personal Software | RedwoodSDK';
-        // Optional: Reset title when component unmounts
-        return () => {
-            document.title = 'RedwoodSDK';
-        };
-    }, []); // Empty dependency array means this runs once on mount
-
     return (
         <div className="flex flex-col md:flex-row min-h-screen font-chivo bg-[#EDEBE6] text-black">
             <HeroImage />
-
             <div className="flex-1 flex flex-col">
                 <div className="sticky top-0 z-10 bg-[#EDEBE6]">
                     <Header />
                 </div>
                 <div className="flex items-center justify-center md:hidden w-full">
-                        <img src="/images/hero-small.png" alt="Hero Image" className="w-[188px] h-full" />
-                    </div>
+                    <img src="/images/hero-small.png" alt="Hero Image" className="w-[188px] h-full" />
+                </div>
 
                 <main className="flex-1 overflow-y-auto px-6 md:pr-16 py-8 space-y-12">
                     <section className="space-y-6">

@@ -7,6 +7,21 @@ declare global {
   }
 }
 
+interface MetaTags {
+  title?: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogUrl?: string;
+  ogImage?: string;
+}
+
+interface DocumentProps {
+  children: React.ReactNode;
+  nonce?: string;
+  meta?: MetaTags;
+}
+
 const GA_ID = import.meta.env.VITE_GA_ID;
 const GTM_ID = 'GTM-FVTZFB44';
 
@@ -25,49 +40,100 @@ const gtmScript = `
   })(window,document,'script','dataLayer','${GTM_ID}');
 `;
 
-export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> = ({
+// CSP directives organized by type
+const cspDirectives = {
+  'script-src': "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
+  'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
+  'font-src': "'self' https://fonts.gstatic.com",
+  'connect-src': "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com",
+  'frame-src': "https://tagmanager.google.com",
+  'object-src': "'none'",
+  'img-src': "'self' https://www.google-analytics.com https://www.googletagmanager.com data: https:",
+};
+
+const cspContent = Object.entries(cspDirectives)
+  .map(([key, value]) => `${key} ${value}`)
+  .join('; ');
+
+export const Document: React.FC<DocumentProps> = ({
   children,
-  nonce
-}) => (
-  <html lang="en">
-    <head>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content="RedwoodSDK is a React framework for building webapps. It's optimized for the Cloudflare Development Platform, which means you can build your webapp with a database, queues, storage, and much more! All in one place, without having to worry about the underlying infrastructure." />
-      <meta name="author" content="RedwoodJS  " />
-      <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK" />
-      <meta name="sitemap" content="/sitemap.xml" />
+  nonce,
+  meta = {}
+}) => {
+  const {
+    title = 'RedwoodSDK',
+    description = 'RedwoodSDK is a React framework for building webapps. It\'s optimized for the Cloudflare Development Platform, which means you can build your webapp with a database, queues, storage, and much more! All in one place, without having to worry about the underlying infrastructure.',
+    ogTitle = title,
+    ogDescription = description,
+    ogUrl = 'https://rwsdk.com',
+    ogImage = 'https://rwsdk.com/images/logo--light.svg'
+  } = meta;
 
-      <script dangerouslySetInnerHTML={{ __html: gtmScript }} nonce={nonce} />
-
-      <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
-      <meta name="robots" content="index, follow" />
-      <meta name="googlebot" content="index, follow" />
-      <meta name="bingbot" content="index, follow" />
-      <meta name="alexa" content="index, follow" />
-      <meta name="yandex" content="index, follow" />
-      <meta name="sitemap" content="/sitemap.xml" />
-      <meta httpEquiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com; frame-src https://tagmanager.google.com; object-src 'none';" />
-      <title>RedwoodSDK</title>
-      <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} nonce={nonce}></script>
-      <script dangerouslySetInnerHTML={{ __html: gaScript }} nonce={nonce} />
-      <script type="module" src="/src/client.tsx" nonce={nonce}></script>
-      <link rel="stylesheet" href={stylesUrl} />
-    </head>
-    <body>
-      <noscript>
-        <iframe 
-          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-          height="0" 
-          width="0" 
-          style={{ display: 'none', visibility: 'hidden' }}
-          title="Google Tag Manager"
-        />
-      </noscript>
-      <div id="root">
-        {children}
-      </div>
-    </body>
-  </html>
-);
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Primary Meta Tags */}
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <meta name="author" content="RedwoodJS" />
+        <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={ogUrl} />
+        <meta property="og:title" content={ogTitle} />
+        <meta property="og:description" content={ogDescription} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:site_name" content="RedwoodSDK" />
+        
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={ogUrl} />
+        <meta property="twitter:title" content={ogTitle} />
+        <meta property="twitter:description" content={ogDescription} />
+        <meta property="twitter:image" content={ogImage} />
+        
+        {/* Icons */}
+        <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+        
+        {/* Search Engine */}
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="yandex" content="index, follow" />
+        <meta name="sitemap" content="/sitemap.xml" />
+        
+        {/* Security */}
+        <meta httpEquiv="Content-Security-Policy" content={cspContent} />
+        
+        {/* Analytics */}
+        <script dangerouslySetInnerHTML={{ __html: gtmScript }} nonce={nonce} />
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} nonce={nonce}></script>
+        <script dangerouslySetInnerHTML={{ __html: gaScript }} nonce={nonce} />
+        
+        {/* Styles and Scripts */}
+        <script type="module" src="/src/client.tsx" nonce={nonce}></script>
+        <link rel="stylesheet" href={stylesUrl} />
+      </head>
+      <body>
+        <noscript>
+          <iframe 
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+            title="Google Tag Manager"
+          />
+        </noscript>
+        <div id="root">
+          {children}
+        </div>
+      </body>
+    </html>
+  );
+};
