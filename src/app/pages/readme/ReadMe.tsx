@@ -1,7 +1,17 @@
+"use client"
 import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
+import { useEffect } from 'react';
 
 export default function ReadMe() {
+    useEffect(() => {
+        document.title = 'README | RedwoodSDK';
+        // Optional: Reset title when component unmounts
+        return () => {
+            document.title = 'RedwoodSDK';
+        };
+    }, []); // Empty dependency array means this runs once on mount
+
     return (
         <div className="flex flex-col md:flex-row min-h-screen font-chivo bg-[#EDEBE6] text-black">
             <HeroImage />
