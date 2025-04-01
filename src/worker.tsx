@@ -17,7 +17,7 @@ export default defineApp<Context>([
   },
   document(Document, [
     index([Home]),
-    route("/ps", [PersonalSoftware]),
+    route("/personal-software", [PersonalSoftware]),
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
