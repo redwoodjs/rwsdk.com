@@ -8,6 +8,14 @@ function Home() {
       return new Date().getFullYear();
     };
 
+    const getCurrentDate = () => {
+      return new Date().toLocaleDateString('en-ZA', {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric'
+      }); 
+    };
+
   return (
     <div>
       <header>
@@ -20,6 +28,7 @@ function Home() {
             <li><div className="bullet"></div></li>
             <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL}>Tutorial</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
+            <li><a className="hover:text-mySin" href={Constants.README_URL}>README {getCurrentDate()}</a></li>
             <li className="ml-auto">
               <GithubButton href="https://github.com/redwoodjs/sdk" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-size="large" data-show-count="true" aria-label="Star redwoodjs/sdk on GitHub">Star</GithubButton>
             </li>
