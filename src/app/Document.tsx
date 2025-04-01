@@ -8,12 +8,21 @@ declare global {
 }
 
 const GA_ID = import.meta.env.VITE_GA_ID;
+const GTM_ID = 'GTM-FVTZFB44';
 
 const gaScript = `
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '${GA_ID}');
+`;
+
+const gtmScript = `
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${GTM_ID}');
 `;
 
 export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> = ({
@@ -28,9 +37,11 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       <meta name="author" content="RedwoodJS  " />
       <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK" />
       <meta name="sitemap" content="/sitemap.xml" />
-      
+
+      <script dangerouslySetInnerHTML={{ __html: gtmScript }} nonce={nonce} />
+
       <link rel="icon" type="image/svg+xml" href="/images/favicon.ico" />
-      <meta name="robots" content="index, follow" />  
+      <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
       <meta name="bingbot" content="index, follow" />
       <meta name="alexa" content="index, follow" />
@@ -45,6 +56,15 @@ export const Document: React.FC<{ children: React.ReactNode; nonce?: string }> =
       <link rel="stylesheet" href={stylesUrl} />
     </head>
     <body>
+      <noscript>
+        <iframe 
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0" 
+          width="0" 
+          style={{ display: 'none', visibility: 'hidden' }}
+          title="Google Tag Manager"
+        />
+      </noscript>
       <div id="root">
         {children}
         <script src="https://kwesforms.com/v2/kf-script.js" defer></script>

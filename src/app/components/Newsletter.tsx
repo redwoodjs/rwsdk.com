@@ -17,7 +17,7 @@ const Newsletter = () => {
           <input type="email" id="email" name="email" data-kw-rules="required|email" />
         </div>
         <footer className="md:col-span-2 bg-alpine border-t-[3px] border-mySin flex justify-end">
-          <button type="submit" className="bg-mySin text-black px-5 py-2 uppercase font-bold flex items-center gap-2 hover:bg-cinnabar hover:text-white border-l-mySin border-l-[3px] cursor-pointer">
+          <button id="newsletter-signup" type="submit" className="bg-mySin text-black px-5 py-2 uppercase font-bold flex items-center gap-2 hover:bg-cinnabar hover:text-white border-l-mySin border-l-[3px] cursor-pointer">
             <img src="/images/triangle.svg" alt="triangle right" />
             Subscribe
           </button>
