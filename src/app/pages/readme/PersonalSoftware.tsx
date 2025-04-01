@@ -6,7 +6,7 @@ export const meta = {
     title: "Personal Software | RedwoodSDK",
     description: "The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK.",
     ogTitle: "The Personal Software Revolution | RedwoodSDK",
-    ogDescription: "Software can be personal again. Not just technically, but philosophically. Owned. Forkable. Shareable. Local. Beautiful. Built for use, not for scale. Built with love, not venture funding.",
+    ogDescription: "With RedwoodSDK, software can be personal again. Not just technically, but philosophically. Owned. Forkable. Shareable. Local. Beautiful. Built for use, not for scale. Built with love, not venture funding.",
     ogUrl: "https://rwsdk.com/personal-software"
 };
 

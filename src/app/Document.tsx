@@ -14,6 +14,7 @@ interface MetaTags {
   ogDescription?: string;
   ogUrl?: string;
   ogImage?: string;
+  ogLogo?: string;
 }
 
 interface DocumentProps {
@@ -62,11 +63,12 @@ export const Document: React.FC<DocumentProps> = ({
 }) => {
   const {
     title = 'RedwoodSDK',
-    description = 'RedwoodSDK is a React framework for building webapps. It\'s optimized for the Cloudflare Development Platform, which means you can build your webapp with a database, queues, storage, and much more! All in one place, without having to worry about the underlying infrastructure.',
+    description = 'RedwoodSDK gives you a complete set of composable tools to handle the request/response lifecycle of webapps.At its core, it’s just a Vite plugin that seamlessly enables SSR, React Server Components, React Server Functions, and real-time.',
     ogTitle = title,
     ogDescription = description,
     ogUrl = 'https://rwsdk.com',
-    ogImage = 'https://rwsdk.com/images/logo--light.svg'
+    ogImage = 'https://rwsdk.com/images/og-image.png',
+    ogLogo = 'https://rwsdk.com/images/logo--light.svg'
   } = meta;
 
   return (
@@ -80,7 +82,7 @@ export const Document: React.FC<DocumentProps> = ({
         <meta name="title" content={title} />
         <meta name="description" content={description} />
         <meta name="author" content="RedwoodJS" />
-        <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK" />
+        <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK, Cloudflare Development Platform, response lifecycle, webapps" />
         
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
@@ -88,6 +90,8 @@ export const Document: React.FC<DocumentProps> = ({
         <meta property="og:title" content={ogTitle} />
         <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
+        <meta property="og:logo" content={ogLogo} />
+
         <meta property="og:site_name" content="RedwoodSDK" />
         
         {/* Twitter */}
@@ -96,10 +100,12 @@ export const Document: React.FC<DocumentProps> = ({
         <meta property="twitter:title" content={ogTitle} />
         <meta property="twitter:description" content={ogDescription} />
         <meta property="twitter:image" content={ogImage} />
-        
+        <meta property="twitter:logo" content={ogLogo} />
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+        <link rel="android-chrome-192x192" href="/images/android-chrome.png" />
+        <link rel="android-chrome-512x512" href="/images/android-chrome.png" />
         
         {/* Search Engine */}
         <meta name="robots" content="index, follow" />
