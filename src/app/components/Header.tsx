@@ -15,9 +15,6 @@ export default function Header() {
       <a href="/" aria-label="RedwoodSDK">
         <img src="/images/logo--light.svg" alt="RedwoodSDK" className="h-10" />
       </a>
-      <div className="block md:hidden w-full">
-        <img src="/images/hero-small.png" alt="Hero Image" className="w-full h-full" />
-      </div>
     </div>
   );
 }

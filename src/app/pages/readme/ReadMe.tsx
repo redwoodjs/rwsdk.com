@@ -20,6 +20,9 @@ export default function ReadMe() {
                 <div className="sticky top-0 z-10 bg-[#EDEBE6]">
                     <Header />
                 </div>
+                <div className="flex items-center justify-center md:hidden w-full">
+                        <img src="/images/hero-small.png" alt="Hero Image" className="w-[188px] h-full" />
+                    </div>
 
                 <main className="flex-1 overflow-y-auto px-6 md:pr-16 py-8 space-y-12">
                     <section className="space-y-6">
@@ -48,7 +51,7 @@ export default function ReadMe() {
                             They stayed up too late. <br />
                             They built games. Tools. Mods. Scripts to make life easier. <br />
                             They shared zip files on forums. Burned CDs for friends. <br />
-                            They made things. 
+                            They made things.
                             <strong>Because they could!</strong>
                         </p>
                     </section>
@@ -61,7 +64,7 @@ export default function ReadMe() {
                         <p className="text-base md:text-lg leading-relaxed font-light">
                             Small tools made by small teams gave way to big tools and big teams. <br />
                             Suddenly, we have massive platforms backed by massive money. <br />
-                            We got jobs. We went to stand ups. We joined sprint planning calls and added tickets to Jira. 
+                            We got jobs. We went to stand ups. We joined sprint planning calls and added tickets to Jira.
                             Software became a business. <br />
                             <strong>And business became the reason software existed.</strong>
                         </p>
@@ -113,7 +116,7 @@ export default function ReadMe() {
                             Software that solves your problem. Software that doesn't try to lock you in or track your usage or upsell you into a higher tier.
                         </p>
                         <p className="text-base md:text-lg leading-relaxed font-light">
-                            <strong>Because here's the thing:</strong> The joy of writing software, and the joy of using it - they should go hand in hand. <strong>We want to bring that joy back.</strong> 
+                            <strong>Because here's the thing:</strong> The joy of writing software, and the joy of using it - they should go hand in hand. <strong>We want to bring that joy back.</strong>
                         </p>
 
                         <h3 className="text-xl font-bold font-jersey uppercase text-[32px]">
