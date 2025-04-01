@@ -9,7 +9,7 @@ export default function Header() {
     <div className="z-10 py-4 px-6 md:pr-16 flex items-center flex-col md:block">
       <div className="flex justify-end">
         <span className="font-jersey-charted text-orange font-light tracking-tight leading-none text-[20px] md:mb-10 mb-2 mx-2">
-          README | {formattedDate}
+          PS | {formattedDate}
         </span>
       </div>
       <a href="/" aria-label="RedwoodSDK">

@@ -13,7 +13,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://rwsdk.com/readme</loc>
+    <loc>https://rwsdk.com/ps</loc>
     <lastmod>${new Date().toISOString()}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1</priority>

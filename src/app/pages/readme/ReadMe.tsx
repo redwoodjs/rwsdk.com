@@ -3,9 +3,9 @@ import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
 import { useEffect } from 'react';
 
-export default function ReadMe() {
+export default function PersonalSoftware() {
     useEffect(() => {
-        document.title = 'README | RedwoodSDK';
+        document.title = 'Personal Software | RedwoodSDK';
         // Optional: Reset title when component unmounts
         return () => {
             document.title = 'RedwoodSDK';

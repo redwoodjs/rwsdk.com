@@ -5,6 +5,7 @@ import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import ReadMe from "src/pages/readme/ReadMe";
+import PersonalSoftware from "src/pages/readme/ReadMe";
 
 type Context = {};
 
@@ -16,7 +17,7 @@ export default defineApp<Context>([
   },
   document(Document, [
     index([Home]),
-    route("/readme", [ReadMe]),
+    route("/ps", [PersonalSoftware]),
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
