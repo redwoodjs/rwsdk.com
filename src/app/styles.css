@@ -49,6 +49,7 @@
   body {
     @apply bg-alpine text-white;
   }
+}
 @layer components {
   .page {
     @apply max-w-[1200px] mx-auto px-4 md:px-8;
