@@ -7,20 +7,9 @@ declare global {
   }
 }
 
-interface MetaTags {
-  title?: string;
-  description?: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogUrl?: string;
-  ogImage?: string;
-  ogLogo?: string;
-}
-
 interface DocumentProps {
   children: React.ReactNode;
   nonce?: string;
-  meta?: MetaTags;
 }
 
 const GA_ID = import.meta.env.VITE_GA_ID;
@@ -59,53 +48,40 @@ const cspContent = Object.entries(cspDirectives)
 export const Document: React.FC<DocumentProps> = ({
   children,
   nonce,
-  meta = {}
 }) => {
-  const {
-    title = 'RedwoodSDK',
-    description = 'RedwoodSDK gives you a complete set of composable tools to handle the request/response lifecycle of webapps.At its core, it’s just a Vite plugin that seamlessly enables SSR, React Server Components, React Server Functions, and real-time.',
-    ogTitle = title,
-    ogDescription = description,
-    ogUrl = 'https://rwsdk.com',
-    ogImage = 'https://rwsdk.com/images/og-image.png',
-    ogLogo = 'https://rwsdk.com/images/logo--light.svg'
-  } = meta;
-
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        {/* Primary Meta Tags */}
-        <title>{title}</title>
-        <meta name="title" content={title} />
-        <meta name="description" content={description} />
-        <meta name="author" content="RedwoodJS" />
-        <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK, Cloudflare Development Platform, response lifecycle, webapps" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={ogUrl} />
-        <meta property="og:title" content={ogTitle} />
-        <meta property="og:description" content={ogDescription} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:logo" content={ogLogo} />
-
-        <meta property="og:site_name" content="RedwoodSDK" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={ogUrl} />
-        <meta property="twitter:title" content={ogTitle} />
-        <meta property="twitter:description" content={ogDescription} />
-        <meta property="twitter:image" content={ogImage} />
-        <meta property="twitter:logo" content={ogLogo} />
+        <title>RedwoodSDK | The JavaScript SDK for Cloudflare Workers</title>
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+        <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />
+        <link rel="logo-dark" type="image/svg+xml" href="/images/logo--dark.svg" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <link rel="android-chrome-192x192" href="/images/android-chrome.png" />
         <link rel="android-chrome-512x512" href="/images/android-chrome.png" />
+
+        {/* ogTags */}
+        <meta property="og:title" content="RedwoodSDK | The JavaScript SDK for Cloudflare Workers" />
+        <meta property="og:description" content="RedwoodSDK is the JavaScript SDK for Cloudflare Workers. It provides a complete set of composable tools to handle the request/response lifecycle of webapps." />
+        <meta property="og:image" content="https://rwsdk.com/images/og-image.png" />
+        <meta property="og:url" content="https://rwsdk.com" />
+        <meta property="og:site_name" content="RedwoodSDK" />
+        {/* logo */}
+        <meta property="og:logo" content="https://rwsdk.com/images/logo--light.svg" />
+        {/* type */}
+        <meta property="og:type" content="website" />
+        {/* locale */}
+        <meta property="og:locale" content="en_US" />
+        {/* image */}
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="RedwoodSDK Logo" />
+        
+        
+        
         
         {/* Search Engine */}
         <meta name="robots" content="index, follow" />
@@ -113,6 +89,9 @@ export const Document: React.FC<DocumentProps> = ({
         <meta name="bingbot" content="index, follow" />
         <meta name="yandex" content="index, follow" />
         <meta name="sitemap" content="/sitemap.xml" />
+        <meta name="description" content="RedwoodSDK is the JavaScript SDK for Cloudflare Workers. It provides a complete set of composable tools to handle the request/response lifecycle of webapps." />
+        <meta name="keywords" content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, RedwoodJS SDK, Cloudflare Development Platform, response lifecycle, webapps" />
+        <meta name="author" content="RedwoodJS" />
         
         {/* Security */}
         <meta httpEquiv="Content-Security-Policy" content={cspContent} />

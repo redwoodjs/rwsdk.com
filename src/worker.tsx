@@ -4,7 +4,7 @@ import { Document } from "src/Document";
 import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
-import PersonalSoftware, { meta as personalSoftwareMeta } from "src/pages/readme/PersonalSoftware";
+import PersonalSoftware from "src/pages/readme/PersonalSoftware";
 
 type Context = {};
 
@@ -14,9 +14,9 @@ export default defineApp<Context>([
     // setup ctx here
     ctx;
   },
-  document((props) => <Document {...props} />, [
-    index([() => <Home />]),
-    route("/personal-software", [() => <Document meta={personalSoftwareMeta}><PersonalSoftware /></Document>]),
+  document(Document, [
+    index([Home]),
+    route("/personal-software", [PersonalSoftware]),
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
