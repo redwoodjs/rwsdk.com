@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,500;0,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono&family=Jersey+10&family=Jersey+10+Charted&display=swap');
+
 
 @font-face {
   font-family: 'Chicago';
@@ -15,10 +17,13 @@
   --color-mySin: #ffad48;
   --color-alpine: #af7b3c;
   --color-cinnabar: #e73c37;
+  --color-orange: #F47238;
   --color-medium-aquamarine: #5dd697;
 
   --font-mono: 'Roboto Mono', monospace;
   --font-chicago: 'Chicago', sans-serif;
+  --font-jersey: 'Jersey 10', sans-serif;
+  --font-jersey-charted: 'Jersey 10 Charted', sans-serif;
 }
 
 @utility bullet {
@@ -43,6 +48,30 @@
 @layer base {
   body {
     @apply bg-alpine text-white;
+  }
+@layer components {
+  .page {
+    @apply max-w-[1200px] mx-auto px-4 md:px-8;
+  }
+
+  .font-jersey {
+    font-family: var(--font-jersey);
+  }
+
+  .font-jersey-charted {
+    font-family: var(--font-jersey-charted);
+  }
+
+  .text-orange {
+    color: var(--color-orange);
+  }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .bullet {
+    @apply w-1.5 h-1.5 bg-mySin rounded-full;
   }
 
   label {
@@ -95,4 +124,9 @@
   .kw-alert-success {
     @apply !bg-medium-aquamarine !text-black !rounded-none;
   }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

@@ -14,12 +14,13 @@ function Home() {
         <nav className="p-8 md:pr-32">
           <ul className="flex items-center uppercase font-mono font-bold gap-2 md:gap-4 text-sm md:text-base">
             <li className="hidden md:block"><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.QUICK_START_URL}>Quick Start</a></li>
+            <li><a className="hover:text-mySin" href={Constants.QUICK_START_URL} aria-label="Quick Start">Quick Start</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.DOCS_URL}>Doc<span className="inline md:hidden">s</span><span className="hidden md:inline">umentation</span></a></li>
+            <li><a className="hover:text-mySin" href={Constants.DOCS_URL} aria-label="Documentation">Doc<span className="inline md:hidden">s</span><span className="hidden md:inline">umentation</span></a></li>
             <li><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL}>Tutorial</a></li>
+            <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL} aria-label="Tutorial">Tutorial</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
+            <li><a className="hover:text-mySin" href={Constants.PS_URL} aria-label="Personal Software">Personal Software</a></li>
             <li className="ml-auto">
               <GithubButton href="https://github.com/redwoodjs/sdk" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-size="large" data-show-count="true" aria-label="Star redwoodjs/sdk on GitHub">Star</GithubButton>
             </li>
