@@ -17,8 +17,8 @@ function Home() {
             <li><a className="hover:text-mySin" href={Constants.QUICK_START_URL} aria-label="Quick Start">Quick Start</a></li>
             <li className="hidden md:block"><div className="bullet"></div></li>
             <li><a className="hover:text-mySin" href={Constants.DOCS_URL} aria-label="Documentation">Doc<span className="inline md:hidden">s</span><span className="hidden md:inline">umentation</span></a></li>
-            <li><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL} aria-label="Tutorial">Tutorial</a></li>
+            {/* <li><div className="bullet"></div></li>
+            <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL} aria-label="Tutorial">Tutorial</a></li> */}
             <li className="hidden md:block"><div className="bullet"></div></li>
             <li><a className="hover:text-mySin" href={Constants.PS_URL} aria-label="Personal Software">Personal Software</a></li>
             <li className="ml-auto">
@@ -39,13 +39,13 @@ function Home() {
 
         {/* letter */}
         <div className="letter">
-          <p>Today, we're sharing an important step forward for Redwood. To achieve our vision of empowering the next generation of personal software, we're aligning our efforts around two clearly defined paths: Redwood GraphQL and Redwood SDK.</p>
+          <p>Today, we're sharing an important step forward for Redwood. To achieve our vision of empowering the next generation of <a className='text-mySin' href="https://www.rwsdk.com/personal-software">personal software</a>, we're aligning our efforts around two clearly defined paths: Redwood GraphQL and RedwoodSDK.</p>
 
           <h2>Why We're Making This Change</h2>
 
           <p>From the start, RedwoodJS was built to simplify full-stack web development. We've seen incredible growth and community enthusiasm, but it's clear we have an opportunity to pursue a broader challenge: enabling people to build, own, and distribute their own software without the constraints of traditional SaaS.</p>
 
-          <p>To fully pursue this vision, we're launching Redwood SDK, a new framework that will become the foundation for this personal software revolution. We'll be sharing more about this in the weeks to come.</p>
+          <p>To fully pursue this vision, we're launching <a className='text-mySin' href="https://www.rwsdk.com">RedwoodSDK</a>, a new framework that will become the foundation for this <a className='text-mySin' href="https://www.rwsdk.com/personal-software">personal software revolution</a>. We'll be sharing more about this in the weeks to come.</p>
 
           <p>At the same time, we deeply value the users and teams who've invested heavily in Redwood. To minimize disruption and provide clarity going forward, we're renaming the existing RedwoodJS framework to Redwood GraphQL, reflecting its strength as a mature, stable framework built around GraphQL.</p>
 
@@ -66,19 +66,18 @@ function Home() {
             </li>
           </ul>
 
-          <h3>Looking Ahead: The Redwood SDK</h3>
+          <h3>Looking Ahead: The RedwoodSDK</h3>
 
-          <p>Redwood SDK represents our commitment to the future we want to build - a software ecosystem designed for personal and modular software creation, distribution, and ownership. It will harness the power of modern serverless infrastructure, AI-driven development tools, and open ecosystems, ensuring that building personal and owned software is accessible to everyone.</p>
+          <p>RedwoodSDK represents our commitment to the future we want to build - a software ecosystem designed for personal and modular software creation, distribution, and ownership. It will harness the power of modern serverless infrastructure, AI-driven development tools, and open ecosystems, ensuring that building personal and owned software is accessible to everyone.</p>
 
-          <p>This is more than just technology. It's about rethinking how software gets created and shared. It's a commitment to making software personal again.</p>
+          <p>This is more than just technology. It's about rethinking how software gets created and shared. It's a commitment to making <a className='text-mySin' href="https://www.rwsdk.com/personal-software">software personal again.</a></p>
 
-          <p>We'll share more about the Redwood SDK in the coming weeks. Until then, those of you are currently using Redwood GraphQL can rest assured - our intention is to ensure that it remains secure, reliable, and ready to power your projects long-term.</p>
+          <p>We'll share more about the RedwoodSDK in the coming weeks. Until then, those of you are currently using Redwood GraphQL can rest assured - our intention is to ensure that it remains secure, reliable, and ready to power your projects long-term.</p>
 
           <p>Thanks for your continued support and excitement for the journey ahead.</p>
 
           <div className="flex items-center gap-4">
-            <img src="/images/avatar-peter.jpg" alt="Peter" srcSet="/images/avatar-peter@2x.jpg 2x, /images/avatar-peter.jpg 1x" className="size-[76px] rounded-full" />
-            <p className="!mb-0">— Peter and the Redwood team</p>
+            <a className="!mb-0" href="https://github.com/redwoodjs/sdk">— The RedwoodSDK Team</a>
           </div>
         </div>
 
