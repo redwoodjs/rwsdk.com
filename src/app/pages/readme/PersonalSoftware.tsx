@@ -71,7 +71,7 @@ export default function PersonalSoftware() {
               <br />
               Kids in bedrooms. Students in labs. Curious minds in internet
               cafés.
-              <br />A generation &dash; and then another &dash; learned the
+              <br />A generation &ndash; and then another &ndash; learned the
               magic of software.
               <br />
               They stayed up too late.
@@ -135,7 +135,7 @@ export default function PersonalSoftware() {
               What if it could be different?
             </h2>
             <p className="text-base lg:text-md leading-8 font-light">
-              What if you could build a tool just for you &dash; because you
+              What if you could build a tool just for you &ndash; because you
               needed it?
               <br />
               What if it didn't require five services and a Terraform config?
@@ -143,7 +143,7 @@ export default function PersonalSoftware() {
               What if you didn't need to be "professional developer" to make it
               happen?
               <br />
-              What if writing software was like picking up a power drill &dash;
+              What if writing software was like picking up a power drill &ndash;
               a tool to get something done?
               <br />
               Not a startup. Not a business. Not a side hustle. <br />
