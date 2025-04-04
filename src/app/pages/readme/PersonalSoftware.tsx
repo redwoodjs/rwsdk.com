@@ -51,7 +51,7 @@ export default function PersonalSoftware() {
             </h1>
 
             <p className="text-base lg:text-md font-light leading-8">
-              A blank files.
+              A blank file.
               <br />
               A few keystrokes.
               <br />
