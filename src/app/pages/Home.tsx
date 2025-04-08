@@ -1,5 +1,5 @@
 import Constants from "src/lib/Constants";
-import { CloudflareImage, ResponsiveCloudflareImage, CloudflareBackground } from "src/components/CloudflareImage";
+import { CloudflareImage, CloudflareBackground } from "src/components/CloudflareImage";
 import { Navbar } from 'src/components/Navbar';
 import { Footer } from 'src/components/Footer';
 import { featureBlocks, FeatureBlock } from 'src/data/features';
