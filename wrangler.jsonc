@@ -4,16 +4,29 @@
 
   // Name of your worker
   "name": "redwoodsdk",
-  "routes": [
-      {
-        "pattern": "rwsdk.com",
-        "custom_domain": true
-      },
-      {
-        "pattern": "www.rwsdk.com",
-        "custom_domain": true
+
+  "env": {
+    "staging": {
+      "vars": {
+        "APP_NAME": "redwoodsdk-staging",
       }
-  ],
+    },
+    "production": {
+      "vars": {
+        "APP_NAME": "redwoodsdk-production",
+        "routes": [
+          {
+            "pattern": "rwsdk.com",
+            "custom_domain": true
+          },
+          {
+            "pattern": "www.rwsdk.com",
+            "custom_domain": true
+          }
+        ]
+      }
+    }
+  },
 
   // Entry point for your worker
   "main": "src/worker.tsx",
@@ -31,7 +44,6 @@
   "observability": {
     "enabled": true
   },
-
   // Environment variables
   "vars": {
     // Add your environment variables here

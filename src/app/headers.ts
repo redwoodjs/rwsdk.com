@@ -3,12 +3,21 @@ import { IS_DEV } from "@redwoodjs/sdk/constants";
 
 export const setCommonHeaders =
   (): RouteMiddleware =>
-  ({ headers, rw: { nonce } }) => {
+  ({ headers, rw: { nonce }, request }) => {
     if (!IS_DEV) {
       // Forces browsers to always use HTTPS for a specified time period (2 years)
       headers.set(
         "Strict-Transport-Security",
         "max-age=63072000; includeSubDomains; preload",
+      );
+    }
+
+    // Set cache control for images
+    const url = new URL(request.url);
+    if (url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i)) {
+      headers.set(
+        "Cache-Control",
+        "public, max-age=31536000, immutable" // Cache for 1 year
       );
     }
 

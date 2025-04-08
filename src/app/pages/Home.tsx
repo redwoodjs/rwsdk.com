@@ -1,105 +1,132 @@
-import Constants from '../lib/Constants';
-import GithubButton from '../components/GitHubButton';
-import { Newsletter } from 'src/components/Newsletter';
+import Constants from "src/lib/Constants";
+import { CloudflareImage, CloudflareBackground } from "src/components/CloudflareImage";
+import { Navbar } from 'src/components/Navbar';
+import { Footer } from 'src/components/Footer';
+import { featureBlocks, FeatureBlock } from 'src/data/features';
+import { builderSections, BuilderSection } from 'src/data/builders';
+import { SDKButton } from 'src/components/SDKButton';
+import React from 'react';
+import { Newsletter } from "src/components/Newsletter";
 
-
-function Home() {
-    const getCurrentYear = () => {
-      return new Date().getFullYear();
-    };
-
+export default function Home() {
   return (
     <div>
-      <header>
-        <nav className="p-8 md:pr-32">
-          <ul className="flex items-center uppercase font-mono font-bold gap-2 md:gap-4 text-sm md:text-base">
-            <li className="hidden md:block"><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.QUICK_START_URL} aria-label="Quick Start">Quick Start</a></li>
-            <li className="hidden md:block"><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.DOCS_URL} aria-label="Documentation">Doc<span className="inline md:hidden">s</span><span className="hidden md:inline">umentation</span></a></li>
-            {/* <li><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.TUTORIAL_URL} aria-label="Tutorial">Tutorial</a></li> */}
-            <li className="hidden md:block"><div className="bullet"></div></li>
-            <li><a className="hover:text-mySin" href={Constants.PS_URL} aria-label="Personal Software">Personal Software</a></li>
-            <li className="ml-auto">
-              <GithubButton href="https://github.com/redwoodjs/sdk" data-color-scheme="no-preference: dark; light: dark; dark: dark;" data-size="large" data-show-count="true" aria-label="Star redwoodjs/sdk on GitHub">Star</GithubButton>
-            </li>
-          </ul>
-        </nav>
+      <title>RedwoodSDK - From Concept to Cloud in a Day</title>
+      <Navbar />
+      {/* Hero section */}
+      <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 fixed top-[-60px]">
 
-        <a href={Constants.GITHUB_REPO} className="fixed right-0 top-0 hidden md:block">
-          <img src="/images/github-corner.svg" alt="GitHub" />
-        </a>
-      </header>
-      <main className="page">
-        <img src="/images/logo--dark.svg" alt="RedwoodSDK" className="mx-auto mb-[60px]" />
-
-        {/* newsletter form */}
-        <Newsletter />
-
-        {/* letter */}
-        <div className="letter">
-          <p>Today, we're sharing an important step forward for Redwood. To achieve our vision of empowering the next generation of <a className='text-mySin' href="https://www.rwsdk.com/personal-software">personal software</a>, we're aligning our efforts around two clearly defined paths: Redwood GraphQL and RedwoodSDK.</p>
-
-          <h2>Why We're Making This Change</h2>
-
-          <p>From the start, RedwoodJS was built to simplify full-stack web development. We've seen incredible growth and community enthusiasm, but it's clear we have an opportunity to pursue a broader challenge: enabling people to build, own, and distribute their own software without the constraints of traditional SaaS.</p>
-
-          <p>To fully pursue this vision, we're launching <a className='text-mySin' href="https://www.rwsdk.com">RedwoodSDK</a>, a new framework that will become the foundation for this <a className='text-mySin' href="https://www.rwsdk.com/personal-software">personal software revolution</a>. We'll be sharing more about this in the weeks to come.</p>
-
-          <p>At the same time, we deeply value the users and teams who've invested heavily in Redwood. To minimize disruption and provide clarity going forward, we're renaming the existing RedwoodJS framework to Redwood GraphQL, reflecting its strength as a mature, stable framework built around GraphQL.</p>
-
-          <h3>What this means for current Redwood users:</h3>
-
-          <ul>
-            <li>
-              <strong><em>Continuity and Stability:</em></strong><br />
-              Redwood GraphQL (formerly the RedwoodJS you use today) will continue to receive security patches and critical updates, ensuring you can confidently rely on it for your projects.
-            </li>
-            <li>
-              <strong><em>Integrations:</em></strong><br />
-              Over the coming months, we'll progressively unbundle third-party integrations—such as the authentication providers, Storybook, and others. These integrations will then be independently maintained by their original teams or the community, giving you greater flexibility, faster updates, and control over which integrations you adopt and support.
-            </li>
-            <li>
-              <strong><em>Community Ownership:</em></strong><br />
-              We will actively nurture and support third-party providers and the broader Redwood community in taking ownership of these integrations.
-            </li>
-          </ul>
-
-          <h3>Looking Ahead: The RedwoodSDK</h3>
-
-          <p>RedwoodSDK represents our commitment to the future we want to build - a software ecosystem designed for personal and modular software creation, distribution, and ownership. It will harness the power of modern serverless infrastructure, AI-driven development tools, and open ecosystems, ensuring that building personal and owned software is accessible to everyone.</p>
-
-          <p>This is more than just technology. It's about rethinking how software gets created and shared. It's a commitment to making <a className='text-mySin' href="https://www.rwsdk.com/personal-software">software personal again.</a></p>
-
-          <p>We'll share more about the RedwoodSDK in the coming weeks. Until then, those of you are currently using Redwood GraphQL can rest assured - our intention is to ensure that it remains secure, reliable, and ready to power your projects long-term.</p>
-
-          <p>Thanks for your continued support and excitement for the journey ahead.</p>
-
-          <div className="flex items-center gap-4">
-            <a className="!mb-0" href="https://github.com/redwoodjs/sdk">— The RedwoodSDK Team</a>
+        <CloudflareImage
+          imageId="83ce73f8-4da8-4812-d10a-81f3e3610c00"
+          alt="Family using RedwoodSDK application"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+        />
+        <div className="relative z-10 flex flex-col items-center justify-end min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
+          <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%] mix-blend-multiply">THIS COULD BE THE START OF SOMETHING SMALL</h1>
+            <h3 className="text-[18px] sm:text-[24px] md:text-[40px] font-jersey text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
+              RedwoodSDK is a composable framework for building server-side web apps on Cloudflare.
+            </h3>
+            <div className="flex justify-center">
+              <SDKButton size="large" />
+            </div>
           </div>
         </div>
+      </div>
 
-      </main>
+      {/* Call to action section */}
+      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
+        <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
+          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2">
+            GO FROM CONCEPT TO CLOUD IN A DAY<span className="text-orange-light cursor-blink">|</span></h2>
+          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
+            It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.
+          </p>
+          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-light font-jersey">
+            <a href={Constants.DOCS_URL} className="text-orange hover:text-orange-light inline-flex items-center font-jersey">
+              Let's build something awesome!
+            </a>
+          </p>
+        </div>
 
-      <footer className="page text-center mb-10">
-        <hr />
-        <p className="mb-5">Copyright &copy; {getCurrentYear()}. RedwoodJS Inc. All Rights Reserved.</p>
-        <ul className="flex justify-center items-center uppercase font-mono font-bold gap-4 flex-wrap md:flex-nowrap">
-        <li><div className="bullet"></div></li>
-        <li><a href={Constants.REDWOODJS_URL}>RedwoodJS</a></li>
-          <li><div className="bullet"></div></li>
-          <li><a href={Constants.GITHUB_REPO}>GITHUB</a></li>
-          <li><div className="bullet"></div></li>
-          <li><a href={Constants.BLUESKY_URL}>BLUESKY</a></li>
-          <li><div className="bullet"></div></li>
-          <li><a href={Constants.DISCORD_URL}>DISCORD</a></li>
-          <li><div className="bullet"></div></li>
-        </ul>
-      </footer>
+        <CloudflareBackground
+          imageId="0fa4e819-9895-4368-0883-56c1e3722a00"
+          className="w-full sm:w-[80%] lg:w-full h-[300px] sm:h-[400px] md:h-[514px] bg-center bg-no-repeat bg-contain flex items-center justify-center hidden lg:block"
+        />
+      </section>
+
+      {/* Features section, 3 columns */}
+      <section className="w-full grid-bg">
+        <div className="flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-16 items-stretch justify-center py-6 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
+          {featureBlocks.map((block: FeatureBlock, index: number) => (
+            <div key={index} className="flex flex-col gap-4 sm:gap-6 bg-baige p-3 sm:p-4 text-center w-full md:w-1/3">
+              <h2 className="text-[20px] sm:text-[24px] md:text-[32px] font-jersey text-center leading-[0.9] mb-2 sm:mb-4">
+                {block.title} <br /> <span className="text-purple">{block.titleHighlight}</span>
+              </h2>
+              <p className="text-[14px] sm:text-[16px] md:text-[18px] font-chivo font-medium">
+                {block.description}
+              </p>
+              <ul className="list-none text-[14px] sm:text-[16px] font-chivo text-center sm:text-left">
+                {block.items.map((item: string, itemIndex: number) => (
+                  <li key={itemIndex}>
+                    <span className="text-purple font-[200] inline-block min-w-[20px]">→</span>
+                    {item.includes('<Page />') ? (
+                      <>
+                        {item.split('<Page />').map((part, i, arr) => (
+                          <React.Fragment key={i}>
+                            {part}
+                            {i < arr.length - 1 && <span className="whitespace-nowrap">&lt;Page /&gt;</span>}
+                          </React.Fragment>
+                        ))}
+                      </>
+                    ) : (
+                      item
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Features section */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
+        <CloudflareImage
+          imageId="b3b61460-b3e5-4a95-08f4-6c8553c4f000"
+          alt="RedwoodSDK Developer Experience Diagram"
+        />
+
+        <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
+          {builderSections.map((section: BuilderSection, index: number) => (
+            <div key={index} className="flex flex-col gap-3 sm:gap-4">
+              <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-jersey">{section.title} <span className="text-purple">{section.titleHighlight}</span></h3>
+              <p className="text-[14px] sm:text-[16px] md:text-[18px] font-chivo font-medium">
+                {section.description}
+              </p>
+              <ul className="list-none text-[14px] sm:text-[16px] font-chivo">
+                {section.items.map((item: string, itemIndex: number) => (
+                  <li key={itemIndex} className="flex items-baseline">
+                    <span className="text-purple inline-block min-w-[20px]">▶︎</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <SDKButton size="large" />
+
+        </div>
+      </section>
+
+      {/* Newsletter section */}
+      <Newsletter />
+
+      {/* Footer section */}
+      <Footer />
     </div>
   );
 }
-
-export default Home;
