@@ -18,11 +18,10 @@ export const builderSections: BuilderSection[] = [
     ]
   },
   {
-    title: "Ship faster,",
+    title: "Ship Faster,",
     titleHighlight: "Flow Longer",
     description: "No wrappers. No black boxes. Just tools that work as they should.",
     items: [
-      "No wrappers. No black boxes. Just tools that work as they should.",
       "HMR Live reloads. Type safety. Cloudflare-native from the jump",
       "Familiar tools like Vite and JSX, supercharged for the edge",
       "Work locally in the same runtime as production: D1 (SQL), R2 (object storage), Queues, Workers AI, and more—zero config required"
