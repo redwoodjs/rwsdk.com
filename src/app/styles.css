@@ -35,6 +35,7 @@
   --color-orange: #F47238;
   --color-orange-light: #FFAD48;
   --color-orange-dark: #E73C36;
+  --color-light: #F2ECE4;
   --font-mono: "Roboto Mono", monospace;
   --font-chicago: "Chicago", sans-serif;
   --font-jersey: "Jersey 25", sans-serif;
@@ -50,4 +51,14 @@ body {
                     linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
   background-size: 20px 20px;
   background-position: -1px -1px;
+}
+
+.cursor-blink {
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    color: transparent;
+  }
 }

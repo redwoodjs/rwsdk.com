@@ -4,28 +4,26 @@
 
   // Name of your worker
   "name": "redwoodsdk",
-  "routes": [
-      {
-        "pattern": "rwsdk.com",
-        "custom_domain": true
-      },
-      {
-        "pattern": "www.rwsdk.com",
-        "custom_domain": true
-      }
-  ],
 
   "env": {
     "staging": {
       "vars": {
         "APP_NAME": "redwoodsdk-staging",
-        "route": "staging.rwsdk.com"
       }
     },
     "production": {
       "vars": {
         "APP_NAME": "redwoodsdk-production",
-        "route": "rwsdk.com"
+        "routes": [
+          {
+            "pattern": "rwsdk.com",
+            "custom_domain": true
+          },
+          {
+            "pattern": "www.rwsdk.com",
+            "custom_domain": true
+          }
+        ]
       }
     }
   },
@@ -46,7 +44,6 @@
   "observability": {
     "enabled": true
   },
-
   // Environment variables
   "vars": {
     // Add your environment variables here

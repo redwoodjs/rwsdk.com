@@ -43,7 +43,7 @@ export default function PersonalSoftware() {
             />
           </a>
           <section className="space-y-6">
-            <h1 className="font-jersey-charted text-[40px] lg:text-[70px] leading-[107%] tracking-normal antialiased">
+            <h1 className="text-[48px] sm:text-[72px] lg:text-[100px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
               <div>
                 It started with a blinking cursor
                 <span className="text-orange cursor-blink"> | </span>

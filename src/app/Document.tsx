@@ -54,7 +54,7 @@ export const Document: React.FC<DocumentProps> = ({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK | The JavaScript SDK for Cloudflare Workers</title>
+        <title>RedwoodSDK | The composable JavaScript framework for Cloudflare Workers</title>
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />
@@ -64,8 +64,8 @@ export const Document: React.FC<DocumentProps> = ({
         <link rel="android-chrome-512x512" href="/images/android-chrome.png" />
 
         {/* ogTags */}
-        <meta property="og:title" content="RedwoodSDK | The JavaScript SDK for Cloudflare Workers" />
-        <meta property="og:description" content="RedwoodSDK is the JavaScript SDK for Cloudflare Workers. It provides a complete set of composable tools to handle the request/response lifecycle of webapps." />
+        <meta property="og:title" content="RedwoodSDK | The composable JavaScript framework for Cloudflare Workers" />
+        <meta property="og:description" content="RedwoodSDK is a composable framework for building server-side web apps on Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features." />
         <meta property="og:image" content="https://rwsdk.com/images/og-image.png" />
         <meta property="og:url" content="https://rwsdk.com" />
         <meta property="og:site_name" content="RedwoodSDK" />
