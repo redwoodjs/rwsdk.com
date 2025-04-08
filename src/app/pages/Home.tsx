@@ -1,7 +1,3 @@
-// import Constants from '../lib/Constants';
-// import GithubButton from '../components/GitHubButton';
-// import { Newsletter } from 'src/components/Newsletter';
-
 import Constants from "src/lib/Constants";
 import { CloudflareImage, ResponsiveCloudflareImage, CloudflareBackground } from "src/components/CloudflareImage";
 import { Navbar } from 'src/components/Navbar';
