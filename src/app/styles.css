@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,500;0,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&family=Jersey+10&family=Jersey+10+Charted&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
+
+@font-face {
+  font-family: "Jersey 25";
+  src: url("/fonts/Jersey25-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chivo";
+  src: url("/fonts/Chivo/Chivo-Italic-VariableFont_wght.ttf") format("truetype");
+  src: url("/fonts/Chivo/Chivo-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Chicago";
@@ -14,147 +31,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-mySin: #ffad48;
-  --color-alpine: #af7b3c;
-  --color-cinnabar: #e73c37;
-  --color-orange: #f47238;
-  --color-medium-aquamarine: #5dd697;
-
+  --color-baige: #F6F4EF;
+  --color-orange: #F47238;
+  --color-orange-light: #FFAD48;
+  --color-orange-dark: #E73C36;
   --font-mono: "Roboto Mono", monospace;
   --font-chicago: "Chicago", sans-serif;
-  --font-jersey: "Jersey 10", sans-serif;
-  --font-jersey-charted: "Jersey 10 Charted", sans-serif;
+  --font-jersey: "Jersey 25", sans-serif;
+  --font-chivo: "Chivo", sans-serif;
 }
 
-@utility bullet {
-  @apply block w-1 h-1 rounded-full bg-mySin;
+body {
+  @apply bg-baige text-black font-mono;
 }
 
-@utility field {
-  @apply pt-7 pb-0 md:pb-10 relative flex flex-col gap-2;
-  &:last-of-type {
-    @apply !pb-7;
-  }
-  &:before {
-    @apply h-4 border-l-[2px] border-mySin w-[1px] content-[''] absolute left-0 top-0 hidden md:block;
-  }
-  &:after {
-    @apply h-4 border-l-[2px] border-mySin w-[1px] content-[''] absolute left-0 bottom-0 hidden md:block;
-  }
-  &:first-of-type:before {
-    @apply block;
-  }
-  &:last-of-type:after {
-    @apply block;
-  }
-}
-
-@utility page {
-  @apply max-w-[760px] mx-auto px-5 md:px-0;
-}
-
-@layer base, components;
-
-@layer base {
-  body {
-    @apply bg-alpine text-white;
-  }
-}
-@layer components {
-  .page {
-    @apply max-w-[1200px] mx-auto px-4 md:px-8;
-  }
-
-  .font-jersey {
-    font-family: var(--font-jersey);
-  }
-
-  .font-jersey-charted {
-    font-family: var(--font-jersey-charted);
-  }
-
-  .text-orange {
-    color: var(--color-orange);
-  }
-
-  .cursor-blink {
-    animation: blink 1s step-end infinite;
-  }
-
-  .bullet {
-    @apply w-1.5 h-1.5 bg-mySin rounded-full;
-  }
-
-  label {
-    @apply text-sm md:text-base font-mono font-bold uppercase text-white bg-[url('/images/dash.svg')] bg-repeat-x bg-left-bottom w-full pb-3 block mb-3;
-  }
-
-  input[type="text"],
-  input[type="email"] {
-    @apply bg-white border-[3px] border-white text-black uppercase font-bold px-2 text-sm md:text-base h-9 w-full outline-mySin focus:outline-mySin;
-  }
-
-  body {
-    @apply bg-black text-white font-mono;
-  }
-
-  .letter {
-    @apply mb-12 md:mb-20 max-w-none;
-    h2 {
-      @apply text-2xl md:text-3xl font-chicago font-bold text-mySin mt-8 mb-4 pt-5;
-    }
-    h3 {
-      @apply text-lg md:text-2xl font-chicago text-mySin mt-6 mb-3 pt-5;
-    }
-    ul {
-      @apply list-disc mb-4 pl-5;
-    }
-    li,
-    p {
-      @apply mb-4 md:mb-10 text-sm md:text-base leading-relaxed;
-    }
-    strong {
-      @apply text-mySin;
-    }
-  }
-
-  hr {
-    @apply bg-[url('/images/plus.svg')] bg-repeat-x bg-[center-center] w-full h-4 border-none mb-12 md:mb-20;
-  }
-
-  footer {
-    @apply text-sm md:text-base;
-    a {
-      @apply hover:text-mySin;
-    }
-  }
-}
-
-@layer components {
-  .bullet {
-    @apply w-1.5 h-1.5 bg-mySin rounded-full;
-  }
-
-  /* Kwes Form */
-  .kw-alert {
-    @apply col-span-2 mx-10 my-3 !w-[calc(100%-80px)];
-  }
-
-  .kw-alert-error {
-    @apply !bg-cinnabar !text-white !rounded-none;
-  }
-
-  .kw-alert-success {
-    @apply !bg-medium-aquamarine !text-black !rounded-none;
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
+.grid-bg {
+  background-image: linear-gradient(#E5E5E5 1px, transparent 1px),
+                    linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -1px -1px;
 }

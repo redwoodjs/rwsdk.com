@@ -15,6 +15,21 @@
       }
   ],
 
+  "env": {
+    "staging": {
+      "vars": {
+        "APP_NAME": "redwoodsdk-staging",
+        "route": "staging.rwsdk.com"
+      }
+    },
+    "production": {
+      "vars": {
+        "APP_NAME": "redwoodsdk-production",
+        "route": "rwsdk.com"
+      }
+    }
+  },
+
   // Entry point for your worker
   "main": "src/worker.tsx",
 
