@@ -11,10 +11,17 @@
 
 @font-face {
   font-family: "Chivo";
-  src: url("/fonts/Chivo/Chivo-Italic-VariableFont_wght.ttf") format("truetype");
   src: url("/fonts/Chivo/Chivo-VariableFont_wght.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Chivo";
+  src: url("/fonts/Chivo/Chivo-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -31,10 +38,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-baige: #F6F4EF;
+  --color-baige: #F4EEDF;
   --color-orange: #F47238;
   --color-orange-light: #FFAD48;
   --color-orange-dark: #E73C36;
+  --color-orange-medium: #F37238;
+  --color-purple: #8B2243;
+  --color-purple-dark: #6B1A35;
   --color-light: #F2ECE4;
   --font-mono: "Roboto Mono", monospace;
   --font-chicago: "Chicago", sans-serif;
@@ -49,7 +59,7 @@ body {
 .grid-bg {
   background-image: linear-gradient(#E5E5E5 1px, transparent 1px),
                     linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-size: 12px 12px;
   background-position: -1px -1px;
 }
 
