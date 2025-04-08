@@ -4,31 +4,16 @@
 
 import Constants from "src/lib/Constants";
 import { CloudflareImage, ResponsiveCloudflareImage, CloudflareBackground } from "src/components/CloudflareImage";
+import { Navbar } from 'src/components/Navbar';
 
 
 export default function Home() {
   return (
     <div>
       <title>RedwoodSDK - From Concept to Cloud in a Day</title>
-
-      {/* Nav bar */}
-      <div className="flex flex-col sm:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8">
-        <CloudflareImage
-          imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
-          alt="logo"
-          className="w-[140px] sm:w-[186px]"
-        />
-        <div className="flex gap-2 sm:gap-4 font-jersey text-[16px] sm:text-[20px] mt-4 sm:mt-0">
-          <a href={Constants.DOCS_URL} className="hover:text-orange-dark">Docs</a>
-          <span className="text-orange">/</span>
-          <a href={Constants.DISCORD_URL} className="hover:text-orange-dark">Discord</a>
-          <span className="text-orange-dark">/</span>
-          <a href={Constants.GITHUB_URL} className="hover:text-orange-dark">Github</a>
-          <span className="text-orange-dark">/</span>
-          <a href="/personal-software" className="hover:text-orange-dark">Personal Software</a>
-        </div>
-      </div>
-
+      
+      <Navbar />
+      
       {/* Hero section */}
       <div className="relative min-h-screen w-full mb-20">
         <CloudflareImage
@@ -39,7 +24,7 @@ export default function Home() {
           fetchPriority="high"
         />
         <div className="relative z-10 flex flex-col items-center justify-end min-h-screen px-4 sm:px-8 text-center max-w-[1260px] mx-auto">
-          <h1 className="text-[48px] sm:text-[72px] lg:text-[100px] text-[var(--color-light)] font-bold font-jersey leading-[81%] mix-blend-multiply mb-[182px]">This could be the start of something small</h1>
+          <h1 className="text-[48px] sm:text-[72px] lg:text-[100px] text-[var(--color-light)] font-bold font-jersey leading-[81%] mix-blend-multiply mb-[182px]">THIS COULD BE THE START OF SOMETHING SMALL</h1>
         </div>
       </div>
 
@@ -49,7 +34,10 @@ export default function Home() {
           <h2 className="text-[48px] sm:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">GO FROM CONCEPT TO CLOUD IN A DAY<span className="text-orange cursor-blink">|</span></h2>
           <p className="text-[24px] sm:text-[32px] font-jersey">
             <span className="text-orange">RedwoodSDK is a composable framework for building server-side web apps on Cloudflare.</span> It begins
-            as a Vite plugin that unlocks SSR, React Server Components, Server Functions and realtime features.
+            as a Vite plugin that unlocks SSR, React Server Components, Server Functions and realtime features{' '}
+            <a href={Constants.DOCS_URL} className="text-orange hover:text-orange-dark inline-flex items-center">
+              <span className="ml-2 text-[32px]">→</span>
+            </a>
           </p>
           <p className="text-[18px] sm:text-[18px] font-light font-chivo">
             Local deveopment feels native. Production feels magic. No suprises. No config hell. No "it works on my machine".
