@@ -45,6 +45,8 @@ const cspContent = Object.entries(cspDirectives)
   .map(([key, value]) => `${key} ${value}`)
   .join('; ');
 
+const canonicalUrl = 'https://rwsdk.com';
+
 export const Document: React.FC<DocumentProps> = ({
   children,
   nonce,
@@ -54,7 +56,8 @@ export const Document: React.FC<DocumentProps> = ({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK | The composable JavaScript framework for Cloudflare Workers</title>
+        <title>RedwoodSDK | The composable JavaScript framework for Cloudflare Workers</title>        <link rel="canonical" href={canonicalUrl} />
+        
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />

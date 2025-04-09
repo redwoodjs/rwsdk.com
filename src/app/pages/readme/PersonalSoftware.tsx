@@ -2,8 +2,40 @@ import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
 
 export default function PersonalSoftware() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Personal Software | RedwoodSDK",
+    "description": "The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK.",
+    "url": "https://rwsdk.com/personal-software",
+    "mainEntity": {
+      "@type": "Article",
+      "headline": "The Personal Software Revolution",
+      "description": "Build fast, server-driven webapps on Cloudflare with SSR, RSC, and realtime.",
+      "author": {
+        "@type": "Organization",
+        "name": "RedwoodJS Inc.",
+        "url": "https://rwsdk.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "RedwoodJS Inc.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://rwsdk.com/images/logo--light.svg"
+        }
+      },
+      "datePublished": "2024-03-20",
+      "dateModified": "2024-03-20"
+    }
+  };
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen font-chivo bg-[#EDEBE6] text-black">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <title>Personal Software | RedwoodSDK</title>
       <meta
         name="description"

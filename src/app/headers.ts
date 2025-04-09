@@ -21,23 +21,25 @@ export const setCommonHeaders =
       );
     }
 
+    // Performance headers
+    headers.set("X-DNS-Prefetch-Control", "on");
+    headers.set("X-XSS-Protection", "1; mode=block");
+    headers.set("X-Frame-Options", "SAMEORIGIN");
+    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+    headers.set("Permissions-Policy", "geolocation=(), microphone=(), camera=()");
+    
+    // Preload critical resources
+    headers.set(
+      "Link",
+      '</images/logo--light.svg>; rel=preload; as=image, </images/favicon.svg>; rel=preload; as=image'
+    );
+
     // Forces browser to use the declared content-type instead of trying to guess/sniff it
     headers.set("X-Content-Type-Options", "nosniff");
-
-    // Stops browsers from sending the referring webpage URL in HTTP headers
-    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-
-    // Explicitly disables access to specific browser features/APIs
-    headers.set(
-      "Permissions-Policy",
-      "geolocation=(), microphone=(), camera=()",
-    );
 
     // Defines trusted sources for content loading and script execution:
     headers.set(
       "Content-Security-Policy",
       "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com; frame-src https://tagmanager.google.com; object-src 'none';",
     );
-
-    headers.set("X-Frame-Options", "DENY");
   };
