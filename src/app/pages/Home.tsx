@@ -9,8 +9,49 @@ import React from 'react';
 import { Newsletter } from "src/components/Newsletter";
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "RedwoodSDK",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cloudflare Workers",
+    "description": "RedwoodSDK is a composable framework for building server-side web apps on Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.",
+    "keywords": "RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, Cloudflare Workers",
+    "url": "https://rwsdk.com",
+    "logo": "https://rwsdk.com/images/logo--light.svg",
+    "sameAs": [
+      Constants.GITHUB_REPO,
+      Constants.DISCORD_URL,
+      Constants.DISCOURSE_URL
+    ],
+    "featureList": featureBlocks.map(block => ({
+      "@type": "SoftwareFeature",
+      "name": `${block.title} ${block.titleHighlight}`,
+      "description": block.description,
+      "featureList": block.items
+    })),
+    "applicationSubCategory": "Web Framework",
+    "operatingSystemVersion": "Cloudflare Workers",
+    "softwareVersion": "1.0.0",
+    "author": {
+      "@type": "Organization",
+      "name": "RedwoodJS Inc.",
+      "url": "https://rwsdk.com",
+      "logo": "https://rwsdk.com/images/logo--light.svg"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "availability": "https://schema.org/InStock"
+    }
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <title>RedwoodSDK - From Concept to Cloud in a Day</title>
       <Navbar />
       {/* Hero section */}
@@ -93,10 +134,11 @@ export default function Home() {
       </section>
 
       {/* Features section */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
+      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
         <CloudflareImage
           imageId="b3b61460-b3e5-4a95-08f4-6c8553c4f000"
           alt="RedwoodSDK Developer Experience Diagram"
+          className="w-full sm:w-[80%] lg:w-auto h-auto"
         />
 
         <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
