@@ -13,7 +13,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "RedwoodSDK",
-    "applicationCategory": "Developer Tools",
+    "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Cloudflare Workers",
     "description": "RedwoodSDK is a composable framework for building server-side web apps on Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.",
     "keywords": "RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, Cloudflare Workers",
@@ -42,7 +42,6 @@ export default function Home() {
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "USD",
       "availability": "https://schema.org/InStock"
     }
   };
