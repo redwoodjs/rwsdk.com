@@ -66,12 +66,12 @@ export default function Home() {
         />
         <div className="relative z-10 flex flex-col items-center justify-end min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
-            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%] mix-blend-multiply">THIS COULD BE THE START OF SOMETHING SMALL</h1>
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%]">THIS COULD BE THE START OF SOMETHING SMALL</h1>
             <h3 className="text-[18px] sm:text-[24px] md:text-[40px] font-jersey text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
               RedwoodSDK is a composable framework for building server-side web apps on Cloudflare.
             </h3>
             <div className="flex justify-center">
-              <SDKButton size="large" />
+              <SDKButton size="large" text="READ THE DOCS" />
             </div>
           </div>
         </div>
@@ -80,14 +80,17 @@ export default function Home() {
       {/* Call to action section */}
       <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
         <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
-          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2">
-            GO FROM CONCEPT TO CLOUD IN A DAY<span className="text-orange-light cursor-blink">|</span></h2>
+          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mb-3 grid-bg py-4 px-2">
+            GO FROM CONCEPT TO CLOUD <span className="text-orange-light cursor-blink">|</span>
+          </h2>
+
+          <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px]">
+            <span className="text-orange">$</span> <span className="text-orange-light">npm release</span>
+          </div>
+          
           <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
-            It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.
-          </p>
-          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-light font-jersey">
-            <a href={Constants.DOCS_URL} className="text-orange hover:text-orange-light inline-flex items-center font-jersey">
-              Let's build something awesome!
+            It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features, <a href="/personal-software" className="text-orange hover:text-orange-light inline-flex items-center font-jersey">
+              and it ends with you building something awesome!
             </a>
           </p>
         </div>
@@ -134,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Features section */}
-      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
         <CloudflareImage
           imageId="b3b61460-b3e5-4a95-08f4-6c8553c4f000"
           alt="RedwoodSDK Developer Experience Diagram"

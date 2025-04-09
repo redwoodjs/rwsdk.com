@@ -11,7 +11,7 @@ export const builderSections: BuilderSection[] = [
     titleHighlight: "Builders",
     description: "RedwoodSDK is your canvas for personal software. Whether you're shipping a side project, running a micro-SaaS, or building the next big thing—this stack stays out of your way.",
     items: [
-      "Bring your own tools: Vite, Tailwind, Prisma, YOU DO YOU",
+      "Bring your own tools: Vite, Tailwind CSS, Prisma etc.",
       "Realtime support, baked in—not bolted on",
       "Predictable, composable responses that just work",
       "Build software you own, on infrastructure you control"

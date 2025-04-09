@@ -14,16 +14,6 @@ export function Footer() {
                   Personal Software
                 </a>
               </li>
-              <li>
-                <a href={Constants.README_URL} className="hover:text-baige font-jersey transition-colors">
-                  README
-                </a>
-              </li>
-              <li>
-                <a href={Constants.QUICK_START_URL} className="hover:text-baige font-jersey transition-colors">
-                  Quick Start
-                </a>
-              </li>
             </ul>
           </div>
           <div>
@@ -57,11 +47,6 @@ export function Footer() {
               <li>
                 <a href={Constants.DISCORD_URL} className="hover:text-baige flex items-center font-jersey transition-colors">
                   <img src="/images/discord.svg" alt="Discord" className="w-4 h-4 inline-block mr-2" /> Discord
-                </a>
-              </li>
-              <li>
-                <a href={Constants.DISCOURSE_URL} className="hover:text-baige flex items-center font-jersey transition-colors">
-                  <img src="/images/discourse.svg" alt="Discourse" className="w-4 h-4 inline-block mr-2" /> Discourse
                 </a>
               </li>
               <li>
