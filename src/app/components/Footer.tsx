@@ -41,7 +41,7 @@ export function Footer() {
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
               <li>
                 <a href={Constants.GITHUB_REPO} className="hover:text-baige flex items-center font-jersey transition-colors">
-                  <img src="/images/github.svg" alt="Github" className="w-4 h-4 inline-block mr-2" /> Github
+                  <img src="/images/github.svg" alt="Github" className="w-4 h-4 inline-block mr-2" /> GitHub
                 </a>
               </li>
               <li>
@@ -52,6 +52,11 @@ export function Footer() {
               <li>
                 <a href={Constants.YOUTUBE_URL} className="hover:text-baige flex items-center font-jersey transition-colors">
                   <img src="/images/youtube.svg" alt="YouTube" className="w-4 h-4 inline-block mr-2" /> YouTube
+                </a>
+              </li>
+              <li>
+                <a href={Constants.BLUESKY_URL} className="hover:text-baige flex items-center font-jersey transition-colors">
+                  <img src="/images/bluesky.svg" alt="BlueSky" className="w-4 h-4 inline-block mr-2" /> Bluesky
                 </a>
               </li>
               <li>
