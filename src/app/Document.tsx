@@ -67,21 +67,16 @@ export const Document: React.FC<DocumentProps> = ({
         <link rel="android-chrome-512x512" href="/images/android-chrome.png" />
 
         {/* ogTags */}
-        <meta property="og:title" content="RedwoodSDK | The composable JavaScript framework for Cloudflare Workers" />
-        <meta property="og:description" content="RedwoodSDK is a composable framework for building server-side web apps on Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features." />
-        <meta property="og:image" content="https://rwsdk.com/images/og-image.png" />
-        <meta property="og:url" content="https://rwsdk.com" />
-        <meta property="og:site_name" content="RedwoodSDK" />
+        
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        
         {/* logo */}
         <meta property="og:logo" content="https://rwsdk.com/images/logo--light.svg" />
-        {/* type */}
-        <meta property="og:type" content="website" />
         {/* locale */}
         <meta property="og:locale" content="en_US" />
         {/* image */}
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="RedwoodSDK Logo" />
+        
         
         
         

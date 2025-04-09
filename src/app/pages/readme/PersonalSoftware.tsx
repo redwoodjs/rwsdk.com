@@ -52,7 +52,7 @@ export default function PersonalSoftware() {
       <meta property="og:url" content="https://rwsdk.com/personal-software" />
       <meta
         property="og:image"
-        content="https://rwsdk.com/images/og-image.png"
+        content="https://rwsdk.com/images/PersonalSoftware-og.png"
       />
       <HeroImage />
       <div className="flex-1 flex flex-col">
