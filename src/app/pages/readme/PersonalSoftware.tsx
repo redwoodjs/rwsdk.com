@@ -54,6 +54,11 @@ export default function PersonalSoftware() {
         property="og:image"
         content="https://rwsdk.com/images/PersonalSoftware-og.png"
       />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta property="og:logo" content="https://rwsdk.com/images/logo--light.svg" />
+      <meta property="og:locale" content="en_US" />
+      
       <HeroImage />
       <div className="flex-1 flex flex-col">
         <Header />
