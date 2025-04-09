@@ -66,7 +66,7 @@ export default function Home() {
         />
         <div className="relative z-10 flex flex-col items-center justify-end min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
-            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%] mix-blend-multiply">THIS COULD BE THE START OF SOMETHING SMALL</h1>
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%]">THIS COULD BE THE START OF SOMETHING SMALL</h1>
             <h3 className="text-[18px] sm:text-[24px] md:text-[40px] font-jersey text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
               RedwoodSDK is a composable framework for building server-side web apps on Cloudflare.
             </h3>
@@ -80,7 +80,7 @@ export default function Home() {
       {/* Call to action section */}
       <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
         <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
-          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2">
+          <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2">
             GO FROM CONCEPT TO CLOUD IN A DAY<span className="text-orange-light cursor-blink">|</span></h2>
           <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
             It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.

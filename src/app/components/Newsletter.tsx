@@ -146,7 +146,7 @@ const Newsletter = () => {
   return (
     <section className="flex flex-row gap-4 max-w-[1400px] mx-auto px-10 py-20">
       <div className="flex flex-col gap-6 max-w-[800px] text-center lg:text-left">
-        <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2">
+        <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2 w-fit">
           BE THE FIRST TO <span className="text-orange-light">KNOW</span>
         </h2>
         <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
