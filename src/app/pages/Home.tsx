@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* Features section */}
-      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto">
         <CloudflareImage
           imageId="b3b61460-b3e5-4a95-08f4-6c8553c4f000"
           alt="RedwoodSDK Developer Experience Diagram"
