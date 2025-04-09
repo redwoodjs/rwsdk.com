@@ -72,3 +72,12 @@ body {
     color: transparent;
   }
 }
+
+
+.hover\:fill-orange:hover {
+  fill: #FFA500; /* Replace with your specific orange color */
+}
+
+.github-start:hover svg path {
+  fill: #FFA500; /* Replace with your specific orange color */
+}

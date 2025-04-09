@@ -36,7 +36,7 @@ const cspDirectives = {
   'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
   'font-src': "'self' https://fonts.gstatic.com",
   'connect-src': "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com",
-  'frame-src': "https://tagmanager.google.com",
+  'frame-src': "https://tagmanager.google.com https://ghbtns.com",
   'object-src': "'none'",
   'img-src': "'self' https://www.google-analytics.com https://www.googletagmanager.com data: https:",
 };

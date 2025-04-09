@@ -1,5 +1,6 @@
 import { CloudflareImage } from './CloudflareImage';
 import Constants from 'src/lib/Constants';
+import { GitHubStarWidget } from './GitHubStarWidget';
 
 export const Navbar = () => {
   return (
@@ -16,7 +17,7 @@ export const Navbar = () => {
         <span className="text-orange-light">/</span>
         <a href={Constants.DISCORD_URL} className="hover:text-orange-medium transition-colors">Discord</a>
         <span className="text-orange-light">/</span>
-        <a href={Constants.GITHUB_URL} className="hover:text-orange-medium transition-colors">GitHub</a>
+        <GitHubStarWidget />
       </div>
     </div>
   );
