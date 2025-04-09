@@ -7,6 +7,18 @@ export interface FeatureBlock {
 
 export const featureBlocks: FeatureBlock[] = [
   {
+    title: "One Response",
+    titleHighlight: "to Build Them All",
+    description: "Every route is just a function. Every function can return a response or a component.",
+    items: [
+      "File-based routing, zero boilerplate",
+      "JSX as a response — literally return <Page />",
+      "Stream requests, upgrade to WebSockets, no abstraction tax",
+      "Interruptors for fine-grained control",
+      "Middleware that feels built-in, not bolted on"
+    ]
+  },
+  {
     title: "React Server Components",
     titleHighlight: "Reimagined",
     description: "RedwoodSDK gives you seamless, production-ready support for React Server Components—no hacks required.",
@@ -26,18 +38,6 @@ export const featureBlocks: FeatureBlock[] = [
       "Miniflare-powered Cloudflare emulation",
       "Runs locally in workers just like production",
       "Fully traceable from request to response"
-    ]
-  },
-  {
-    title: "One Response",
-    titleHighlight: "to Build Them All",
-    description: "Every route is just a function. Every function can return a response or a component.",
-    items: [
-      "File-based routing, zero boilerplate",
-      "JSX as a response — literally return <Page />",
-      "Stream requests, upgrade to WebSockets, no abstraction tax",
-      "Interruptors for fine-grained control",
-      "Middleware that feels built-in, not bolted on"
     ]
   }
 ]; 

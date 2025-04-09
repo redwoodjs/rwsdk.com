@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { SDKButton } from './SDKButton';
-
+import { CloudflareImage } from './CloudflareImage';
 declare global {
   interface Window {
     __kwesformsScriptAdded?: boolean;
@@ -147,7 +147,7 @@ const Newsletter = () => {
     <section className="flex flex-row gap-4 max-w-[1400px] mx-auto px-10 py-20">
       <div className="flex flex-col gap-6 max-w-[800px] text-center lg:text-left">
         <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2 w-fit">
-          BE THE FIRST TO <span className="text-orange-light">KNOW</span>
+          BE THE FIRST TO KNOW
         </h2>
         <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
           Get a summary of what we've shipped, articles we've written, and upcoming events straight to your inbox, at most once every two weeks.
@@ -190,7 +190,11 @@ const Newsletter = () => {
         </form>
       </div>
       <div>
-
+        <CloudflareImage
+          imageId="f32bcf3d-9f19-455e-1247-dfa18baf4f00"
+          alt="logo"
+          className="w-[180px] sm:w-[220px] md:w-[300px]"
+        />
       </div>
     </section>
   )
