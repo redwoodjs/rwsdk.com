@@ -53,12 +53,12 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <title>RedwoodSDK - From Concept to Cloud in a Day</title>
-      <meta property="og:title" content="RedwoodSDK | The composable JavaScript framework for Cloudflare Workers" />
-      <meta property="og:description" content="RedwoodSDK is a composable framework for building server-side web apps on Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features." />
+      <meta property="og:title" content="RedwoodSDK | The React Framework for Cloudfare" />
+      <meta property="og:description" content="RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response" />
       <meta property="og:image" content="https://rwsdk.com/images/Homepage-og.png" />
       <meta property="og:url" content="https://rwsdk.com" />
       <meta property="og:site_name" content="RedwoodSDK" />
-      <meta property="og:image:alt" content="RedwoodSDK - composable JavaScript framework for Cloudflare Workers" />
+      <meta property="og:image:alt" content="RedwoodSDK - The React Framework for Cloudfare" />
       <Navbar />
       {/* Hero section */}
       <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 fixed top-[-60px]">

@@ -5,13 +5,13 @@ export default function PersonalSoftware() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Personal Software | RedwoodSDK",
-    "description": "The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK.",
+    "name": "RedwoodSDK | The React Framework for Cloudfare and personal software",
+    "description": "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
     "url": "https://rwsdk.com/personal-software",
     "mainEntity": {
       "@type": "Article",
       "headline": "The Personal Software Revolution",
-      "description": "Build fast, server-driven webapps on Cloudflare with SSR, RSC, and realtime.",
+      "description": "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
       "author": {
         "@type": "Organization",
         "name": "RedwoodJS Inc.",

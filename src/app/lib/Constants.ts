@@ -3,6 +3,7 @@ const Constants = Object.freeze({
   README_URL: 'https://github.com/redwoodjs/sdk/blob/main/README.md',
   QUICK_START_URL: 'https://docs.rwsdk.com/getting-started/quick-start/',
   DOCS_URL: 'https://docs.rwsdk.com',
+  REDWOOD_GRAPHQL_DOCS_URL: 'https://docs.redwoodjs.com/docs/introduction/',
   TUTORIAL_URL: 'https://docs.redwoodjs.com/sdk/tutorial',
   PS_URL: '/personal-software',
   GITHUB_URL: 'https://github.com/redwoodjs',

@@ -14,6 +14,11 @@ export function Footer() {
                   Personal Software
                 </a>
               </li>
+              <li>
+                <a href="https://redwoodjs.com/blog/redwoodsdk" className="hover:text-baige font-jersey transition-colors">
+                  RedwoodJS Announcement
+                </a>
+              </li>
             </ul>
           </div>
           <div>
@@ -32,6 +37,11 @@ export function Footer() {
               <li>
                 <a href={Constants.REDWOODJS_URL} className="hover:text-baige font-jersey transition-colors">
                   RedwoodJS
+                </a>
+              </li>
+              <li>
+                <a href={Constants.REDWOOD_GRAPHQL_DOCS_URL} className="hover:text-baige font-jersey transition-colors">
+                  RedwoodGraphQL Docs
                 </a>
               </li>
             </ul>
