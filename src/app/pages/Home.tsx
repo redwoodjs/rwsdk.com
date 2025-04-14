@@ -73,7 +73,7 @@ export default function Home() {
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
             <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-jersey leading-[81%]">THIS COULD BE THE START OF SOMETHING SMALL</h1>
             <h3 className="text-[18px] sm:text-[24px] md:text-[40px] font-jersey text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
-              RedwoodSDK is a composable framework for building server-side web apps on Cloudflare.
+              RedwoodSDK is a React Framework for building server-side web apps on Cloudfare.
             </h3>
             <div className="flex justify-center">
               <SDKButton size="large" text="READ THE DOCS" />
