@@ -31,7 +31,7 @@ export const GitHubStarWidget = () => {
 
   return (
     <div className="flex items-center gap-2">
-      <a href={Constants.GITHUB_REPO} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a className="hidden sm:block" href={Constants.GITHUB_REPO} target="_blank" rel="noopener noreferrer">GitHub</a>
       <a
         href="https://github.com/redwoodjs/sdk"
         target="_blank"

@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 import { redwood } from "@redwoodjs/sdk/vite";
+import mdx from '@mdx-js/rollup';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
 export default defineConfig({
   environments: {
@@ -13,5 +16,14 @@ export default defineConfig({
     // * To prevent builds getting blocked on this, we stub out the ssr environment here
     ssr: {},
   },
-  plugins: [tailwindcss(), redwood()],
+  plugins: [
+    tailwindcss(), 
+    redwood(),
+    mdx({
+      remarkPlugins: [
+        remarkFrontmatter,
+        remarkMdxFrontmatter
+      ]
+    })
+  ],
 });

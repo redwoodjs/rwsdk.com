@@ -2,7 +2,7 @@ import { CloudflareImage } from './CloudflareImage';
 import Constants from 'src/lib/Constants';
 import { GitHubStarWidget } from './GitHubStarWidget';
 
-export const Navbar = () => {
+export const Navbar = (props: { activePage: string }) => {
   return (
     <div className="flex flex-col sm:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8">
       <CloudflareImage
@@ -11,7 +11,9 @@ export const Navbar = () => {
         className="w-[140px] sm:w-[186px]"
       />
       <div className="flex gap-2 sm:gap-4 font-jersey text-[16px] sm:text-[20px] mt-4 sm:mt-0">
-        <a href="/personal-software" className="hover:text-orange-medium transition-colors">Personal Software</a>
+        <a href="/blog" className={`hover:text-orange-medium transition-colors ${props.activePage === "blog" ? "text-orange-medium" : ""}`}>Blog</a>
+        <span className="text-orange-light">/</span>
+        <a href="/personal-software" className={`hover:text-orange-medium transition-colors ${props.activePage === "personal-software" ? "text-orange-medium" : ""}`}>Personal Software</a>
         <span className="text-orange-light">/</span>
         <a href={Constants.DOCS_URL} className="hover:text-orange-medium transition-colors">Docs</a>
         <span className="text-orange-light">/</span>
