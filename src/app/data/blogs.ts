@@ -5,7 +5,6 @@ export interface BlogPost {
   title: string;
   description: string;
   date: string;
-  readTime: string;
   author: Author;
   image: string;
   tags: string[];
@@ -13,13 +12,12 @@ export interface BlogPost {
 
 export const blogs: BlogPost[] = [
   {
-    slug: 'introducing-redwood-sdk',
-    title: 'Introducing Redwood SDK',
-    description: 'A comprehensive guide to getting started with Redwood SDK',
-    date: '2024-03-20',
-    readTime: '5 min read',
+    slug: 'redwoodjs-to-redwoodsdk',
+    title: 'From RedwoodJS to RedwoodSDK',
+    description: 'RedwoodSDK is here. RedwoodJS is not going anywhere. We are excited to share that our focus is evolving to a new direction: RedwoodSDK 🚀',
+    date: '2025-04-01',
     author: authors['peter'],
-    image: '782e6243-41a3-47ee-0cdc-e322ef043700',
-    tags: ['redwood', 'sdk', 'tutorial']
+    image: '86a788b0-00dd-481b-30c3-e05e9d372800',
+    tags: ['redwoodjs', 'redwoodsdk'],
   },
 ]; 

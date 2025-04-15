@@ -9,7 +9,7 @@ export const blogRoutes = [
     route("/:slug", [
         async ({params}) => {
             const slug = params.slug;
-            if (!blogPosts.includes(slug as BlogPostSlug)) {
+            if (!blogPosts.some(post => post.slug === slug)) {
                 return notFound();
             }
         },

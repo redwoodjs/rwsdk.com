@@ -18,15 +18,16 @@ export default function BlogList() {
             <meta property="og:description" content="Latest articles and tutorials about RedwoodSDK, Cloudflare development, and modern web technologies." />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://rwsdk.com/blog" />
+            <meta property="og:image" content="https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/ee6336e7-f053-406f-1622-ee4082b6e800/public" />
 
             <Navbar activePage="blog" />
 
             {/* Hero Section */}
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 py-12 sm:py-16 lg:py-20">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-jersey text-black mb-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-jersey text-black mb-4 text-center lg:text-left">
                     RedwoodSDK Blog
                 </h1>
-                <p className="text-xl text-gray-600 max-w-2xl">
+                <p className="text-xl text-gray-600 max-w-2xl text-center lg:text-left">
                     Latest articles and tutorials about RedwoodSDK, The React Framework for Cloudflare.
                 </p>
             </div>
