@@ -11,6 +11,16 @@ export const blogPosts: BlogPost[] = [
         image: '86a788b0-00dd-481b-30c3-e05e9d372800',
         tags: ['redwoodjs', 'redwoodsdk'],
         content: 'Content will be loaded from markdown file...'
+    },
+    {
+        slug: 'redwoodsdk-and-cloudflare-environments',
+        title: 'Managing Production and Staging Environments with RedwoodSDK and Cloudflare',
+        description: 'Learn how to easily manage production and staging environments for your RedwoodSDK application using Cloudflare\'s environment variables and deployment commands.',
+        date: '2025-04-10',
+        author: authors['herman'],
+        image: '077a4d25-89e1-46f4-6f62-71d8ee160500',
+        tags: ['redwoodsdk', 'cloudflare', 'deployment', 'environments'],
+        content: 'Content will be loaded from markdown file...'
     }
 ];
 

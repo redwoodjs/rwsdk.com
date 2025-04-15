@@ -1,11 +1,11 @@
 import { CloudflareImage } from 'src/components/CloudflareImage';
-import { blogs } from 'src/data/blogs';
+import { blogPosts } from 'src/data/blog/manifest';
 import { Navbar } from 'src/components/Navbar';
 import { Footer } from 'src/components/Footer';
 
 export default function BlogList() {
     // Sort blogs by date to get the latest one
-    const sortedBlogs = [...blogs].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sortedBlogs = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     const latestBlog = sortedBlogs[0];
     const otherBlogs = sortedBlogs.slice(1);
 

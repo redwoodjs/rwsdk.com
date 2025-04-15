@@ -20,7 +20,8 @@ marked.use(markedHighlight({
 
 marked.setOptions({
     gfm: true,
-    breaks: true
+    breaks: true,
+    pedantic: false
 });
 
 // Use Vite's import.meta.glob to get all markdown files

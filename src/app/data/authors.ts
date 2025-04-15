@@ -23,6 +23,6 @@ export const authors: Record<string, Author> = {
   "amy": {
     name: 'Amy Dutton',
     role: 'Core team developer, marketing and design',
-    avatar: 'e279b807-974e-4d7b-100b-99fd97cedf00' //imageID in cloudflare
+    avatar: 'f219a932-fb8a-4f09-5dff-0f262edd2200' //imageID in cloudflare
   }, 
 }
