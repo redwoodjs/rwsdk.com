@@ -1,4 +1,6 @@
+import { TurnstileScript } from "@redwoodjs/sdk/turnstile";
 import stylesUrl from "./styles.css?url";
+import { DocumentProps } from "@redwoodjs/sdk/router";
 
 declare global {
   interface Window {
@@ -47,6 +49,7 @@ const cspContent = Object.entries(cspDirectives)
 
 const canonicalUrl = 'https://rwsdk.com';
 
+
 export const Document: React.FC<DocumentProps> = ({
   children,
   nonce,
@@ -57,7 +60,7 @@ export const Document: React.FC<DocumentProps> = ({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>RedwoodSDK | The composable JavaScript framework for Cloudflare Workers</title>        <link rel="canonical" href={canonicalUrl} />
-        
+        <TurnstileScript />
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />
@@ -116,6 +119,7 @@ export const Document: React.FC<DocumentProps> = ({
         <div id="root">
           {children}
         </div>
+        <script src="/src/client.tsx"></script>
       </body>
     </html>
   );

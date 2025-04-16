@@ -1,33 +1,31 @@
-'use client';
-import { useEffect, useState } from 'react';
 import Constants from 'src/lib/Constants';
+
 interface GitHubRepoData {
   stargazers_count: number;
 }
 
-export const GitHubStarWidget = () => {
-  const [starCount, setStarCount] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export const GitHubStarWidget = async () => {
+  let starCount: number | null = null;
+  let error: string | null = null;
 
-  useEffect(() => {
-    const fetchStarCount = async () => {
-      try {
-        const response = await fetch('https://api.github.com/repos/redwoodjs/sdk');
-        if (!response.ok) {
-          throw new Error('Failed to fetch star count');
-        }
-        const data: GitHubRepoData = await response.json();
-        setStarCount(data.stargazers_count);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setIsLoading(false);
+  try {
+    const response = await fetch('https://api.github.com/repos/redwoodjs/sdk', {
+      headers: {
+        'User-Agent': 'RedwoodSDK',
+        'Accept': 'application/vnd.github.v3+json'
       }
-    };
-
-    fetchStarCount();
-  }, []);
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch star count');
+    }
+    
+    const data: GitHubRepoData = await response.json();
+    starCount = data.stargazers_count;
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An error occurred';
+    console.error(err);
+  }
 
   return (
     <div className="flex items-center gap-2">
@@ -58,7 +56,7 @@ export const GitHubStarWidget = () => {
           />
         </svg>
         <span className="font-jersey">
-          {isLoading ? '...' : error ? 'Error' : `${starCount?.toLocaleString()}`}
+          {error ? 'Error' : `${starCount?.toLocaleString()}`}
         </span>
       </a>
     </div>
