@@ -3,6 +3,7 @@ import * as React from 'react'
 import { CloudflareImage } from './CloudflareImage';
 import Constants from 'src/lib/Constants';
 import { GitHubStarWidget } from './GitHubStarWidget';
+import { Suspense } from 'react';
 
 interface NavbarProps {
     activePage?: string;
@@ -38,7 +39,9 @@ export function Navbar(props: NavbarProps) {
                 <span className="text-orange-light">/</span>
                 <a href={Constants.DISCORD_URL} className="hover:text-orange-medium transition-colors">Discord</a>
                 <span className="text-orange-light">/</span>
-                {/* <GitHubStarWidget /> */}
+                <Suspense fallback={<span className="font-jersey">...</span>}>
+                    <GitHubStarWidget />
+                </Suspense>
             </div>
         </div>
     );

@@ -1,30 +1,54 @@
+"use server"
 import Constants from 'src/lib/Constants';
+import { env } from "cloudflare:workers";
 
 interface GitHubRepoData {
   stargazers_count: number;
 }
 
-export const GitHubStarWidget = async () => {
+interface GitHubError {
+  message: string;
+}
+
+export async function GitHubStarWidget() {
   let starCount: number | null = null;
   let error: string | null = null;
 
   try {
+    const headers: HeadersInit = {
+      'User-Agent': 'RedwoodSDK',
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    };
+
+    // Add GitHub token if available
+    const githubToken = env.VITE_GITHUB_TOKEN;
+    if (githubToken) {
+      headers['Authorization'] = `token ${githubToken}`;
+    }
+
     const response = await fetch('https://api.github.com/repos/redwoodjs/sdk', {
-      headers: {
-        'User-Agent': 'RedwoodSDK',
-        'Accept': 'application/vnd.github.v3+json'
-      }
+      method: 'GET',
+      headers
     });
     
     if (!response.ok) {
-      throw new Error('Failed to fetch star count');
+      const errorData = await response.json().catch(() => null) as GitHubError | null;
+      const errorMessage = errorData?.message || `HTTP error! status: ${response.status}`;
+      
+      // Special handling for rate limit errors
+      if (response.status === 403 && errorMessage.includes('rate limit')) {
+        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+      }
+      
+      throw new Error(errorMessage);
     }
     
     const data: GitHubRepoData = await response.json();
     starCount = data.stargazers_count;
   } catch (err) {
     error = err instanceof Error ? err.message : 'An error occurred';
-    console.error(err);
+    console.error('GitHub API Error:', err);
   }
 
   return (
@@ -56,9 +80,9 @@ export const GitHubStarWidget = async () => {
           />
         </svg>
         <span className="font-jersey">
-          {error ? 'Error' : `${starCount?.toLocaleString()}`}
+          {error ? 'Error' : starCount === null ? '...' : starCount.toLocaleString()}
         </span>
       </a>
     </div>
   );
-}; 
+} 
