@@ -40,6 +40,7 @@ export function Navbar(props: NavbarProps) {
                 <a href={Constants.DISCORD_URL} className="hover:text-orange-medium transition-colors">Discord</a>
                 <span className="text-orange-light">/</span>
                 <Suspense fallback={<span className="font-jersey">...</span>}>
+                    {/* @ts-expect-error Async Server Component */}
                     <GitHubStarWidget />
                 </Suspense>
             </div>
