@@ -18,7 +18,7 @@ export const authors: Record<string, Author> = {
   "justin": {
     name: 'Justin van der Merwe',
     role: 'Core team developer',
-    avatar: 'e279b807-974e-4d7b-100b-99fd97cedf00' //imageID in cloudflare
+    avatar: '9c27adaa-3e4b-4b38-34ea-70268a02d100' //imageID in cloudflare
   },
   "amy": {
     name: 'Amy Dutton',

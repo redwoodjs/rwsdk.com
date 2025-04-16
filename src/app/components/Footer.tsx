@@ -19,6 +19,11 @@ export function Footer() {
                   RedwoodJS Announcement
                 </a>
               </li>
+              <li>
+                <a href="/blog" className="hover:text-baige font-jersey transition-colors">
+                  Blog
+                </a>
+              </li>
             </ul>
           </div>
           <div>

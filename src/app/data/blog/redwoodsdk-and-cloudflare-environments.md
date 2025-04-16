@@ -5,7 +5,7 @@ date: "2025-04-10"
 author:
   id: "herman"
 heroImage: "077a4d25-89e1-46f4-6f62-71d8ee160500"
-ogImage: "hhttps://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/a90bdff6-ef21-4dbf-93da-6c86e6844e00/public"
+ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/a90bdff6-ef21-4dbf-93da-6c86e6844e00/public"
 tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 ---
 
