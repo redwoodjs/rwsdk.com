@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-const Newsletter = () => {
+export function Newsletter() {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
@@ -199,5 +199,3 @@ const Newsletter = () => {
     </section>
   )
 }
-
-export { Newsletter }

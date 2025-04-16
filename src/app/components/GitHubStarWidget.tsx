@@ -1,6 +1,4 @@
-"use server"
 import Constants from 'src/lib/Constants';
-import { env } from "cloudflare:workers";
 
 interface GitHubRepoData {
   stargazers_count: number;
@@ -10,7 +8,7 @@ interface GitHubError {
   message: string;
 }
 
-export async function GitHubStarWidget() {
+export async function GitHubStarWidget(): Promise<JSX.Element> {
   let starCount: number | null = null;
   let error: string | null = null;
 
@@ -22,7 +20,8 @@ export async function GitHubStarWidget() {
     };
 
     // Add GitHub token if available
-    const githubToken = env.VITE_GITHUB_TOKEN;
+    const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
+    console.log('githubToken', githubToken);
     if (githubToken) {
       headers['Authorization'] = `token ${githubToken}`;
     }

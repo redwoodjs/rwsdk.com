@@ -1,6 +1,5 @@
 import { TurnstileScript } from "@redwoodjs/sdk/turnstile";
 import stylesUrl from "./styles.css?url";
-import { DocumentProps } from "@redwoodjs/sdk/router";
 
 declare global {
   interface Window {
@@ -34,7 +33,7 @@ const gtmScript = `
 
 // CSP directives organized by type
 const cspDirectives = {
-  'script-src': "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
+  'script-src': "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://kwesforms.com",
   'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
   'font-src': "'self' https://fonts.gstatic.com",
   'connect-src': "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com",
@@ -50,7 +49,10 @@ const cspContent = Object.entries(cspDirectives)
 const canonicalUrl = 'https://rwsdk.com';
 
 
-export const Document: React.FC<DocumentProps> = ({
+export const Document: React.FC<{
+  children: React.ReactNode;
+  nonce?: string;
+}> = ({
   children,
   nonce,
 }) => {
