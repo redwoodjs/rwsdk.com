@@ -12,6 +12,7 @@ export type AppContext = {};
 
 export default defineApp([
   setCommonHeaders(),
+  // @ts-expect-error Async Server Component
   render(Document, [
     index([Home]),
     route("/personal-software", [PersonalSoftware]),

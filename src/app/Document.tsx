@@ -119,7 +119,6 @@ export const Document: React.FC<DocumentProps> = ({
         <div id="root">
           {children}
         </div>
-        <script src="/src/client.tsx"></script>
       </body>
     </html>
   );

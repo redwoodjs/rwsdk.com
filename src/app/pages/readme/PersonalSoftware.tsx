@@ -35,7 +35,7 @@ export default function PersonalSoftware() {
   return (
     <div>
       <Navbar activePage="personal-software" />
-      <div className="flex flex-col lg:flex-row min-h-screen font-chivo bg-[#EDEBE6] text-black">
+      <div className="flex flex-col lg:flex-row min-h-screen font-chivo bg-baige text-black">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

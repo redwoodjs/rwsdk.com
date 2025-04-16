@@ -38,8 +38,8 @@ export function Navbar(props: NavbarProps) {
                 <span className="text-orange-light">/</span>
                 <a href={Constants.DISCORD_URL} className="hover:text-orange-medium transition-colors">Discord</a>
                 <span className="text-orange-light">/</span>
-                <GitHubStarWidget />
+                {/* <GitHubStarWidget /> */}
             </div>
         </div>
     );
-} 
+}
