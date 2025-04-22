@@ -47,9 +47,6 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-f2df5694-20240916
         version: 19.0.0-rc-f2df5694-20240916(react@19.0.0-rc-f2df5694-20240916)
-      react-github-btn:
-        specifier: ^1.4.0
-        version: 1.4.0(react@19.0.0-rc-f2df5694-20240916)
       react-helmet:
         specifier: ^6.1.0
         version: 6.1.0(react@19.0.0-rc-f2df5694-20240916)
@@ -1709,9 +1706,6 @@ packages:
   get-tsconfig@4.10.0:
     resolution: {integrity: sha512-kGzZ3LWWQcGIAmg6iWvXn0ei6WDtV26wzHRMwDSzmAbcXrTEXxHy6IehI6/4eT6VRKyMP1eF1VqwrVUmE/LR7A==}
 
-  github-buttons@2.29.1:
-    resolution: {integrity: sha512-TV3YgAKda5hPz75n7QXmGCsSzgVya1vvmBieebg3EB5ScmashTZ0FldViG1aU2d4V5rcAGrtQ7k5uAaCo0A4PA==}
-
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -2268,11 +2262,6 @@ packages:
 
   react-fast-compare@3.2.2:
     resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
-
-  react-github-btn@1.4.0:
-    resolution: {integrity: sha512-lV4FYClAfjWnBfv0iNlJUGhamDgIq6TayD0kPZED6VzHWdpcHmPfsYOZ/CFwLfPv4Zp+F4m8QKTj0oy2HjiGXg==}
-    peerDependencies:
-      react: '>=16.3.0'
 
   react-helmet@6.1.0:
     resolution: {integrity: sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==}
@@ -4369,8 +4358,6 @@ snapshots:
       resolve-pkg-maps: 1.0.0
     optional: true
 
-  github-buttons@2.29.1: {}
-
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -5122,11 +5109,6 @@ snapshots:
       scheduler: 0.25.0-rc-f2df5694-20240916
 
   react-fast-compare@3.2.2: {}
-
-  react-github-btn@1.4.0(react@19.0.0-rc-f2df5694-20240916):
-    dependencies:
-      github-buttons: 2.29.1
-      react: 19.0.0-rc-f2df5694-20240916
 
   react-helmet@6.1.0(react@19.0.0-rc-f2df5694-20240916):
     dependencies:
