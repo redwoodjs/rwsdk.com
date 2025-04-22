@@ -4,7 +4,7 @@ description: "RedwoodSDK introduces a powerful feature: React Server Function St
 date: "2025-05-22"
 author:
   id: "herman"
-heroImage: "8126e54a-237d-4c60-ee27-182ea5b29900"
+heroImage: "7a9d155b-1d08-4158-2f45-f42a723fbc00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8126e54a-237d-4c60-ee27-182ea5b29900/public"
 tags: ["redwoodsdk", "cloudflare", "streaming", "guide", "realtime"]
 ---
