@@ -19,7 +19,7 @@ In Redwood, every route can define its own document. Not just the content. The *
 
 Here’s what that looks like:
 
-```tsx
+```tsx title="
 // src/app/Document.tsx
 
 export const Document: React.FC<{ children: React.ReactNode }> = ({
@@ -70,7 +70,8 @@ Because you define the document per route, you can build:
 - `/app/user/login`: an interactive form with client-side validation
 - `/app/dashboard`: a realtime UI hydrated over websockets
 
-```tsx src/worker.tsx
+```tsx
+// src/worker.tsx
 
 import { defineApp } from '@redwoodjs/sdk/worker'
 import { render, route, prefix } from '@redwoodjs/sdk/router'
