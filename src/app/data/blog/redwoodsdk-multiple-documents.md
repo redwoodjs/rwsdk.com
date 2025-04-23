@@ -4,7 +4,7 @@ description: "Most frameworks give you a fixed HTML document: a `<!DOCTYPE html>
 date: "2025-05-23"
 author:
   id: "peter"
-heroImage: "7a9d155b-1d08-4158-2f45-f42a723fbc00"
+heroImage: "a63a9f22-bb6f-440d-36a4-c230a784bd00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8126e54a-237d-4c60-ee27-182ea5b29900/public"
 tags: ["redwoodsdk", "html", "guide"]
 ---
@@ -19,7 +19,7 @@ In Redwood, every route can define its own document. Not just the content. The *
 
 Here’s what that looks like:
 
-```tsx title="
+```tsx
 // src/app/Document.tsx
 
 export const Document: React.FC<{ children: React.ReactNode }> = ({

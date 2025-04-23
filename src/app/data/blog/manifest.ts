@@ -39,11 +39,10 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "redwoodsdk-multiple-documents",
     title: "Per-Route Documents in RedwoodSDK: Total Control Over Your HTML",
-    description:
-      "Most frameworks give you a fixed HTML document: a `<!DOCTYPE html>` page with a `<head>`, a `<body>`, and a root div for React to hydrate into. You might be able to tweak the title or inject a meta tag—but the structure? That's locked down.",
+    description: "You control every byte over the wire.",
     date: "2025-05-23",
     author: authors["peter"],
-    image: "7a9d155b-1d08-4158-2f45-f42a723fbc00",
+    image: "a63a9f22-bb6f-440d-36a4-c230a784bd00",
     tags: ["redwoodsdk", "html", "guide"],
     content: "Content will be loaded from markdown file...",
   },
