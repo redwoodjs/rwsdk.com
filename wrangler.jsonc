@@ -27,7 +27,12 @@
       }
     }
   },
-
+  "r2_buckets": [
+    {
+      "bucket_name": "rwsdk-blog",
+      "binding": "R2",
+    },
+  ],
   // Entry point for your worker
   "main": "src/worker.tsx",
 

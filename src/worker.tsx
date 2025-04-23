@@ -1,22 +1,22 @@
 import { defineApp } from "@redwoodjs/sdk/worker";
-import { index, document, route } from "@redwoodjs/sdk/router";
+import { index, render, route, prefix } from "@redwoodjs/sdk/router";
 import { Document } from "src/Document";
 import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
+import { blogRoutes } from "src/pages/blog/routes";
+import { notFound } from "src/utils/notFound";
 
-type Context = {};
+export type AppContext = {};
 
-export default defineApp<Context>([
+export default defineApp([
   setCommonHeaders(),
-  ({ ctx }) => {
-    // setup ctx here
-    ctx;
-  },
-  document(Document, [
+  // @ts-expect-error Async Server Component
+  render(Document, [
     index([Home]),
     route("/personal-software", [PersonalSoftware]),
+    prefix("/blog", blogRoutes),
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
@@ -53,6 +53,9 @@ export default defineApp<Context>([
           "Content-Type": "text/plain",
         },
       });
+    }),
+    route("*", async () => {
+      return notFound();
     }),
   ]),
 ]);

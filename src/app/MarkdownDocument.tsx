@@ -1,4 +1,3 @@
-import { TurnstileScript } from "@redwoodjs/sdk/turnstile";
 import stylesUrl from "./styles.css?url";
 
 declare global {
@@ -33,7 +32,7 @@ const gtmScript = `
 
 // CSP directives organized by type
 const cspDirectives = {
-  'script-src': "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://kwesforms.com",
+  'script-src': "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
   'style-src': "'self' 'unsafe-inline' https://fonts.googleapis.com",
   'font-src': "'self' https://fonts.gstatic.com",
   'connect-src': "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com",
@@ -48,11 +47,7 @@ const cspContent = Object.entries(cspDirectives)
 
 const canonicalUrl = 'https://rwsdk.com';
 
-
-export const Document: React.FC<{
-  children: React.ReactNode;
-  nonce?: string;
-}> = ({
+export const MarkdownDocument: React.FC<DocumentProps> = ({
   children,
   nonce,
 }) => {
@@ -61,8 +56,8 @@ export const Document: React.FC<{
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK | The composable JavaScript framework for Cloudflare Workers</title>        <link rel="canonical" href={canonicalUrl} />
-        <TurnstileScript />
+        <title>RedwoodSDK Blog | The React framework for Cloudflare</title>        <link rel="canonical" href={canonicalUrl} />
+        
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />
