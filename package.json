@@ -1,12 +1,12 @@
 {
-  "name": "@redwoodjs/starter-minimal",
+  "name": "redwoodsdk-website",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "keywords": [],
   "author": "",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "postinstall": "pnpm dev:init",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.0",
-    "@redwoodjs/sdk": "^0.0.57",
+    "@redwoodjs/sdk": "^0.0.71",
     "@tailwindcss/vite": "^4.0.15",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^6.0.0",
@@ -32,10 +32,6 @@
     "marked": "^15.0.8",
     "marked-highlight": "^2.2.1",
     "mdx-bundler": "^10.1.1",
-    "react": "19.0.0-rc-f2df5694-20240916",
-    "react-dom": "19.0.0-rc-f2df5694-20240916",
-    "react-helmet": "^6.1.0",
-    "react-server-dom-webpack": "19.0.0-rc-f2df5694-20240916",
     "tailwindcss": "^4.0.15"
   },
   "devDependencies": {
