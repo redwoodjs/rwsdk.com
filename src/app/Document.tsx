@@ -124,7 +124,7 @@ export const Document: React.FC<{
         </noscript>
         <div id="root">
           {children}
-          <script src="/src/client.tsx"></script>
+          {/* <script src="/src/client.tsx"></script> */}
         </div>
       </body>
     </html>

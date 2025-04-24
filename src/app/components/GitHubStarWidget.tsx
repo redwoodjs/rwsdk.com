@@ -1,6 +1,5 @@
-"use client"
 import Constants from 'src/lib/Constants';
-import { useEffect, useState } from 'react';
+import { env } from "cloudflare:workers";
 
 interface GitHubRepoData {
   stargazers_count: number;
@@ -10,51 +9,54 @@ interface GitHubError {
   message: string;
 }
 
-export function GitHubStarWidget(): JSX.Element {
-  const [starCount, setStarCount] = useState<number | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export async function GitHubStarWidget() {
+  let starCount: number | null = null;
+  let error: string | null = null;
+  const startTime = Date.now();
 
-  useEffect(() => {
-    const fetchStarCount = async () => {
-      try {
-        const headers: HeadersInit = {
-          'User-Agent': 'RedwoodSDK',
-          'Accept': 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-          'Cache-Control': 'public, max-age=14400, stale-while-revalidate=7200'
-        };
-
-        const githubToken = process.env.VITE_GITHUB_TOKEN;
-        if (githubToken) {
-          headers['Authorization'] = `token ${githubToken}`;
-        }
-
-        const response = await fetch('https://api.github.com/repos/redwoodjs/sdk', {
-          method: 'GET',
-          headers
-        });
-        
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => null) as GitHubError | null;
-          const errorMessage = errorData?.message || `HTTP error! status: ${response.status}`;
-          
-          if (response.status === 403 && errorMessage.includes('rate limit')) {
-            throw new Error('GitHub API rate limit exceeded. Please try again later.');
-          }
-          
-          throw new Error(errorMessage);
-        }
-        
-        const data: GitHubRepoData = await response.json();
-        setStarCount(data.stargazers_count);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-        console.error('GitHub API Error:', err);
-      }
+  try {
+    const headers: HeadersInit = {
+      'User-Agent': 'RedwoodSDK',
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
     };
 
-    fetchStarCount();
-  }, []);
+    const githubToken = env.VITE_GITHUB_TOKEN;
+    if (githubToken) {
+      headers['Authorization'] = `token ${githubToken}`;
+    }
+
+    console.log(githubToken);
+
+    const response = await fetch('https://api.github.com/repos/redwoodjs/sdk', {
+      method: 'GET',
+      headers,
+      cf: {
+        cacheTtl: 14400, // Cache for 4 hours
+        cacheEverything: true
+      }
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null) as GitHubError | null;
+      const errorMessage = errorData?.message || `HTTP error! status: ${response.status}`;
+      
+      if (response.status === 403 && errorMessage.includes('rate limit')) {
+        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+      }
+      
+      throw new Error(errorMessage);
+    }
+    
+    const data: GitHubRepoData = await response.json();
+    starCount = data.stargazers_count;
+    
+    // Log the response time
+    console.log(`GitHub API call took ${Date.now() - startTime}ms`);
+  } catch (err) {
+    error = err instanceof Error ? err.message : 'An error occurred';
+    console.error('GitHub API Error:', err);
+  }
 
   return (
     <div className="flex items-center gap-2">
