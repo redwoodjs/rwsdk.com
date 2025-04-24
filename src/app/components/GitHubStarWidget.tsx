@@ -1,3 +1,4 @@
+"use server"
 import Constants from 'src/lib/Constants';
 import { env } from "cloudflare:workers";
 
@@ -25,8 +26,6 @@ export async function GitHubStarWidget() {
     if (githubToken) {
       headers['Authorization'] = `token ${githubToken}`;
     }
-
-    console.log(githubToken);
 
     const response = await fetch('https://api.github.com/repos/redwoodjs/sdk', {
       method: 'GET',
