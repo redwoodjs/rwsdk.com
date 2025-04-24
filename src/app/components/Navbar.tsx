@@ -22,7 +22,7 @@ export function Navbar(props: NavbarProps) {
     }, []);
 
     return (
-        <div className={`flex flex-col sm:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200 ${hasShadow ? 'shadow-md' : ''}`}>
+        <div className={`flex flex-col lg:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200 ${hasShadow ? 'shadow-md' : ''}`}>
             <a className="cursor-pointer" href="/">
                 <CloudflareImage
                 imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
