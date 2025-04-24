@@ -27,8 +27,7 @@
 
 @font-face {
   font-family: "Chicago";
-  src:
-    url("/fonts/ChicagoFLF.woff2") format("woff2"),
+  src: url("/fonts/ChicagoFLF.woff2") format("woff2"),
     url("/fonts/ChicagoFLF.woff") format("woff");
   font-weight: normal;
   font-style: normal;
@@ -38,14 +37,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-baige: #F4EEDF;
-  --color-orange: #F47238;
-  --color-orange-light: #FFAD48;
-  --color-orange-dark: #E73C36;
-  --color-orange-medium: #F37238;
-  --color-purple: #8B2243;
-  --color-purple-dark: #6B1A35;
-  --color-light: #F2ECE4;
+  --color-baige: #f4eedf;
+  --color-orange: #f47238;
+  --color-orange-light: #ffad48;
+  --color-orange-dark: #e73c36;
+  --color-orange-medium: #f37238;
+  --color-purple: #8b2243;
+  --color-purple-dark: #6b1a35;
+  --color-light: #f2ece4;
   --font-mono: "Roboto Mono", monospace;
   --font-chicago: "Chicago", sans-serif;
   --font-jersey: "Jersey 25", sans-serif;
@@ -57,8 +56,8 @@ body {
 }
 
 .grid-bg {
-  background-image: linear-gradient(#E5E5E5 1px, transparent 1px),
-                    linear-gradient(90deg, #E5E5E5 1px, transparent 1px);
+  background-image: linear-gradient(#e5e5e5 1px, transparent 1px),
+    linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
   background-size: 12px 12px;
   background-position: -1px -1px;
 }
@@ -81,13 +80,17 @@ body {
   @apply text-orange-light;
 }
 
-
 .hover\:fill-orange:hover {
-  fill: #FFA500; /* Replace with your specific orange color */
+  fill: #ffa500; /* Replace with your specific orange color */
 }
 
 .github-start:hover svg path {
-  fill: #FFA500; /* Replace with your specific orange color */
+  fill: #ffa500; /* Replace with your specific orange color */
+}
+
+.prose code:not(.hljs) {
+  color: #c9d1d9;
+  background: #0d1117;
 }
 
 /* Syntax highlighting */
