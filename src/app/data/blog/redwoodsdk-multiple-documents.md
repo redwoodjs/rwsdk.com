@@ -5,7 +5,7 @@ date: "2025-05-23"
 author:
   id: "peter"
 heroImage: "a63a9f22-bb6f-440d-36a4-c230a784bd00"
-ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8126e54a-237d-4c60-ee27-182ea5b29900/public"
+ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8725384b-c535-4a75-b119-c16856f6c800/public"
 tags: ["redwoodsdk", "html", "guide"]
 ---
 
