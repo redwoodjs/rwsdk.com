@@ -1,7 +1,7 @@
 ---
 title: "How to use React Server Function Streams in RedwoodSDK"
 description: "RedwoodSDK introduces a powerful feature: React Server Function Streams. This allows developers to stream partial responses from the server to the client, enabling real-time updates and improved user experiences."
-date: "2025-05-22"
+date: "2025-04-22"
 author:
   id: "herman"
 heroImage: "7a9d155b-1d08-4158-2f45-f42a723fbc00"
@@ -20,6 +20,7 @@ Server Function Streams enable the server to send data to the client in chunks a
 ## Prerequisites and Setup
 
 Before implementing streaming responses, ensure you have:
+
 - The latest RedwoodSDK package is installed
 - A Cloudflare account with AI access is enabled
 - Configure your `wrangler.json` file with the AI binding:
@@ -31,7 +32,6 @@ Before implementing streaming responses, ensure you have:
     }
   }
   ```
-  
 
 ### Project Structure
 
@@ -46,14 +46,13 @@ src/
         functions.ts  # Server functions
 ```
 
-
 ## Implementing a Streaming Chat with RedwoodSDK
 
 Let's walk through creating a simple chat interface that streams AI-generated responses using RedwoodSDK.
 
 ### Server-Side: Creating the Stream Function
 
-First, define a server function that initiates a streaming response from an AI model.  Note how we are using the binding from `env.AI` to access the Cloudflare AI models:
+First, define a server function that initiates a streaming response from an AI model. Note how we are using the binding from `env.AI` to access the Cloudflare AI models:
 
 ```ts
 // app/pages/Chat/functions.ts
@@ -152,6 +151,7 @@ The combination of server-side streaming and client-side consumption creates smo
 - Implement user authentication and rate limiting
 
 For more details and examples, refer to:
+
 - [RedwoodSDK Documentation](https://docs.rwsdk.com/guides/rsc-streams/)
 - [Working Example Repository](https://github.com/redwoodjs/example-streaming-ai-chat/tree/main)
 - [Cloudflare AI Documentation](https://developers.cloudflare.com/workers-ai/)
