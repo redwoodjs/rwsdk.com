@@ -1,7 +1,7 @@
 ---
 title: "Per-Route Documents in RedwoodSDK: Total Control Over Your HTML"
 description: "Most frameworks give you a fixed HTML document: a `<!DOCTYPE html>` page with a `<head>`, a `<body>`, and a root div for React to hydrate into. You might be able to tweak the title or inject a meta tag—but the structure? That’s locked down."
-date: "2025-05-23"
+date: "2025-04-23"
 author:
   id: "peter"
 heroImage: "a63a9f22-bb6f-440d-36a4-c230a784bd00"
