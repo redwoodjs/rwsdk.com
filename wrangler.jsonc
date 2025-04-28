@@ -8,30 +8,30 @@
   "env": {
     "staging": {
       "vars": {
-        "APP_NAME": "redwoodsdk-staging",
+        "APP_NAME": "redwoodsdk-staging"
       }
     },
     "production": {
       "vars": {
-        "APP_NAME": "redwoodsdk-production",
-        "routes": [
-          {
-            "pattern": "rwsdk.com",
-            "custom_domain": true
-          },
-          {
-            "pattern": "www.rwsdk.com",
-            "custom_domain": true
-          }
-        ]
-      }
+        "APP_NAME": "redwoodsdk-production"
+      },
+      "routes": [
+        {
+          "pattern": "rwsdk.com",
+          "custom_domain": true
+        },
+        {
+          "pattern": "www.rwsdk.com",
+          "custom_domain": true
+        }
+      ]
     }
   },
   "r2_buckets": [
     {
       "bucket_name": "rwsdk-blog",
-      "binding": "R2",
-    },
+      "binding": "R2"
+    }
   ],
   // Entry point for your worker
   "main": "src/worker.tsx",
