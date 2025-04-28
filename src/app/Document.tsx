@@ -122,10 +122,8 @@ export const Document: React.FC<{
             title="Google Tag Manager"
           />
         </noscript>
-        <div id="root">
-          {children}
-          <script>import("/src/client.tsx")</script>
-        </div>
+        <div id="root">{children}</div>
+        <script>import("/src/client.tsx")</script>
       </body>
     </html>
   );
