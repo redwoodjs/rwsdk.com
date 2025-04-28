@@ -109,8 +109,8 @@ export const Document: React.FC<{
         ></script>
         <script dangerouslySetInnerHTML={{ __html: gaScript }} nonce={nonce} />
         {/* Styles and Scripts */}
-        <link rel="preload" href="/src/client.tsx" as="script" />
         <link rel="stylesheet" href={stylesUrl} />
+        <link rel="modulepreload" href="/src/client.tsx" />
       </head>
       <body>
         <noscript>
@@ -124,7 +124,7 @@ export const Document: React.FC<{
         </noscript>
         <div id="root">
           {children}
-          {/* <script src="/src/client.tsx"></script> */}
+          <script>import("/src/client.tsx")</script>
         </div>
       </body>
     </html>
