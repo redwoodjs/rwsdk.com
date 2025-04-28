@@ -1,5 +1,4 @@
-"use client"
-import * as React from 'react'
+
 import { CloudflareImage } from './CloudflareImage';
 import Constants from 'src/lib/Constants';
 import { GitHubStarWidget } from './GitHubStarWidget';
@@ -10,19 +9,9 @@ interface NavbarProps {
 }
 
 export function Navbar(props: NavbarProps) {
-    const [hasShadow, setHasShadow] = React.useState(false);
-
-    React.useEffect(() => {
-        const handleScroll = () => {
-            setHasShadow(window.scrollY > 0);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
-        <div className={`flex flex-col lg:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200 ${hasShadow ? 'shadow-md' : ''}`}>
+        <div className='flex flex-col lg:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200'>
             <a className="cursor-pointer" href="/">
                 <CloudflareImage
                 imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"

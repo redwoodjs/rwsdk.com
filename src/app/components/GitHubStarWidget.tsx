@@ -1,4 +1,3 @@
-"use server"
 import Constants from 'src/lib/Constants';
 import { env } from "cloudflare:workers";
 
