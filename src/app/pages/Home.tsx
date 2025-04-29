@@ -74,7 +74,7 @@ export default function Home() {
       />
       <Navbar />
       {/* Hero section */}
-      <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 fixed top-[-60px]">
+      <div className="min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 fixed top-[-60px]">
         <CloudflareImage
           imageId="83ce73f8-4da8-4812-d10a-81f3e3610c00"
           alt="Family using RedwoodSDK application"

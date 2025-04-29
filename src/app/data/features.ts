@@ -11,7 +11,7 @@ export const featureBlocks: FeatureBlock[] = [
     titleHighlight: "to Build Them All",
     description: "Every route is just a function. Every function can return a response or a component.",
     items: [
-      "File-based routing, zero boilerplate",
+      "Code-based routing, zero boilerplate",
       "JSX as a response — literally return <Page />",
       "Stream requests, upgrade to WebSockets, no abstraction tax",
       "Interruptors for fine-grained control",
