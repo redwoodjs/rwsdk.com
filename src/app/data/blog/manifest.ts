@@ -26,13 +26,13 @@ export const blogPosts: BlogPost[] = [
         slug: 'redwoodsdk-streaming-guide',
         title: 'How to use React Server Function Streams in RedwoodSDK',
         description: 'RedwoodSDK introduces a powerful feature: React Server Function Streams. This allows developers to stream partial responses from the server to the client, enabling real-time updates and improved user experiences.',
-        date: '2025-05-22',
+        date: '2025-04-22',
         author: authors['herman'],
         image: '7a9d155b-1d08-4158-2f45-f42a723fbc00',
         tags: ['redwoodsdk', 'streaming', 'guide', 'realtime'],
         content: 'Content will be loaded from markdown file...'
     }
-    
+
 ];
 
-export type BlogPostSlug = typeof blogPosts[number]['slug']; 
+export type BlogPostSlug = typeof blogPosts[number]['slug'];
