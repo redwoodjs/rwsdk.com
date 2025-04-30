@@ -30,7 +30,7 @@ export const blogPosts: BlogPost[] = [
     title: "How to use React Server Function Streams in RedwoodSDK",
     description:
       "RedwoodSDK introduces a powerful feature: React Server Function Streams. This allows developers to stream partial responses from the server to the client, enabling real-time updates and improved user experiences.",
-    date: "2025-05-22",
+    date: "2025-04-22",
     author: authors["herman"],
     image: "7a9d155b-1d08-4158-2f45-f42a723fbc00",
     tags: ["redwoodsdk", "streaming", "guide", "realtime"],
@@ -40,7 +40,7 @@ export const blogPosts: BlogPost[] = [
     slug: "redwoodsdk-multiple-documents",
     title: "Per-Route Documents in RedwoodSDK: Total Control Over Your HTML",
     description: "You control every byte over the wire.",
-    date: "2025-05-23",
+    date: "2025-04-23",
     author: authors["peter"],
     image: "a63a9f22-bb6f-440d-36a4-c230a784bd00",
     tags: ["redwoodsdk", "html", "guide"],
