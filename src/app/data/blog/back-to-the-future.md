@@ -1,7 +1,7 @@
 ---
 title: The web evolution, a personal account  of back to the future."
-description: "Learn how to easily manage production and staging environments for your RedwoodSDK application using Cloudflare's environment variables and deployment commands."
-date: "2025-04-10"
+description: "Bare with me as I smash some burgers, mash some movies and get punching hard, avocado in hand. RedwoodSDK style"
+date: "2025-05-06"
 author:
   id: "herman"
 heroImage: "3e1d4578-e67b-4444-b056-70b495fce800"
