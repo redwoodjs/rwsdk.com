@@ -1,5 +1,5 @@
 ---
-title: The web evolution, a personal account  of back to the future."
+title: "The web evolution, a personal account of back to the future."
 description: "Bare with me as I smash some burgers, mash some movies and get punching hard, avocado in hand. RedwoodSDK style"
 date: "2025-05-06"
 author:
