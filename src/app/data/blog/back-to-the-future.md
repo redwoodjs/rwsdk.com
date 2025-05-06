@@ -4,7 +4,7 @@ description: "Learn how to easily manage production and staging environments for
 date: "2025-04-10"
 author:
   id: "herman"
-heroImage: "31e4f1aa-1c3a-481d-a699-d0d4d8e20a00"
+heroImage: "3e1d4578-e67b-4444-b056-70b495fce800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/85731534-4c84-403e-8ac0-31d81f05ee00/public"
 tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 ---
