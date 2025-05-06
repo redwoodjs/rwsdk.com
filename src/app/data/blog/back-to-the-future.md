@@ -13,7 +13,7 @@ tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 
 ### Bare with me as I smash some burgers, mash some movies and get punching hard, avocado in hand..
 
-In the hit film, back to the future, Marty McFly travels back in time to return to the future, or what is the present... Only to meet BRUCE LEE!
+In the hit film, back to the future, Marty McFly travels back in time to return to the future, or what is the present... Only to meet BRUCE LEE! (not realy, but hang in there)
 
 I for one, can relate to this, given what I call my “full-circle” of web development. As a young developer starting out, I learned PHP first. Slowly this evolved, and then came Python and Django. Then came, what I thought was the future of web development, Javascript. Javascript has been around a long time, but suddenly it became “frameworks”. We started using things like Backbone.js to build entire web applications. It was an exiting time and before we knew it, we had spaghetti code holding the proverbial ship together with strings under stress. 
 
