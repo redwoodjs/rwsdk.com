@@ -46,6 +46,16 @@ export const blogPosts: BlogPost[] = [
     tags: ["redwoodsdk", "html", "guide"],
     content: "Content will be loaded from markdown file...",
   },
+  {
+    slug: "back-to-the-future",
+    title: "Back to the Future",
+    description: "RedwoodSDK is the back to the future of web development. \"Now in cinemas\".  Join me on my personal evolution of web development.",
+    date: "2025-05-06",
+    author: authors["herman"],
+    image: "31e4f1aa-1c3a-481d-a699-d0d4d8e20a00",
+    tags: ["redwoodsdk", "personal"],
+    content: "Content will be loaded from markdown file...",
+  },
 ];
 
 export type BlogPostSlug = (typeof blogPosts)[number]["slug"];
