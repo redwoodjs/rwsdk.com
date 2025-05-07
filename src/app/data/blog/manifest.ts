@@ -56,6 +56,26 @@ export const blogPosts: BlogPost[] = [
     tags: ["redwoodsdk", "personal"],
     content: "Content will be loaded from markdown file...",
   },
+  {
+    title: "RedwoodSDK: Fullstack in the true sense",
+    description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK.",
+    slug: "true-js-fullstack",
+    date: "2025-05-07",
+    author: authors["herman"],
+    image: "e35b945c-dd4e-42ad-e635-04ef2d475800",
+    tags: ["redwoodsdk", "fullstack", "server components"],
+    content: "Content will be loaded from markdown file...",
+  },
+  {
+    title: "Integrating with a payment gateway",
+    description: "How RedwoodSDK simplifies integrating a payment gateway into you application.",
+    slug: "full-stack-payment-integration",
+    date: "2025-05-08",
+    author: authors["herman"],
+    image: "5e072198-1834-45c3-0c73-9e91c0854700",
+    tags: ["redwoodsdk", "fullstack", "payment", "integration"],
+    content: "Content will be loaded from markdown file...",
+  },
 ];
 
 export type BlogPostSlug = (typeof blogPosts)[number]["slug"];
