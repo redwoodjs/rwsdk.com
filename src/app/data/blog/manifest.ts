@@ -49,7 +49,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "back-to-the-future",
     title: "Back to the Future",
-    description: "RedwoodSDK is the back to the future of web development. \"Now in cinemas\".  Join me on my personal evolution of web development.",
+    description:
+      'RedwoodSDK is the back to the future of web development. "Now in cinemas".  Join me on my personal evolution of web development.',
     date: "2025-05-06",
     author: authors["herman"],
     image: "3e1d4578-e67b-4444-b056-70b495fce800",
@@ -58,7 +59,8 @@ export const blogPosts: BlogPost[] = [
   },
   {
     title: "RedwoodSDK: Fullstack in the true sense",
-    description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK.",
+    description:
+      "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK.",
     slug: "true-js-fullstack",
     date: "2025-05-07",
     author: authors["herman"],
@@ -66,15 +68,28 @@ export const blogPosts: BlogPost[] = [
     tags: ["redwoodsdk", "fullstack", "server components"],
     content: "Content will be loaded from markdown file...",
   },
+
   {
     title: "Integrating with a payment gateway",
-    description: "How RedwoodSDK simplifies integrating a payment gateway into you application.",
+    description:
+      "How RedwoodSDK simplifies integrating a payment gateway into you application.",
     slug: "full-stack-payment-integration",
     date: "2025-05-08",
     author: authors["herman"],
     image: "5e072198-1834-45c3-0c73-9e91c0854700",
     tags: ["redwoodsdk", "fullstack", "payment", "integration"],
     content: "Content will be loaded from markdown file...",
+  },
+  {
+    title: "Full stack Co-location",
+    description:
+      "Co-locate everything: routes, pages, apis, and database migrations",
+    slug: "full-stack-colocation",
+    date: "2025-05-09",
+    author: authors["peter"],
+    image: "465ce5ca-1241-470a-318c-9a316e155d00",
+    tags: ["redwoodsdk", "react"],
+    content: "",
   },
 ];
 
