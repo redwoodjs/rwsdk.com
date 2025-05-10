@@ -1,5 +1,5 @@
-import { defineApp } from "@redwoodjs/sdk/worker";
-import { index, render, route, prefix } from "@redwoodjs/sdk/router";
+import { defineApp } from "rwsdk/worker";
+import { index, render, route, prefix } from "rwsdk/router";
 import { Document } from "src/Document";
 import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
@@ -20,7 +20,7 @@ export default defineApp([
       return new Response(null, {
         status: 301,
         headers: {
-          "Location": "https://docs.rwsdk.com",
+          Location: "https://docs.rwsdk.com",
         },
       });
     }),
@@ -28,7 +28,7 @@ export default defineApp([
       return new Response(null, {
         status: 301,
         headers: {
-          "Location": "https://docs.rwsdk.com/getting-started/quick-start/",
+          Location: "https://docs.rwsdk.com/getting-started/quick-start/",
         },
       });
     }),
