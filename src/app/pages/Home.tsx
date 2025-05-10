@@ -19,7 +19,7 @@ export default function Home() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Cloudflare Workers",
     description:
-      "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features. Its standards-based router, with support for middleware and interruptors, gives you fine-grained control over every request and response.",
+      "RedwoodSDK is a React Framework for Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features. Its standards-based router, with support for middleware and interruptors, gives you fine-grained control over every request and response.",
     keywords:
       "RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, TailwindCSS, Cloudflare Workers",
     url: "https://rwsdk.com",
@@ -53,7 +53,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <title>RedwoodSDK | The React Framework for Cloudfare</title>
+      <title>RedwoodSDK | The React Framework for Cloudflare</title>
       <meta
         property="og:title"
         content="RedwoodSDK | The React Framework for Cloudflare"
