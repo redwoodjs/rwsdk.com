@@ -82,7 +82,7 @@ On the client, use the `consumeEventStream` function to handle incoming data chu
 
 import { sendMessage } from "./functions";
 import { useState } from "react";
-import { consumeEventStream } from "@redwoodjs/sdk/client";
+import { consumeEventStream } from "rwsdk/client";
 
 export function Chat() {
   const [message, setMessage] = useState("");

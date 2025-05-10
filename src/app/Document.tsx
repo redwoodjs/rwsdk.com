@@ -1,4 +1,4 @@
-import { TurnstileScript } from "@redwoodjs/sdk/turnstile";
+import { TurnstileScript } from "rwsdk/turnstile";
 import stylesUrl from "./styles.css?url";
 
 declare global {

@@ -2,9 +2,7 @@
 title: "Full-Stack: RedwoodSDK and Paystack Payment Integration"
 description: "How RedwoodSDK simplifies integrating a payment gateway such as Paystack into your application."
 date: "2025-05-08"
-author: {
-  id: "herman"
-}
+author: { id: "herman" }
 heroImage: "5e072198-1834-45c3-0c73-9e91c0854700"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6ac44b33-2e30-416d-703a-dd570d738d00/public"
 tags: ["redwoodsdk", "fullstack", "server components"]
@@ -66,7 +64,7 @@ export async function initiatePayment(email: string, plan: string) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${env.PAYSTACK_SECRET_KEY}`,
+      Authorization: `Bearer ${env.PAYSTACK_SECRET_KEY}`,
     },
     body: JSON.stringify({ email, plan, callback_url: CALLBACK_URL }),
   });
@@ -78,7 +76,7 @@ export async function initiatePayment(email: string, plan: string) {
 export async function verifyPayment(reference: string) {
   const response = await fetch(`${VERIFY_PAYMENT_LINK}${reference}`, {
     headers: {
-      "Authorization": `Bearer ${env.PAYSTACK_SECRET_KEY}`,
+      Authorization: `Bearer ${env.PAYSTACK_SECRET_KEY}`,
     },
   });
 
@@ -103,7 +101,7 @@ import { useState } from "react";
 export default function Subscribe() {
   const [selectedPackage, setSelectedPackage] = useState("Starter");
   const [email, setEmail] = useState("");
-  const pkg = packages.find(pkg => pkg.title === selectedPackage);
+  const pkg = packages.find((pkg) => pkg.title === selectedPackage);
 
   const handleSelectPackage = (packageName: string) => {
     setSelectedPackage(packageName);
@@ -122,9 +120,7 @@ export default function Subscribe() {
   return (
     <form onSubmit={handleSubmit}>
       {/* form fields */}
-      <button type="submit">
-        Subscribe to {selectedPackage} Package
-      </button>
+      <button type="submit">Subscribe to {selectedPackage} Package</button>
     </form>
   );
 }
@@ -163,7 +159,7 @@ And now the route definitions:
 ```ts
 // subscribeRoutes.ts
 
-import { route, index } from "@redwoodjs/sdk/router";
+import { route, index } from "rwsdk/router";
 import { verifyPayment } from "@/app/actions/payment";
 import Subscribe from "./Subscribe";
 import PaymentSuccess from "./PaymentSuccess";
@@ -189,7 +185,9 @@ const subscribeRoutes = [
         // Additional logic...
       }
 
-      return Response.redirect(new URL("/subscribe/payment-success", request.url));
+      return Response.redirect(
+        new URL("/subscribe/payment-success", request.url)
+      );
     }
 
     return Response.redirect(new URL("/subscribe/payment-failed", request.url));
@@ -205,7 +203,6 @@ export default subscribeRoutes;
 _Note how were are simply sending a valid Response, be it React or a Redirect. This could be done in many ways, but it shows how we think about Request/Response, how you could interrupt and return something else instead based on the outcome of a normal function, DB call and so on._
 
 ---
-
 
 ## Final Thoughts
 
