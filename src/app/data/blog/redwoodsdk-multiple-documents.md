@@ -73,8 +73,8 @@ Because you define the document per route, you can build:
 ```tsx
 // src/worker.tsx
 
-import { defineApp } from '@redwoodjs/sdk/worker'
-import { render, route, prefix } from '@redwoodjs/sdk/router'
+import { defineApp } from 'rwsdk/worker'
+import { render, route, prefix } from 'rwsdk/router'
 
 import { StaticDocument } from '@/app/StaticDocument.tsx'
 import { StandardDocument } from '@/app/StandardDocument.tsx'
