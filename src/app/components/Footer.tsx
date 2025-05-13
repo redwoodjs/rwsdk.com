@@ -42,6 +42,14 @@ export function Footer() {
               Resources
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
+            <li>
+                <a
+                  href={Constants.CLOUDFLARE_DOCS_URL}
+                  className="hover:text-baige font-jersey transition-colors"
+                >
+                  Cloudflare RedwoodSDK Docs
+                </a>
+              </li>
               <li>
                 <a
                   href={Constants.DOCS_URL}
