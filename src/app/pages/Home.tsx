@@ -10,6 +10,7 @@ import { builderSections, BuilderSection } from "src/data/builders";
 import { SDKButton } from "src/components/SDKButton";
 import React from "react";
 import { Newsletter } from "src/components/Newsletter";
+import { Copy } from "src/components/Copy";
 
 export default function Home() {
   const structuredData = {
@@ -116,9 +117,18 @@ export default function Home() {
             </a>
           </p>
 
-          <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px]">
+          <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
             <span className="text-orange">$</span>{" "}
+<<<<<<< Updated upstream
             <span className="text-orange-light">npm release</span>
+=======
+            <span className="text-orange-light flex-1">
+              npx degit redwoodjs/sdk/starters/standard
+            </span>
+            <span className="text-orange-light">
+              <Copy text="npx degit redwoodjs/sdk/starters/standard" />
+            </span>
+>>>>>>> Stashed changes
           </div>
         </div>
 
