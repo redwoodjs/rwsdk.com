@@ -52,6 +52,22 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href="https://www.youtube.com/watch?v=bj2pL1amHow&ab_channel=Syntax"
+                  className="hover:text-baige font-jersey transition-colors"
+                >
+                  SyntaxFM Podcast
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk"
+                  className="hover:text-baige font-jersey transition-colors"
+                >
+                  SyntaxFM Interview
+                </a>
+              </li>
+              <li>
+                <a
                   href={Constants.DOCS_URL}
                   className="hover:text-baige font-jersey transition-colors"
                 >
