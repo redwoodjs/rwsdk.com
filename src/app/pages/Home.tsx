@@ -97,6 +97,20 @@ export default function Home() {
         </div>
       </div>
 
+      {/* video */}
+      <section className="w-full flex items-center justify-center max-w-[900px] mx-auto mb-20">
+        <iframe
+          width="100%"
+          className="aspect-video"
+          src="https://www.youtube.com/embed/2egEM4qboEA?si=htSm1Lw4I5dyZsQT"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      </section>
+
       {/* Call to action section */}
       <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
         <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
@@ -118,7 +132,7 @@ export default function Home() {
 
           <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px]">
             <span className="text-orange">$</span>{" "}
-            <span className="text-orange-light">npm release</span>
+            <span className="text-orange-light">pnpm release</span>
           </div>
         </div>
 
