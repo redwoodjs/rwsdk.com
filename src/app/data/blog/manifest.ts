@@ -91,6 +91,16 @@ export const blogPosts: BlogPost[] = [
     tags: ["redwoodsdk", "react"],
     content: "",
   },
+  {
+    title: "Building with React Server Components and Client Components in RedwoodSDK.",
+    description: "In our RedwoodSDK app, we're embracing the latest patterns recommended by the React team by combining React Server Components (RSC) with client components to build efficient and scalable interfaces.",
+    slug: "react-rsc-redwoodsdk",
+    date: "2025-05-14",
+    author: authors["herman"],
+    image: "d16e15d2-102f-43f1-fd54-69fc743eb300",
+    tags: ["redwoodsdk", "react", "server components"],
+    content: "Content will be loaded from markdown file...",
+  },
 ];
 
 export type BlogPostSlug = (typeof blogPosts)[number]["slug"];
