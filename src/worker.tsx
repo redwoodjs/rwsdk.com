@@ -7,15 +7,18 @@ import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
 import { blogRoutes } from "src/pages/blog/routes";
 import { notFound } from "src/utils/notFound";
+import { addonChangelog } from "src/addons/changelog/routes";
 
 export type AppContext = {};
 
 export default defineApp([
   setCommonHeaders(),
+  addonChangelog({ routePrefix: "/changelog", Document }),
   render(Document, [
     index([Home]),
     route("/personal-software", [PersonalSoftware]),
     prefix("/blog", blogRoutes),
+
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
