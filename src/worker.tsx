@@ -13,7 +13,7 @@ export type AppContext = {};
 
 export default defineApp([
   setCommonHeaders(),
-  addonChangelog({ routePrefix: "/changelog", Document }),
+
   render(Document, [
     index([Home]),
     route("/personal-software", [PersonalSoftware]),
@@ -56,6 +56,7 @@ export default defineApp([
         },
       });
     }),
+    addonChangelog({ routePrefix: "/changelog" }),
     route("*", async () => {
       return notFound();
     }),

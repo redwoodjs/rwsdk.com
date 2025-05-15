@@ -1,9 +1,7 @@
-import { prefix, render, route } from "rwsdk/router";
-import { Document } from "./Document";
+import { prefix, route } from "rwsdk/router";
 import { env } from "cloudflare:workers";
 
-const CACHE_KEY = "latest_release";
-const CACHE_DURATION = 3600; // 1 hour in seconds
+import { LocalizedDate } from "./components/LocalizedDate";
 
 interface GitHubUser {
   login: string;
@@ -63,11 +61,6 @@ interface GitHubRelease {
   mentions_count: number;
 }
 
-interface Releases {
-  key: string;
-  date: string;
-}
-
 import { marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
@@ -88,14 +81,9 @@ marked.setOptions({
   pedantic: false,
 });
 
-async function addRelease(release: GitHubRelease[]) {
-  release[0].body = await marked(release[0].body);
-  await env.KV_ADDON_CHANGELOG.put("releases", JSON.stringify([]));
-}
-
 async function fetchLatestRelease() {
   if (await env.KV_ADDON_CHANGELOG.get("lastUpdate")) {
-    return await env.KV_ADDON_CHANGELOG.get<GitHubRelease[]>("releases", {
+    return await env.KV_ADDON_CHANGELOG.get<GitHubRelease>("releases", {
       type: "json",
     });
   }
@@ -111,44 +99,45 @@ async function fetchLatestRelease() {
     }
   );
 
-  const releases = await response.json<GitHubRelease[]>();
+  const data = await response.json<GitHubRelease>();
   await env.KV_ADDON_CHANGELOG.put("lastUpdate", new Date().toISOString());
-  await addRelease(releases);
-  return releases;
+  data.body = await marked(data.body);
+  await env.KV_ADDON_CHANGELOG.put("releases", JSON.stringify(data));
+  return data;
 }
 
 export function addonChangelog({ routePrefix }: { routePrefix: string }) {
-  return render(Document, [
-    prefix(routePrefix, [
-      route("/", async function ({ headers }) {
-        let releases = await fetchLatestRelease();
+  return prefix(routePrefix, [
+    route("/", async function () {
+      let release = await fetchLatestRelease();
 
-        if (!releases) {
-          return <div>No release found</div>;
-        }
+      if (!release) {
+        return <div>No release found</div>;
+      }
 
-        return (
-          <div>
-            <h1>Changelog</h1>
-            {releases.map((release) => {
-              return (
-                <div key={release.id}>
-                  <h2>{release.name}</h2>
-
-                  <div>
-                    <span>{release.created_at}</span>
-                    <div dangerouslySetInnerHTML={{ __html: release.body }} />
-                  </div>
-                  <p>
-                    <img src={release.author.avatar_url} />
-                    {release.author.login}
-                  </p>
-                </div>
-              );
-            })}
+      return (
+        <div>
+          <h1 className="text-2xl font-bold">Changelog</h1>
+          <div key={release.id} className="flex items-center gap-2">
+            <div>
+              <h2>{release.name}</h2>
+              <LocalizedDate date={release.created_at} />
+              <div className="flex items-center gap-2">
+                <img
+                  src={release.author.avatar_url}
+                  alt={release.author.login}
+                  className="rounded-full w-7 h-7"
+                />
+                {release.author.login}
+              </div>
+            </div>
           </div>
-        );
-      }),
-    ]),
+
+          <div>
+            <div dangerouslySetInnerHTML={{ __html: release.body }} />
+          </div>
+        </div>
+      );
+    }),
   ]);
 }
