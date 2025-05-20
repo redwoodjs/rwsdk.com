@@ -22,7 +22,6 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.0",
-    "rwsdk": "^0.0.81",
     "@tailwindcss/vite": "^4.0.15",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^6.0.0",
@@ -32,6 +31,8 @@
     "marked": "^15.0.8",
     "marked-highlight": "^2.2.1",
     "mdx-bundler": "^10.1.1",
+    "prism-react-renderer": "^2.4.1",
+    "rwsdk": "^0.0.81",
     "tailwindcss": "^4.0.15"
   },
   "devDependencies": {

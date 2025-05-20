@@ -4,10 +4,10 @@ import { CloudflareImage } from "./CloudflareImage";
 export function Footer() {
   return (
     <footer className="bg-orange-light border-t border-orange-dark py-8 sm:py-12 md:py-[61px]">
-      <div className="max-w-[1400px] mx-auto py-8 sm:py-12 md:py-[61px] px-4 sm:px-8 md:px-20">
+      <div className="max-w-[1400px] mx-auto py-8 sm:py-12 md:py-[61px] px-4 sm:px-8 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:flex gap-8 md:gap-20">
           <div>
-            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-jersey text-purple mb-3">
+            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-noto font-bold text-purple mb-3">
               About
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
@@ -38,7 +38,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-jersey text-purple mb-3">
+            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-noto font-bold text-purple mb-3">
               Resources
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
@@ -101,7 +101,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-jersey text-purple mb-3">
+            <h3 className="text-[20px] sm:text-[24px] md:text-[32px] font-noto font-bold text-purple mb-3">
               Social
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
@@ -121,7 +121,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.DISCORD_URL}
-                  className="hover:text-baige flex items-center font-jersey transition-colors"
+                  className="hover:text-baige flex items-center font-noto transition-colors"
                 >
                   <img
                     src="/images/discord.svg"
@@ -134,7 +134,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.YOUTUBE_URL}
-                  className="hover:text-baige flex items-center font-jersey transition-colors"
+                  className="hover:text-baige flex items-center font-noto transition-colors"
                 >
                   <img
                     src="/images/youtube.svg"
@@ -147,7 +147,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.BLUESKY_URL}
-                  className="hover:text-baige flex items-center font-jersey transition-colors"
+                  className="hover:text-baige flex items-center font-noto transition-colors"
                 >
                   <img
                     src="/images/bluesky.svg"
@@ -160,7 +160,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.X_URL}
-                  className="hover:text-baige flex items-center font-jersey transition-colors"
+                  className="hover:text-baige flex items-center font-noto transition-colors"
                 >
                   <img
                     src="/images/x.svg"
@@ -178,7 +178,7 @@ export function Footer() {
               alt="logo"
               className="w-[180px] sm:w-[220px] md:w-[300px]"
             />
-            <p className="text-[14px] sm:text-[12px] font-chivo">
+            <p className="text-[14px] sm:text-[12px] font-noto font-light">
               RedwoodSDK is a React framework for Cloudflare. It begins as a
               Vite plugin that unlocks SSR, React Server Components, Server
               Functions, and realtime features. Its standards-based router, with

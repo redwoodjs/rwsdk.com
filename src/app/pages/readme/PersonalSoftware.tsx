@@ -35,7 +35,7 @@ export default function PersonalSoftware() {
   return (
     <div>
       <Navbar activePage="personal-software" />
-      <div className="flex flex-col lg:flex-row min-h-screen font-chivo bg-baige text-black">
+      <div className="flex flex-col lg:flex-row min-h-screen bg-baige text-black">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -83,7 +83,7 @@ export default function PersonalSoftware() {
               />
             </a>
             <section className="space-y-6">
-              <h1 className="text-[48px] sm:text-[72px] lg:text-[100px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
+              <h1 className="text-[28px] sm:text-[52px] lg:text-[60px] font-bold font-playfair leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
                 <div>
                   It started with a blinking cursor
                   <span className="text-orange cursor-blink"> | </span>

@@ -1,38 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,500;0,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
 
-@font-face {
-  font-family: "Jersey 25";
-  src: url("/fonts/Jersey25-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Chivo";
-  src: url("/fonts/Chivo/Chivo-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Chivo";
-  src: url("/fonts/Chivo/Chivo-Italic-VariableFont_wght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Chicago";
-  src: url("/fonts/ChicagoFLF.woff2") format("woff2"),
-    url("/fonts/ChicagoFLF.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
 @import "tailwindcss";
 
@@ -45,14 +13,13 @@
   --color-purple: #8b2243;
   --color-purple-dark: #6b1a35;
   --color-light: #f2ece4;
-  --font-mono: "Roboto Mono", monospace;
-  --font-chicago: "Chicago", sans-serif;
-  --font-jersey: "Jersey 25", sans-serif;
-  --font-chivo: "Chivo", sans-serif;
+  --color-editor: #1B1B1B;
+  --font-playfair: "Playfair Display", serif;
+  --font-noto: "Noto Sans", sans-serif;
 }
 
 body {
-  @apply bg-baige text-black font-mono;
+  @apply bg-baige text-black font-noto;
 }
 
 .grid-bg {
