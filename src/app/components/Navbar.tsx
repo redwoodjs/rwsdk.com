@@ -19,15 +19,15 @@ export function Navbar(props: NavbarProps) {
                     className="w-[140px] sm:w-[186px]"
                 />
             </a>
-            <div className="flex gap-2 sm:gap-4 font-jersey text-[16px] sm:text-[20px] mt-4 sm:mt-0">
+            <div className="flex gap-2 sm:gap-4 font-noto font-bold text-[16px] sm:text-[18px] mt-4 sm:mt-0">
                 <a href={Constants.DOCS_URL} className="hover:text-orange-medium transition-colors">Docs</a>
-                <span className="text-orange-light">/</span>
+                <span className="text-orange-light">\</span>
                 <a href="/personal-software" className={`hover:text-orange-medium transition-colors ${props.activePage === "personal-software" ? "text-orange-medium" : ""}`}>Personal Software</a>
-                <span className="text-orange-light">/</span>
+                <span className="text-orange-light">\</span>
                 <a href="/blog" className={`hover:text-orange-medium transition-colors ${props.activePage === "blog" ? "text-orange-medium" : ""}`}>Blog</a>
-                <span className="text-orange-light">/</span>
+                <span className="text-orange-light">\</span>
                 <a href={Constants.DISCORD_URL} className="hover:text-orange-medium transition-colors">Discord</a>
-                <span className="text-orange-light">/</span>
+                <span className="text-orange-light">\</span>
                 <Suspense fallback={<div>Loading...</div>}>
                     <GitHubStarWidget />
                 </Suspense>
