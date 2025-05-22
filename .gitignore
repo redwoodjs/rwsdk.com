@@ -1,4 +1,5 @@
 # Node modules
+.wrangler
 node_modules
 
 # Logs
