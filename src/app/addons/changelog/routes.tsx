@@ -116,25 +116,37 @@ export function addonChangelog({ routePrefix }: { routePrefix: string }) {
       }
 
       return (
-        <div>
-          <h1 className="text-2xl font-bold">Changelog</h1>
-          <div key={release.id} className="flex items-center gap-2">
-            <div>
-              <h2>{release.name}</h2>
-              <LocalizedDate date={release.created_at} />
-              <div className="flex items-center gap-2">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold py-6 border-b-orange border-b mb-6">
+            Changelog
+          </h1>
+
+          <div key={release.id} className="flex flex-row text-sm">
+            {/* Version */}
+            <div className="flex-1/6 text-xs">
+              <LocalizedDate
+                date={release.created_at}
+                className="text-gray-500"
+              />
+              <div className="flex gap-2 mt-4 items-center">
                 <img
                   src={release.author.avatar_url}
                   alt={release.author.login}
-                  className="rounded-full w-7 h-7"
+                  className="rounded-full w-7 h-7 "
                 />
                 {release.author.login}
               </div>
             </div>
-          </div>
 
-          <div>
-            <div dangerouslySetInnerHTML={{ __html: release.body }} />
+            <div className="flex-5/6 ">
+              <h2 className="mb-4 font-bold text-2xl">{release.name}</h2>
+
+              <div className="flex items-center gap-2"></div>
+              <div
+                dangerouslySetInnerHTML={{ __html: release.body }}
+                className="text-xs break-words word-wrap max-w-2xl"
+              />
+            </div>
           </div>
         </div>
       );
