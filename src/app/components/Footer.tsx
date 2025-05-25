@@ -14,7 +14,7 @@ export function Footer() {
               <li>
                 <a
                   href="/personal-software"
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   Personal Software
                 </a>
@@ -22,7 +22,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://redwoodjs.com/blog/redwoodsdk"
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   RedwoodJS Announcement
                 </a>
@@ -30,7 +30,7 @@ export function Footer() {
               <li>
                 <a
                   href="/blog"
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   Blog
                 </a>
@@ -42,10 +42,10 @@ export function Footer() {
               Resources
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
-            <li>
+              <li>
                 <a
                   href={Constants.CLOUDFLARE_DOCS_URL}
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   Cloudflare RedwoodSDK Docs
                 </a>
@@ -53,7 +53,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://www.youtube.com/watch?v=bj2pL1amHow&ab_channel=Syntax"
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   SyntaxFM Podcast
                 </a>
@@ -61,7 +61,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk"
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   SyntaxFM Interview
                 </a>
@@ -69,7 +69,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.DOCS_URL}
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   Docs
                 </a>
@@ -77,7 +77,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.QUICK_START_URL}
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   Quick Start
                 </a>
@@ -85,7 +85,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.REDWOODJS_URL}
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   RedwoodJS
                 </a>
@@ -93,7 +93,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.REDWOOD_GRAPHQL_DOCS_URL}
-                  className="hover:text-baige font-jersey transition-colors"
+                  className="hover:text-baige font-playfair transition-colors"
                 >
                   RedwoodGraphQL Docs
                 </a>
@@ -108,7 +108,7 @@ export function Footer() {
               <li>
                 <a
                   href={Constants.GITHUB_REPO}
-                  className="hover:text-baige flex items-center font-jersey transition-colors"
+                  className="hover:text-baige flex items-center font-playfair transition-colors"
                 >
                   <img
                     src="/images/github.svg"

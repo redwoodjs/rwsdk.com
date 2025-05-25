@@ -27,7 +27,7 @@ export default function Post({ post }: { post: BlogPost }) {
               />
             )}
             <div>
-              <p className="font-jersey text-xl text-black">
+              <p className="font-playfair text-xl text-black">
                 {post.author.name}
               </p>
               <p className="text-sm text-orange-dark font-chivo">
@@ -42,9 +42,9 @@ export default function Post({ post }: { post: BlogPost }) {
       </header>
       <article
         className="prose prose-lg prose-slate dark:prose-invert w-full max-w-none overflow-x-hidden
-                        [&_h1]:font-jersey [&_h1]:leading-[81%] [&_h1]:mb-4 [&_h1]:text-[36px] sm:[&_h1]:text-[48px] md:[&_h1]:text-[60px] lg:[&_h1]:text-[70px] [&_h1]:text-black [&_h1]:font-bold
-                        [&_h2]:font-jersey [&_h2]:leading-[81%] [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-[24px] sm:[&_h2]:text-[32px] md:[&_h2]:text-[40px] lg:[&_h2]:text-[48px] [&_h2]:text-orange-dark [&_h2]:font-bold
-                        [&_h3]:font-jersey [&_h3]:leading-[81%] [&_h3]:mb-4 [&_h3]:mt-8 [&_h3]:text-[20px] sm:[&_h3]:text-[24px] md:[&_h3]:text-[32px] lg:[&_h3]:text-[40px] [&_h3]:text-orange-dark
+                        [&_h1]:font-playfair [&_h1]:leading-[81%] [&_h1]:mb-4 [&_h1]:text-[36px] sm:[&_h1]:text-[48px] md:[&_h1]:text-[60px] lg:[&_h1]:text-[70px] [&_h1]:text-black [&_h1]:font-bold
+                        [&_h2]:font-playfair [&_h2]:leading-[81%] [&_h2]:mb-4 [&_h2]:mt-8 [&_h2]:text-[24px] sm:[&_h2]:text-[32px] md:[&_h2]:text-[40px] lg:[&_h2]:text-[48px] [&_h2]:text-orange-dark [&_h2]:font-bold
+                        [&_h3]:font-playfair [&_h3]:leading-[81%] [&_h3]:mb-4 [&_h3]:mt-8 [&_h3]:text-[20px] sm:[&_h3]:text-[24px] md:[&_h3]:text-[32px] lg:[&_h3]:text-[40px] [&_h3]:text-orange-dark
                         [&_p]:text-[14px] sm:[&_p]:text-[16px] md:[&_p]:text-[18px] [&_p]:font-chivo [&_p]:font-medium [&_p]:mb-4
                         [&_a]:text-orange [&_a]:hover:text-orange-light
                         [&_ul]:list-disc [&_ul]:text-[14px] sm:[&_ul]:text-[16px] [&_ul]:font-chivo [&_ul]:mb-4 [&_ul]:pl-6

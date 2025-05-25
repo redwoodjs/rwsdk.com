@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { SDKButton } from './SDKButton';
-import { CloudflareImage } from './CloudflareImage';
+import { useEffect, useRef } from "react";
+import { SDKButton } from "./SDKButton";
+import { CloudflareImage } from "./CloudflareImage";
 declare global {
   interface Window {
     __kwesformsScriptAdded?: boolean;
@@ -14,8 +14,8 @@ export function Newsletter() {
 
   useEffect(() => {
     if (!window.__kwesformsScriptAdded) {
-      const script = document.createElement('script');
-      script.src = 'https://kwesforms.com/v2/kf-script.js';
+      const script = document.createElement("script");
+      script.src = "https://kwesforms.com/v2/kf-script.js";
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
@@ -23,7 +23,7 @@ export function Newsletter() {
     }
 
     // Add custom styles for KwesForms
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       /* Error styling */
       .field.kw-has-error {
@@ -150,7 +150,8 @@ export function Newsletter() {
           Be the first to know
         </h2>
         <p className="text-[18px] sm:text-[24px] md:text-[28px] font-noto leading-[1]">
-          Get a summary of what we've shipped, articles we've written, and upcoming events straight to your inbox, at most once every two weeks.
+          Get a summary of what we've shipped, articles we've written, and
+          upcoming events straight to your inbox, at most once every two weeks.
         </p>
         <form
           ref={formRef}
@@ -181,7 +182,7 @@ export function Newsletter() {
             <button
               id="newsletter-signup"
               type="submit"
-              className="text-orange-medium border border-2 border-orange-light bg-black font-jersey w-full sm:w-fit hover:text-orange-light transition-colors text-[18px] sm:text-[20px] md:text-[24px] px-4 sm:px-3 md:px-8 py-1 h-[52px] sm:mb-[33px]"
+              className="text-orange-medium border border-2 border-orange-light bg-black font-playfair w-full sm:w-fit hover:text-orange-light transition-colors text-[18px] sm:text-[20px] md:text-[24px] px-4 sm:px-3 md:px-8 py-1 h-[52px] sm:mb-[33px]"
             >
               Subscribe
             </button>
@@ -197,5 +198,5 @@ export function Newsletter() {
         />
       </div>
     </section>
-  )
+  );
 }

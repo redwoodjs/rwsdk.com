@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
-
 
 @import "tailwindcss";
 
@@ -13,7 +12,7 @@
   --color-purple: #8b2243;
   --color-purple-dark: #6b1a35;
   --color-light: #f2ece4;
-  --color-editor: #1B1B1B;
+  --color-editor: #1b1b1b;
   --font-playfair: "Playfair Display", serif;
   --font-noto: "Noto Sans", sans-serif;
 }
