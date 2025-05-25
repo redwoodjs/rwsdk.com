@@ -14,7 +14,7 @@ Do you ever feel disjointed when building a web app? Like the pieces don’t exa
 
 Here’s my theory: JavaScript framework authors are still chasing the Nirvana of Ruby on Rails: a beautifully integrated system made possible by a language (Ruby) with a built in DSL pattern which lets you invent new syntax that feels native. It’s not a hack, it’s an accepted and beloved feature of the language.
 
-Unfortunately when you give a JS framework author a transpiler, and a dream, they’re suddenly introducing new syntax: a gothic, dracula-core dialect of a language, layered with magic, spooky-at-a-distance syntax, and diminished contracts.
+Unfortunately when you give a JS framework author a transpiler, and a dream, they’re suddenly introducing new syntax: a gothic, dracula-core dialect of a language, layered with magic, spooky-at-a-distance syntax, and diminished contracts. [1]
 
 And you, the developer, are stuck trying to reason about your app in plain JavaScript… Whilst your framework speaks in tongues.
 
@@ -87,7 +87,7 @@ export default async function BlogPost({ params }) {
 
 Functions like `generateStaticParams` and `generateMetadata` are magic exports—Next.js calls them behind the scenes. This adds indirection: you can’t fully understand how a page works just by reading the code. You need to know the framework’s rules.
 
-Then there are _File-system spells_: `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, (group), @modal segment, etc. Also, the logic about when which rendering you get. like if you access cookies, or headers, then a page is no longer static etc. It's not traceable! You must know the rules of the framework. Hidden knowledge that you need to be effective.
+Then there are **File-system spells**: `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `(group)`, `@modal` segment, etc. Also, the logic about when which rendering you get. like if you access cookies, or headers, then a page is no longer static etc. It's not traceable! You must know the rules of the framework. Hidden knowledge that you need to be effective.
 
 ### In React Router - RSC Preview (Remix):
 
@@ -114,7 +114,7 @@ export async function ServerComponent({ loaderData }) {
 
 Remix is way better, but you can't trace how this page gets to the browser just from the code alone. The framework pulls in extra behavior by convention.
 
-**In RedwoodSDK:**
+### In RedwoodSDK:
 
 ```tsx
 // worker.tsx
@@ -132,7 +132,7 @@ export default defineApp([
 
 In RedwoodJS you define a route, and return a JSX element (Or a response object). The JSX element can be a client or server component.
 
-# The Web Is Enough
+## The Web Is Enough
 
 You don’t need a framework that pretends to be a language. You don’t need layers of build steps to speak HTTP. You don’t need magic.
 
@@ -147,8 +147,10 @@ That’s why we built RedwoodSDK:
 
 You already know JavaScript. Now you can build everything with it.
 
-[Get started](https://docs.rwsdk.com/)
+[If this resonated with you, give it a spin!](https://docs.rwsdk.com/)
 
 ---
 
-RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework decribe it as invisible. Our goal is to make you care about the software you want to write, rather than the framework or the platform that you run on.
+RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described itas invisible. Our goal is to make you care about the software you want to write, rather than the framework or the platform that you run on.
+
+[1]: RedwoodJS is guilty of this. We introduced specific exports for Cells. It made things difficult.

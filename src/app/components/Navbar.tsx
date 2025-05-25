@@ -14,10 +14,10 @@ export function Navbar(props: NavbarProps) {
         <CloudflareImage
           imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
           alt="logo"
-          className="w-[140px] sm:w-[186px] mb-4"
+          className="w-[140px] sm:w-[186px] sm:mb-4 lg:mb-0"
         />
       </a>
-      <div className="flex gap-2 sm:gap-4 font-noto font-bold text-[16px] sm:text-[18px] mt-4 sm:mt-0">
+      <div className="flex gap-2 sm:gap-4 font-noto font-bold text-[16px] sm:text-[18px]">
         <a
           href={Constants.DOCS_URL}
           className="hover:text-orange-medium transition-colors"
