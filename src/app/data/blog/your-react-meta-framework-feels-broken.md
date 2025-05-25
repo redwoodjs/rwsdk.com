@@ -146,11 +146,12 @@ That’s why we built RedwoodSDK:
 - Composable by Default: Drop in routes, features, or entire apps.
 
 You already know JavaScript. Now you can build everything with it.
+Sometimes you've got to burn it all down, start from ash, and rebuild from first principles.
 
 [If this resonated with you, give it a spin!](https://docs.rwsdk.com/)
 
 ---
 
-RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described itas invisible. Our goal is to make you care about the software you want to write, rather than the framework or the platform that you run on.
+RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described it as invisible. Our goal is to make you only have to care about the software you want to write, rather than the framework or the platform that you run on.
 
-[1]: RedwoodJS is guilty of this. We introduced specific exports for Cells. It made things difficult.
+[1]: RedwoodJS is guilty of this. We introduced specific exports for Cells.
