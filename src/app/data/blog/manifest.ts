@@ -92,14 +92,27 @@ export const blogPosts: BlogPost[] = [
     content: "",
   },
   {
-    title: "Building with React Server Components and Client Components in RedwoodSDK.",
-    description: "In our RedwoodSDK app, we're embracing the latest patterns recommended by the React team by combining React Server Components (RSC) with client components to build efficient and scalable interfaces.",
+    title:
+      "Building with React Server Components and Client Components in RedwoodSDK.",
+    description:
+      "In our RedwoodSDK app, we're embracing the latest patterns recommended by the React team by combining React Server Components (RSC) with client components to build efficient and scalable interfaces.",
     slug: "react-rsc-redwoodsdk",
     date: "2025-05-14",
     author: authors["herman"],
     image: "d16e15d2-102f-43f1-fd54-69fc743eb300",
     tags: ["redwoodsdk", "react", "server components"],
     content: "Content will be loaded from markdown file...",
+  },
+  {
+    title: "Your React Meta-Framework Feels Broken, Here's Why",
+    description:
+      "Do you ever feel disjointed when building a web app? Like the pieces don’t exactly fit in the puzzle, both mentally and in the code? Here's my take!",
+    slug: "your-react-meta-framework-feels-broken",
+    date: "2025-05-25",
+    author: authors["peter"],
+    image: "23343616-ea1c-4f38-7bb2-c21f95439900",
+    tags: ["redwoodsdk", "react", "server components", "remix", "next"],
+    content: "",
   },
 ];
 
