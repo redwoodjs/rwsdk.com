@@ -75,7 +75,7 @@ export async function GitHubStarWidget() {
         href="https://github.com/redwoodjs/sdk"
         target="_blank"
         rel="noopener noreferrer"
-        className="github-start inline-flex items-center gap-2 px-1 border-2 border-black text-black leading-none transition-colors font-playfair h-[24px]"
+        className="github-start inline-flex items-center gap-2 px-1 border-2 border-black text-black leading-none transition-colors h-[24px]"
       >
         <svg
           id="github-star"
