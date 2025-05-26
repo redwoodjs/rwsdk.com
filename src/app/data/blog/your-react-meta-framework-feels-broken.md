@@ -10,19 +10,25 @@ tags: ["redwoodsdk", "fullstack", "server components", "remix", "next"]
 
 # Your React Meta-Framework Feels Broken, Here's Why
 
+<!-- have you felt this pain?,
+the pain is because of X,
+it doesn't have to be X, it could be Y,
+here's a comparison of X and Y,
+Use Y -->
+
 Do you ever feel disjointed when building a web app? Like the pieces don’t exactly fit in the puzzle, both mentally and in the code?
 
-Here’s my theory: JavaScript framework authors are still chasing the Nirvana of Ruby on Rails: a beautifully integrated system made possible by a language (Ruby) with a built in DSL pattern which lets you invent new syntax that feels native. It’s not a hack, it’s an accepted and beloved feature of the language.
+Bewildered and lost in a convention-heavy file structure that makes routing feel more like its own language rather than straightforward pattern matching?
 
-Unfortunately when you give a JS framework author a transpiler, and a dream, they’re suddenly introducing new syntax: a gothic, dracula-core dialect of a language, layered with magic, spooky-at-a-distance syntax, and diminished contracts. [1]
-
-And you, the developer, are stuck trying to reason about your app in plain JavaScript… Whilst your framework speaks in tongues.
-
-It’s death by a thousand cuts.
+Right-click+Inspect doesn't go anywhere meaningful?
 
 ## The Abstraction Trap
 
 Frameworks promise simplicity, but often deliver indirection. Modern frameworks don’t just abstract the platform, they abstract your own code!
+
+And you, the developer, are stuck trying to reason about your app in plain JavaScript... Whilst your framework speaks in tongues.
+
+It’s death by a thousand cuts.
 
 You write a function, but it’s not really a function: it’s a macro wrapped in a build step.
 
@@ -43,7 +49,7 @@ They demand trust instead of understanding.
 What if you could build full-stack apps without rewriting JavaScript’s rules?
 
 - No custom syntax.
-- No invisible transformations. (Besides React, and TypeScript)
+- No invisible transformations. (Besides JSX, React, and TypeScript)
 - No framework-specific magic words.
 
 Just TypeScript, modules, functions, values, and types.
@@ -98,7 +104,7 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 export default [route("blog/:slug", "routes/blog.tsx")] satisfies RouteConfig;
 ```
 
-`routes/blog.tsx` is indirectly associated to `blog/:slug`.
+`"routes/blog.tsx"` is indirectly associated to `blog/:slug`.
 
 ```tsx
 // routes/blog.tsx
