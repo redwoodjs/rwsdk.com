@@ -43,7 +43,7 @@ They demand trust instead of understanding.
 What if you could build full-stack apps without rewriting JavaScript’s rules?
 
 - No custom syntax.
-- No invisible transformations.
+- No invisible transformations. (Besides React, and TypeScript)
 - No framework-specific magic words.
 
 Just TypeScript, modules, functions, values, and types.
@@ -146,12 +146,18 @@ That’s why we built RedwoodSDK:
 - Composable by Default: Drop in routes, features, or entire apps.
 
 You already know JavaScript. Now you can build everything with it.
-Sometimes you've got to burn it all down, start from ash, and rebuild from first principles.
 
-[If this resonated with you, give it a spin!](https://docs.rwsdk.com/)
+--
 
----
+Sometimes you've got to burn it all down, start from ash, and rebuild from first principles. This is what we did with RedwoodJS. We built it from scratch so that we could deliver a framework that allowed you to focus on the software you want to write rather than the platform or the framework that it runs on. RedwoodJS is just TypeScript, React, Vite, and Cloudflare.
 
-RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described it as invisible. Our goal is to make you only have to care about the software you want to write, rather than the framework or the platform that you run on.
+RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described it as invisible.
+
+Read more about it here:
+
+- [Per-Route Documents in RedwoodSDK: Total Control Over Your HTML](/blog/redwoodsdk-multiple-documents)
+- [Fullstack co-location](/blog/full-stack-colocation)
+- [Streaming with fetch](/blog/redwoodsdk-streaming-guide)
+- [Documentation](https://docs.rwsdk.com/)
 
 [1]: RedwoodJS is guilty of this. We introduced specific exports for Cells.
