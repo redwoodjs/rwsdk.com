@@ -1,35 +1,31 @@
 "use server"
-import { blogPosts, BlogPostSlug } from '../../data/blog/manifest';
-import { Navbar } from '../../components/Navbar';
-import { Footer } from '../../components/Footer';
-import Post from './Post';
-import { Suspense } from 'react';
-import { authors } from 'src/data/authors';
+import { Navbar } from 'src/components/Navbar';
+import { Footer } from 'src/components/Footer';
+import Post from '../components/Post';
+import { authors } from '../data/authors';
+import { blogModules } from '../data/posts/index';
 import { marked } from 'marked';
-import { markedHighlight } from 'marked-highlight';
-import hljs from 'highlight.js';
+// import { markedHighlight } from 'marked-highlight';
+// import hljs from 'highlight.js';
 
-// Configure marked with syntax highlighting
-marked.use(markedHighlight({
-    langPrefix: 'hljs language-',
-    highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    }
-}));
+// // Configure marked with syntax highlighting
+// marked.use(markedHighlight({
+//     langPrefix: 'hljs language-',
+//     highlight(code, lang) {
+//         const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+//         return hljs.highlight(code, { language }).value;
+//     }
+// }));
 
-marked.setOptions({
-    gfm: true,
-    breaks: true,
-    pedantic: false
-});
-
-// Use Vite's import.meta.glob to get all markdown files
-const blogModules = import.meta.glob('../../data/blog/*.{md,mdx}', { as: 'raw' });
+// marked.setOptions({
+//     gfm: true,
+//     breaks: true,
+//     pedantic: false
+// });
 
 interface BlogPageProps {
     params: {
-        slug: BlogPostSlug;
+        slug: "BlogPostSlug";
     };
 }
 
@@ -63,10 +59,7 @@ function parseFrontmatter(content: string) {
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const slug = params.slug;
-    let post = {
-    }
-    const mdPath = `../../data/blog/${slug}.md`;
-    const moduleLoader = blogModules[mdPath];
+    const moduleLoader = blogModules[`./${slug}.md`];
 
     if (!moduleLoader) {
         throw new Error(`Module loader not found for: ${slug}`);
@@ -105,4 +98,5 @@ export default async function BlogPage({ params }: BlogPageProps) {
             </div>
         </>
     );
+
 } 

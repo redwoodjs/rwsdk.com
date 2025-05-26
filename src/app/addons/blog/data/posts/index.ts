@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { Author } from '../authors';
 
 // Use Vite's import.meta.glob to get all markdown files
-const blogModules = import.meta.glob('./*.md', { as: 'raw' });
+export const blogModules = import.meta.glob('./*.md', { as: 'raw' });
 
 type BlogPostData = {
     title: string;
@@ -100,4 +100,4 @@ export const blogPosts = Object.keys(blogModules).reduce((acc, key) => {
     return acc;
 }, {} as Record<string, () => Promise<{ data: BlogPostData; content: string }>>);
 
-export type BlogPostSlug = keyof typeof blogPosts;  
+export type BlogPostSlug = keyof typeof blogPosts; 

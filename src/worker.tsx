@@ -5,8 +5,9 @@ import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
-import { blogRoutes } from "src/pages/blog/routes";
+// import { blogRoutes } from "../public/blog/routes";
 import { notFound } from "src/utils/notFound";
+import { blogRoutes } from "./app/addons/blog";
 
 export type AppContext = {};
 
@@ -15,7 +16,7 @@ export default defineApp([
   render(Document, [
     index([Home]),
     route("/personal-software", [PersonalSoftware]),
-    prefix("/blog", blogRoutes),
+    prefix("/blog", blogRoutes ),
     route("/docs", async () => {
       return new Response(null, {
         status: 301,

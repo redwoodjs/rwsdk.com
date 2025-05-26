@@ -1,11 +1,17 @@
 import { CloudflareImage } from 'src/components/CloudflareImage';
-import { blogPosts } from 'src/data/blog/manifest';
+import { blogPosts } from '../data/posts/index';
 import { Navbar } from 'src/components/Navbar';
 import { Footer } from 'src/components/Footer';
 
-export default function BlogList() {
+export default async function BlogList() {
+    // Fetch and parse all blog posts
+    const posts = await Promise.all(Object.entries(blogPosts).map(async ([slug, getPost]) => {
+        const { data } = await (getPost as () => Promise<{ data: any }>)();
+        return { ...data, slug };
+    }));
+
     // Sort blogs by date to get the latest one
-    const sortedBlogs = [...blogPosts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const sortedBlogs = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     const latestBlog = sortedBlogs[0];
     const otherBlogs = sortedBlogs.slice(1);
 
