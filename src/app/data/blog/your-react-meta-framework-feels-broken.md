@@ -136,7 +136,7 @@ export default defineApp([
 ]);
 ```
 
-In RedwoodJS you define a route, and return a JSX element (Or a response object). The JSX element can be a client or server component.
+In RedwoodSDK you define a route, and return a JSX element (Or a response object). The JSX element can be a client or server component.
 
 ## The Web Is Enough
 
@@ -155,7 +155,7 @@ You already know JavaScript. Now you can build everything with it.
 
 --
 
-Sometimes you've got to burn it all down, start from ash, and rebuild from first principles. This is what we did with RedwoodJS. We built it from scratch so that we could deliver a framework that allowed you to focus on the software you want to write rather than the platform or the framework that it runs on. RedwoodJS is just TypeScript, React, Vite, and Cloudflare.
+Sometimes you've got to burn it all down, start from ash, and rebuild from first principles. This is what we did with RedwoodSDK. We built it from scratch so that we could deliver a framework that allowed you to focus on the software you want to write rather than the platform or the framework that it runs on. RedwoodSDK is just TypeScript, React, Vite, and Cloudflare.
 
 RedwoodSDK's principles are enshrined in making the obvious... obvious. People that use our framework have described it as invisible.
 
