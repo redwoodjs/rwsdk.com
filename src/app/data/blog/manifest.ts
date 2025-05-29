@@ -114,6 +114,16 @@ export const blogPosts: BlogPost[] = [
     tags: ["redwoodsdk", "react", "server components", "remix", "next"],
     content: "",
   },
+  {
+    title: "Redwood is sponsoring Johannes from LiveStore",
+    description: "Johannes from LiveStore to build an adapter for Cloudflare",
+    slug: "rwsdk-x-livestore",
+    date: "2025-05-29",
+    author: authors["peter"],
+    image: "7ec66c6d-50f9-4ca0-17ff-eb711cd68400",
+    tags: ["redwoodsdk", "react", "server components", "remix", "next"],
+    content: "",
+  },
 ];
 
 export type BlogPostSlug = (typeof blogPosts)[number]["slug"];
