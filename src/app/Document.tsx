@@ -54,7 +54,6 @@ export const Document: React.FC<{
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK is a React framework for Cloudflare</title>
         <link rel="canonical" href={canonicalUrl} />
         <TurnstileScript />
         {/* Icons */}
