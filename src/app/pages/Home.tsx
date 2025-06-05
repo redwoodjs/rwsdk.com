@@ -225,9 +225,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 w-full mx-auto">
+      <section className="py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
         <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
-          <h3 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg py-4 px-2  max-w-[1400px] mx-auto">
+          <h3 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg py-4 px-2 mx-auto">
             PS… Built for Builders
           </h3>
 
