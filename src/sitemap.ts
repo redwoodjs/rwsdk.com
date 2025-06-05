@@ -1,6 +1,6 @@
-// import { blogPosts } from "../public/blog/data/posts/index";
+import { generateBlogSitemap } from "./app/addons/blog/data/sitemap";
 
-type Post = { slug: string; date: string };
+const blogUrls = await generateBlogSitemap();
 
 const staticUrls = [`
   <url>
@@ -35,17 +35,12 @@ const staticUrls = [`
   </url>`
 ];
 
-// const blogUrls = (blogPosts as Post[]).map(({ slug, date }) => {
-//   return `  <url>\n    <loc>https://rwsdk.com/blog/${slug}</loc>\n    <lastmod>${date}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.9</priority>\n  </url>`;
-// });
-
-// ${[...staticUrls, ...blogUrls].join("\n")}\n
-
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+                ${[...staticUrls, ...blogUrls].join("\n")}\n
 </urlset>`;
 
 export default sitemap;
