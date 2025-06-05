@@ -1,15 +1,20 @@
-import { CloudflareImage } from "src/components/CloudflareImage";
-import { blogPosts } from "src/data/blog/manifest";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
+import { CloudflareImage } from 'src/components/CloudflareImage';
+import { blogPostSlugs, getBlogPost } from '../data/posts/index';
+import { Navbar } from 'src/components/Navbar';
+import { Footer } from 'src/components/Footer';
 
-export default function BlogList() {
-  // Sort blogs by date to get the latest one
-  const sortedBlogs = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  const latestBlog = sortedBlogs[0];
-  const otherBlogs = sortedBlogs.slice(1);
+export default async function BlogList() {
+    // Fetch and parse all blog posts
+    const posts = await Promise.all(blogPostSlugs.map(async (slug) => {
+        const { data } = await getBlogPost(slug);
+        return { ...data, slug };
+    }));
+
+    // Sort blogs by date to get the latest one
+    const sortedBlogs = posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const latestBlog = sortedBlogs[0];
+    const otherBlogs = sortedBlogs.slice(1);
+
 
   return (
     <div className="min-h-screen bg-baige">
@@ -78,7 +83,7 @@ export default function BlogList() {
             </div>
             <div className="lg:w-1/2">
               <CloudflareImage
-                imageId={latestBlog.image}
+                imageId={latestBlog.heroImage}
                 alt={latestBlog.title}
                 className="object-cover w-full h-full lg:block hidden"
               />

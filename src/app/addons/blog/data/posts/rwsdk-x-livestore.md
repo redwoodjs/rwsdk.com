@@ -2,7 +2,8 @@
 title: "Redwood is sponsoring Johannes from LiveStore"
 description: "Redwood is sponsoring LiveStore to build an adapter for Cloudflare"
 date: "2025-05-29"
-author: { id:"peter" }
+author:
+  id: "peter"
 heroImage: "7ec66c6d-50f9-4ca0-17ff-eb711cd68400"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/7ec66c6d-50f9-4ca0-17ff-eb711cd68400/public"
 tags: ["livestore"]

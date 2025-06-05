@@ -2,9 +2,8 @@
 title: "From RedwoodJS to RedwoodSDK"
 description: "RedwoodSDK is here. RedwoodJS is not going anywhere."
 date: "2025-04-01"
-author: {
-    id:"peter"
-}
+author:
+  id: "peter"
 heroImage: "86a788b0-00dd-481b-30c3-e05e9d372800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/4a6417ff-e764-40aa-cfaa-80cc5e4d6900/public"
 tags: ["redwoodjs", "redwoodsdk"]
