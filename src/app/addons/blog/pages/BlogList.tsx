@@ -15,6 +15,7 @@ export default async function BlogList() {
     const latestBlog = sortedBlogs[0];
     const otherBlogs = sortedBlogs.slice(1);
 
+
   return (
     <div className="min-h-screen bg-baige">
       {/* SEO Metadata */}
@@ -82,7 +83,7 @@ export default async function BlogList() {
             </div>
             <div className="lg:w-1/2">
               <CloudflareImage
-                imageId={latestBlog.image}
+                imageId={latestBlog.heroImage}
                 alt={latestBlog.title}
                 className="object-cover w-full h-full lg:block hidden"
               />

@@ -2,7 +2,8 @@
 title: "Your React Meta-Framework Feels Broken, Here's Why"
 description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK."
 date: "2025-05-25"
-author: { id:"peter" }
+author: 
+  id:"peter"
 heroImage: "23343616-ea1c-4f38-7bb2-c21f95439900"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/23343616-ea1c-4f38-7bb2-c21f95439900/public"
 tags: ["redwoodsdk", "fullstack", "server components", "remix", "next"]

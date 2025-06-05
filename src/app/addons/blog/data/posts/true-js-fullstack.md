@@ -2,9 +2,8 @@
 title: "Fullstack in the true sense"
 description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK."
 date: "2025-05-07"
-author: {
-    id:"herman"
-}
+author:
+  id:"herman"
 heroImage: "e35b945c-dd4e-42ad-e635-04ef2d475800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/d80b1b68-f5a9-4af6-5cf0-924663a2e000/public"
 tags: ["redwoodsdk", "fullstack", "server components"]

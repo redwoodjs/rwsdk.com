@@ -1,5 +1,6 @@
 import { generateBlogSitemap } from "./app/addons/blog/data/sitemap";
 
+// need to do this in a smarter way, but this works for now
 const blogUrls = await generateBlogSitemap();
 
 const staticUrls = [`

@@ -2,7 +2,8 @@
 title: "Full-Stack: RedwoodSDK and Paystack Payment Integration"
 description: "How RedwoodSDK simplifies integrating a payment gateway such as Paystack into your application."
 date: "2025-05-08"
-author: { id: "herman" }
+author: 
+  id: "herman"
 heroImage: "5e072198-1834-45c3-0c73-9e91c0854700"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6ac44b33-2e30-416d-703a-dd570d738d00/public"
 tags: ["redwoodsdk", "fullstack", "server components"]

@@ -34,6 +34,7 @@ export default defineApp([
       });
     }),
     route("/sitemap.xml", async () => {
+      // this should become an addon, and it should take other sitemaps as inputs and merge them together
       return new Response(sitemap, {
         status: 200,
         headers: {
@@ -42,6 +43,7 @@ export default defineApp([
       });
     }),
     route("/robots.txt", async () => {
+      // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
         Disallow: /search
