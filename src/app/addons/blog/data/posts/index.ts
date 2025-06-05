@@ -1,8 +1,6 @@
 import { lazy } from 'react';
-import { Author } from '../authors';
-
-// Use Vite's import.meta.glob to get all markdown files
-export const blogModules = import.meta.glob('./*.md', { as: 'raw' });
+import { Author, authors } from '../authors';
+import { getBlogModule, getAllBlogSlugs, BlogPostSlug } from './modules';
 
 type BlogPostData = {
     title: string;
@@ -81,23 +79,22 @@ async function parseFrontmatter(content: string) {
     }
 
     // Set author data if we have an author ID
-    if (authorId) {
-        const { authors } = await import('../authors');
-        if (authors[authorId]) {
-            data.author = authors[authorId];
-        }
+    if (authorId && authors[authorId]) {
+        data.author = authors[authorId];
     }
 
     return { data, content: markdown };
 }
 
-export const blogPosts = Object.keys(blogModules).reduce((acc, key) => {
-    const slug = key.replace('./', '').replace('.md', '');
-    acc[slug] = async () => {
-        const content = await blogModules[key]();
-        return parseFrontmatter(content);
-    };
-    return acc;
-}, {} as Record<string, () => Promise<{ data: BlogPostData; content: string }>>);
+// Create a function to get blog posts instead of an object
+export async function getBlogPost(slug: BlogPostSlug) {
+    const module = getBlogModule(slug);
+    if (!module) {
+        throw new Error(`Blog post ${slug} not found`);
+    }
+    const content = module as string;
+    return parseFrontmatter(content);
+}
 
-export type BlogPostSlug = keyof typeof blogPosts; 
+// Get all available blog post slugs
+export const blogPostSlugs = getAllBlogSlugs(); 

@@ -1,9 +1,9 @@
-import { blogPosts } from "./posts/index";
+import { blogPostSlugs, getBlogPost } from "./posts/index";
 
 export async function generateBlogSitemap() {
   const posts = await Promise.all(
-    Object.entries(blogPosts).map(async ([slug, getPost]) => {
-      const { data } = await getPost();
+    blogPostSlugs.map(async (slug) => {
+      const { data } = await getBlogPost(slug);
       return { slug, date: data.date };
     })
   );

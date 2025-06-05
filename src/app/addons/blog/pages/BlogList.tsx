@@ -1,12 +1,12 @@
 import { CloudflareImage } from 'src/components/CloudflareImage';
-import { blogPosts } from '../data/posts/index';
+import { blogPostSlugs, getBlogPost } from '../data/posts/index';
 import { Navbar } from 'src/components/Navbar';
 import { Footer } from 'src/components/Footer';
 
 export default async function BlogList() {
     // Fetch and parse all blog posts
-    const posts = await Promise.all(Object.entries(blogPosts).map(async ([slug, getPost]) => {
-        const { data } = await (getPost as () => Promise<{ data: any }>)();
+    const posts = await Promise.all(blogPostSlugs.map(async (slug) => {
+        const { data } = await getBlogPost(slug);
         return { ...data, slug };
     }));
 

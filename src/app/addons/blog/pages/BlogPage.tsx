@@ -3,7 +3,7 @@ import { Navbar } from 'src/components/Navbar';
 import { Footer } from 'src/components/Footer';
 import Post from '../components/Post';
 import { authors } from '../data/authors';
-import { blogModules } from '../data/posts/index';
+import { blogPostSlugs, getBlogPost } from '../data/posts/index';
 import { marked } from 'marked';
 // import { markedHighlight } from 'marked-highlight';
 // import hljs from 'highlight.js';
@@ -59,17 +59,15 @@ function parseFrontmatter(content: string) {
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const slug = params.slug;
-    const moduleLoader = blogModules[`./${slug}.md`];
 
-  if (!moduleLoader) {
+  if (!blogPostSlugs.includes(slug)) {
     throw new Error(`Module loader not found for: ${slug}`);
   }
 
-  const module = await moduleLoader();
-  const { data, content } = parseFrontmatter(module);
-  if (data.id) {
-    data["author"] = authors[data.id];
-  }
+  const { data, content } = await getBlogPost(slug);
+  // if (data.id) {
+  //   data["author"] = authors[data.id];
+  // }
   const trimmedContent = await marked(content.trim());
   return (
     <>
@@ -92,7 +90,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
                     content: trimmedContent,
                     author: data.author,
                     image: data.heroImage,
-                    tags: data.tags
+                    tags: data.tags || []
                 }} />
                 <Footer />
             </div>
