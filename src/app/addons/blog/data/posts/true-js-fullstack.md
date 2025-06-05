@@ -3,20 +3,20 @@ title: "Fullstack in the true sense"
 description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK."
 date: "2025-05-07"
 author:
-  id:"herman"
+  id: "herman"
 heroImage: "e35b945c-dd4e-42ad-e635-04ef2d475800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/d80b1b68-f5a9-4af6-5cf0-924663a2e000/public"
 tags: ["redwoodsdk", "fullstack", "server components"]
 ---
 # Fullstack in the true sense
 
-In this post, I’d like to focus on some specifics why **RedwoodSDK is truly a fullstack framework**, and why that matters.
+In this post, I'd like to focus on some specifics why **RedwoodSDK is truly a fullstack framework**, and why that matters.
 
 ---
 
 ### The "Problem" with "Fullstack" Frontends
 
-Classical front-end frameworks are often disjointed. There’s considerable overhead just to get started:
+Classical front-end frameworks are often disjointed. There's considerable overhead just to get started:
 
 - Setting up a database
 - Spinning up a server or backend
@@ -35,13 +35,13 @@ It places the **[database](https://docs.rwsdk.com/core/database/), [queues](http
 
 And the exciting part?  
 **What runs locally *mirrors* production.**  
-No more “but it works on my machine” headaches. Your local dev environment mirrors production so that you can be more at ease with deployments.
+No more "but it works on my machine" headaches. Your local dev environment mirrors production so that you can be more at ease with deployments.
 
 ---
 
 ### Classic vs RedwoodSDK
 
-Let’s compare a typical setup in a classic React frontend vs. a RedwoodSDK app.
+Let's compare a typical setup in a classic React frontend vs. a RedwoodSDK app.
 
 #### Classic React Frontend: Fetching via API
 
@@ -96,9 +96,9 @@ app.get('/api/users', async (req, res) => {
 
 📘 [Read more here on how to setup your Database](https://docs.rwsdk.com/core/database/) with RedwoodSDK
 
-### Request/Response: You’re in Control
+### Request/Response: You're in Control
 
-Don’t think you’re limited to React Server Components.
+Don't think you're limited to React Server Components.
 
 RedwoodSDK operates on a [Request/Response cycle](https://docs.rwsdk.com/core/routing/), which means you can write routes that return any valid Response:
 	•	JSON
@@ -159,6 +159,6 @@ With RedwoodSDK, you can:
 	•	Fetch data directly from the DB
 	•	Write fullstack features without gluing together disparate tools
 
-It’s flexible and It’s fullstack.
+It's flexible and It's fullstack.
 
 **_To have this full setup running won't cost you a penny, even in production! Cloudflare has generous free tier offerings._**

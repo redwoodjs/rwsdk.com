@@ -38,38 +38,39 @@ async function parseFrontmatter(content: string) {
 
     // Parse YAML frontmatter
     const lines = frontmatter.split('\n');
-    let inAuthorBlock = false;
+    let currentKey = '';
     let authorId = '';
 
     for (const line of lines) {
         const trimmedLine = line.trim();
         if (trimmedLine === '') continue;
 
-        // Check if we're in an author block
-        if (trimmedLine === 'author:') {
-            inAuthorBlock = true;
+        // Handle nested objects
+        if (line.startsWith('  ')) {
+            const [key, ...values] = line.trim().split(':');
+            if (key && values.length > 0) {
+                const value = values.join(':').trim().replace(/^["']|["']$/g, '');
+                if (currentKey === 'author' && key === 'id') {
+                    authorId = value;
+                }
+            }
             continue;
         }
 
-        // Handle author ID
-        if (inAuthorBlock && line.startsWith('  id:')) {
-            authorId = line.split(':')[1].trim().replace(/^["']|["']$/g, '');
-            continue;
-        }
-
-        // Handle regular key-value pairs
+        // Handle top-level keys
         const [key, ...values] = line.split(':');
         if (key && values.length > 0) {
             const value = values.join(':').trim().replace(/^["']|["']$/g, '');
+            currentKey = key.trim();
             
-            if (key.trim() === 'tags') {
+            if (currentKey === 'tags') {
                 // Handle tags array
                 const tagsMatch = value.match(/\[(.*?)\]/);
                 if (tagsMatch) {
                     data.tags = tagsMatch[1].split(',').map(tag => tag.trim().replace(/^["']|["']$/g, ''));
                 }
-            } else if (key.trim() !== 'author') {
-                const dataKey = key.trim() as keyof BlogPostData;
+            } else if (currentKey !== 'author') {
+                const dataKey = currentKey as keyof BlogPostData;
                 if (dataKey !== 'author' && dataKey !== 'tags') {
                     data[dataKey] = value as any;
                 }

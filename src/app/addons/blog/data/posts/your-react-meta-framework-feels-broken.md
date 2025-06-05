@@ -3,7 +3,7 @@ title: "Your React Meta-Framework Feels Broken, Here's Why"
 description: "Lets shine the spotlite on some of the true fullstack features of RedwoodSDK."
 date: "2025-05-25"
 author: 
-  id:"peter"
+  id: "peter"
 heroImage: "23343616-ea1c-4f38-7bb2-c21f95439900"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/23343616-ea1c-4f38-7bb2-c21f95439900/public"
 tags: ["redwoodsdk", "fullstack", "server components", "remix", "next"]
@@ -17,7 +17,7 @@ it doesn't have to be X, it could be Y,
 here's a comparison of X and Y,
 Use Y -->
 
-Do you ever feel disjointed when building a web app? Like the pieces don’t exactly fit in the puzzle, both mentally and in the code?
+Do you ever feel disjointed when building a web app? Like the pieces don't exactly fit in the puzzle, both mentally and in the code?
 
 Bewildered and lost in a convention-heavy file structure that makes routing feel more like its own language rather than straightforward pattern matching?
 
@@ -25,29 +25,29 @@ Right-click+Inspect doesn't go anywhere meaningful?
 
 ## The Abstraction Trap
 
-Frameworks promise simplicity, but often deliver indirection. Modern frameworks don’t just abstract the platform, they abstract your own code!
+Frameworks promise simplicity, but often deliver indirection. Modern frameworks don't just abstract the platform, they abstract your own code!
 
 And you, the developer, are stuck trying to reason about your app in plain JavaScript... Whilst your framework speaks in tongues.
 
-It’s death by a thousand cuts.
+It's death by a thousand cuts.
 
-You write a function, but it’s not really a function: it’s a macro wrapped in a build step.
+You write a function, but it's not really a function: it's a macro wrapped in a build step.
 
-You see a type: but it’s not defined anywhere. It’s generated at build time, and you won't know it's broken until the generation step is run.
+You see a type: but it's not defined anywhere. It's generated at build time, and you won't know it's broken until the generation step is run.
 
-Every layer hides the layer beneath it, until you’re debugging a stack trace that feels like it came from another planet.
+Every layer hides the layer beneath it, until you're debugging a stack trace that feels like it came from another planet.
 
-This isn’t developer experience. This is a mirage. Real DX doesn’t require a glossary. It doesn’t hide execution. It doesn’t make your editor lie to you. It's meant to be idiomatic!
+This isn't developer experience. This is a mirage. Real DX doesn't require a glossary. It doesn't hide execution. It doesn't make your editor lie to you. It's meant to be idiomatic!
 
-And we’ve normalized it. We tell ourselves that if we just learn the right mental model, it’ll all click. But the truth is, many frameworks today ask you to abandon the mental model of JavaScript itself:
+And we've normalized it. We tell ourselves that if we just learn the right mental model, it'll all click. But the truth is, many frameworks today ask you to abandon the mental model of JavaScript itself:
 
 They fight the web.  
 They abstract the platform.  
 They demand trust instead of understanding.
 
-## What if it didn’t have to be this way?
+## What if it didn't have to be this way?
 
-What if you could build full-stack apps without rewriting JavaScript’s rules?
+What if you could build full-stack apps without rewriting JavaScript's rules?
 
 - No custom syntax.
 - No invisible transformations. (Besides JSX, React, and TypeScript)
@@ -57,11 +57,11 @@ Just TypeScript, modules, functions, values, and types.
 A router that returns JSX or a Response.
 Middleware you can write yourself.
 Server components that stream.
-Local dev that’s identical to production.
+Local dev that's identical to production.
 
-You don’t need a new language to build modern apps! You just need to stop fighting the one you already have!
+You don't need a new language to build modern apps! You just need to stop fighting the one you already have!
 
-That’s why we built RedwoodSDK, a framework that _is_ the platform. Not built in spite of the browser, or in denial of the network. But on top of them.
+That's why we built RedwoodSDK, a framework that _is_ the platform. Not built in spite of the browser, or in denial of the network. But on top of them.
 
 ## Concrete Examples: Magic vs the Platform
 
@@ -92,7 +92,7 @@ export default async function BlogPost({ params }) {
 }
 ```
 
-Functions like `generateStaticParams` and `generateMetadata` are magic exports—Next.js calls them behind the scenes. This adds indirection: you can’t fully understand how a page works just by reading the code. You need to know the framework’s rules.
+Functions like `generateStaticParams` and `generateMetadata` are magic exports—Next.js calls them behind the scenes. This adds indirection: you can't fully understand how a page works just by reading the code. You need to know the framework's rules.
 
 Then there are **File-system spells**: `layout.tsx`, `error.tsx`, `loading.tsx`, `not-found.tsx`, `(group)`, `@modal` segment, etc. Also, the logic about when which rendering you get. like if you access cookies, or headers, then a page is no longer static etc. It's not traceable! You must know the rules of the framework. Hidden knowledge that you need to be effective.
 
@@ -141,11 +141,11 @@ In RedwoodSDK you define a route, and return a JSX element (Or a response object
 
 ## The Web Is Enough
 
-You don’t need a framework that pretends to be a language. You don’t need layers of build steps to speak HTTP. You don’t need magic.
+You don't need a framework that pretends to be a language. You don't need layers of build steps to speak HTTP. You don't need magic.
 
 You need something that works with the web—not against it.
 
-That’s why we built RedwoodSDK:
+That's why we built RedwoodSDK:
 
 - Zero magic: RedwoodSDK does have a build step, but we keep the boring-visible: TypeScript in, JSX out. No secret macros.
 - Web APIs: fetch, Request, Response. No wrappers.
