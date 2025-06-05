@@ -5,7 +5,6 @@ import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
-// import { blogRoutes } from "../public/blog/routes";
 import { notFound } from "src/utils/notFound";
 import { blogRoutes } from "./app/addons/blog";
 
