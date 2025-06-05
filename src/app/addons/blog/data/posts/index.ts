@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { Author, authors } from '../authors';
 import { getBlogModule, getAllBlogSlugs, BlogPostSlug } from './modules';
 
