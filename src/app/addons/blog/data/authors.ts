@@ -12,12 +12,12 @@ export const authors: Record<string, Author> = {
   },
   peter: {
     name: "Peter Pistorius",
-    role: "CEO",
+    role: "Creator",
     avatar: "0ecedd8a-aec2-4783-ea00-a38aa1a18c00", //imageID in cloudflare
   },
   justin: {
     name: "Justin van der Merwe",
-    role: "Core team developer",
+    role: "Co-creator",
     avatar: "9c27adaa-3e4b-4b38-34ea-70268a02d100", //imageID in cloudflare
   },
   amy: {
