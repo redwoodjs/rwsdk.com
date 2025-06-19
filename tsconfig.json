@@ -17,7 +17,6 @@
     "types": [
       "worker-configuration.d.ts",
       "./types/react.d.ts",
-      "./types/global.d.ts",
       "./types/vite.d.ts"
     ],
     "paths": {
