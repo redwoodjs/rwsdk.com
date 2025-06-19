@@ -7,7 +7,7 @@ import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
 import { notFound } from "src/utils/notFound";
 
-import { addonChangelog } from "src/addons/changelog/routes";
+import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 
 export type AppContext = {};
@@ -61,7 +61,9 @@ export default defineApp([
         },
       });
     }),
-    addonChangelog({ routePrefix: "/changelog" }),
+
+    prefix("/changelog", changelogRoutes),
+
     route("*", async () => {
       return notFound();
     }),
