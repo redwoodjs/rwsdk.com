@@ -33,6 +33,12 @@
       "binding": "R2"
     }
   ],
+  "kv_namespaces": [
+    {
+      "binding": "KV_ADDON_CHANGELOG",
+      "id": "c934e8cdc828424f8ccfbdd002fb9a7e"
+    }
+  ],
   // Entry point for your worker
   "main": "src/worker.tsx",
 

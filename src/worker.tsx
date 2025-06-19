@@ -6,17 +6,21 @@ import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
 import { notFound } from "src/utils/notFound";
+
+import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 
 export type AppContext = {};
 
 export default defineApp([
   setCommonHeaders(),
+
   render(Document, [
     route("/", Home),
     route("/personal-software", PersonalSoftware),
 
     prefix("/blog", blogRoutes),
+
     route("/docs", async () => {
       return new Response(null, {
         status: 301,
@@ -57,6 +61,9 @@ export default defineApp([
         },
       });
     }),
+
+    prefix("/changelog", changelogRoutes),
+
     route("*", async () => {
       return notFound();
     }),

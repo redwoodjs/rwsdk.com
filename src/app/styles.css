@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-baige: #f4eedf;
@@ -174,4 +175,7 @@ h3 {
 .hljs-deletion {
   color: #ffdcd7;
   background-color: #67060c;
+}
+
+.addon-changelog {
 }
