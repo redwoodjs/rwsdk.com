@@ -7,10 +7,6 @@ export const changelogRoutes = [
   route("/", async function () {
     let releaseKeys = await fetchReleases("redwoodjs/sdk");
 
-    if (!releaseKeys.length) {
-      return <div>No release found</div>;
-    }
-
     return (
       <div className="max-w-4xl mx-auto">
         <title>Changelog — RedwoodSDK</title>

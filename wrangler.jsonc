@@ -24,6 +24,12 @@
           "pattern": "www.rwsdk.com",
           "custom_domain": true
         }
+      ],
+      "kv_namespaces": [
+        {
+          "binding": "KV_ADDON_CHANGELOG",
+          "id": "c934e8cdc828424f8ccfbdd002fb9a7e"
+        }
       ]
     }
   },
