@@ -7,35 +7,37 @@ export default function PersonalSoftware() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "RedwoodSDK | The React Framework for Cloudfare and personal software",
-    "description": "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
-    "url": "https://rwsdk.com/personal-software",
-    "mainEntity": {
+    name: "RedwoodSDK | The React Framework for Cloudfare and personal software",
+    description:
+      "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
+    url: "https://rwsdk.com/personal-software",
+    mainEntity: {
       "@type": "Article",
-      "headline": "The Personal Software Revolution",
-      "description": "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
-      "author": {
+      headline: "The Personal Software Revolution",
+      description:
+        "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
+      author: {
         "@type": "Organization",
-        "name": "RedwoodJS Inc.",
-        "url": "https://rwsdk.com"
+        name: "RedwoodJS Inc.",
+        url: "https://rwsdk.com",
       },
-      "publisher": {
+      publisher: {
         "@type": "Organization",
-        "name": "RedwoodJS Inc.",
-        "logo": {
+        name: "RedwoodJS Inc.",
+        logo: {
           "@type": "ImageObject",
-          "url": "https://rwsdk.com/images/logo--light.svg"
-        }
+          url: "https://rwsdk.com/images/logo--light.svg",
+        },
       },
-      "datePublished": "2024-03-20",
-      "dateModified": "2024-03-20"
-    }
+      datePublished: "2024-03-20",
+      dateModified: "2024-03-20",
+    },
   };
 
   return (
     <div>
       <Navbar activePage="personal-software" />
-      <div className="flex flex-col lg:flex-row min-h-screen font-chivo bg-baige text-black">
+      <div className="flex flex-col lg:flex-row min-h-screen bg-baige text-black">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -60,7 +62,10 @@ export default function PersonalSoftware() {
         />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="og:logo" content="https://rwsdk.com/images/logo--light.svg" />
+        <meta
+          property="og:logo"
+          content="https://rwsdk.com/images/logo--light.svg"
+        />
         <meta property="og:locale" content="en_US" />
         <HeroImage />
         <div className="flex-1 flex flex-col">
@@ -83,7 +88,7 @@ export default function PersonalSoftware() {
               />
             </a>
             <section className="space-y-6">
-              <h1 className="text-[48px] sm:text-[72px] lg:text-[100px] font-bold font-jersey leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
+              <h1 className="text-[28px] sm:text-[52px] lg:text-[60px] font-bold font-playfair leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
                 <div>
                   It started with a blinking cursor
                   <span className="text-orange cursor-blink"> | </span>
@@ -126,7 +131,7 @@ export default function PersonalSoftware() {
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 But the software we built changed
               </h2>
 
@@ -151,7 +156,7 @@ export default function PersonalSoftware() {
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 There's nothing inherently wrong with software at scale
               </h2>
 
@@ -171,7 +176,7 @@ export default function PersonalSoftware() {
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 What if it could be different?
               </h2>
               <p className="text-base lg:text-md leading-8 font-light">
@@ -180,18 +185,18 @@ export default function PersonalSoftware() {
                 <br />
                 What if it didn't require five services and a Terraform config?
                 <br />
-                What if you didn't need to be "professional developer" to make it
-                happen?
+                What if you didn't need to be "professional developer" to make
+                it happen?
                 <br />
-                What if writing software was like picking up a power drill &ndash;
-                a tool to get something done?
+                What if writing software was like picking up a power drill
+                &ndash; a tool to get something done?
                 <br />
                 Not a startup. Not a business. Not a side hustle. <br />
                 Just a piece of software that works. That's yours. That you own.
                 That you can share (if you want to).
               </p>
 
-              <h3 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 Personal software is coming back
               </h3>
 
@@ -219,7 +224,7 @@ export default function PersonalSoftware() {
                 </strong>
               </p>
 
-              <h3 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 Redwood is here for that reason
               </h3>
 
@@ -251,7 +256,7 @@ export default function PersonalSoftware() {
                 We want to bring that joy back.
               </p>
 
-              <h3 className="text-xl font-bold font-jersey uppercase text-[28px]">
+              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
                 The Personal Software Revolution
               </h3>
 
@@ -268,8 +273,8 @@ export default function PersonalSoftware() {
                 <br />
                 Built for yourself - and maybe a few others.
                 <br />
-                If this resonates with you, come join us. We're not just building
-                a framework. <br />
+                If this resonates with you, come join us. We're not just
+                building a framework. <br />
                 <strong className="font-bold">
                   We're building a future where software is yours again.
                 </strong>

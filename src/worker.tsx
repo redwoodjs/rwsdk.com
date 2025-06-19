@@ -5,9 +5,10 @@ import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/PersonalSoftware";
-import { blogRoutes } from "src/pages/blog/routes";
 import { notFound } from "src/utils/notFound";
+
 import { addonChangelog } from "src/addons/changelog/routes";
+import { blogRoutes } from "./app/addons/blog";
 
 export type AppContext = {};
 
@@ -15,8 +16,9 @@ export default defineApp([
   setCommonHeaders(),
 
   render(Document, [
-    index([Home]),
-    route("/personal-software", [PersonalSoftware]),
+    route("/", Home),
+    route("/personal-software", PersonalSoftware),
+
     prefix("/blog", blogRoutes),
 
     route("/docs", async () => {
@@ -27,6 +29,7 @@ export default defineApp([
         },
       });
     }),
+
     route("/docs/getting-started/quick-start/", async () => {
       return new Response(null, {
         status: 301,
@@ -36,6 +39,7 @@ export default defineApp([
       });
     }),
     route("/sitemap.xml", async () => {
+      // this should become an addon, and it should take other sitemaps as inputs and merge them together
       return new Response(sitemap, {
         status: 200,
         headers: {
@@ -44,6 +48,7 @@ export default defineApp([
       });
     }),
     route("/robots.txt", async () => {
+      // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
         Disallow: /search

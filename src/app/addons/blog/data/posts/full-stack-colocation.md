@@ -2,7 +2,8 @@
 title: "Full-stack Co-location"
 description: "RedwoodSDK let's you co-locate everything, it makes software easier to reason about. When everything is in one place, you spend less time chasing ghosts through your codebase."
 date: "2025-05-09"
-author: { id: "peter" }
+author:
+  id: "peter"
 heroImage: "465ce5ca-1241-470a-318c-9a316e155d00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/9efc82a2-2831-4e48-5fd2-238ba2adb000/public"
 tags: ["redwoodsdk", "react"]

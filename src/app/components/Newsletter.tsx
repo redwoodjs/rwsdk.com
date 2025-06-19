@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { SDKButton } from './SDKButton';
-import { CloudflareImage } from './CloudflareImage';
+import { useEffect, useRef } from "react";
+import { SDKButton } from "./SDKButton";
+import { CloudflareImage } from "./CloudflareImage";
 declare global {
   interface Window {
     __kwesformsScriptAdded?: boolean;
@@ -14,8 +14,8 @@ export function Newsletter() {
 
   useEffect(() => {
     if (!window.__kwesformsScriptAdded) {
-      const script = document.createElement('script');
-      script.src = 'https://kwesforms.com/v2/kf-script.js';
+      const script = document.createElement("script");
+      script.src = "https://kwesforms.com/v2/kf-script.js";
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
@@ -23,7 +23,7 @@ export function Newsletter() {
     }
 
     // Add custom styles for KwesForms
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       /* Error styling */
       .field.kw-has-error {
@@ -146,11 +146,12 @@ export function Newsletter() {
   return (
     <section className="flex flex-row gap-4 max-w-[1400px] mx-auto px-10 py-20">
       <div className="flex flex-col gap-6 max-w-[800px] text-center lg:text-left">
-        <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-jersey leading-[81%] mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2 w-fit">
-          BE THE FIRST TO KNOW
+        <h2 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[80px] font-bold font-playfair leading-[81%] mb-3 sm:mb-4 md:mb-8 grid-bg py-4 px-2 w-fit">
+          Be the first to know
         </h2>
-        <p className="text-[18px] sm:text-[24px] md:text-[32px] font-jersey leading-[1]">
-          Get a summary of what we've shipped, articles we've written, and upcoming events straight to your inbox, at most once every two weeks.
+        <p className="text-[18px] sm:text-[24px] md:text-[28px] font-noto leading-[1]">
+          Get a summary of what we've shipped, articles we've written, and
+          upcoming events straight to your inbox, at most once every two weeks.
         </p>
         <form
           ref={formRef}
@@ -181,9 +182,9 @@ export function Newsletter() {
             <button
               id="newsletter-signup"
               type="submit"
-              className="text-orange-medium border border-2 border-orange-light bg-black font-jersey w-full sm:w-fit hover:text-orange-light transition-colors text-[18px] sm:text-[20px] md:text-[24px] px-4 sm:px-3 md:px-8 py-1 h-[52px] sm:mb-[33px]"
+              className="text-orange-medium border border-2 border-orange-light bg-black font-playfair w-full sm:w-fit hover:text-orange-light transition-colors text-[18px] sm:text-[20px] md:text-[24px] px-4 sm:px-3 md:px-8 py-1 h-[52px] sm:mb-[33px]"
             >
-              SUBSCRIBE
+              Subscribe
             </button>
           </div>
           {/* Error and success messages will be inserted here by KwesForms */}
@@ -197,5 +198,5 @@ export function Newsletter() {
         />
       </div>
     </section>
-  )
+  );
 }
