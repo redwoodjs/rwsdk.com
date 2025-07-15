@@ -18,6 +18,13 @@ export function Navbar(props: NavbarProps) {
         />
       </a>
       <div className="flex gap-2 sm:gap-4 font-noto font-bold text-[16px] sm:text-[18px]">
+      <a
+          href={Constants.LEARN_URL}
+          className="hover:text-orange-medium transition-colors"
+        >
+          Learn
+        </a>
+        <span className="text-orange-light">\</span>
         <a
           href={Constants.DOCS_URL}
           className="hover:text-orange-medium transition-colors"

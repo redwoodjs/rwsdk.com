@@ -20,6 +20,7 @@ const Constants = Object.freeze({
     ACCOUNT_HASH: "EBSSfnGYYD9-tGTmYMjDgg",
     IMAGE_URL: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg",
   } as const,
+  LEARN_URL: "https://learn.rwsdk.com",
 });
 
 export default Constants;
