@@ -17,21 +17,21 @@ export function Navbar(props: NavbarProps) {
           className="w-[140px] sm:w-[186px] sm:mb-4 lg:mb-0"
         />
       </a>
-      <div className="flex gap-2 sm:gap-4 font-noto font-bold text-[16px] sm:text-[18px]">
-      <a
+      <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-4 font-noto font-bold text-[14px] sm:text-[16px] md:text-[18px] mt-4 lg:mt-0">
+        <a
           href={Constants.LEARN_URL}
           className="hover:text-orange-medium transition-colors"
         >
           Learn
         </a>
-        <span className="text-orange-light">\</span>
+        <span className="text-orange-light hidden sm:inline">\</span>
         <a
           href={Constants.DOCS_URL}
           className="hover:text-orange-medium transition-colors"
         >
           Docs
         </a>
-        <span className="text-orange-light">\</span>
+        <span className="text-orange-light hidden sm:inline">\</span>
         <a
           href="/personal-software"
           className={`hover:text-orange-medium transition-colors ${
@@ -40,7 +40,7 @@ export function Navbar(props: NavbarProps) {
         >
           Personal Software
         </a>
-        <span className="text-orange-light">\</span>
+        <span className="text-orange-light hidden sm:inline">\</span>
         <a
           href="/blog"
           className={`hover:text-orange-medium transition-colors ${
@@ -49,15 +49,15 @@ export function Navbar(props: NavbarProps) {
         >
           Blog
         </a>
-        <span className="text-orange-light">\</span>
+        <span className="text-orange-light hidden sm:inline">\</span>
         <a
           href={Constants.DISCORD_URL}
           className="hover:text-orange-medium transition-colors"
         >
           Discord
         </a>
-        <span className="text-orange-light">\</span>
-        <Suspense fallback={<div>Loading...</div>}>
+        <span className="text-orange-light hidden sm:inline">\</span>
+        <Suspense fallback={<div className="text-[14px] sm:text-[16px] md:text-[18px]">Loading...</div>}>
           <GitHubStarWidget />
         </Suspense>
       </div>
