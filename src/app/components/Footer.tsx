@@ -44,6 +44,14 @@ export function Footer() {
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
               <li>
                 <a
+                  href="https://www.udemy.com/course/redwoodsdk-beginners-course/learn/lecture/51431222#overview"
+                  className="hover:text-baige font-playfair transition-colors"
+                >
+                  Udemy Beginner RedwoodSDK Course
+                </a>
+              </li>
+              <li>
+                <a
                   href={Constants.LEARN_URL}
                   className="hover:text-baige font-playfair transition-colors"
                 >
