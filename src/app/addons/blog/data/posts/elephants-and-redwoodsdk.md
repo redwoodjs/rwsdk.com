@@ -4,15 +4,15 @@ description: "In this article we explore how we assist in monitoring Elephants i
 date: "2025-07-16"
 author:
   id: "herman"
-heroImage: "913199e2-813f-4c61-e342-7d5c88f2df00"
-ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/0a0d9656-f074-43bc-110d-1d1a35338c00/public"
+heroImage: "ddc0df82-3a1d-4897-2f05-2f7c1fc6bc00"
+ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6729edba-1110-4595-dd1c-4fd8de0cfe00/public"
 tags: ["redwoodsdk", "cloudflare", "coding for good", "conservation"]
 ---
 # Using RedwoodSDK to Help Elephants and Humans Coexist in Victoria Falls
 
-In the world of software development, it’s not every day you get to contribute to something that helps protect one of the planet’s most iconic species. But that’s exactly what we got to do through our recent work with the [Connected Conservation Trust (CCT)](https://www.connectedconservation.com/) and [**cbio**](https://za.linkedin.com/in/craig-beech-98101318) in Zimbabwe.
+In the world of software development, it’s not every day you get to contribute to something that helps protect one of the planet’s most iconic species. I have been fortunate to spend years in the field in Southern Africa implementing technology to prevent wildife crime and Human-Wildlife Conflict (HWC) with my degree in Nature Conservation and Software development background. And this is exactly what I got to do through our recent work with the [Connected Conservation Trust (CCT)](https://www.connectedconservation.com/) and [**cbio**](https://za.linkedin.com/in/craig-beech-98101318) in Zimbabwe.
 
-CCT is leading the charge to monitor elephant movement in and around **Victoria Falls**, where rapid urban development increasingly intersects with traditional wildlife corridors. The challenge? Human-Wildlife Conflict (HWC)—a growing concern in areas where communities and wildlife share shrinking space.
+CCT is leading the charge to monitor elephant movement in and around **Victoria Falls**, where rapid urban development increasingly intersects with traditional wildlife corridors. The challenge? Human-Wildlife Conflict; a growing concern in areas where communities and wildlife share shrinking space.
 
 To tackle this, elephants are fitted with GPS collars that stream real-time location data. But raw data alone doesn’t tell a story—it needs to be parsed, cleaned, and transformed into something usable for scientists, conservationists, and planners.
 
@@ -35,6 +35,18 @@ ArcGIS transforms these data points into beautiful and informative visualisation
 The work also supports tools like the **Land Use Conflict Identification Strategy (LUCIS)**, which guides inclusive, evidence-based development decisions involving government, conservationists, and local communities.
 
 ![ArcGIS visualisation by CBIO to show paths of elephants in Zimbabwe near Victoria Falls](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/2a868f86-d594-4d2d-2d08-b6f6a66f7000/public)
+
+## Simple tech
+
+RedwoodSDK is built on web standards. This means there is no hidden magic, and with this comes simplicity, reliability and control. The setup for this
+application was super simple and streight forward, leveraging a few key concepts of **RedwoodSDK and Cloudflare**.
+
+At the heart our app has a cronjob that runs on shedule to retrieve new data from the collar API. This data is then cleaned and stored on a D1 database. After this its passed on to the **ArcGIS Feature Server** where [cbio](https://www.cbio.co.za/) builds dashboards and insigts with the cleaned data.
+
+![Adding the Cronjob to RedwoodSDK](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/a7f145c8-e631-45ee-c8be-7c0cbbf62600/public)
+![Adding the Cronjob to RedwoodSDK - wrangler config](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/c0e87338-0074-40ae-e831-f95e77c0c700/public)
+
+Prior to this their stack was running on 3 seperate services in Google Coud and this cost the team a fair bit of monthly subscriptions. _We simplified their setup to have it all running in **Cloudflare in a single worker at $0.00 cost**._
 
 
 ## Building Technology That Matters
