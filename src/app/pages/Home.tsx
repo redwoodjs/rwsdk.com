@@ -130,7 +130,7 @@ export default function Home() {
           <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
             <span className="text-orange">$</span>{" "}
             <span className="text-orange-light flex-1">
-              npx degit redwoodjs/sdk/starters/standard
+              npx create-rwsdk my-project-name
             </span>
             <span className="text-orange-light">
               <Copy text="npx degit redwoodjs/sdk/starters/standard" />
