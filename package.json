@@ -33,7 +33,7 @@
     "marked-highlight": "^2.2.1",
     "mdx-bundler": "^10.1.1",
     "prism-react-renderer": "^2.4.1",
-    "rwsdk": "v0.1.0-alpha.17",
+    "rwsdk": "v0.1.0-alpha.19",
     "tailwindcss": "^4.0.15"
   },
   "devDependencies": {

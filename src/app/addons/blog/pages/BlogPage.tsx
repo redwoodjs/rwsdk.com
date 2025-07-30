@@ -1,27 +1,9 @@
-"use server";
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
 import Post from "../components/Post";
-import { authors } from "../data/authors";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { marked } from "marked";
-// import { markedHighlight } from 'marked-highlight';
-// import hljs from 'highlight.js';
 
-// // Configure marked with syntax highlighting
-// marked.use(markedHighlight({
-//     langPrefix: 'hljs language-',
-//     highlight(code, lang) {
-//         const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-//         return hljs.highlight(code, { language }).value;
-//     }
-// }));
-
-// marked.setOptions({
-//     gfm: true,
-//     breaks: true,
-//     pedantic: false
-// });
 
 interface BlogPageProps {
   params: {
@@ -57,7 +39,7 @@ function parseFrontmatter(content: string) {
   return { data, content: markdown };
 }
 
-export async function BlogPage({ params }: BlogPageProps) {
+export default async function BlogPage({ params }: BlogPageProps) {
   const slug = params.slug;
 
   if (!blogPostSlugs.includes(slug)) {

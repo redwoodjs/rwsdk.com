@@ -3,7 +3,7 @@ import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
 
-export async function BlogList() {
+export default async function BlogList() {
   // Fetch and parse all blog posts
   const posts = await Promise.all(
     blogPostSlugs.map(async (slug) => {
