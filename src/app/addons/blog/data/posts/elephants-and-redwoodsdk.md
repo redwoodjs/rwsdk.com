@@ -10,7 +10,7 @@ tags: ["redwoodsdk", "cloudflare", "coding for good", "conservation"]
 ---
 # Using RedwoodSDK to Help Elephants and Humans Coexist in Victoria Falls
 
-In the world of software development, it’s not every day you get to contribute to something that helps protect one of the planet’s most iconic species. I have been fortunate to spend years in the field in Southern Africa implementing technology to prevent wildife crime and Human-Wildlife Conflict (HWC) with my degree in Nature Conservation and Software development background. And this is exactly what I got to do through our recent work with the [Connected Conservation Trust (CCT)](https://www.connectedconservation.com/) and [**cbio**](https://za.linkedin.com/in/craig-beech-98101318) in Zimbabwe.
+In the world of software development, it’s not every day you get to contribute to something that helps protect one of the planet’s most iconic species. I have been fortunate to spend years in the field in Southern Africa implementing technology to prevent wildlife crime and Human-Wildlife Conflict (HWC) with my degree in Nature Conservation and Software development background. And this is exactly what I got to do through our recent work with the [Connected Conservation Trust (CCT)](https://www.connectedconservation.com/) and [**cbio**](https://za.linkedin.com/in/craig-beech-98101318) in Zimbabwe.
 
 CCT is leading the charge to monitor elephant movement in and around **Victoria Falls**, where rapid urban development increasingly intersects with traditional wildlife corridors. The challenge? Human-Wildlife Conflict; a growing concern in areas where communities and wildlife share shrinking space.
 
@@ -18,7 +18,7 @@ To tackle this, elephants are fitted with GPS collars that stream real-time loca
 
 That’s where we came in.
 
-![An elephant getting collard](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/c503d290-ee61-4a65-3d24-ee6e7372a400/public)
+![An elephant getting collared](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/c503d290-ee61-4a65-3d24-ee6e7372a400/public)
 
 ## Simplifying the Data Pipeline with RedwoodSDK
 
@@ -38,16 +38,14 @@ The work also supports tools like the **Land Use Conflict Identification Strateg
 
 ## Simple tech
 
-RedwoodSDK is built on web standards. This means there is no hidden magic, and with this comes simplicity, reliability and control. The setup for this
-application was super simple and streight forward, leveraging a few key concepts of **RedwoodSDK and Cloudflare**.
+RedwoodSDK is built on web standards. This means there is no hidden magic, and with this comes simplicity, reliability and control. The setup for this application was super simple and straightforward, leveraging a few key concepts of **RedwoodSDK and Cloudflare**.
 
-At the heart our app has a cronjob that runs on shedule to retrieve new data from the collar API. This data is then cleaned and stored on a D1 database. After this its passed on to the **ArcGIS Feature Server** where [cbio](https://www.cbio.co.za/) builds dashboards and insigts with the cleaned data.
+At the heart our app has a cronjob that runs on schedule to retrieve new data from the collar API. This data is then cleaned and stored on a D1 database. After this it’s passed on to the **ArcGIS Feature Server** where [cbio](https://www.cbio.co.za/) builds dashboards and insights with the cleaned data.
 
 ![Adding the Cronjob to RedwoodSDK](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/a7f145c8-e631-45ee-c8be-7c0cbbf62600/public)
 ![Adding the Cronjob to RedwoodSDK - wrangler config](https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/c0e87338-0074-40ae-e831-f95e77c0c700/public)
 
-Prior to this their stack was running on 3 seperate services in Google Coud and this cost the team a fair bit of monthly subscriptions. _We simplified their setup to have it all running in **Cloudflare in a single worker at $0.00 cost**._
-
+Prior to this their stack was running on 3 separate services in Google Cloud and this cost the team a fair bit of monthly subscriptions. _We simplified their setup to have it all running in **Cloudflare in a single worker at $0.00 cost**._
 
 ## Building Technology That Matters
 
