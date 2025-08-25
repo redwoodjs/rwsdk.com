@@ -6,8 +6,11 @@ import { Copy } from "src/components/Copy";
 export default function StartPage() {
   return (
     <div className="max-w-[1100px] mx-auto px-3 sm:px-4 md:px-8 py-10 sm:py-14 md:py-20">
+      {/* Instruct robots not to index this page */}
+      <meta name="robots" content="noindex, nofollow" />
+      <meta name="googlebot" content="noindex, nofollow" />
       <div className="flex items-center gap-3 mb-6">
-        <a href="/" aria-label="RedwoodSDK">
+        <a href="/" aria-label="RedwoodSDK" target="_blank" rel="noreferrer">
           <img src="/images/logo--light.svg" alt="RedwoodSDK" className="h-10" />
         </a>
       </div>

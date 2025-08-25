@@ -54,7 +54,7 @@ export default defineApp([
       // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
-        Disallow: /search
+        Disallow: /start
         Sitemap: https://rwsdk.com/sitemap.xml`;
 
       return new Response(robotsTxt, {

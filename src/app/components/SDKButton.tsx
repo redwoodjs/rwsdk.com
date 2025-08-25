@@ -24,6 +24,8 @@ export const SDKButton: React.FC<SDKButtonProps> = ({
 
   return (
     <a
+      target="_blank"
+      rel="noreferrer"
       href={href || Constants.DOCS_QUICKSTART_URL}
       className={`text-orange-medium border-2 border-orange-light bg-black font-playfair w-fit hover:text-orange-light transition-colors ${sizeClasses[size]} ${className}`}
     >
