@@ -9,6 +9,7 @@ import { notFound } from "src/utils/notFound";
 
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
+import StartPage from "./app/pages/Start";
 
 export type AppContext = {};
 
@@ -20,6 +21,8 @@ export default defineApp([
     route("/personal-software", PersonalSoftware),
 
     prefix("/blog", blogRoutes),
+
+    route('/start', StartPage),
 
     route("/docs", async () => {
       return new Response(null, {
@@ -51,7 +54,7 @@ export default defineApp([
       // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
-        Disallow: /search
+        Disallow: /start
         Sitemap: https://rwsdk.com/sitemap.xml`;
 
       return new Response(robotsTxt, {
