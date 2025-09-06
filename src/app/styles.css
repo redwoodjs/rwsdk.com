@@ -84,6 +84,12 @@ h3 {
   background: #0d1117;
 }
 
+footer a:hover img[src$=".svg"],
+footer a:focus img[src$=".svg"] {
+  @apply transition;
+  filter: invert(15%) sepia(39%) saturate(4504%) hue-rotate(321deg) brightness(96%) contrast(88%);
+}
+
 /* Syntax highlighting */
 .hljs {
   color: #c9d1d9;
