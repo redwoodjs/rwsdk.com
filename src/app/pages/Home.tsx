@@ -133,7 +133,7 @@ export default function Home() {
               npx create-rwsdk my-project-name
             </span>
             <span className="text-orange-light">
-              <Copy text="npx degit redwoodjs/sdk/starters/standard" />
+              <Copy text="npx create-rwsdk my-project-name" />
             </span>
           </div>
         </div>
