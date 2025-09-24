@@ -52,7 +52,8 @@
     "@tailwindcss/typography": "^0.5.16",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.1.0",
-    "vibe-rules": "^0.2.31"
+    "vite": "^6.3.6",
+    "wrangler": "^4.20.3"
   },
   "engines": {
     "node": "22.19.0"
