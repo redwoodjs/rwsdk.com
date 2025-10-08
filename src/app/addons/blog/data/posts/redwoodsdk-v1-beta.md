@@ -4,9 +4,9 @@ description: "We're excited to share that RedwoodSDK v1.0.0 Beta has officially 
 date: "2025-10-08"
 author:
   id: "herman"
-heroImage: "3e1d4578-e67b-4444-b056-70b495fce800"
-ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/0a0d9656-f074-43bc-110d-1d1a35338c00/public"
-tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
+heroImage: "dfe10477-7c62-4481-49f6-edd20aa03d00"
+ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/4b7a124b-6a74-4d9b-aade-b26871b30500/public"
+tags: ["redwoodsdk", "cloudflare", "v1.0.0", "beta"]
 ---
 # RedwoodSDK v1.0.0 Beta: A Major Milestone at the Edge 🚀
 
