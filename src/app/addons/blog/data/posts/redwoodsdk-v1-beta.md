@@ -16,7 +16,7 @@ release, bringing greater stability, clarity, and performance to
 developers building full-stack React apps on Cloudflare Workers.
 
 👉 [Download the beta on
-GitHub](https://github.com/redwoodjs/sdk/releases/tag/v1.0.0-beta.2)\
+GitHub](https://github.com/redwoodjs/sdk/releases/tag/v1.0.0-beta.9)\
 👉 [Get started with
 `create-rwsdk`](https://github.com/redwoodjs/create-rwsdk)\
 👉 [Migration guide for existing
