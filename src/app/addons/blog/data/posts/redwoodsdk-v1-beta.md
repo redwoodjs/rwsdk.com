@@ -1,6 +1,6 @@
 ---
-title: "RedwoodSDK v1.0.0 Beta: A Major Milestone at the Edge 🚀"
-description: "We're excited to share that RedwoodSDK v1.0.0 Beta has officially landed! This marks an important step on our journey to a stable v1.0 release."
+title: "RedwoodSDK 1.0 Beta: A Major Milestone at the Edge 🚀"
+description: "We're excited to share that RedwoodSDK 1.0 Beta has officially landed! This marks an important step on our journey to a stable v1.0 release."
 date: "2025-10-08"
 author:
   id: "herman"
@@ -8,9 +8,9 @@ heroImage: "dfe10477-7c62-4481-49f6-edd20aa03d00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/4b7a124b-6a74-4d9b-aade-b26871b30500/public"
 tags: ["redwoodsdk", "cloudflare", "v1.0.0", "beta"]
 ---
-# RedwoodSDK v1.0.0 Beta: A Major Milestone at the Edge 🚀
+# RedwoodSDK 1.0 Beta: A Major Milestone at the Edge 🚀
 
-We're excited to share that **RedwoodSDK v1.0.0 Beta** has officially
+We're excited to share that **RedwoodSDK 1.0 Beta** has officially
 landed! This marks an important step on our journey to a stable v1.0
 release, bringing greater stability, clarity, and performance to
 developers building full-stack React apps on Cloudflare Workers.
@@ -39,11 +39,11 @@ We've heard from developers who want three things:
 3.  **Integration** --- First-class access to Cloudflare's primitives:
     Durable Objects, D1, R2, and beyond.
 
-The **v1.0.0 Beta** is where those promises start to solidify.
+The **1.0 Beta** is where those promises start to solidify.
 
 ------------------------------------------------------------------------
 
-## What's New in v1.0.0 Beta
+## What's New in 1.0 Beta
 
 This beta release focuses on **foundational stability** and a few
 carefully chosen architectural improvements:
@@ -89,8 +89,13 @@ We want to be transparent about where we're headed:
 -   **Future → Big Ideas**\
     Larger quality-of-life improvements and architectural explorations.
 
-By the time we ship **1.0 stable**, our docs will clearly mark which
-features are production-ready and which are still experimental.
+For a detailed view of our progress, you can follow along on GitHub. We
+use labels to organize work for each phase. For instance, you can see
+everything planned for the 1.0 release
+[here](https://github.com/redwoodjs/sdk/issues?q=is:issue%20state:open%20label:1.0).
+
+Our documentation already marks experimental features, giving you a
+clear picture of what's stable for production use.
 
 ------------------------------------------------------------------------
 
@@ -141,4 +146,4 @@ React apps** feels natural, productive, and fun.
 
 The beta is ready for you today. We can't wait to see what you build.
 
-🚀 **RedwoodSDK v1.0.0 Beta is here --- let's go!**
+🚀 **RedwoodSDK 1.0 Beta is here --- let's go!**
