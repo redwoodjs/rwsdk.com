@@ -11,13 +11,21 @@ tags: ["cloudflare", "workers", "hyperdrive", "mysql", "kysely"]
 
 # Using Cloudflare Hyperdrive with an External MySQL: Migrations and Seeding
 
+If you’re building on [Cloudflare Workers](https://developers.cloudflare.com/workers/) and you already have a MySQL database (PlanetScale, Vitess, or self-managed), **[Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/)** gives you private, low-latency access from the edge without exposing your database to the public internet. In practice, this means production connections are brokered by Cloudflare, connections are short‑lived, and credentials are issued per request—so you don’t have to ship static database secrets to the edge.
+
+This post shows the end‑to‑end shape of a setup that keeps your Worker runtime simple (Kysely + `mysql2`), while running migrations and seeds in Node where local dev and CI are easiest. We’ll wire up Wrangler, create a Worker‑side DB client, build a Node‑side client for tooling, and cover migrations and idempotent seeding—with a few production footguns to avoid along the way.
+
 ## Why Hyperdrive
 
-- **Private, low-latency DB access** from Workers (no public DB exposure).
-- **Ephemeral, per-request credentials** (reduced secret handling).
-- **Works with existing MySQL** (including Vitess/PlanetScale) and ORMs like Kysely.
+Hyperdrive is a great fit when:
+
+- You want to keep your DB private but still connect from the edge. Cloudflare runs a secure proxy close to your origin, so connections stay fast and private.
+- You want to avoid long‑lived credentials in Workers. Hyperdrive issues ephemeral, per‑request credentials, reducing secret sprawl.
+- You already have MySQL (including [Vitess](https://vitess.io/) / [PlanetScale](https://planetscale.com/)) and want it to “just work” with familiar tools like [Kysely](https://kysely.dev/) and [`mysql2`](https://github.com/sidorares/node-mysql2).
 
 ## Wrangler configuration
+
+You declare a Hyperdrive binding per environment in your `wrangler.json`/`wrangler.jsonc`. For local development and CI, a `localConnectionString` lets you point the binding at a local or containerized MySQL instance while keeping the rest of your code unchanged. See [Wrangler configuration](https://developers.cloudflare.com/workers/wrangler/configuration/) and Hyperdrive [bindings](https://developers.cloudflare.com/hyperdrive/platform/bindings/) for details.
 
 - Declare a Hyperdrive binding per environment; use `localConnectionString` for dev/CI:
 
@@ -35,6 +43,8 @@ tags: ["cloudflare", "workers", "hyperdrive", "mysql", "kysely"]
 ```
 
 ## Worker database (Kysely + mysql2)
+
+Inside your Worker, construct a Kysely instance using connection details from the Hyperdrive binding. Enabling `nodejs_compat` unlocks the Node client library so you can use `mysql2` from the Workers runtime. This keeps your runtime code identical across dev and prod, while Hyperdrive abstracts where the connection terminates.
 
 - Use the bound Hyperdrive fields to create a Kysely dialect:
 
@@ -55,6 +65,8 @@ export function createDb() {
 
 ## Node tooling (migrations/seeding)
 
+Migrations and seeding are better run outside Workers so you can iterate quickly, reuse the same scripts in CI, and avoid tying long‑running actions to the request lifecycle. For that, create a Node‑side Kysely client that reads a regular `DATABASE_URL`. This pairs nicely with `localConnectionString` in development and connects directly to MySQL in CI.
+
 - Migrations and seeding run outside Workers, using `DATABASE_URL`:
 
 ```ts
@@ -69,6 +81,8 @@ export function createLocalDb() {
 ```
 
 ### Migrations with Kysely
+
+Kysely’s migration system is simple and file‑based, which makes it easy to wire into `tsx`/`ts-node` scripts and CI. You can create a small CLI that applies the latest migration, steps up/down one migration, or lists current state. See the official docs for more options: [Kysely migrations](https://kysely.dev/docs/migrations/).
 
 - File-based migrations and a simple CLI:
 
@@ -89,11 +103,11 @@ Commands:
 - Down one: `tsx src/db/migrate.ts down`
 - List: `tsx src/db/migrate.ts list`
 
-For Vitess/PlanetScale, avoid DB‑level FKs; enforce integrity in services.
+If you’re on [Vitess](https://vitess.io/) (including [PlanetScale](https://planetscale.com/)), avoid database‑level foreign keys—they’re not supported. Enforce referential integrity in your services and/or via application‑level checks instead.
 
 ### Seeding strategy (idempotent)
 
-- Upsert a baseline dataset (company, admin, drivers, accounts, trucks, calls) for dev/CI repeatability:
+Your seed should be safe to run multiple times: **idempotent**. Using MySQL’s `INSERT ... ON DUPLICATE KEY UPDATE` (exposed by Kysely via `onDuplicateKeyUpdate`) lets you upsert a consistent baseline dataset for dev and CI. That means you can wipe the DB, run migrations, seed, and get a predictable world—every time. See the MySQL docs: [INSERT ... ON DUPLICATE KEY UPDATE](https://dev.mysql.com/doc/refman/8.0/en/insert-on-duplicate.html).
 
 ```ts
 // db/scripts/seed.ts (conceptual)
@@ -109,22 +123,20 @@ await db.insertInto('auth_user').values({ email: adminEmail, role: 'admin', /* .
 
 ## Environment guidance
 
-- **Dev/CI**: `localConnectionString` maps Hyperdrive to local Docker or a local port; scripts use `DATABASE_URL`.
-- **Staging/Prod**: bind to the managed Hyperdrive `id`; no `localConnectionString`.
-- **Node compat**: enable `nodejs_compat` to use `mysql2` from Workers code.
-- **Pool sizing**: keep conservative per isolate; Workers scale horizontally.
+In development and CI, prefer speed and iteration: point Hyperdrive’s `localConnectionString` at a local container or dev DB, and let your Node scripts use `DATABASE_URL` directly. In staging and production, bind your Worker to the managed Hyperdrive `id` and let Cloudflare handle credential brokering and connection pooling at the edge.
+
+- Dev/CI: `localConnectionString` maps Hyperdrive to local Docker or a local port; scripts use `DATABASE_URL`.
+- Staging/Prod: bind to the managed Hyperdrive `id`; no `localConnectionString`.
+- Node compat: enable [`nodejs_compat`](https://developers.cloudflare.com/workers/runtime-apis/nodejs/) to use `mysql2` from Workers code.
+- Pool sizing: keep connection limits conservative per isolate; Workers scale horizontally.
 
 ## Pitfalls and patterns
 
-- Enforce referential integrity in services if the DB doesn’t enforce FKs.
-- Let Hyperdrive manage DB credentials; don’t duplicate in `vars`.
-- Make seeds idempotent for reliable re-runs in CI.
-- Provision distinct DBs per environment (dev/test/staging/prod).
+There are a few easy wins to keep things smooth in production. Don’t duplicate database credentials into Worker `vars`—let Hyperdrive issue ephemeral credentials per request. Make seeds idempotent so CI can re‑run them without surprises. If your DB layer can’t enforce foreign keys (Vitess), push integrity checks into your service layer. Finally, provision distinct databases per environment (dev/test/staging/prod) to avoid accidental cross‑contamination.
 
 ## What you gain
 
-- **Production-grade external MySQL** from Workers with minimal ops.
-- **Clean separation** between Worker runtime DB access and Node scripts.
-- **Deterministic dev/CI** environments with migrations and seeds.
+With this setup, you get **production‑grade external MySQL** from Workers with minimal ops, a **clean separation** between Worker‑time database access and Node‑based tooling, and **deterministic dev/CI** through repeatable migrations and idempotent seeds. It’s a small amount of structure that pays for itself the first time you rotate credentials, rebuild CI from scratch, or diagnose a tricky edge‑only bug.
+
 
 
