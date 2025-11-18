@@ -4,7 +4,7 @@ description: "Private, low-latency MySQL from Workers using Hyperdrive—plus a 
 date: "2025-11-13"
 author:
   id: "herman"
-heroImage: "3d0544ee-7197-42a2-9954-b8524ab83100"
+heroImage: "e1894d1b-f9b2-40e9-be1e-d0a141681a00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/b84a4952-3bab-4801-26fd-1b354af75900/public"
 tags: ["cloudflare", "workers", "hyperdrive", "mysql", "kysely"]
 ---
