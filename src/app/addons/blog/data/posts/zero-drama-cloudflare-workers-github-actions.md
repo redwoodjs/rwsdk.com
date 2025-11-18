@@ -11,18 +11,9 @@ tags: ["cloudflare", "workers", "wrangler", "github-actions", "ci-cd"]
 
 # Zero‑drama Cloudflare Workers releases with GitHub Actions
 
-## Goals
+Shipping a [Cloudflare Workers](https://developers.cloudflare.com/workers/) release should be boring—in a good way. This workflow is a small, repeatable [GitHub Actions](https://docs.github.com/actions) pipeline you can trigger on demand with an environment selector (`staging` or `production`). It pins the toolchain for deterministic builds, keeps secrets in the right place, and runs fast so releases feel like a single click or API call.
 
-- Single click (or API) deploys to staging/production  
-- Deterministic builds with pinned toolchains  
-- Secure secrets and environment handling  
-- Clear, fast pipeline
-
-## Workflow at a glance
-
-- Manually triggered workflow with an environment selector (`staging` or `production`)
-- Set up Node + pnpm, pin `wrangler`, install dependencies
-- Builds the app, then deploys with `wrangler deploy --env <env>`
+At a glance, the job checks out the repository, sets up Node and pnpm, installs dependencies, builds the project, and then deploys with [Wrangler](https://developers.cloudflare.com/workers/wrangler/) using `wrangler deploy --env <env>`. Concurrency is enabled to prevent overlapping deploys to the same environment, so each release is serialized per target ([GitHub Actions concurrency](https://docs.github.com/actions/using-jobs/using-concurrency)). The workflow is triggered manually with a typed input ([`workflow_dispatch` inputs](https://docs.github.com/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch)).
 
 ```yaml
 # .github/workflows/deploy-worker.yml
@@ -82,34 +73,14 @@ jobs:
             --config "dist/worker/wrangler.json"
 ```
 
-Notes:
+A couple of notes to keep it smooth: `--env` maps to your `wrangler.jsonc` environment sections (for example, `staging` and `production`)—see [Wrangler environments](https://developers.cloudflare.com/workers/wrangler/configuration/environments/). This example uses a generated config at `dist/worker/wrangler.json` after build; if your project uses a root config, point Wrangler there instead. Pinning `wrangler` (and matching Node/pnpm) keeps builds reproducible; adjust versions to match your project and CI base image. The steps reference well‑known actions: [`actions/checkout`](https://github.com/actions/checkout), [`actions/setup-node`](https://github.com/actions/setup-node), and [`pnpm/action-setup`](https://github.com/pnpm/action-setup). Deploy uses `wrangler deploy` ([command reference](https://developers.cloudflare.com/workers/wrangler/commands/#deploy)).
 
-- `--env` maps to your `wrangler.jsonc` env sections (e.g., `staging`, `production`).
-- This uses the generated config at `dist/worker/wrangler.json` after build.
-- Pin `wrangler` for reproducibility. Adjust Node/pnpm versions to match your project.
+For secrets, set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` under GitHub Settings → Secrets and variables → Actions. The token should include “Workers Scripts:Edit” and “Account:Read”; create or scope it appropriately via [Cloudflare API tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/). If you want environment‑specific secrets or approvals, configure [GitHub Environments](https://docs.github.com/actions/deployment/targeting-different-environments/using-environments-for-deployment) named `staging` and `production` and keep sensitive values scoped there.
 
-## Required secrets and environments
+A few pragmatic tips: cache pnpm via `actions/setup-node`’s `cache: pnpm` input to speed up installs; keep build artifacts minimal and let Wrangler bundle based on your `wrangler.jsonc`; and if you want canaries, add a `canary` environment or a `--dry-run` input and route only a subset of traffic at the DNS/route level.
 
-Set these in GitHub Settings → Secrets and variables → Actions:
+If something goes wrong, start here: a 403 from Wrangler usually means the token scopes or account ID are off; an “env not found” error means the `[env.<name>]` block is missing in `wrangler.jsonc`; and if the build can’t find your config, ensure `dist/worker/wrangler.json` exists post‑build or point Wrangler at your root config.
 
-- `CLOUDFLARE_API_TOKEN`: API token with “Workers Scripts:Edit” and “Account:Read”
-- `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare account ID
-
-Optional per‑environment variables can be configured using GitHub Environments (`staging`, `production`) to scope secrets and approvals.
-
-## Tips for reliable deploys
-
-- Cache pnpm via `actions/setup-node` `cache: pnpm` for faster installs.
-- Use `concurrency` to avoid overlapping deploys to the same environment.
-- Keep build artifacts minimal; let Wrangler bundle based on your `wrangler.jsonc`.
-- For canary releases, add an input like `--dry-run` or a `canary` env and route only a subset of traffic at the DNS/route level.
-
-## Troubleshooting
-
-- 403 from Wrangler: verify `CLOUDFLARE_API_TOKEN` scopes and `CLOUDFLARE_ACCOUNT_ID`.
-- Env not found: ensure an `[env.<name>]` block exists in `wrangler.jsonc`.
-- Build can’t find config: confirm `dist/worker/wrangler.json` exists post‑build or switch to the root config if your build doesn’t generate one.
-
-This yields dependable, low‑touch releases: one button (or API call), the same way every time.
+The result is dependable, low‑touch releases: press a button (or hit the API), and ship the same way every time.
 
 

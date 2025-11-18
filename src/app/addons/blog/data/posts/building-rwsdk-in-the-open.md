@@ -11,62 +11,19 @@ tags: ["rwsdk", "cloudflare", "workers", "consulting", "hyperdrive", "r2", "rout
 
 # Building RedwoodSDK in the open and shipping for real‑world teams
 
-## We built RedwoodSDK, and we ship with it
+RedwoodSDK is our Cloudflare‑first framework for building fast, secure, developer‑friendly apps. We build it in the open—and we prove it in production with real teams. Over the past few months we’ve delivered multi‑tenant, mission‑critical apps on [Cloudflare Workers](https://developers.cloudflare.com/workers/) using RedwoodSDK’s routing model, interruptor‑based permissions, and a clean separation between administrative and end‑user surfaces.
 
-RedwoodSDK is our Cloudflare‑first framework for building fast, secure, developer‑friendly apps. We build it in the open — and we prove it in production on real systems.
+One example: we’re working with the [Go PRZM](https://www.goprzm.com/) team on a tow‑to‑claim platform that spans dispatch through release with auditable, end‑to‑end trails. The system brings together police rotation and impound management, real‑time time‑tracking/billing, and insurer flows from FNOL through valuation and sale—while vehicles remain in‑facility. Under the hood, we use RedwoodSDK’s route‑level interruptors for auth/roles/permissions, a clean admin/app split for bundle isolation, [Hyperdrive](https://developers.cloudflare.com/hyperdrive/) for external MySQL (see our write‑up: [Cloudflare Hyperdrive + external MySQL](/blog/cloudflare-hyperdrive-external-mysql)), and [R2](https://developers.cloudflare.com/r2/) for images and video—deployed via a deterministic CI/CD pipeline ([Zero‑drama Cloudflare Workers CI/CD](/blog/zero-drama-cloudflare-workers-github-actions)).
 
-On recent engagements, we’ve shipped multi‑tenant, mission‑critical apps on Cloudflare Workers using RWSDK’s routing model, interruptor‑based permissions, and a clean split between admin and end‑user surfaces.
+Why Cloudflare + RedwoodSDK? Performance arrives by default at the edge, keeping P95s low without extra ops. Security is enforced where it matters with route‑level interruptors that gate access at the router ([route‑level permissions](/blog/route-level-permissions-rwsdk-interruptors)). Operational overhead stays small—no servers to babysit—while Workers, Hyperdrive, and R2 cover the core data and storage needs. And the developer experience is intentionally simple: a clear router, layered layouts, and typed contexts that make teams faster and code easier to review.
 
-### Go PRZM: Tow‑to‑claim platform on Cloudflare (in progress)
+In practice, this shows up as two‑surface apps with dedicated shells—each surface has its own `Document` and `Layout`—so admin and user experiences are isolated and load only what they need ([splitting admin and app](/blog/splitting-admin-and-app), [multiple documents](/blog/redwoodsdk-multiple-documents)). We implement authorization with small, composable interruptors like `requireAuth`, `requireAdmin`, and fine‑grained permission checks, and we run against external MySQL via Hyperdrive with assets stored in R2. We keep environments repeatable with migrations and idempotent seeding for dev/CI, wire up deterministic builds and deploys, and verify critical journeys with end‑to‑end tests using [Playwright](https://playwright.dev/).
 
-We’re building this with the [Go PRZM](https://www.goprzm.com/) team, using RedwoodSDK.
+If you’re new to RedwoodSDK, the core ideas are intentionally small. Start with [first‑class routing](https://docs.rwsdk.com/core/routing/) that composes `render → layout → route/prefix` with a typed `ctx`. Add [interruptors](https://docs.rwsdk.com/core/routing/#interrupters)—tiny async functions that can short‑circuit requests for auth, permissions, or feature flags. Layer on [Layouts & Documents](https://docs.rwsdk.com/guides/frontend/layouts/) to create durable UI shells per surface (e.g., admin vs app) without cross‑polluting bundles. All of this is designed to fit Cloudflare’s platform ergonomically—from Workers to R2, Hyperdrive, and wrangler multi‑env deployments.
 
-- A towing/insurer platform spanning dispatch to release with auditable, end‑to‑end trails.
-- Digital dispatching, police rotation, impound management, and time‑tracking/billing in one place.
-- Insurer flows from FNOL to valuation and sale, with real‑time visibility while vehicles remain in‑facility.
-- AI‑assisted damage review and valuation inputs to speed decisions.
-- RedwoodSDK under the hood: route‑level interruptors for auth/roles/permissions, admin/app split for bundle isolation, Hyperdrive for external MySQL, and R2 for images/video — all deployed via a deterministic CI/CD pipeline.
+We also partner directly with teams who want Cloudflare‑native results fast. That ranges from greenfield builds (admin + app, edge caching, secure routing) to migrations off legacy stacks and deep performance/hardening work—latency audits, permission model reviews, binding/secret hygiene. We frequently embed alongside your engineers to establish patterns and leave you with a maintainable codebase that your team can own.
 
-## Why Cloudflare + RedwoodSDK
-
-- **Performance by default**: Global edge execution keeps P95s low without extra ops.
-- **Security built‑in**: Route‑level interruptors (auth, roles, permissions) guard access at the router.
-- **Operational simplicity**: No servers to babysit. Use Workers, Hyperdrive for external DBs, and R2 for object storage.
-- **Great DX**: A clear router, layered layouts, and typed contexts make teams faster and code easier to review.
-
-## What we’ve been shipping
-
-- **Two‑surface apps**: Dedicated admin and app shells, each with its own `Document` and `Layout` for clean UX and bundle isolation.
-- **Route‑level authorization**: Interruptors for `requireAuth`, `requireAdmin`, and fine‑grained `requirePermission`.
-- **Cloudflare‑native data**: External MySQL via Hyperdrive; asset storage on R2; secure, environment‑scoped bindings.
-- **Repeatable environments**: Migrations and idempotent seeding for dev/CI; deterministic builds and deploys.
-- **Confidence via tests**: Playwright E2E coverage for routing, permissions, and critical user journeys.
-
-## What RedwoodSDK brings
-
-- [**First‑class routing**](https://docs.rwsdk.com/core/routing/): `render → layout → route/prefix` composition with typed `ctx`.
-- [**Interruptors**](https://docs.rwsdk.com/core/routing/#interrupters): Small async functions that can short‑circuit requests for auth, permissions, and feature flags.
-- [**Layouts & Documents**](https://docs.rwsdk.com/guides/frontend/layouts/): Layered UI shells per surface (e.g., admin vs app) without cross‑polluting bundles.
-- **Cloudflare ergonomics**: Works seamlessly with Workers, R2, Hyperdrive, and wrangler multi‑env deployments.
-
-## Consulting with the RedwoodSDK team
-
-We supplement framework work with consulting for teams that want Cloudflare‑native results, fast.
-
-- **Greenfield builds**: Design and deliver production apps on Workers (admin + app, edge caching, secure routing).
-- **Migrations**: Move from legacy stacks to Workers, preserving correctness and improving performance.
-- **Performance & hardening**: Latency audits, permission model reviews, and secure bindings/secret hygiene.
-- **Enablement**: Pair with your team, establish patterns, and leave you with a maintainable codebase.
-
-Work with the team behind RedwoodSDK; we apply these patterns in your codebase and feed improvements back into the framework.
-
-## Let’s work together
-
-Have a project you want to run on Cloudflare with RedwoodSDK? We can help:
-
-- Architecture and design sprints
-- Implementation and delivery
-- Audits, performance tuning, and training
+If you have a project you want to run on Cloudflare with RedwoodSDK—architecture/design sprints, implementation and delivery, or audits and enablement, we’d love to help. Work with the team behind RedwoodSDK; we apply these patterns in your codebase and feed improvements back into the framework.
 
 Get in touch: [peter@redwoodjs.com](mailto:peter@redwoodjs.com)
 

@@ -11,19 +11,9 @@ tags: ["redwoodsdk", "architecture", "routing", "auth"]
 
 # Splitting Admin and App in RedwoodSDK: Why, How, and What You Gain
 
-## Why split admin from the main app?
+Splitting your admin console from the customer-facing app is one of those small architectural decisions that pays off every day. In RedwoodSDK, the split leans into the framework’s multi-render model and declarative router. The main app stays lean and fast for everyday workflows, while the admin console can ship heavier UI and management tooling without making customers pay for it. Security becomes clearer too: admin-only routes, assets, and UI are isolated and consistently gated behind admin checks instead of sprinkled ad‑hoc across the app. Because each surface has its own `Document`, layout, and top‑level navigation, you get complete design autonomy—different look-and-feel, fonts, CSP, and shell behaviors—without complex conditionals. Operationally, you can roll admin changes separately, test them in isolation, and keep admin-only bundles out of your main app’s critical path and caches. The result is better developer ergonomics and a simpler mental model for routing and middleware.
 
-- **Performance and UX focus**: The customer-facing app stays lean and fast, while the admin console can ship heavier UI and management tooling without slowing down day-to-day workflows.
-- **Security and authorization clarity**: Admin-only routes, assets, and UI are isolated and consistently gated behind admin checks, reducing accidental exposure in the main app.
-- **Design and navigation autonomy**: Each surface has its own `Document`, layout, and top-level navigation, allowing totally different look-and-feel, fonts, CSP, and shell behaviors.
-- **Operational flexibility**: You can roll admin changes separately, test them in isolation, and keep admin-only assets out of your main app’s critical path and caches.
-- **Developer ergonomics**: Clear boundaries lead to clearer ownership, easier end-to-end tests, and simpler mental models for routing and middleware.
-
-## How it works
-
-Mount two independent rendering trees under one Worker: app and admin. Each has its own `Document` and `Layout`, with different route trees and middleware chains.
-
-Wire the two surfaces like this:
+Here’s how it works in practice. Mount two independent rendering trees under a single Worker—one for the app, one for admin—each with its own `Document` and `Layout`, distinct route trees, and their own middleware chains. You’re composing standard primitives from the router and Worker APIs, so it stays obvious and testable. If you’re new to these pieces, the router is covered in the docs at `https://docs.rwsdk.com/core/routing/`, and interruptors (route‑level middleware) are introduced here: `https://docs.rwsdk.com/core/routing/#interrupters`. For a deeper dive on policy composition, see the companion post on route‑level permissions: `/blog/route-level-permissions-rwsdk-interruptors`.
 
 ```tsx
 // src/worker.tsx
@@ -63,61 +53,17 @@ export default defineApp([
 ]);
 ```
 
-What this gives you:
+What this structure gives you is clean separation by default. You get separate Documents (`src/app/Document.tsx` vs `src/admin/Document.tsx`) to set different head tags, fonts, meta, CSP, and base shells. You get separate Layouts (`src/app/layout/Layout.tsx` vs `src/admin/layout/Layout.tsx`) so top nav, sidebars, and chrome don’t bleed across surfaces. You can hydrate and bundle independently with distinct entry clients (`src/app/client.tsx` and `src/admin/client.tsx`), enabling different code‑splitting strategies. And the route trees are distinct and predictable: the app mounts at `/` for customer workflows; admin mounts under `/admin` for admin‑only tooling, each with its own guards like `requireAuth` and `requireAdmin`.
 
-- **Separate Documents**: `src/app/Document.tsx` vs `src/admin/Document.tsx` so you can use different head tags, fonts, meta, CSP, and base shells.
-- **Separate Layouts**: `src/app/layout/Layout.tsx` vs `src/admin/layout/Layout.tsx` for top nav, sidebars, and app chrome that don’t bleed across surfaces.
-- **Separate Clients**: `src/app/client.tsx` and `src/admin/client.tsx` let you hydrate and bundle independently (different entry points, different code-splitting).
-- **Distinct route trees**: The app mounts at `/` with customer workflows; admin mounts under `/admin` with admin-only tooling. Each tree has its own guards (`requireAuth`, `requireAdmin`).
+On authentication, sessions, and context, a simple rule of thumb keeps things robust: shape the request once, then enforce policies many times. Populate a common `ctx.user` per request (typically in your auth/session layer) and rely on interruptors to gate access—app routes use `requireAuth` and fine‑grained helpers like `requirePermission(...)`, while admin routes apply `requireAdmin` to everything under `/admin`. This keeps login state unified while applying stricter policies where it matters. If you want to see concrete patterns for composing these checks, the permissions blueprint here goes deeper: `/blog/route-level-permissions-rwsdk-interruptors`. You can also reference the request/response and context model at `https://docs.rwsdk.com/core/request-response/`.
 
-## Auth, sessions, and context
+In day‑to‑day use, the benefits compound. Customer flows don’t pay the cost of admin UI, icons, and libraries, which keeps the app fast and cache‑friendly. Security becomes a lot easier to reason about when a single choke point (`requireAdmin`) gates the admin tree and finer‑grained checks live right next to the routes they protect. Each surface can evolve independently—admin gets the complex tables, sidebars, and management screens it needs, while the app keeps a streamlined shell for speed. Tests become clearer, too: end‑to‑end coverage can target `/admin/*` separately with its own fixtures, and code owners can move faster without cross‑surface conflicts.
 
-- Populate a common `ctx.user` once per request (e.g., via your auth/session layer), then enforce different authorization rules per surface:
-  - App routes use `requireAuth` and fine-grained `requirePermission(...)`.
-  - Admin routes use `requireAdmin` to gate everything under `/admin`.
-- This keeps the login state unified while applying stricter policies where needed.
+There are a few best practices that help the split stay clean. Prefer not to share heavy UI components by default; duplicating a small wrapper is often cheaper than dragging admin dependencies into the app bundle. Keep route guards declarative at the edge with interruptors (`requireAdmin`, `requirePermission`) instead of scattering conditionals inside components. Use distinct navigation and chrome components so you don’t end up with brittle branching. And align CI with the architecture: build, lint, and test admin and app independently when you can.
 
-## Benefits in detail
+When is this worth it? If your admin console is materially different from the customer app in look, needs, and team ownership—or you find yourself fighting bundle bloat and adding exceptions for admin‑only features—making the split usually pays for itself. It also simplifies authorization and testing by giving you obvious boundaries and fewer surprises.
 
-- **Faster main app**:
-  - Customer flows are not paying for admin UI, icons, and libraries.
-  - Better cache locality: admin bundles don’t pollute app caches/CDN.
-- **Cleaner security posture**:
-  - One choke point (`requireAdmin`) gates the entire admin tree.
-  - Fine-grained checks live closer to the UI they protect.
-- **Independent composition**:
-  - Admin can have complex sidebars, tables, and management screens.
-  - App maintains a streamlined nav and minimal shell for speed.
-- **Testing and DX**:
-  - End-to-end tests can target `/admin/*` separately with their own fixtures.
-  - Code owners can evolve each surface without constant conflicts.
+A lightweight migration path looks like this: create `src/admin/Document.tsx` and `src/admin/layout/Layout.tsx` (and verify the equivalents under `src/app`); add separate entry clients at `src/admin/client.tsx` and `src/app/client.tsx`; mount the two render trees in your Worker with distinct middleware chains and route prefixes (as shown above); move admin‑only pages and components under `src/admin` and wire them into `adminRoutes`; keep shared domain logic in `src/shared/**` while avoiding imports of admin‑only UI from app routes; and finally, add E2E coverage for both surfaces, including auth guards.
 
-## Gotchas and best practices
-
-- **Don’t share heavy components by default.** Duplication of a small wrapper is often cheaper than pulling large admin dependencies into the app bundle.
-- **Keep route guards declarative** at the route level (`requireAdmin`, `requirePermission`) to avoid ad hoc checks scattered in components.
-- **Use distinct `TopNav`/chrome components**; sharing nav between surfaces often leads to messy conditional logic.
-- **Align CI steps with the split**: build, lint, and test admin and app independently when possible.
-
-## When to consider this split
-
-- Your admin console is materially different from the customer app in look, needs, and team ownership.
-- You’re fighting bundle bloat or repeatedly adding exceptions for admin-only features.
-- You need tighter controls and simpler mental models for authorization and testing.
-
-## Migration checklist
-
-- Create `src/admin/Document.tsx` and `src/admin/layout/Layout.tsx`; do the same (or verify) for `src/app`.
-- Add separate entry clients: `src/admin/client.tsx` and `src/app/client.tsx`.
-- In your worker, mount two render trees with distinct middlewares and route prefixes (as shown above).
-- Move admin-only pages and components under `src/admin` and wire them into `adminRoutes`.
-- Keep shared domain logic in `src/shared/**`; avoid importing admin-only UI from app routes.
-- Add E2E coverage for both surfaces, including auth guards.
-
-## Results
-
-- The app stays fast and focused for customer workflows.
-- The admin side scales in complexity without taxing the main experience.
-- Auth boundaries are obvious and enforced at the right layer.
-- Teams collaborate more cleanly with fewer cross-surface regressions.
+The net result is a main app that remains fast and focused on customer workflows, an admin surface that can scale in complexity without taxing the user experience, and authorization boundaries that are obvious and enforced at the right layer. Teams collaborate more cleanly, and changes ship with less drama.
 

@@ -11,18 +11,17 @@ tags: ["rwsdk", "auth", "permissions", "interruptors", "routing"]
 
 # Route‑level permissions with rwsdk interruptors: a practical blueprint
 
-## Goals
+Modern apps earn trust by putting the right guardrails in the right places. For routing, that means keeping authentication and authorization decisions close to the edges where requests first land, expressing policies declaratively, and composing them in small, testable units. In rwsdk, the building block for this is the interruptor: a tiny async function that can short‑circuit a request before it hits your page or action handler.
 
-- Keep auth and authorization close to routing
-- Make policies composable and testable
-- Express permissions declaratively, not hidden in components
+If you’ve ever scattered permission checks across components or buried them deep in handlers, you’ve felt the pain: rules drift, duplication creeps in, and reviewing access becomes guesswork. By moving these checks to the router with interruptors, policy becomes obvious, local, and easy to reason about—while still staying flexible enough to model roles, permissions, and “least privilege” access.
 
-## Building blocks
+What follows is a practical blueprint you can lift into your app. We’ll define a couple of foundational interruptors for auth and admin gating, centralize permission helpers, compose them at the router, and shape context once so every check reads from the same source of truth.
 
- - [Interruptors](https://docs.rwsdk.com/core/routing/#interrupters): small async functions that run before a route handler; return a Response to short‑circuit.
-- Permission helpers: `can`, `cannot`, `requirePermission` utilities to centralize policy.
+Along the way we’ll link to the relevant rwsdk docs so you can dive deeper, and we’ll call out patterns that keep things robust as your surface area grows.
 
-## 1) [Interruptors](https://docs.rwsdk.com/core/routing/#interrupters) for authentication and admin gating
+## Interruptors for authentication and admin gating
+
+[Interruptors](https://docs.rwsdk.com/core/routing/#interrupters) are small async functions that run before a route’s handler. If they return a `Response`, rwsdk stops and returns it immediately—perfect for redirects (on unauthenticated access) or 403s (on authorization failures).
 
 ```ts
 // src/shared/auth/interruptors.ts
@@ -45,7 +44,9 @@ export async function requireAdmin({ ctx }: RequestInfo) {
 }
 ```
 
-## 2) Centralized permission helpers
+## Centralized permission helpers
+
+Rather than scattering ad‑hoc string checks everywhere, define a small set of permission utilities once. This keeps rules DRY and reviewable, and lets routes compose richer gatekeeping without repeating logic.
 
 ```ts
 // src/shared/auth/permissions.ts
@@ -89,9 +90,9 @@ export function requireAllPermissions(...permissions: Permission[]) {
 }
 ```
 
-## 3) Route‑level composition at the router
+## Compose policies at the router
 
-Attach interruptors directly to routes so policy is obvious and local.
+Attach interruptors directly to routes so policy is obvious where it matters most: at the edge. Your router becomes a living map of access rules—easy to scan, easy to test, and hard to bypass.
 
 ```ts
 // src/app/pages/accounts/routes.ts
@@ -119,9 +120,9 @@ export default [
 ]
 ```
 
-## 4) Shaping context once, enforcing policies many times
+## Shape context once, enforce many times
 
-Populate `ctx.user` once (auth/session middleware), then rely on it in interruptors:
+Populate `ctx.user` once (in auth/session middleware) and let every interruptor rely on it. Centralizing identity and permissions in the request context keeps checks fast, deterministic, and consistent across the app.
 
 ```ts
 // worker.tsx (excerpt)
@@ -135,15 +136,14 @@ export default defineApp([
 ])
 ```
 
-## 5) Pitfalls and patterns
+## Pitfalls and patterns to keep you out of trouble
 
-- Don’t hide permission checks deep in components; keep them at the route edge.
-- Prefer `requireAdmin` at `/admin/*` and fine‑grained `requirePermission` per route.
-- Co‑locate interruptors/permissions under `src/shared/auth/**` to avoid cycles.
-- Keep helpers small and deterministic; avoid reading from the network inside permission checks.
+Avoid hiding permission checks deep in components; keep them at the route edge so they’re unskippable and auditable. Use a broad gate like `requireAdmin` for `/admin/*` and layer fine‑grained `requirePermission` per route for true [least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). Co‑locate interruptors and permission helpers under `src/shared/auth/**` to avoid cycles and keep discoverability high. And keep helpers small and deterministic—permission checks should not reach over the network.
 
-## TL;DR
+If you’re new to composing routes in rwsdk, the router guide is a good companion read: see [Routing](https://docs.rwsdk.com/core/routing/) and, specifically, [Interruptors](https://docs.rwsdk.com/core/routing/#interrupters).
 
-Use interruptors to keep auth and permissions declarative at the router. Centralize policy in helpers like `requirePermission`, then compose per route for clarity, testability, and least‑privilege.
+## Wrapping up
+
+Use interruptors to keep auth and permissions declarative at the router. Centralize policy in small helpers like `requirePermission`, then compose per route for clarity, testability, and [least‑privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege) access. Your future self—and your security reviews—will thank you.
 
 
