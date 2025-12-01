@@ -2,6 +2,7 @@ import { CloudflareImage } from "src/components/CloudflareImage";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
+import { link } from "src/shared/links";
 
 export default async function BlogList() {
   // Fetch and parse all blog posts
@@ -56,7 +57,7 @@ export default async function BlogList() {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 mb-20">
         <article className="group rounded-lg overflow-hidden transition-shadow duration-300">
           <a
-            href={`/blog/${latestBlog.slug}`}
+            href={link("/blog/:slug", { slug: latestBlog.slug })}
             className="flex flex-col lg:flex-row"
           >
             <div className="lg:w-1/2 p-6">
@@ -101,7 +102,7 @@ export default async function BlogList() {
           {otherBlogs.map((blog) => (
             <article key={blog.slug} className="group">
               <a
-                href={`/blog/${blog.slug}`}
+                href={link("/blog/:slug", { slug: blog.slug })}
                 className="block rounded-lg overflow-hidden transition-shadow duration-300 h-full"
               >
                 <div className="p-6">

@@ -2,6 +2,7 @@ import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
+import { link } from "src/shared/links";
 
 export default function PersonalSoftware() {
   const structuredData = {
@@ -80,7 +81,7 @@ export default function PersonalSoftware() {
           </div>
 
           <main className="flex-1 overflow-y-auto px-6 lg:pr-16 py-8 space-y-12">
-            <a href="/" aria-label="RedwoodSDK" className="hidden lg:block">
+            <a href={link("/")} aria-label="RedwoodSDK" className="hidden lg:block">
               <img
                 src="/images/logo--light.svg"
                 alt="RedwoodSDK"

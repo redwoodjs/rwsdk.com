@@ -1,5 +1,6 @@
 import Constants from "../lib/Constants";
 import { CloudflareImage } from "./CloudflareImage";
+import { link } from "src/shared/links";
 
 export function Footer() {
 
@@ -14,7 +15,7 @@ export function Footer() {
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
               <li>
                 <a
-                  href="/personal-software"
+                  href={link("/personal-software")}
                   className="hover:text-purple focus:text-purple font-playfair transition-colors"
                 >
                   Personal Software
@@ -30,7 +31,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/blog"
+                  href={link("/blog")}
                   className="hover:text-purple focus:text-purple font-playfair transition-colors"
                 >
                   Blog

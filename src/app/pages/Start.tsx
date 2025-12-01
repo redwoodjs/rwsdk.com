@@ -2,6 +2,7 @@ import Constants from "src/lib/Constants";
 import { GitHubStarWidget } from "src/components/GitHubStarWidget";
 import { SDKButton } from "src/components/SDKButton";
 import { Copy } from "src/components/Copy";
+import { link } from "src/shared/links";
 
 export default function StartPage() {
   return (
@@ -10,7 +11,7 @@ export default function StartPage() {
       <meta name="robots" content="noindex, nofollow" />
       <meta name="googlebot" content="noindex, nofollow" />
       <div className="flex items-center gap-3 mb-6">
-        <a href="/" aria-label="RedwoodSDK" target="_blank" rel="noreferrer">
+        <a href={link("/")} aria-label="RedwoodSDK" target="_blank" rel="noreferrer">
           <img src="/images/logo--light.svg" alt="RedwoodSDK" className="h-10" />
         </a>
       </div>

@@ -1,4 +1,6 @@
-export function notFound() {
+import { link } from "src/shared/links";
+
+export function notFound(): Response {
     return new Response(`
         <!DOCTYPE html>
         <html>
@@ -88,7 +90,7 @@ export function notFound() {
                         <img src="/images/logo--light.svg" alt="RedwoodSDK Logo" class="logo">
                         <h1>404</h1>
                         <p>Oops! The page you're looking for doesn't exist.</p>
-                        <a href="/">Return Home</a>
+                        <a href="${link("/")}">Return Home</a>
                     </div>
                     <div class="image-container">
                         <img src="https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6604e363-18fa-4429-f9bd-72e0919f7c00/public" alt="404 Illustration">

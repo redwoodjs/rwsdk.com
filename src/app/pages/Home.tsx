@@ -10,6 +10,7 @@ import { SDKButton } from "src/components/SDKButton";
 import { Newsletter } from "src/components/Newsletter";
 import { Copy } from "src/components/Copy";
 import StyledCodeBlock from "src/components/StyledCodeBlock";
+import { link } from "src/shared/links";
 
 export default function Home() {
   const structuredData = {
@@ -120,7 +121,7 @@ export default function Home() {
           <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-medium leading-[1]">
             It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.
             <a
-              href="/personal-software"
+              href={link("/personal-software")}
               className="text-orange hover:text-orange-light inline-flex items-center font-noto font-bold mt-4 "
             >
               And it ends with you building something awesome!
