@@ -1,17 +1,18 @@
 import { generateBlogSitemap } from "./app/addons/blog/data/sitemap";
+import { link } from "src/shared/links";
 
 // need to do this in a smarter way, but this works for now
-const blogUrls = await generateBlogSitemap();
+const blogUrls: string[] = await generateBlogSitemap();
 
-const staticUrls = [`
+const staticUrls: string[] = [`
   <url>
-    <loc>https://rwsdk.com/</loc>
+    <loc>https://rwsdk.com${link("/")}</loc>
     <lastmod>2024-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>`,
   `<url>
-    <loc>https://rwsdk.com/personal-software</loc>
+    <loc>https://rwsdk.com${link("/personal-software")}</loc>
     <lastmod>2024-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -29,14 +30,14 @@ const staticUrls = [`
     <priority>0.7</priority>
   </url>`,
   `<url>
-    <loc>https://rwsdk.com/blog</loc>
+    <loc>https://rwsdk.com${link("/blog")}</loc>
     <lastmod>2025-04-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>`
 ];
 
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+const sitemapXml: string = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -44,4 +45,4 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
                 ${[...staticUrls, ...blogUrls].join("\n")}\n
 </urlset>`;
 
-export default sitemap;
+export default sitemapXml;

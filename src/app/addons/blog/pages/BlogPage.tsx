@@ -3,40 +3,13 @@ import { Footer } from "src/components/Footer";
 import Post from "../components/Post";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { marked } from "marked";
+import { link } from "src/shared/links";
 
 
 interface BlogPageProps {
   params: {
-    slug: "BlogPostSlug";
+    slug: string;
   };
-}
-
-function parseFrontmatter(content: string) {
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n/;
-  const match = content.match(frontmatterRegex);
-
-  if (!match) {
-    return { data: {}, content };
-  }
-
-  const frontmatter = match[1];
-  const markdown = content.slice(match[0].length);
-
-  // Simple YAML parser for frontmatter
-  const data = frontmatter.split("\n").reduce((acc, line) => {
-    const [key, ...values] = line.split(":");
-    if (key && values.length > 0) {
-      const value = values.join(":").trim();
-      try {
-        acc[key.trim()] = JSON.parse(value);
-      } catch {
-        acc[key.trim()] = value;
-      }
-    }
-    return acc;
-  }, {} as Record<string, any>);
-
-  return { data, content: markdown };
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {
@@ -59,7 +32,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <meta property="og:title" content={`${data.title} | RedwoodSDK`} />
       <meta property="og:description" content={data.description} />
       <meta property="og:type" content="article" />
-      <meta property="og:url" content={`https://rwsdk.com/blog/${slug}`} />
+      <meta property="og:url" content={`https://rwsdk.com${link("/blog/:slug", { slug })}`} />
       <meta property="og:image" content={data.ogImage} />
 
       <div className="flex flex-col min-h-screen">

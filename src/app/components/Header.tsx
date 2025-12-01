@@ -1,3 +1,5 @@
+import { link } from "src/shared/links";
+
 export default function Header() {
   return (
     <div className="z-10 py-4 px-6 lg:pr-16 flex items-center flex-col lg:block">
@@ -6,7 +8,7 @@ export default function Header() {
           PERSONAL SOFTWARE
         </span>
       </div>
-      <a href="/" aria-label="RedwoodSDK">
+      <a href={link("/")} aria-label="RedwoodSDK">
         <img
           src="/images/logo--light.svg"
           alt="RedwoodSDK"
