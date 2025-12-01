@@ -1,7 +1,6 @@
 {
   // Schema reference for wrangler configuration
   "$schema": "node_modules/wrangler/config-schema.json",
-
   // Name of your worker
   "name": "redwoodsdk",
 
@@ -49,7 +48,7 @@
   "main": "src/worker.tsx",
 
   // Compatibility settings
-  "compatibility_date": "2024-09-23",
+  "compatibility_date": "2025-08-21",
   "compatibility_flags": ["nodejs_compat"],
 
   // Assets configuration
