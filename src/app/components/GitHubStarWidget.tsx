@@ -1,5 +1,4 @@
 import Constants from "src/lib/Constants";
-import { env } from "cloudflare:workers";
 
 interface GitHubRepoData {
   stargazers_count: number;
@@ -21,7 +20,7 @@ export async function GitHubStarWidget() {
       "Content-Type": "application/json",
     };
 
-    const githubToken = env.VITE_GITHUB_TOKEN;
+    const githubToken = import.meta.env.VITE_GITHUB_TOKEN;
     if (githubToken) {
       headers["Authorization"] = `token ${githubToken}`;
     }

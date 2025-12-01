@@ -1,47 +1,26 @@
 import { RouteMiddleware } from "rwsdk/router";
-import { IS_DEV } from "rwsdk/constants";
 
 export const setCommonHeaders =
   (): RouteMiddleware =>
-  ({ headers, rw: { nonce }, request }) => {
-    if (!IS_DEV) {
+  ({ response, rw: { nonce } }) => {
+    if (!import.meta.env.VITE_IS_DEV_SERVER) {
       // Forces browsers to always use HTTPS for a specified time period (2 years)
-      headers.set(
+      response.headers.set(
         "Strict-Transport-Security",
-        "max-age=63072000; includeSubDomains; preload"
+        "max-age=63072000; includeSubDomains; preload",
       );
     }
-    // Set cache control for images
-    const url = new URL(request.url);
-    if (url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg)$/i)) {
-      headers.set(
-        "Cache-Control",
-        "public, max-age=31536000, immutable" // Cache for 1 year
-      );
-    }
-
-    // Performance headers
-    headers.set("X-DNS-Prefetch-Control", "on");
-    headers.set("X-XSS-Protection", "1; mode=block");
-    // Block clickjacking by default; allow specific route to be embedded
-    if (url.pathname !== "/start") {
-      headers.set("X-Frame-Options", "SAMEORIGIN");
-    }
-    headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-    headers.set(
-      "Permissions-Policy",
-      "geolocation=(), microphone=(), camera=()"
-    );
-
-    // Preload critical resources
-    headers.set(
-      "Link",
-      "</images/logo--light.svg>; rel=preload; as=image, </images/favicon.svg>; rel=preload; as=image"
-    );
-
     // Forces browser to use the declared content-type instead of trying to guess/sniff it
-    headers.set("X-Content-Type-Options", "nosniff");
+    response.headers.set("X-Content-Type-Options", "nosniff");
 
+    // Stops browsers from sending the referring webpage URL in HTTP headers
+    response.headers.set("Referrer-Policy", "no-referrer");
+
+    // Explicitly disables access to specific browser features/APIs
+    response.headers.set(
+      "Permissions-Policy",
+      "geolocation=(), microphone=(), camera=()",
+    );
     // Defines trusted sources for content loading and script execution:
     const baseCsp =
       "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com; " +
@@ -52,13 +31,5 @@ export const setCommonHeaders =
       "object-src 'none'; " +
       "img-src 'self' data: https: https://queue.simpleanalyticscdn.com;";
 
-    if (url.pathname === "/start") {
-      headers.set(
-        "Content-Security-Policy",
-        baseCsp +
-          " frame-ancestors 'self' http://localhost:5173 http://127.0.0.1:5173 http://localhost:5174 http://127.0.0.1:5174;"
-      );
-    } else {
-      headers.set("Content-Security-Policy", baseCsp);
-    }
+      response.headers.set("Content-Security-Policy", baseCsp);
   };
