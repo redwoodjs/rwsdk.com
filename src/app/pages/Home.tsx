@@ -97,19 +97,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Udemy course section */}
-      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
-        <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
-          <h2 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-bold font-playfair leading-[81%] mb-3 grid-bg py-4 px-2">
-            Udemy Beginner RedwoodSDK Course
-          </h2>
-          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-medium leading-[1]">
-            Learn how to build a simple web app with RedwoodSDK.
-          </p>
-          <a href="https://www.udemy.com/course/redwoodsdk-beginners-course/learn/lecture/51431222#overview" className="text-orange hover:text-orange-light inline-flex items-center font-noto font-bold mt-4 ">Start the beginner course, its 40 minutes long and its free!</a>
-        </div>
-      </section>
-
 
       {/* Call to action section */}
       <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
