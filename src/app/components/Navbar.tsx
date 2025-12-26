@@ -4,6 +4,48 @@ import { GitHubStarWidget } from "./GitHubStarWidget";
 import { Suspense } from "react";
 import { link } from "src/shared/links";
 
+interface NavItem {
+  href: string;
+  label: string;
+  activeKey?: string;
+}
+
+const navItems: NavItem[] = [
+  { href: Constants.DOCS_URL, label: "Docs" },
+  { href: link("/blog"), label: "Blog", activeKey: "blog" },
+
+  {
+    href: link("/personal-software"),
+    label: "Personal Software",
+    activeKey: "personal-software",
+  },
+  { href: Constants.LEARN_URL, label: "Learn" },
+  { href: Constants.DISCORD_URL, label: "Discord" },
+];
+
+interface NavLinkProps {
+  href: string;
+  label: string;
+  isActive?: boolean;
+}
+
+function NavLink({ href, label, isActive }: NavLinkProps) {
+  return (
+    <a
+      href={href}
+      className={`hover:text-orange-medium transition-colors ${
+        isActive ? "text-orange-medium" : ""
+      }`}
+    >
+      {label}
+    </a>
+  );
+}
+
+function NavSeparator() {
+  return <span className="text-orange-light hidden sm:inline">\</span>;
+}
+
 interface NavbarProps {
   activePage?: string;
 }
@@ -19,46 +61,24 @@ export function Navbar(props: NavbarProps) {
         />
       </a>
       <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-4 font-noto font-bold text-[14px] sm:text-[16px] md:text-[18px] mt-4 lg:mt-0">
-        <a
-          href={Constants.LEARN_URL}
-          className="hover:text-orange-medium transition-colors"
+        {navItems.map((item, index) => (
+          <span key={item.label} className="contents">
+            <NavLink
+              href={item.href}
+              label={item.label}
+              isActive={item.activeKey === props.activePage}
+            />
+            {index < navItems.length - 1 && <NavSeparator />}
+          </span>
+        ))}
+        <NavSeparator />
+        <Suspense
+          fallback={
+            <div className="text-[14px] sm:text-[16px] md:text-[18px]">
+              Loading...
+            </div>
+          }
         >
-          Learn
-        </a>
-        <span className="text-orange-light hidden sm:inline">\</span>
-        <a
-          href={Constants.DOCS_URL}
-          className="hover:text-orange-medium transition-colors"
-        >
-          Docs
-        </a>
-        <span className="text-orange-light hidden sm:inline">\</span>
-        <a
-          href={link("/personal-software")}
-          className={`hover:text-orange-medium transition-colors ${
-            props.activePage === "personal-software" ? "text-orange-medium" : ""
-          }`}
-        >
-          Personal Software
-        </a>
-        <span className="text-orange-light hidden sm:inline">\</span>
-        <a
-          href={link("/blog")}
-          className={`hover:text-orange-medium transition-colors ${
-            props.activePage === "blog" ? "text-orange-medium" : ""
-          }`}
-        >
-          Blog
-        </a>
-        <span className="text-orange-light hidden sm:inline">\</span>
-        <a
-          href={Constants.DISCORD_URL}
-          className="hover:text-orange-medium transition-colors"
-        >
-          Discord
-        </a>
-        <span className="text-orange-light hidden sm:inline">\</span>
-        <Suspense fallback={<div className="text-[14px] sm:text-[16px] md:text-[18px]">Loading...</div>}>
           <GitHubStarWidget />
         </Suspense>
       </div>
