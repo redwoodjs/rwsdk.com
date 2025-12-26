@@ -89,8 +89,13 @@ export default function Home() {
             <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold font-noto text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
               Server-first React with zero magic. Built to stay understandable.
             </h3>
-            <div className="flex justify-center font-bold font-noto ">
-              <SDKButton size="large" text="Read the docs" />
+            <div className="flex flex-col items-center gap-3">
+              <div className="flex justify-center font-bold font-noto">
+                <SDKButton size="large" text="Read the docs" />
+              </div>
+              <span className="text-[12px] sm:text-[14px] font-noto text-baige bg-black/50 px-3 py-1 rounded-full border border-baige/30">
+                Cloudflare only
+              </span>
             </div>
           </div>
         </div>

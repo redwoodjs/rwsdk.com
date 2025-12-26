@@ -10,13 +10,13 @@ export default function PersonalSoftware() {
     "@type": "WebPage",
     name: "RedwoodSDK | The React Framework for Cloudfare and personal software",
     description:
-      "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
+      "A simple framework for humans. Server-first React with zero magic. Built to stay understandable. RedwoodSDK begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features. Its standards-based router, with support for middleware and interruptors, gives you fine-grained control over every request and response.",
     url: "https://rwsdk.com/personal-software",
     mainEntity: {
       "@type": "Article",
       headline: "The Personal Software Revolution",
       description:
-        "RedwoodSDK is a React Framework for Cloudfare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features.  Its standards-based router, with support for middleware and  interruptors, gives you fine-grained control over every request and  response",
+        "A simple framework for humans. Server-first React with zero magic. Built to stay understandable. RedwoodSDK begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features. Its standards-based router, with support for middleware and interruptors, gives you fine-grained control over every request and response.",
       author: {
         "@type": "Organization",
         name: "RedwoodJS Inc.",

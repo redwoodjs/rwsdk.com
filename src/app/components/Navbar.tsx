@@ -19,8 +19,6 @@ const navItems: NavItem[] = [
     label: "Personal Software",
     activeKey: "personal-software",
   },
-  { href: Constants.LEARN_URL, label: "Learn" },
-  { href: Constants.DISCORD_URL, label: "Discord" },
 ];
 
 interface NavLinkProps {

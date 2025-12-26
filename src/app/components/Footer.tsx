@@ -182,14 +182,14 @@ export function Footer() {
               className="w-[180px] sm:w-[220px] md:w-[300px]"
             />
             <p className="text-[14px] sm:text-[12px] font-noto font-light">
-              RedwoodSDK is a React framework for Cloudflare. It begins as a
-              Vite plugin that unlocks SSR, React Server Components, Server
-              Functions, and realtime features. Its standards-based router, with
-              support for middleware and interruptors, gives you fine-grained
-              control over every request and response. With built-in access to
-              Cloudflare Workers, D1 (Database), R2 (Storage), Queues, AI, and
-              full local emulation via Miniflare, development feels just like
-              production.
+              A simple framework for humans. Server-first React with zero magic.
+              Built to stay understandable. RedwoodSDK begins as a Vite plugin
+              that unlocks SSR, React Server Components, Server Functions, and
+              realtime features. Its standards-based router, with support for
+              middleware and interruptors, gives you fine-grained control over
+              every request and response. With built-in access to Cloudflare
+              Workers, D1 (Database), R2 (Storage), Queues, AI, and full local
+              emulation via Miniflare, development feels just like production.
             </p>
             <p className="text-[14px] sm:text-[12px] font-chivo">
               Copyright © 2025 RedwoodJS Inc. All rights reserved.
