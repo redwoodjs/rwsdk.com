@@ -54,7 +54,7 @@ export default function PersonalSoftware() {
         />
         <meta
           property="og:description"
-          content="Build fast, server-driven webapps on Cloudflare with SSR, RSC, and realtime. "
+          content="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
         />
         <meta property="og:url" content="https://rwsdk.com/personal-software" />
         <meta

@@ -9,10 +9,10 @@ const cspDirectives = {
   "font-src": "'self' https://fonts.gstatic.com",
   "connect-src":
     "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://simpleanalyticscdn.com https://queue.simpleanalyticscdn.com",
-  "frame-src": "https://ghbtns.com https://www.youtube.com https://youtube.com https://www.youtube.com/",
+  "frame-src":
+    "https://ghbtns.com https://www.youtube.com https://youtube.com https://www.youtube.com/",
   "object-src": "'none'",
-  "img-src":
-    "'self' data: https: https://queue.simpleanalyticscdn.com",
+  "img-src": "'self' data: https: https://queue.simpleanalyticscdn.com",
 };
 
 const cspContent = Object.entries(cspDirectives)
@@ -30,7 +30,9 @@ export const Document: React.FC<{
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK is a React framework for Cloudflare</title>
+
+        <title>RedwoodSDK: A simple framework for humans</title>
+
         <link rel="canonical" href={canonicalUrl} />
         <TurnstileScript />
         {/* Icons */}
@@ -67,11 +69,11 @@ export const Document: React.FC<{
         <meta name="sitemap" content="/sitemap.xml" />
         <meta
           name="description"
-          content="RedwoodSDK is a React framework for Cloudflare. It begins as a Vite plugin that unlocks SSR, React Server Components, Server Functions, and realtime features. Its standards-based router, with support for middleware and interruptors, gives you fine-grained control over every request and response. With built-in access to Cloudflare Workers, D1 (Database), R2 (Storage), Queues, AI, and full local emulation via Miniflare, development feels just like production."
+          content="Server-first React with zero magic. Built to stay understandable."
         />
         <meta
           name="keywords"
-          content="RedwoodSDK, RedwoodJS, React, TypeScript, Prisma, Tailwind CSS, RedwoodJS SDK, Cloudflare Development Platform, response lifecycle, webapps"
+          content="Server-first React, zero magic, understandable, framework, React, TypeScript, Cloudflare Workers"
         />
         <meta name="author" content="RedwoodJS" />
         {/* Security */}
@@ -83,8 +85,17 @@ export const Document: React.FC<{
       <body>
         <div id="root">{children}</div>
         <script>import("/src/client.tsx")</script>
-        <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-        <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerPolicy="no-referrer-when-downgrade" /></noscript>
+        <script
+          async
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
+        ></script>
+        <noscript>
+          <img
+            src="https://queue.simpleanalyticscdn.com/noscript.gif"
+            alt=""
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </noscript>
       </body>
     </html>
   );
