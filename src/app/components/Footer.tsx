@@ -3,7 +3,6 @@ import { CloudflareImage } from "./CloudflareImage";
 import { link } from "src/shared/links";
 
 export function Footer() {
-
   return (
     <footer className="bg-orange-light border-t border-orange-dark py-8 sm:py-12 md:py-[61px]">
       <div className="max-w-[1400px] mx-auto py-8 sm:py-12 md:py-[61px] px-4 sm:px-8 md:px-10">
@@ -21,14 +20,7 @@ export function Footer() {
                   Personal Software
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://redwoodjs.com/blog/redwoodsdk"
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  RedwoodJS Announcement
-                </a>
-              </li>
+
               <li>
                 <a
                   href={link("/blog")}
@@ -100,14 +92,7 @@ export function Footer() {
                   Quick Start
                 </a>
               </li>
-              <li>
-                <a
-                  href={Constants.REDWOODJS_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  RedwoodJS
-                </a>
-              </li>
+
               <li>
                 <a
                   href={Constants.REDWOOD_GRAPHQL_DOCS_URL}

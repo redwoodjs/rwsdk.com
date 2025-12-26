@@ -3,7 +3,8 @@ const Constants = Object.freeze({
   README_URL: "https://github.com/redwoodjs/sdk/blob/main/README.md",
   QUICK_START_URL: "https://docs.rwsdk.com/getting-started/quick-start/",
   DOCS_URL: "https://docs.rwsdk.com",
-  CLOUDFLARE_DOCS_URL: "https://developers.cloudflare.com/workers/frameworks/framework-guides/redwoodsdk/",
+  CLOUDFLARE_DOCS_URL:
+    "https://developers.cloudflare.com/workers/frameworks/framework-guides/redwoodsdk/",
   DOCS_QUICKSTART_URL: "https://docs.rwsdk.com/getting-started/quick-start/",
   REDWOOD_GRAPHQL_DOCS_URL: "https://docs.redwoodjs.com/docs/introduction/",
   TUTORIAL_URL: "https://docs.redwoodjs.com/sdk/tutorial",
@@ -11,7 +12,6 @@ const Constants = Object.freeze({
   GITHUB_URL: "https://github.com/redwoodjs",
   BLUESKY_URL: "https://bsky.app/profile/redwoodjs.com",
   DISCORD_URL: "https://discord.gg/redwoodjs",
-  DISCOURSE_URL: "https://discourse.redwoodjs.com",
   YOUTUBE_URL: "https://www.youtube.com/@redwoodjs",
   X_URL: "https://x.com/redwoodjs",
   REDWOODJS_URL: "https://redwoodjs.com",
