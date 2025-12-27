@@ -8,6 +8,7 @@ type BlogPostData = {
     author: Author;
     heroImage: string;
     tags?: string[];
+    draft?: boolean;
     [key: string]: any; // Allow additional properties
 };
 
@@ -33,7 +34,8 @@ async function parseFrontmatter(content: string) {
             avatar: ''
         },
         heroImage: '',
-        tags: []
+        tags: [],
+        draft: false
     };
 
     // Parse YAML frontmatter
@@ -69,9 +71,12 @@ async function parseFrontmatter(content: string) {
                 if (tagsMatch) {
                     data.tags = tagsMatch[1].split(',').map(tag => tag.trim().replace(/^["']|["']$/g, ''));
                 }
+            } else if (currentKey === 'draft') {
+                // Handle draft boolean
+                data.draft = value.toLowerCase() === 'true';
             } else if (currentKey !== 'author') {
                 const dataKey = currentKey as keyof BlogPostData;
-                if (dataKey !== 'author' && dataKey !== 'tags') {
+                if (dataKey !== 'author' && dataKey !== 'tags' && dataKey !== 'draft') {
                     data[dataKey] = value as any;
                 }
             }

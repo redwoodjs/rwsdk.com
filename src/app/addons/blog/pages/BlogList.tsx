@@ -13,8 +13,11 @@ export default async function BlogList() {
     })
   );
 
+  // Filter out draft posts
+  const publishedPosts = posts.filter((post) => !post.draft);
+
   // Sort blogs by date to get the latest one
-  const sortedBlogs = posts.sort(
+  const sortedBlogs = publishedPosts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const latestBlog = sortedBlogs[0];
@@ -54,12 +57,13 @@ export default async function BlogList() {
       </div>
 
       {/* Latest Blog */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 mb-20">
-        <article className="group rounded-lg overflow-hidden transition-shadow duration-300">
-          <a
-            href={link("/blog/:slug", { slug: latestBlog.slug })}
-            className="flex flex-col lg:flex-row"
-          >
+      {latestBlog && (
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 mb-20">
+          <article className="group rounded-lg overflow-hidden transition-shadow duration-300">
+            <a
+              href={link("/blog/:slug", { slug: latestBlog.slug })}
+              className="flex flex-col lg:flex-row"
+            >
             <div className="lg:w-1/2 p-6">
               <h2 className="text-3xl font-playfair text-black mb-4 group-hover:text-orange transition-colors">
                 {latestBlog.title}
@@ -94,7 +98,8 @@ export default async function BlogList() {
             </div>
           </a>
         </article>
-      </div>
+        </div>
+      )}
 
       {/* Other Blogs Grid */}
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-20 pb-20">
