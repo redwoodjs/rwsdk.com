@@ -24,17 +24,11 @@ const navItems: NavItem[] = [
 interface NavLinkProps {
   href: string;
   label: string;
-  isActive?: boolean;
 }
 
-function NavLink({ href, label, isActive }: NavLinkProps) {
+function NavLink({ href, label }: NavLinkProps) {
   return (
-    <a
-      href={href}
-      className={`hover:text-orange-medium transition-colors ${
-        isActive ? "text-orange-medium" : ""
-      }`}
-    >
+    <a href={href} className="`hover:text-orange-medium transition-colors">
       {label}
     </a>
   );
@@ -61,11 +55,7 @@ export function Navbar(props: NavbarProps) {
       <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-4 font-noto font-bold text-[14px] sm:text-[16px] md:text-[18px] mt-4 lg:mt-0">
         {navItems.map((item, index) => (
           <span key={item.label} className="contents">
-            <NavLink
-              href={item.href}
-              label={item.label}
-              isActive={item.activeKey === props.activePage}
-            />
+            <NavLink href={item.href} label={item.label} />
             {index < navItems.length - 1 && <NavSeparator />}
           </span>
         ))}
