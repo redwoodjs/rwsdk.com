@@ -23,7 +23,7 @@ To build web applications, you need a minimum of four things: **Compute, Databas
 
 Which left **Cloudflare**.
 
-## The "Odd Duck" That quacks like a winner
+## Cloudflare
 
 At first, I was skeptical. Cloudflare is a bit of an "odd duck." It quacks like Node.js, but isn't. It’s a networking company that happens to offer compute. But as we leaned in and started prototyping RedwoodSDK on top of Cloudflare’s **workerd** (Compute), we were blown away.
 
