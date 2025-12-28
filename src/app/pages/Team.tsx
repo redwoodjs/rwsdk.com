@@ -229,6 +229,10 @@ export default function Team() {
             We don't just advise on these ideas, we build them. The R&D behind
             RedwoodJS and RedwoodSDK is the lab that powers our consulting work.
           </p>
+          <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+            In additional to consulting, we are also building an AI product
+            called Machinen (Currently in private beta).
+          </p>
         </div>
       </section>
 
