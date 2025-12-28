@@ -59,12 +59,12 @@ export default function Team() {
           </a>
         </div>
         <a
-          href="https://calendly.com/redwoodjs-inc"
+          href="mailto:peter@redwoodjs.com"
           target="_blank"
           rel="noopener noreferrer"
           className="font-mono text-sm sm:text-base text-slate-800 hover:text-slate-600 underline"
         >
-          Book a Call
+          Chat with Peter (peter@redwoodjs.com)
         </a>
       </header>
 
