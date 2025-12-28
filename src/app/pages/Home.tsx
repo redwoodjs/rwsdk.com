@@ -93,9 +93,15 @@ export default function Home() {
               <div className="flex justify-center font-bold font-noto">
                 <SDKButton size="large" text="Read the docs" />
               </div>
-              <span className="text-[12px] sm:text-[14px] font-noto text-baige bg-black/50 px-3 py-1 rounded-full border border-baige/30">
-                Cloudflare only
-              </span>
+              <a
+                href={link("/blog/:slug", {
+                  slug: "why-cloudflare-unified-platform",
+                })}
+              >
+                <span className="text-[12px] sm:text-[14px] font-noto text-baige bg-black/50 px-3 py-1 rounded-full border border-baige/30">
+                  Cloudflare only
+                </span>
+              </a>
             </div>
           </div>
         </div>
