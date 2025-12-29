@@ -78,7 +78,7 @@ export default function Team() {
             We delete complexity for a living.
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-slate-700 leading-relaxed">
-            Zero-magic systems built to stay understandable under AI velocity.
+            Zero-magic systems, built to stay understandable under AI velocity.
           </p>
         </div>
       </section>
@@ -108,9 +108,9 @@ export default function Team() {
             <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
               Leverage over headcount. We outperform larger agencies by
               automating the friction that slows development down. We build the
-              Golden Path; the infrastructure for high-confidence validation and
-              instant deployment. We ensure your team can move 10x faster
-              without the traditional tax of technical debt.
+              Golden Path: The infrastructure for high-confidence validation and
+              instant deployment. We ensure your team can move faster without
+              the traditional tax of technical debt.
             </p>
           </div>
 
