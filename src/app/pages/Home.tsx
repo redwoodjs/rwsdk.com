@@ -74,19 +74,12 @@ export default function Home() {
       <Navbar />
       {/* Hero section */}
       <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 top-[-60px]">
-        <CloudflareImage
-          imageId="83ce73f8-4da8-4812-d10a-81f3e3610c00"
-          alt="Family using RedwoodSDK"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-        />
-        <div className="relative z-10 flex flex-col items-center justify-end min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
-            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px] text-baige font-bold font-playfair leading-[81%]">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold font-playfair leading-[81%]">
               A simple framework for humans
             </h1>
-            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold font-noto text-center leading-[0.9] text-orange-light max-w-[1060px] mx-auto">
+            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold font-noto text-center leading-[0.9] max-w-[1060px] mx-auto">
               Server-first React with zero magic. Built to stay understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
@@ -98,8 +91,8 @@ export default function Home() {
                   slug: "why-cloudflare-unified-platform",
                 })}
               >
-                <span className="text-[12px] sm:text-[14px] font-noto text-baige bg-black/50 px-3 py-1 rounded-full border border-baige/30">
-                  Cloudflare only
+                <span className="text-[12px] sm:text-[14px] font-noto  underline ">
+                  Built for Cloudflare
                 </span>
               </a>
             </div>
