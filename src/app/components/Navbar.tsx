@@ -23,14 +23,14 @@ interface NavLinkProps {
 
 function NavLink({ href, label }: NavLinkProps) {
   return (
-    <a href={href} className="`hover:text-orange-medium transition-colors">
+    <a href={href} className="hover:text-orange-medium transition-colors">
       {label}
     </a>
   );
 }
 
 function NavSeparator() {
-  return <span className="text-orange-light hidden sm:inline">\</span>;
+  return <span className="text-slate-200 hidden sm:inline">|</span>;
 }
 
 interface NavbarProps {
@@ -58,7 +58,7 @@ export function Navbar(props: NavbarProps) {
         <Suspense
           fallback={
             <div className="text-[14px] sm:text-[16px] md:text-[18px]">
-              Loading...
+              0000
             </div>
           }
         >

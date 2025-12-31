@@ -63,18 +63,10 @@ export async function GitHubStarWidget() {
   return (
     <div className="flex items-center gap-2">
       <a
-        className="hidden sm:block"
-        href={Constants.GITHUB_REPO}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        GitHub
-      </a>
-      <a
         href="https://github.com/redwoodjs/sdk"
         target="_blank"
         rel="noopener noreferrer"
-        className="github-start inline-flex items-center gap-2 px-1 border-2 border-black text-black leading-none transition-colors h-[24px]"
+        className="inline-flex items-center gap-2 leading-none !no-underline"
       >
         <svg
           id="github-star"
@@ -95,11 +87,11 @@ export async function GitHubStarWidget() {
             className="hover:fill-orange"
           />
         </svg>
-        <span className="font-jersey">
+        <span>
           {error
-            ? "Error"
+            ? "0000"
             : starCount === null
-            ? "..."
+            ? "0000"
             : starCount.toLocaleString()}
         </span>
       </a>

@@ -6,7 +6,7 @@ import {
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
 import { featureBlocks } from "src/data/features";
-import { SDKButton } from "src/components/SDKButton";
+import { Button } from "src/components/Button";
 import { Newsletter } from "src/components/Newsletter";
 import { Copy } from "src/components/Copy";
 import StyledCodeBlock from "src/components/StyledCodeBlock";
@@ -76,24 +76,25 @@ export default function Home() {
       <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 top-[-60px]">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
-            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold font-playfair leading-[81%]">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[81%]">
               A simple framework for humans
             </h1>
-            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold font-noto text-center leading-[0.9] max-w-[1060px] mx-auto">
-              Server-first React with zero magic. Built to stay understandable.
+            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold text-center leading-[0.9] max-w-[1060px] mx-auto">
+              Server-first React with zero magic. <br />
+              Built to stay understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
-              <div className="flex justify-center font-bold font-noto">
-                <SDKButton size="large" text="Read the docs" />
-              </div>
+              <Button>Get started</Button>
+              <br />
               <a
                 href={link("/blog/:slug", {
                   slug: "why-cloudflare-unified-platform",
                 })}
+                className="!text-sm !text-slate-500"
               >
-                <span className="text-[12px] sm:text-[14px] font-noto  underline ">
-                  Built for Cloudflare
-                </span>
+                Built for
+                <br />
+                Cloudflare's Developer Platform
               </a>
             </div>
           </div>
@@ -101,22 +102,19 @@ export default function Home() {
       </div>
 
       {/* Call to action section */}
-      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
+      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
-          <h2 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-bold font-playfair leading-[81%] mb-3 grid-bg py-4 px-2">
-            From concept to cloud
-          </h2>
+          <div className="prose prose-slate max-w-none">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+              From concept to cloud
+            </h2>
 
-          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-medium leading-[1]">
-            It begins as a Vite plugin that unlocks SSR, React Server
-            Components, Server Functions, and realtime features.
-            <a
-              href={link("/personal-software")}
-              className="text-orange hover:text-orange-light inline-flex items-center font-noto font-bold mt-4 "
-            >
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-6 leading-relaxed">
+              It begins as a Vite plugin that unlocks SSR, React Server
+              Components, Server Functions, middles out with a type safe router
               And it ends with you building something awesome!
-            </a>
-          </p>
+            </p>
+          </div>
 
           <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
             <span className="text-orange">$</span>{" "}
@@ -131,31 +129,37 @@ export default function Home() {
 
         <CloudflareBackground
           imageId="ab6519e2-6484-4c91-6095-c49f9268ca00"
-          className="w-full sm:w-[80%] lg:w-full h-[300px] sm:h-[400px] md:h-[514px] bg-center bg-no-repeat bg-contain flex items-center justify-center hidden lg:block"
+          className="w-full sm:w-[80%] lg:w-full h-[300px] sm:h-[400px] md:h-[514px] bg-center bg-no-repeat bg-contain hidden lg:flex items-center justify-center"
         />
       </section>
 
       {/* Features section, 3 columns */}
-      <section className="max-w-[1300px] mx-auto">
-        <h3 className="text-[26px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg py-4 px-2  max-w-[1400px] mx-auto">
-          One Response to build them all
-        </h3>
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+        <div className="prose prose-slate max-w-none mb-12">
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+            One Response to build them all
+          </h3>
+        </div>
         {featureBlocks.map((block, idx) => (
-          <div key={block.title}>
+          <div key={block.title} className="mb-12 sm:mb-16">
             <div
-              className={`flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-6 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1400px] mx-auto ${
+              className={`flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center ${
                 idx % 2 === 1 ? "md:flex-row-reverse" : ""
               }`}
             >
               <div className="w-full md:w-1/3 text-left">
-                <h3 className="font-noto font-bold text-[20px] sm:text-[24px] md:text-[32px] mb-2">
-                  {block.title}
-                </h3>
-                <ul className="list-none text-[14px] sm:text-[16px]">
-                  {block.items.map((item: string, itemIndex: number) => (
-                    <li key={itemIndex}>{item}</li>
-                  ))}
-                </ul>
+                <div className="prose prose-slate max-w-none">
+                  <h3 className="text-base sm:text-lg text-slate-700 font-bold mb-4">
+                    {block.title}
+                  </h3>
+                  <ul className="list-disc list-outside ml-6 space-y-4 text-base sm:text-lg text-slate-700">
+                    {block.items.map((item: string, itemIndex: number) => (
+                      <li key={itemIndex} className="leading-relaxed">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               <div className="w-full md:w-2/3">
                 <StyledCodeBlock codeBlocks={block.code ?? []} />
@@ -165,7 +169,7 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="col-span-1 hidden sm:block">
           <div className="w-full">
             <CloudflareImage
@@ -176,50 +180,53 @@ export default function Home() {
           </div>
         </div>
         <div className="col-span-1 lg:col-span-2">
-          <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
-            <h3 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg py-4 px-2  max-w-[1400px] mx-auto">
+          <div className="prose prose-slate max-w-none space-y-6">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
               React Server Components - as they're meant to be
             </h3>
-            <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-bold leading-[1]">
-              React Server Components are a powerful way to build server-side
-              web apps on Cloudflare.
-            </p>
-            <p>
-              Everything is server-first by default. Your components run on the
-              server where they belong, streaming HTML straight to the browser.
-              When you need interactivity, just mark a component with use
-              client. It's the same mental model you'd use anywhere else—only
-              now it runs on the edge.
-            </p>
-            <p>
-              {" "}
-              There's no need to wrestle with bundlers, patch frameworks, or
-              manually split code between server and client. RedwoodSDK treats
-              React's directives as first-class citizens and integrates them
-              seamlessly with Vite and Cloudflare Workers. The result is
-              lightning-fast time-to-interactive, zero boilerplate, and a dev
-              environment that mirrors production—without any extra setup.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <strong>
+                React Server Components are a powerful way to build server-side
+                web apps on Cloudflare.
+              </strong>
+              <p className="leading-relaxed">
+                Everything is server-first by default. Your components run on
+                the server where they belong, streaming HTML straight to the
+                browser. When you need interactivity, just mark a component with
+                use client. It's the same mental model you'd use anywhere
+                else—only now it runs on the edge.
+              </p>
+              <p className="leading-relaxed">
+                There's no need to wrestle with bundlers, patch frameworks, or
+                manually split code between server and client. RedwoodSDK treats
+                React's directives as first-class citizens and integrates them
+                seamlessly with Vite and Cloudflare Workers. The result is
+                lightning-fast time-to-interactive, zero boilerplate, and a dev
+                environment that mirrors production—without any extra setup.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
+      <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="col-span-1 lg:col-span-2">
-          <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 text-left">
-            <h3 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg">
+          <div className="prose prose-slate max-w-none space-y-6">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
               Concept to Cloudflare
             </h3>
-            <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-bold leading-[1]">
-              RedwoodSDK is built for Cloudflare from the first line of code.
-            </p>
-            <p>
-              No adapters, no shims. What runs locally is what runs in
-              production. Development uses Miniflare to emulate Cloudflare
-              Workers with uncanny accuracy. You're not faking the edge. You're
-              building on it. No config drift. No "it worked on my machine."
-              Just a clean path from idea to deploy.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <strong>
+                RedwoodSDK is built for Cloudflare from the first line of code.
+              </strong>
+              <p className="leading-relaxed">
+                No adapters, no shims. What runs locally is what runs in
+                production. Development uses Miniflare to emulate Cloudflare
+                Workers with uncanny accuracy. You're not faking the edge.
+                You're building on it. No config drift. No "it worked on my
+                machine." Just a clean path from idea to deploy.
+              </p>
+            </div>
           </div>
         </div>
         <div className="col-span-1 hidden sm:block">
@@ -231,29 +238,31 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 sm:py-8 md:py-16 px-3 sm:px-4 md:px-8 max-w-[1300px] mx-auto">
-        <div className="flex flex-col gap-4 sm:gap-6 md:gap-8">
-          <h3 className="text-[36px] sm:text-[48px] md:text-[58px] lg:text-[65px] font-light font-playfair leading-[81%] mb-3 grid-bg py-4 px-2 mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+        <div className="prose prose-slate max-w-none space-y-6">
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
             PS… Built for Builders
           </h3>
 
-          <p className="text-[18px] sm:text-[24px] md:text-[32px] font-noto font-bold leading-[1]">
-            RedwoodSDK is for people who write software they own.
-          </p>
-          <p>
-            It's built on browser standards, not vendor abstractions—just native
-            Web APIs and predictable behavior from request to response.
-          </p>
-          <p>
-            Bring your own tools. Use realtime out of the box. Run locally on
-            Cloudflare's stack with zero config—D1, R2, Queues, Workers AI, and
-            more.
-          </p>
-          <p>
-            <span className="font-bold text-[#8B2243]">No wrappers.</span>
-            <span className="font-bold text-[#F37337]">No black boxes.</span>
-            <span className="font-bold text-[#FFAD48]">Just flow.</span>
-          </p>
+          <div className="space-y-6 text-base sm:text-lg text-slate-700">
+            <strong>
+              RedwoodSDK is for people who write software they own.
+            </strong>
+            <p className="leading-relaxed">
+              It's built on browser standards, not vendor abstractions—just
+              native Web APIs and predictable behavior from request to response.
+            </p>
+            <p className="leading-relaxed">
+              Bring your own tools. Use realtime out of the box. Run locally on
+              Cloudflare's stack with zero config—D1, R2, Queues, Workers AI,
+              and more.
+            </p>
+            <p className="leading-relaxed">
+              <span className="font-bold text-[#8B2243]">No wrappers.</span>{" "}
+              <span className="font-bold text-[#F37337]">No black boxes.</span>{" "}
+              <span className="font-bold text-[#FFAD48]">Just flow.</span>
+            </p>
+          </div>
         </div>
       </section>
 

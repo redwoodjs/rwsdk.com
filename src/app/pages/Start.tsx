@@ -1,6 +1,6 @@
 import Constants from "src/lib/Constants";
 import { GitHubStarWidget } from "src/components/GitHubStarWidget";
-import { SDKButton } from "src/components/SDKButton";
+import { SDKButton } from "src/components/Button";
 import { Copy } from "src/components/Copy";
 import { link } from "src/shared/links";
 

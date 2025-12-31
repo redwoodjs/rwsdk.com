@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { SDKButton } from "./SDKButton";
+import { SDKButton } from "./Button";
 import { CloudflareImage } from "./CloudflareImage";
 declare global {
   interface Window {

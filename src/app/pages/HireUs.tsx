@@ -7,19 +7,12 @@ export function HireUs() {
     "@type": "WebPage",
     name: "RedwoodJS Inc. - Consultancy",
     description:
-      "We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development.",
-    url: "https://rwsdk.com/team",
-    mainEntity: {
-      "@type": "Organization",
-      name: "RedwoodJS, Inc.",
-      description:
-        "A maintenance-first consultancy based in GMT+2. We build the frameworks and tooling that define the modern web.",
-      url: "https://rwsdk.com/team",
-    },
+      "RedwoodJS Inc. is a maintenance-first consultancy based in GMT+2. We do not build to exit. We build to last.",
+    url: "https://rwsdk.com/hire-us",
   };
 
   return (
-    <div className="bg-[#F9F7F2] text-slate-800 min-h-screen">
+    <div className="min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -61,7 +54,7 @@ export function HireUs() {
         <a
           href="#contact"
           rel="noopener noreferrer"
-          className="font-mono text-sm sm:text-base text-slate-800 hover:text-slate-600 underline"
+          className="text-sm sm:text-base"
         >
           Get in touch
         </a>
@@ -179,23 +172,14 @@ export function HireUs() {
             </div>
 
             <div className="mt-8 flex gap-6" id="contact">
-              <a
-                href="https://calendar.app.google/p4UeizJNkdYexKwL9"
-                className="text-slate-800 hover:text-slate-600 underline font-mono"
-              >
+              <a href="https://calendar.app.google/p4UeizJNkdYexKwL9">
                 Book a call
               </a>
-              <a
-                href="mailto:peter@redwoodjs.com"
-                className="text-slate-800 hover:text-slate-600 underline font-mono"
-              >
-                Email
-              </a>
+              <a href="mailto:peter@redwoodjs.com">Email</a>
               <a
                 href={Constants.DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-800 hover:text-slate-600 underline font-mono"
               >
                 Discord
               </a>
