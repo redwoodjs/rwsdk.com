@@ -1,5 +1,5 @@
-import { CloudflareImage } from "src/components/CloudflareImage";
 import Constants from "src/lib/Constants";
+import { Navbar } from "src/components/Navbar";
 
 export function HireUs() {
   const structuredData = {
@@ -41,24 +41,7 @@ export function HireUs() {
       <meta property="og:locale" content="en_US" />
 
       {/* Header */}
-      <header className="flex justify-between items-center py-6 px-4 sm:px-8 max-w-[1200px] mx-auto">
-        <div className="flex items-center gap-3 group">
-          <a href="/">
-            <CloudflareImage
-              imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
-              alt="RedwoodSDK logo"
-              className="w-[120px] sm:w-[140px] grayscale"
-            />
-          </a>
-        </div>
-        <a
-          href="#contact"
-          rel="noopener noreferrer"
-          className="text-sm sm:text-base"
-        >
-          Get in touch
-        </a>
-      </header>
+      <Navbar />
 
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="space-y-12 sm:space-y-16">

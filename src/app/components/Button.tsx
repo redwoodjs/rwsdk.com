@@ -5,7 +5,7 @@ interface ButtonProps {
   className?: string;
   size?: "small" | "medium" | "large";
   href?: string;
-  children?: string;
+  children?: React.ReactNode;
 }
 
 export const Button: React.FC<ButtonProps> = ({

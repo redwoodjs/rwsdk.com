@@ -1,4 +1,5 @@
-import Constants from "src/lib/Constants";
+import { Suspense } from "react";
+import { Button } from "./Button";
 
 interface GitHubRepoData {
   stargazers_count: number;
@@ -8,7 +9,52 @@ interface GitHubError {
   message: string;
 }
 
-export async function GitHubStarWidget() {
+interface GitHubStarWidgetUIProps {
+  starCount: number | null;
+  error: string | null;
+}
+
+function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
+  return (
+    <div className="flex items-center gap-2">
+      <a
+        href="https://github.com/redwoodjs/sdk"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center leading-none gap-1 !no-underline"
+      >
+        <svg
+          id="github-star"
+          data-name="Github Star"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+          width="16.524"
+          height="15.715"
+          viewBox="0 0 16.524 15.715"
+        >
+          <path
+            d="M8.262.443,10.6,5.178l5.227.764L12.044,9.626l.893,5.2L8.262,12.372,3.587,14.831l.893-5.2L.7,5.942l5.227-.764Z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="square"
+            strokeLinejoin="bevel"
+            strokeWidth="2"
+            className="hover:fill-orange"
+          />
+        </svg>
+        <span className="font-medium">
+          {error
+            ? "3200"
+            : starCount === null
+            ? "3200"
+            : starCount.toLocaleString()}
+        </span>
+      </a>
+    </div>
+  );
+}
+
+async function GitHubStarWidgetData() {
   let starCount: number | null = null;
   let error: string | null = null;
   const startTime = Date.now();
@@ -60,41 +106,13 @@ export async function GitHubStarWidget() {
     console.error("GitHub API Error:", err);
   }
 
+  return <GitHubStarWidgetUI starCount={starCount} error={error} />;
+}
+
+export function GitHubStarWidget() {
   return (
-    <div className="flex items-center gap-2">
-      <a
-        href="https://github.com/redwoodjs/sdk"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 leading-none !no-underline"
-      >
-        <svg
-          id="github-star"
-          data-name="Github Star"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="16.524"
-          height="15.715"
-          viewBox="0 0 16.524 15.715"
-        >
-          <path
-            d="M8.262.443,10.6,5.178l5.227.764L12.044,9.626l.893,5.2L8.262,12.372,3.587,14.831l.893-5.2L.7,5.942l5.227-.764Z"
-            fill="none"
-            stroke="#1b1b1b"
-            strokeLinecap="square"
-            strokeLinejoin="bevel"
-            strokeWidth="2"
-            className="hover:fill-orange"
-          />
-        </svg>
-        <span>
-          {error
-            ? "0000"
-            : starCount === null
-            ? "0000"
-            : starCount.toLocaleString()}
-        </span>
-      </a>
-    </div>
+    <Suspense fallback={<GitHubStarWidgetUI starCount={null} error={null} />}>
+      <GitHubStarWidgetData />
+    </Suspense>
   );
 }
