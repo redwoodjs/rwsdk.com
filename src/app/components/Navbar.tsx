@@ -13,7 +13,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { href: Constants.DOCS_URL, label: "Docs" },
   { href: link("/blog"), label: "Blog" },
-  { href: link("/team"), label: "Team" },
+  { href: link("/hire-us"), label: "Hire Us" },
 ];
 
 interface NavLinkProps {

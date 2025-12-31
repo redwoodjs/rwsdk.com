@@ -10,7 +10,7 @@ import { notFound } from "src/utils/notFound";
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/Start";
-import Team from "./app/pages/Team";
+import { HireUs } from "./app/pages/HireUs";
 
 export type AppContext = {};
 
@@ -20,11 +20,11 @@ export default defineApp([
   render(Document, [
     route("/", Home),
     route("/personal-software", PersonalSoftware),
-    route("/team", Team),
+    route("/hire-us", HireUs),
 
     prefix("/blog", blogRoutes),
 
-    route('/start', StartPage),
+    route("/start", StartPage),
 
     route("/docs", async () => {
       return new Response(null, {
