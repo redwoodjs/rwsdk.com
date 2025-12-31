@@ -1,5 +1,6 @@
 import { CloudflareImage } from "src/components/CloudflareImage";
 import Constants from "src/lib/Constants";
+import { link } from "src/shared/links";
 
 export default function Team() {
   const structuredData = {
@@ -7,13 +8,13 @@ export default function Team() {
     "@type": "WebPage",
     name: "RedwoodJS Inc. - Consultancy",
     description:
-      "Your codebase is too heavy. We're here to lighten it. A self-sustainable consultancy based in GMT+2specializing in simplifying complex codebases.",
+      "We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development.",
     url: "https://rwsdk.com/team",
     mainEntity: {
       "@type": "Organization",
       name: "RedwoodJS, Inc.",
       description:
-        "A self-sustainable consultancy based in GMT+2. We are simplifiers, not just problem solvers.",
+        "A maintenance-first consultancy based in GMT+2. We build the frameworks and tooling that define the modern web.",
       url: "https://rwsdk.com/team",
     },
   };
@@ -27,12 +28,12 @@ export default function Team() {
       <title>RedwoodJS, Inc. - Consultancy</title>
       <meta
         name="description"
-        content="Your codebase is too heavy. We're here to lighten it. A self-sustainable consultancy based in South Africa specializing in simplifying complex codebases."
+        content="We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development."
       />
       <meta property="og:title" content="RedwoodJS Inc. - Consultancy" />
       <meta
         property="og:description"
-        content="Your codebase is too heavy. We're here to lighten it. A self-sustainable consultancy based in South Africa specializing in simplifying complex codebases."
+        content="We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development."
       />
       <meta property="og:url" content="https://rwsdk.com/team" />
       <meta
@@ -59,180 +60,181 @@ export default function Team() {
           </a>
         </div>
         <a
-          href="mailto:peter@redwoodjs.com"
+          href="https://calendar.app.google/p4UeizJNkdYexKwL9"
           target="_blank"
           rel="noopener noreferrer"
           className="font-mono text-sm sm:text-base text-slate-800 hover:text-slate-600 underline"
         >
-          Chat with Peter (peter@redwoodjs.com)
+          Book a call
         </a>
       </header>
 
-      {/* Section 1: Hero */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="prose prose-slate max-w-none">
-          <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-            00 TEAM // HIRE US
-          </div>
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
-            We delete complexity for a living.
-          </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-700 leading-relaxed">
-            Zero-magic systems, built to stay understandable under AI velocity.
-          </p>
-        </div>
-      </section>
-
-      {/* Section 2: The 5 C's Philosophy */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="space-y-8 sm:space-y-10">
-          {/* Character */}
+        <div className="space-y-12 sm:space-y-16">
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              01 CHARACTER
+              00 TEAM // HIRE US
             </div>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              We are simplifiers. In an industry that rewards complexity with
-              billable hours, we operate with a radical commitment to
-              architectural editing. We favor Zero-Magic patterns over
-              proprietary abstractions. If the web platform can handle a task
-              natively, we do not invent a new way to do it.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+              We build software for the long term.
+            </h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-6 leading-relaxed">
+              We partner with technical founders and engineering leaders to
+              design "Golden Path" systems: high-velocity infrastructure built
+              to remain understandable under the weight of AI-driven
+              development.
             </p>
+            <div className="flex flex-wrap gap-6 sm:gap-8 text-sm sm:text-base">
+              <a
+                href="https://calendar.app.google/p4UeizJNkdYexKwL9"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Book a call
+              </a>
+              <a
+                href="mailto:peter@redwoodjs.com"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Email
+              </a>
+              <a
+                href={Constants.DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Discord
+              </a>
+            </div>
           </div>
 
-          {/* Capacity */}
+          <br />
+
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              02 CAPACITY
+              01 THE THESIS
             </div>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              Leverage over headcount. We outperform larger agencies by
-              automating the friction that slows development down. We build the
-              Golden Path: The infrastructure for high-confidence validation and
-              instant deployment. We ensure your team can move faster without
-              the traditional tax of technical debt.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <p className="leading-relaxed">
+                AI-generated code has turned architectural discipline into a
+                survival requirement. Because AI is a force multiplier for code
+                volume, it is inherently a force multiplier for technical debt.
+                We believe in the Guardrail Mandate: building rigid,
+                deterministic systems through type-safe boundaries and automated
+                validation. These guardrails prevent AI agents from
+                hallucinating your architecture into a corner.
+              </p>
+              <p className="leading-relaxed">
+                True speed requires Understandability over Magic. If code is too
+                clever, AI cannot reason about it and humans cannot debug it. We
+                build "Zero-Magic" systems that stay legible to both. In this
+                era, the value of engineering shifted from writing code to
+                managing the "Paved Road" it runs on. We build that platform so
+                your team can focus entirely on product logic.
+              </p>
+            </div>
           </div>
 
-          {/* Compatibility */}
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              03 COMPATIBILITY
+              02 PRINCIPLES
             </div>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              Built for stability. We are the ideal partners for technical
-              leaders who recognize that as AI generates more code, the
-              underlying architecture must be incredibly stable. We fit best
-              with organizations that prioritize deterministic testing and
-              high-confidence, type-safe deployments.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <p className="leading-relaxed">
+                We practice Architectural Editing. We don't just ship features;
+                we curate the codebase to ensure it remains an asset. This means
+                favoring native web platform features over proprietary
+                abstractions. If the browser can handle a task natively, we do
+                not invent a new way to do it.
+              </p>
+              <p className="leading-relaxed">
+                Our Maintenance-First constraint ensures no vendor lock-in. If
+                we would not support the code for a decade, we will not build it
+                for you. This philosophy is enforced through Deterministic
+                Validation. We replace flaky tests with high-confidence E2E
+                pipelines, ensuring every feature is validated with zero noise,
+                even when generated by an LLM.
+              </p>
+            </div>
           </div>
 
-          {/* Constraint */}
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              04 CONSTRAINT
+              03 CAPABILITY
             </div>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              The Maintenance-First Mandate. Our refusal to build black boxes is
-              your greatest safety feature. If we would not want to support it
-              for a decade, we will not build it for you. This constraint
-              ensures no vendor lock-in; you remain the absolute owner of your
-              software.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <p className="leading-relaxed">
+                We are platform engineers who build the tools that define the
+                modern web. Our expertise is rooted in the K.I.S.S. Stack: Vite,
+                React, TypeScript, and Cloudflare. Having built the framework
+                twice, we understand React Server Components from the metal up.
+                We use this depth to enforce Type-Safe Governance, catching
+                architectural rot before it reaches production. Our work on
+                Machinen, our own AI product, allows us to battle-test these
+                theories in a live environment.
+              </p>
+            </div>
           </div>
 
-          {/* Confidence */}
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              05 CONFIDENCE
+              04 STEWARDSHIP
             </div>
-            <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-              Proven in the Lab. RedwoodJS Inc. is powered by the research and
-              development behind RedwoodJS (The original framework) and
-              RedwoodSDK. We don't just theorize about the web; we build the
-              frameworks and tooling that define it. We apply these distilled,
-              battle-tested solutions directly to your project.
-            </p>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <p className="leading-relaxed">
+                RedwoodJS was initiated by Tom Preston-Werner, the co-founder of
+                GitHub, to bring "Golden Path" discipline to the web. In 2024,
+                stewardship moved to Peter Pistorius, marking the start of
+                RedwoodJS Inc. We operate as a maintenance-first consultancy to
+                fund open-source innovation. We solve the hardest architectural
+                problems for our clients to ensure the framework's longevity. We
+                are not building to exit; we are building to last.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* Section 3: What We Do */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="prose prose-slate max-w-none">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6">
-            What We Do: The Paved Road
-          </h2>
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            As platform engineers, we design the "Golden Path" that allows lean
-            teams to ship code without the traditional tax of complexity.
-          </p>
-          <ul className="list-none space-y-4 text-base sm:text-lg text-slate-700">
-            <li className="relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-slate-600">
-              <strong className="font-semibold">
-                K.I.S.S. The Keep it Simple Stack:
-              </strong>{" "}
-              Experts in Vite, React, TypeScript, and Cloudflare. We've built
-              the framework, twice! And implemented React Server Components from
-              scratch, we understand it intimately.
-            </li>
-            <li className="relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-slate-600">
-              <strong className="font-semibold">
-                Deterministic Validation:
-              </strong>{" "}
-              We engineer reliable E2E pipelines that ensure AI-generated
-              features are validated with zero flakiness.
-            </li>
-            <li className="relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-slate-600">
-              <strong className="font-semibold">
-                Standardized Infrastructure:
-              </strong>{" "}
-              Automated Infrastructure-as-Code providing per-PR previews,
-              ephemeral databases, and automated secrets management.
-            </li>
-            <li className="relative pl-6 before:content-['•'] before:absolute before:left-0 before:text-slate-600">
-              <strong className="font-semibold">Type-Safe Governance:</strong>{" "}
-              We enforce strict, end-to-end type safety to catch architectural
-              rot before it reaches production.
-            </li>
-          </ul>
-        </div>
-      </section>
+          <div className="prose prose-slate max-w-none">
+            <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
+              05 CONTACT
+            </div>
+            <div className="space-y-6 text-base sm:text-lg text-slate-700">
+              <p className="leading-relaxed">
+                We partner with organizations that prioritize stability and
+                type-safe deployments. We offer Advisory for architectural
+                reviews, Implementation for V1 builds or migrations, and
+                Embedded Engineering to accelerate your team.
+              </p>
+              <p className="leading-relaxed">
+                Ready to build on a solid foundation? Whether starting fresh or
+                upgrading an existing React/Vite/TS stack, let's talk. We
+                partner with teams worldwide to handle the platform while they
+                focus on the product.
+              </p>
+            </div>
 
-      {/* Section 4: Who We Are */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="prose prose-slate max-w-none">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6">
-            Who We Are
-          </h2>
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            RedwoodJS Inc. is a maintenance-first consultancy built by the
-            people behind Redwood.
-          </p>
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            Redwood started as an independent open-source project initiated and
-            sponsored by Tom Preston-Werner, GitHub cofounder and the creator of
-            Jekyll, Gravatar, Semantic Versioning, and TOML.
-          </p>
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            RedwoodJS was founded by Tom Preston-Werner, Peter Pistorius, Rob
-            Cameron, and David Price.
-          </p>
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            In late 2024, Tom asked Peter to take over stewardship of the
-            project. That handoff marked the start of the next chapter: a
-            renewed focus on server-first React, zero-magic patterns, and the
-            kind of foundations that don't collapse under AI-driven velocity.
-          </p>
-          <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-            We don't just advise on these ideas, we build them. The R&D behind
-            RedwoodJS and RedwoodSDK is the lab that powers our consulting work.
-          </p>
-          <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
-            In additional to consulting, we are also building an AI product
-            called Machinen (Currently in private beta).
-          </p>
+            <div className="mt-8">
+              <a
+                href="https://calendar.app.google/p4UeizJNkdYexKwL9"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Book a call
+              </a>
+              <a
+                href="mailto:peter@redwoodjs.com"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Email
+              </a>
+              <a
+                href={Constants.DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-slate-800 hover:text-slate-600 underline font-mono"
+              >
+                Discord
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -240,8 +242,8 @@ export default function Team() {
       <footer className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto border-t border-slate-300 mt-12">
         <div className="prose prose-slate max-w-none">
           <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            RedwoodJS Inc. is a consultancy based in GMT+2. We do not build to
-            exit. We build to last.
+            RedwoodJS Inc. is a maintenance-first consultancy based in GMT+2. We
+            do not build to exit. We build to last.
           </p>
           <div className="flex flex-wrap gap-4 sm:gap-6 text-sm sm:text-base">
             <a
@@ -259,6 +261,14 @@ export default function Team() {
               className="text-slate-800 hover:text-slate-600 underline font-mono"
             >
               Twitter
+            </a>
+            <a
+              href={Constants.DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-800 hover:text-slate-600 underline font-mono"
+            >
+              Discord
             </a>
             <a
               href="mailto:peter@redwoodjs.com"
