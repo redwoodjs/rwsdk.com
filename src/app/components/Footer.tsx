@@ -2,6 +2,29 @@ import Constants from "../lib/Constants";
 import { CloudflareImage } from "./CloudflareImage";
 import { link } from "src/shared/links";
 
+function FooterLink({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <li>
+      <a
+        href={href}
+        className={`hover:text-purple focus:text-purple font-playfair transition-colors ${
+          className || ""
+        }`}
+      >
+        {children}
+      </a>
+    </li>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="bg-orange-light border-t border-orange-dark py-8 sm:py-12 md:py-[61px]">
@@ -12,23 +35,19 @@ export function Footer() {
               About
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
-              <li>
-                <a
-                  href={link("/personal-software")}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Personal Software
-                </a>
-              </li>
+              <FooterLink href={link("/team")}>Team</FooterLink>
+              <FooterLink
+                href={link("/blog/:slug", {
+                  slug: "why-cloudflare-unified-platform",
+                })}
+              >
+                Why Cloudflare?
+              </FooterLink>
+              <FooterLink href={link("/personal-software")}>
+                Personal Software
+              </FooterLink>
 
-              <li>
-                <a
-                  href={link("/blog")}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Blog
-                </a>
-              </li>
+              <FooterLink href={link("/blog")}>Blog</FooterLink>
             </ul>
           </div>
           <div>
@@ -36,71 +55,29 @@ export function Footer() {
               Resources
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
-              <li>
-                <a
-                  href="https://www.udemy.com/course/redwoodsdk-beginners-course/learn/lecture/51431222#overview"
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Udemy Beginner RedwoodSDK Course
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.LEARN_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Learn RedwoodSDK
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.CLOUDFLARE_DOCS_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Cloudflare RedwoodSDK Docs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/watch?v=bj2pL1amHow&ab_channel=Syntax"
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  SyntaxFM Podcast
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk"
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  SyntaxFM Interview
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.DOCS_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Docs
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.QUICK_START_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  Quick Start
-                </a>
-              </li>
+              <FooterLink href={Constants.QUICK_START_URL}>
+                Quick Start
+              </FooterLink>
+              <FooterLink href={Constants.DOCS_URL}>Docs</FooterLink>
+              <FooterLink href="https://www.udemy.com/course/redwoodsdk-beginners-course/learn/lecture/51431222#overview">
+                Udemy Beginner RedwoodSDK Course
+              </FooterLink>
+              <FooterLink href={Constants.LEARN_URL}>
+                Beginner Video Course
+              </FooterLink>
+              <FooterLink href={Constants.CLOUDFLARE_DOCS_URL}>
+                Cloudflare RedwoodSDK Docs
+              </FooterLink>
+              <FooterLink href="https://www.youtube.com/watch?v=bj2pL1amHow&ab_channel=Syntax">
+                SyntaxFM Podcast
+              </FooterLink>
+              <FooterLink href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk">
+                SyntaxFM Interview
+              </FooterLink>
 
-              <li>
-                <a
-                  href={Constants.REDWOOD_GRAPHQL_DOCS_URL}
-                  className="hover:text-purple focus:text-purple font-playfair transition-colors"
-                >
-                  RedwoodGraphQL Docs
-                </a>
-              </li>
+              <FooterLink href={Constants.REDWOOD_GRAPHQL_DOCS_URL}>
+                RedwoodGraphQL Docs
+              </FooterLink>
             </ul>
           </div>
           <div>
@@ -108,71 +85,58 @@ export function Footer() {
               Social
             </h3>
             <ul className="list-none text-[16px] sm:text-[20px] font-chivo space-y-2">
-              <li>
-                <a
-                  href={Constants.GITHUB_REPO}
-                  className="hover:text-purple focus:text-purple flex items-center font-playfair transition-colors"
-                >
-                  <img
-                    src="/images/github.svg"
-                    alt="Github"
-                    className="w-4 h-4 inline-block mr-2"
-                  />{" "}
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.DISCORD_URL}
-                  className="hover:text-purple focus:text-purple flex items-center font-playfair transition-colors"
-                >
-                  <img
-                    src="/images/discord.svg"
-                    alt="Discord"
-                    className="w-4 h-4 inline-block mr-2"
-                  />{" "}
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.YOUTUBE_URL}
-                  className="hover:text-purple focus:text-purple flex items-center font-playfair transition-colors"
-                >
-                  <img
-                    src="/images/youtube.svg"
-                    alt="YouTube"
-                    className="w-4 h-4 inline-block mr-2"
-                  />{" "}
-                  YouTube
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.BLUESKY_URL}
-                  className="hover:text-purple focus:text-purple flex items-center font-playfair transition-colors"
-                >
-                  <img
-                    src="/images/bluesky.svg"
-                    alt="BlueSky"
-                    className="w-4 h-4 inline-block mr-2"
-                  />{" "}
-                  Bluesky
-                </a>
-              </li>
-              <li>
-                <a
-                  href={Constants.X_URL}
-                  className="hover:text-purple focus:text-purple flex items-center font-playfair transition-colors"
-                >
-                  <img
-                    src="/images/x.svg"
-                    alt="X"
-                    className="w-4 h-4 inline-block mr-2"
-                  />{" "}
-                  X
-                </a>
-              </li>
+              <FooterLink
+                href={Constants.GITHUB_REPO}
+                className="flex items-center"
+              >
+                <img
+                  src="/images/github.svg"
+                  alt="Github"
+                  className="w-4 h-4 inline-block mr-2"
+                />{" "}
+                GitHub
+              </FooterLink>
+              <FooterLink
+                href={Constants.DISCORD_URL}
+                className="flex items-center"
+              >
+                <img
+                  src="/images/discord.svg"
+                  alt="Discord"
+                  className="w-4 h-4 inline-block mr-2"
+                />{" "}
+                Discord
+              </FooterLink>
+              <FooterLink
+                href={Constants.YOUTUBE_URL}
+                className="flex items-center"
+              >
+                <img
+                  src="/images/youtube.svg"
+                  alt="YouTube"
+                  className="w-4 h-4 inline-block mr-2"
+                />{" "}
+                YouTube
+              </FooterLink>
+              <FooterLink
+                href={Constants.BLUESKY_URL}
+                className="flex items-center"
+              >
+                <img
+                  src="/images/bluesky.svg"
+                  alt="BlueSky"
+                  className="w-4 h-4 inline-block mr-2"
+                />{" "}
+                Bluesky
+              </FooterLink>
+              <FooterLink href={Constants.X_URL} className="flex items-center">
+                <img
+                  src="/images/x.svg"
+                  alt="X"
+                  className="w-4 h-4 inline-block mr-2"
+                />{" "}
+                X
+              </FooterLink>
             </ul>
           </div>
           <div className="flex flex-col gap-4 max-w-[600px]">
