@@ -1,6 +1,6 @@
 import Constants from "src/lib/Constants";
 import { GitHubStarWidget } from "src/components/GitHubStarWidget";
-import { SDKButton } from "src/components/Button";
+import { Button } from "src/components/Button";
 import { Copy } from "src/components/Copy";
 import { link } from "src/shared/links";
 
@@ -62,7 +62,7 @@ export default function StartPage() {
           </li>
         </ol>
         <div className="mt-6">
-          <SDKButton text="Read the Quick Start" />
+          <Button text="Read the Quick Start" />
         </div>
       </section>
 
