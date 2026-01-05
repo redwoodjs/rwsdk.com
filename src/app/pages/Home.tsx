@@ -77,11 +77,10 @@ export default function Home() {
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
             <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[81%]">
-              A simple framework for humans
+              A simple framework for humans*
             </h1>
             <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold text-center leading-[0.9] max-w-[1060px] mx-auto">
-              Server-first React with zero magic. <br />
-              Built to stay understandable.
+              Server-first React with zero magic. Built to stay understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
               <Button>Get started</Button>
@@ -100,6 +99,108 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+        <div className="prose prose-slate max-w-none space-y-6">
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+            *... and AI
+          </h3>
+
+          <div className="space-y-6 text-base sm:text-lg text-slate-700">
+            <p className="leading-relaxed">
+              <strong>Simplicity for humans is determinism for AI.</strong>{" "}
+              Because we don't invent syntax or hide logic in "black boxes,"
+              your AI assistant doesn't have to guess. By sticking to TypeScript
+              and giving you direct control over the raw Request and Response,
+              we maximize the Signal-to-Noise ratio. You spend your tokens on
+              business logic, not on explaining a proprietary framework to your
+              LLM.
+            </p>
+
+            <h4 className="text-2xl sm:text-3xl font-bold text-slate-800 mt-8 mb-4">
+              The Principles
+            </h4>
+
+            <p className="leading-relaxed">
+              We use the web the way it works: standards, the browser, and the
+              network. Built with React, TypeScript, Vite, and Cloudflare in a
+              straightforward way. The result: systems that are easier to
+              understand, easier to change, and cheaper to maintain.
+            </p>
+
+            <div className="not-prose bg-editor rounded-xl overflow-hidden mt-8 mb-12 border border-slate-800">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-800/50">
+                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-600">
+                        Principle
+                      </th>
+                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-600">
+                        Technical Reality
+                      </th>
+                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-600">
+                        Why it helps the AI
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-slate-800/50">
+                      <td className="px-6 py-4 font-bold text-white text-sm">
+                        Zero Magic
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        No hidden code generation. If TypeScript can't do it, we
+                        won't.
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        No hallucinations. The AI sees the same code the engine
+                        executes.
+                      </td>
+                    </tr>
+                    <tr className="border-b border-slate-800/50">
+                      <td className="px-6 py-4 font-bold text-white text-sm">
+                        Server-First
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        Native RSC on Cloudflare V8 isolates.
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        One linear data flow instead of complex client/server
+                        sync loops.
+                      </td>
+                    </tr>
+                    <tr className="border-b border-slate-800/50">
+                      <td className="px-6 py-4 font-bold text-white text-sm">
+                        Total Control
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        Modify the raw Request/Response throughout the stack.
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        Standard Web APIs mean the AI uses its core training,
+                        not "hacks."
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-white text-sm">
+                        Web Standard
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        We use the browser and the network as intended.
+                      </td>
+                      <td className="px-6 py-4 text-slate-300 text-sm">
+                        High-signal code that is as easy to audit as it is to
+                        write.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Call to action section */}
       <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
@@ -248,6 +349,12 @@ export default function Home() {
             <strong>
               RedwoodSDK is for people who write software they own.
             </strong>
+            <p className="leading-relaxed">
+              We use the web the way it works: standards, the browser, and the
+              network. Built with React, TypeScript, Vite, and Cloudflare in a
+              straightforward way. The result: systems that are easier to
+              understand, easier to change, and cheaper to maintain over time.
+            </p>
             <p className="leading-relaxed">
               It's built on browser standards, not vendor abstractions—just
               native Web APIs and predictable behavior from request to response.
