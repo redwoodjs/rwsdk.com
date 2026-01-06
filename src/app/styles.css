@@ -5,7 +5,7 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-baige: #f4eedf;
+  --color-baige: #F9F7F2;
   --color-orange: #f47238;
   --color-orange-light: #ffad48;
   --color-orange-dark: #e73c36;
@@ -19,7 +19,11 @@
 }
 
 body {
-  @apply bg-baige text-black font-noto;
+  @apply bg-baige text-slate-800 font-noto;
+}
+
+a {
+  @apply font-mono underline text-slate-800 hover:text-slate-600 transition-colors;
 }
 
 .blog-page p,
