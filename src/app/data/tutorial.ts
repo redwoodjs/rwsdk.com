@@ -9,6 +9,7 @@ export interface CodeBlockStep {
   description: string;
   highlightLines?: number[]; // Line numbers (1-indexed) to highlight
   annotations?: Annotation[];
+  interactionKey?: string;
 }
 
 export interface CodeBlock {
@@ -23,6 +24,7 @@ export interface TutorialStep {
   annotations?: Annotation[];
   codeBlockIndex: number;
   stepIndex: number;
+  interactionKey?: string;
 }
 
 // Flattened structure for easy navigation
@@ -31,64 +33,47 @@ export const tutorialSteps: TutorialStep[] = [];
 // Code blocks with multiple steps
 export const codeBlocks: CodeBlock[] = [
   {
-    code: `\
-// Default code (fallback if step doesn't specify)
-export default defineApp([]);`,
+    code: ``,
     steps: [
       {
         code: `\
-// Browser - Standard fetch or navigation
-fetch('/api/users/123')
-  .then(res => res.json())
-  .then(data => console.log(data));`,
+import { route } from 'rwsdk/router';
+
+export default defineApp([
+  route('/', function handler() {
+    return new Response('Hello, World!')
+  }),
+]);`,
         description:
-          "The Browser Request: It starts with a standard fetch or navigation. Because RedwoodSDK is built on Vite and Cloudflare, there are no proprietary wrappers here.",
-        highlightLines: [1, 2],
+          "The router maps incoming requests by path to specific handlers, which then process the logic and return a response.",
+        highlightLines: [4, 5, 6],
         annotations: [
           {
-            word: "fetch",
-            text: "fetch",
-            lines: [2],
+            word: "path",
+            text: "/",
+            lines: [4],
+          },
+          {
+            word: "response",
+            text: "return new Response('Hello, World!')",
+            lines: [5],
           },
         ],
       },
       {
         code: `\
-// worker.tsx - The Entry Point
+import { route } from 'rwsdk/router';
+
+import { HomePage } from '@/app/pages/home-page';
+
 export default defineApp([
-  // All routes and middleware go here
+  route('/', function handler() {
+    return <HomePage />
+  }),
 ]);`,
         description:
-          "The Worker (The Entry): The request hits a Cloudflare Worker. This is defined in your worker.tsx using defineApp. It's the gateway for all traffic.",
-        highlightLines: [2],
-        annotations: [
-          {
-            word: "defineApp",
-            text: "defineApp",
-            lines: [2],
-          },
-        ],
-      },
-      {
-        code: `\
-// Middleware runs before routes
-export default defineApp([
-  async function logMiddleware({ request }) {
-    console.log(\`\${request.method} \${request.url}\`);
-  },
-  
-  async function authMiddleware({ ctx, request }) {
-    const session = await getSession(request);
-    if (session) {
-      ctx.user = await db.user.find({ id: session.userId });
-    }
-  },
-  
-  // Routes follow...
-]);`,
-        description:
-          "Middleware: Before hitting a route, the request passes through global or per-router middleware. This is where you inject headers, handle sessions, or log telemetry.",
-        highlightLines: [3, 4, 5, 6, 7, 8, 9, 10, 11],
+          "You can also return JSX from a route handler, which will be rendered into HTML and streamed to the browser.",
+        highlightLines: [3, 7],
         annotations: [
           {
             word: "Middleware",
@@ -104,18 +89,17 @@ export default defineApp([
       },
       {
         code: `\
-// Interruptor: Can halt the flow
-function requireAuth({ ctx }) {
-  if (!ctx.user) {
-    return new Response('Unauthorized', { status: 401 });
-  }
-}
+import { route } from 'rwsdk/router';
 
-route('/api/users/:id', [
-  requireAuth, // Interruptor runs first
-  async function handler({ request, params }) {
-    // This only runs if requireAuth doesn't return
-  }
+import { Document } from '@/app/document';
+import { HomePage } from '@/app/pages/home-page';
+
+export default defineApp([
+  render(Document, [
+    route('/', function handler() {
+      return <HomePage />
+    }),
+  ]),
 ]);`,
         description:
           "Interruptors: Unlike traditional middleware, interruptors can halt the flow. If a user isn't authenticated, the interruptor returns a Response (like a 401 or 302 redirect) before the route handler ever executes.",
@@ -470,6 +454,7 @@ export function getStepsForBlock(blockIndex: number): TutorialStep[] {
     description: step.description,
     highlightLines: step.highlightLines,
     annotations: step.annotations,
+    interactionKey: step.interactionKey,
     codeBlockIndex: blockIndex,
     stepIndex: stepIndex,
   }));

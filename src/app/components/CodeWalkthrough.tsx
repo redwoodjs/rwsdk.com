@@ -7,6 +7,7 @@ import {
   type TutorialStep,
   type Annotation,
 } from "src/data/tutorial";
+import RPCVisualizer from "./RPCVisualizer";
 
 // Matching theme from StyledCodeBlock
 const walkthroughTheme: PrismTheme = {
@@ -208,7 +209,7 @@ export default function CodeWalkthrough({
                   visible ? "opacity-100" : "opacity-0"
                 }`}
               >
-                <p className="text-[#E9B46A] text-xs sm:text-sm leading-relaxed">
+                <p className="text-[#E9B46A] text-xs sm:text-sm leading-relaxed mb-6">
                   {step.annotations
                     ? step.description.split(/(\s+)/).map((part, i) => {
                         const cleanWord = part.replace(/[.,]/g, "").trim();
@@ -234,6 +235,12 @@ export default function CodeWalkthrough({
                       })
                     : step.description}
                 </p>
+
+                {step.interactionKey?.startsWith("rpc-") && (
+                  <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                    <RPCVisualizer interactionKey={step.interactionKey} />
+                  </div>
+                )}
               </div>
             </div>
           </div>

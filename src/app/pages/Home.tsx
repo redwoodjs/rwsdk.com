@@ -11,7 +11,7 @@ import { Newsletter } from "src/components/Newsletter";
 import { Copy } from "src/components/Copy";
 import StyledCodeBlock from "src/components/StyledCodeBlock";
 import CodeWalkthrough from "src/components/CodeWalkthrough";
-import { getStepsForBlock } from "src/data/tutorial";
+import { homeWalkthroughBlocks } from "src/data/home_walkthrough_v2";
 import { link } from "src/shared/links";
 
 export default function Home() {
@@ -119,7 +119,7 @@ export default function Home() {
             </p>
 
             <h4 className="text-2xl sm:text-3xl font-bold text-slate-800 mt-8 mb-4">
-              The Principles
+              Our Principles
             </h4>
 
             <p className="leading-relaxed">
@@ -208,14 +208,14 @@ export default function Home() {
 
       {/* Call to action section */}
 
-      <section className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-10 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-center lg:text-left">
+      <section className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+        <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-left">
           <div className="prose prose-slate max-w-none">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
               Get started
             </h2>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-6 leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 leading-relaxed">
               Running this command installs Vite and the RedwoodSDK plugin which
               gives you React Server Components (RSC), a type-safe router,
               type-safe SQL, a Cloudflare development environment, and{" "}
@@ -223,7 +223,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-black mb-4 p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
+          <div className="bg-black p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
             <span className="text-orange">$</span>{" "}
             <span className="text-orange-light flex-1">
               npx create-rwsdk my-project-name
@@ -239,67 +239,26 @@ export default function Home() {
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="prose prose-slate max-w-none mb-12">
           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
-            The concept via code
+            Code
           </h3>
         </div>
-        <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-          00 THE REQUEST LIFECYCLE
-        </div>
-        <CodeWalkthrough steps={getStepsForBlock(0)} />
 
-        <div className="mt-20">
-          <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-            01 THE UI & STREAMING LIFECYCLE
-          </div>
-          <CodeWalkthrough steps={getStepsForBlock(1)} />
-        </div>
-
-        <div className="mt-20">
-          <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-            02 RPC (REACT SERVER FUNCTIONS)
-          </div>
-          <CodeWalkthrough steps={getStepsForBlock(2)} />
-        </div>
-      </section>
-
-      {/* Features section, 3 columns */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="prose prose-slate max-w-none mb-12">
-          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
-            Code samples
-          </h3>
-        </div>
-        {featureBlocks.map((block, idx) => (
-          <div key={block.title} className="mb-12 sm:mb-16">
-            <div
-              className={`flex flex-col md:flex-row gap-6 sm:gap-8 lg:gap-16 items-center justify-center ${
-                idx % 2 === 1 ? "md:flex-row-reverse" : ""
-              }`}
-            >
-              <div className="w-full md:w-1/3 text-left">
-                <div className="prose prose-slate max-w-none">
-                  <h3 className="text-base sm:text-lg text-slate-700 font-bold mb-4">
-                    {block.title}
-                  </h3>
-                  <ul className="list-disc list-outside ml-6 space-y-4 text-base sm:text-lg text-slate-700">
-                    {block.items.map((item: string, itemIndex: number) => (
-                      <li key={itemIndex} className="leading-relaxed">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="w-full md:w-2/3">
-                <StyledCodeBlock codeBlocks={block.code ?? []} />
-              </div>
+        {homeWalkthroughBlocks.map((block, index: number) => (
+          <div key={block.title} className={index > 0 ? "mt-20" : ""}>
+            <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2 uppercase">
+              {String(index).padStart(2, "0")} {block.title}
             </div>
+            <CodeWalkthrough
+              steps={block.steps.map((step, stepIndex: number) => ({
+                ...step,
+                code: step.code || block.code,
+                codeBlockIndex: index,
+                stepIndex: stepIndex,
+              }))}
+            />
           </div>
         ))}
       </section>
-
-      {/* Newsletter section */}
-      <Newsletter />
 
       {/* Footer section */}
       <Footer />
