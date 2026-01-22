@@ -61,10 +61,10 @@ export default function Home() {
       <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 top-[-60px]">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
-            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[81%]">
+            <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[1.1]">
               A simple framework for humans*
             </h1>
-            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold text-center leading-[0.9] max-w-[1060px] mx-auto">
+            <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold text-center leading-[1.2] max-w-[1060px] mx-auto">
               React and Cloudflare, without magic. Simple. Understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
