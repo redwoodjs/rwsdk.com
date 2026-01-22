@@ -1,12 +1,11 @@
+import { SEO } from "src/components/SEO";
 import Constants from "src/lib/Constants";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
 
 export function HireUs() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: "RedwoodJS Inc. - Consultancy",
+    name: "RedwoodJS Inc.",
     description:
       "RedwoodJS Inc. is a maintenance-first consultancy based in GMT+2. We do not build to exit. We build to last.",
     url: "https://rwsdk.com/hire-us",
@@ -14,35 +13,15 @@ export function HireUs() {
 
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      <SEO
+        title="RedwoodJS, Inc."
+        description="We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development."
+        ogTitle="RedwoodJS Inc."
+        ogUrl="https://rwsdk.com/hire-us"
+        structuredData={structuredData}
       />
-      <title>RedwoodJS, Inc. - Consultancy</title>
-      <meta
-        name="description"
-        content="We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development."
-      />
-      <meta property="og:title" content="RedwoodJS Inc. - Consultancy" />
-      <meta
-        property="og:description"
-        content="We build software for the long term. We partner with technical founders and engineering leaders to design 'Golden Path' systems: high-velocity infrastructure built to remain understandable under the weight of AI-driven development."
-      />
-      <meta property="og:url" content="https://rwsdk.com/team" />
-      <meta
-        property="og:image"
-        content="https://rwsdk.com/images/Homepage-og.png"
-      />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta
-        property="og:logo"
-        content="https://rwsdk.com/images/logo--light.svg"
-      />
-      <meta property="og:locale" content="en_US" />
 
       {/* Header */}
-      <Navbar />
 
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="space-y-12 sm:space-y-16">
@@ -174,7 +153,6 @@ export function HireUs() {
       </section>
 
       {/* Footer */}
-      <Footer />
     </div>
   );
 }

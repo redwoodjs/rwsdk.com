@@ -1,5 +1,5 @@
 import { defineApp } from "rwsdk/worker";
-import { index, render, route, prefix } from "rwsdk/router";
+import { index, render, route, prefix, layout } from "rwsdk/router";
 import { Document } from "src/Document";
 import Home from "src/pages/Home";
 import { setCommonHeaders } from "src/headers";
@@ -11,6 +11,7 @@ import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/Start";
 import { HireUs } from "./app/pages/HireUs";
+import Layout from "./app/components/Layout";
 
 export type AppContext = {};
 
@@ -18,11 +19,12 @@ export default defineApp([
   setCommonHeaders(),
 
   render(Document, [
-    route("/", Home),
-    route("/personal-software", PersonalSoftware),
-    route("/hire-us", HireUs),
-
-    prefix("/blog", blogRoutes),
+    ...layout(Layout, [
+      route("/", Home),
+      route("/personal-software", PersonalSoftware),
+      route("/hire-us", HireUs),
+      prefix("/blog", blogRoutes),
+    ]),
 
     route("/start", StartPage),
 
@@ -53,7 +55,6 @@ export default defineApp([
       });
     }),
     route("/robots.txt", async () => {
-      // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
         Disallow: /start

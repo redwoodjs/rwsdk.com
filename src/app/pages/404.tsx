@@ -1,9 +1,15 @@
 import { Navbar } from "src/components/Navbar";
 import { Footer } from "src/components/Footer";
+import { SEO } from "src/components/SEO";
 
 export default function NotFound() {
   return (
     <div className="flex flex-col min-h-screen">
+      <SEO
+        title="404 - Page Not Found | RedwoodSDK"
+        description="The page you're looking for doesn't exist."
+        robots="noindex, nofollow"
+      />
       <Navbar activePage="" />
       <div className="flex-1 flex flex-col items-center justify-center px-4">
         <h1 className="text-6xl sm:text-7xl lg:text-8xl text-slate-800 mb-4 font-playfair font-bold">

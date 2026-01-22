@@ -1,8 +1,7 @@
 import { CloudflareImage } from "src/components/CloudflareImage";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
 import { link } from "src/shared/links";
+import { SEO } from "src/components/SEO";
 
 export default async function BlogList() {
   // Fetch and parse all blog posts
@@ -24,30 +23,18 @@ export default async function BlogList() {
 
   return (
     <div className="min-h-screen">
-      {/* SEO Metadata */}
-      <title>Blog - RedwoodSDK</title>
-      <meta
-        name="description"
-        content="RedwoodSDK is loved because it's simple. This is our blog about building the framework and how we help teams ship high-velocity software on Cloudflare."
-      />
-      <meta property="og:title" content="Blog - RedwoodSDK" />
-      <meta
-        property="og:description"
-        content="RedwoodSDK is loved because it's simple. This is our blog about building the framework and how we help teams ship high-velocity software on Cloudflare."
-      />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://rwsdk.com/blog" />
-      <meta
-        property="og:image"
-        content="https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/ee6336e7-f053-406f-1622-ee4082b6e800/public"
+      <SEO
+        title="Blog | RedwoodSDK"
+        description="RedwoodSDK is loved because it's simple. This is our blog about building the framework and how we help teams ship high-velocity software on Cloudflare."
+        ogUrl="https://rwsdk.com/blog"
+        ogImage="https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/ee6336e7-f053-406f-1622-ee4082b6e800/public"
       />
 
-      <Navbar activePage="blog" />
 
       {/* Hero Section */}
       <div className="max-w-[800px] mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-20">
         <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-          00 BLOG
+          BLOG
         </div>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
           We build RedwoodSDK. We build for you.
@@ -108,7 +95,6 @@ export default async function BlogList() {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

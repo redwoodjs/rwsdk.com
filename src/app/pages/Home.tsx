@@ -3,8 +3,6 @@ import {
   CloudflareImage,
   CloudflareBackground,
 } from "src/components/CloudflareImage";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
 import { featureBlocks } from "src/data/features";
 import { Button } from "src/components/Button";
 import { Newsletter } from "src/components/Newsletter";
@@ -13,6 +11,7 @@ import StyledCodeBlock from "src/components/StyledCodeBlock";
 import CodeWalkthrough from "src/components/CodeWalkthrough";
 import { homeWalkthroughBlocks } from "src/data/home_walkthrough_v2";
 import { link } from "src/shared/links";
+import { SEO } from "src/components/SEO";
 
 export default function Home() {
   const structuredData = {
@@ -51,29 +50,13 @@ export default function Home() {
 
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      <SEO
+        title="RedwoodSDK: A simple framework for humans"
+        description="Server-first React with zero magic. Built to stay understandable."
+        ogUrl="https://rwsdk.com"
+        ogImageAlt="RedwoodSDK: A simple framework for humans"
+        structuredData={structuredData}
       />
-      <meta
-        property="og:title"
-        content="RedwoodSDK: A simple framework for humans"
-      />
-      <meta
-        property="og:description"
-        content="Server-first React with zero magic. Built to stay understandable."
-      />
-      <meta
-        property="og:image"
-        content="https://rwsdk.com/images/Homepage-og.png"
-      />
-      <meta property="og:url" content="https://rwsdk.com" />
-      <meta property="og:site_name" content="RedwoodSDK" />
-      <meta
-        property="og:image:alt"
-        content="RedwoodSDK: A simple framework for humans"
-      />
-      <Navbar />
       {/* Hero section */}
       <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 top-[-60px]">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
@@ -262,7 +245,6 @@ export default function Home() {
 
 
       {/* Footer section */}
-      <Footer />
     </div>
   );
 }

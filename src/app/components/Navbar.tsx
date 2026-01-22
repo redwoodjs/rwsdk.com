@@ -38,15 +38,15 @@ interface NavbarProps {
 
 export function Navbar(props: NavbarProps) {
   return (
-    <div className="flex flex-col lg:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200">
+    <div className="flex flex-col justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200">
       <a className="cursor-pointer" href={link("/")}>
         <CloudflareImage
           imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
           alt="logo"
-          className="w-[140px] sm:w-[186px] sm:mb-4 lg:mb-0"
+          className="w-[186px] mb-4"
         />
       </a>
-      <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap- font-noto font-bold text-[14px] sm:text-[16px] md:text-[18px] mt-4 lg:mt-0">
+      <div className="flex flex-wrap justify-center gap-2 font-noto font-bold text-[16px] mt-4">
         {navItems.map((item, index) => (
           <span key={item.label} className="contents">
             <NavLink href={item.href} label={item.label} />

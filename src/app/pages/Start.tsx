@@ -1,3 +1,4 @@
+import { SEO } from "src/components/SEO";
 import Constants from "src/lib/Constants";
 import { GitHubStarWidget } from "src/components/GitHubStarWidget";
 import { Button } from "src/components/Button";
@@ -7,9 +8,11 @@ import { link } from "src/shared/links";
 export default function StartPage() {
   return (
     <div className="max-w-[1100px] mx-auto px-3 sm:px-4 md:px-8 py-10 sm:py-14 md:py-20">
-      {/* Instruct robots not to index this page */}
-      <meta name="robots" content="noindex, nofollow" />
-      <meta name="googlebot" content="noindex, nofollow" />
+      <SEO
+        title="Welcome to RedwoodSDK"
+        description="Get started with RedwoodSDK - a React framework for Cloudflare."
+        robots="noindex, nofollow"
+      />
       <div className="flex items-center gap-3 mb-6">
         <a
           href={link("/")}
@@ -74,7 +77,6 @@ export default function StartPage() {
           If this project helps you, please give us a star on GitHub:
         </p>
         {/* Server Component */}
-        {/* @ts-expect-error Async Server Component */}
         <GitHubStarWidget />
       </section>
 

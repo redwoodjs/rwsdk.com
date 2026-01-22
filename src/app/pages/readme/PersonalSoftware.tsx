@@ -1,8 +1,7 @@
 import Header from "src/components/Header";
 import HeroImage from "src/components/HeroImage";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
 import { link } from "src/shared/links";
+import { SEO } from "src/components/SEO";
 
 export default function PersonalSoftware() {
   const structuredData = {
@@ -37,37 +36,15 @@ export default function PersonalSoftware() {
 
   return (
     <div>
-      <Navbar activePage="personal-software" />
       <div className="flex flex-col lg:flex-row min-h-screen">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        <SEO
+          title="Personal Software | RedwoodSDK"
+          description="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
+          ogTitle="The Personal Software Revolution | RedwoodSDK"
+          ogUrl="https://rwsdk.com/personal-software"
+          ogImage="https://rwsdk.com/images/PersonalSoftware-og.png"
+          structuredData={structuredData}
         />
-        <title>Personal Software | RedwoodSDK</title>
-        <meta
-          name="description"
-          content="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
-        />
-        <meta
-          property="og:title"
-          content="The Personal Software Revolution | RedwoodSDK"
-        />
-        <meta
-          property="og:description"
-          content="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
-        />
-        <meta property="og:url" content="https://rwsdk.com/personal-software" />
-        <meta
-          property="og:image"
-          content="https://rwsdk.com/images/PersonalSoftware-og.png"
-        />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          property="og:logo"
-          content="https://rwsdk.com/images/logo--light.svg"
-        />
-        <meta property="og:locale" content="en_US" />
         <HeroImage />
         <div className="flex-1 flex flex-col">
           <Header />
@@ -288,7 +265,6 @@ export default function PersonalSoftware() {
           </main>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

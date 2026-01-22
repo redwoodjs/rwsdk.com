@@ -44,9 +44,9 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
         </svg>
         <span className="font-medium no-underline">
           {error
-            ? "1300"
+            ? "1376"
             : starCount === null
-            ? "1300"
+            ? "1376"
             : starCount.toLocaleString()}
         </span>
       </a>
