@@ -260,6 +260,7 @@ export default function Home() {
         ))}
       </section>
 
+
       {/* Footer section */}
       <Footer />
     </div>

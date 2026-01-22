@@ -82,7 +82,7 @@ export const Document: React.FC<{
         <link rel="stylesheet" href={stylesUrl} />
         <link rel="modulepreload" href="/src/client.tsx" />
       </head>
-      <body>
+      <body className="bg-baige text-slate-800 font-noto">
         <div id="root">{children}</div>
         <script>import("/src/client.tsx")</script>
         <script

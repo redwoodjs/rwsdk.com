@@ -1,5 +1,6 @@
 import Constants from "src/lib/Constants";
 import { Navbar } from "src/components/Navbar";
+import { Footer } from "src/components/Footer";
 
 export function HireUs() {
   const structuredData = {
@@ -12,7 +13,7 @@ export function HireUs() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -154,15 +155,16 @@ export function HireUs() {
               </p>
             </div>
 
-            <div className="mt-8 flex gap-6" id="contact">
-              <a href="https://calendar.app.google/p4UeizJNkdYexKwL9">
+            <div className="not-prose mt-8 flex gap-6 text-slate-800 font-bold" id="contact">
+              <a href="https://calendar.app.google/p4UeizJNkdYexKwL9" className="hover:text-orange transition-colors">
                 Book a call
               </a>
-              <a href="mailto:peter@redwoodjs.com">Email</a>
+              <a href="mailto:peter@redwoodjs.com" className="hover:text-orange transition-colors">Email</a>
               <a
                 href={Constants.DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="hover:text-orange transition-colors"
               >
                 Discord
               </a>
@@ -172,14 +174,7 @@ export function HireUs() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto border-t border-slate-300 mt-12">
-        <div className="prose prose-slate max-w-none">
-          <p className="text-base sm:text-lg text-slate-700 mb-6 leading-relaxed">
-            RedwoodJS Inc. is a maintenance-first consultancy based in GMT+2. We
-            do not build to exit. We build to last.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

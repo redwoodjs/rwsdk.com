@@ -15,7 +15,7 @@ function FooterLink({
     <li>
       <a
         href={href}
-        className={`hover:text-purple focus:text-purple font-playfair transition-colors ${
+        className={`hover:text-purple focus:text-purple transition-colors ${
           className || ""
         }`}
       >

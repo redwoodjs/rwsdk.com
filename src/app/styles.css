@@ -18,37 +18,7 @@
   --font-noto: "Noto Sans", sans-serif;
 }
 
-body {
-  @apply bg-baige text-slate-800 font-noto;
-}
 
-a {
-  @apply font-mono underline text-slate-800 hover:text-slate-600 transition-colors;
-}
-
-.blog-page p,
-.blog-page ol,
-.blog-page ul {
-  font-size: 16px;
-  font-weight: 500;
-  @apply font-noto;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1;
-}
-
-.blog-page h1,
-.blog-page h2,
-.blog-page h3,
-.blog-page h4,
-.blog-page h5,
-.blog-page h6 {
-  line-height: 1.2;
-  @apply font-playfair;
-}
 
 .grid-bg {
   background-image: linear-gradient(#e5e5e5 1px, transparent 1px),
@@ -73,14 +43,6 @@ h3 {
 
 .language-typescript {
   @apply text-orange-light;
-}
-
-.hover\:fill-orange:hover {
-  fill: #ffa500; /* Replace with your specific orange color */
-}
-
-.github-start:hover svg path {
-  fill: #ffa500; /* Replace with your specific orange color */
 }
 
 .prose code:not(.hljs) {
@@ -185,7 +147,4 @@ footer a:focus img[src$=".svg"] {
 .hljs-deletion {
   color: #ffdcd7;
   background-color: #67060c;
-}
-
-.addon-changelog {
 }

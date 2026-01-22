@@ -42,7 +42,7 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
             className="hover:fill-orange"
           />
         </svg>
-        <span className="font-medium">
+        <span className="font-medium no-underline">
           {error
             ? "1300"
             : starCount === null
