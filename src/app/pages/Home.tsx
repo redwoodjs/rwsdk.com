@@ -52,7 +52,7 @@ export default function Home() {
     <div>
       <SEO
         title="RedwoodSDK: A simple framework for humans"
-        description="Server-first React with zero magic. Built to stay understandable."
+        description="React and Cloudflare, without magic. Simple. Understandable."
         ogUrl="https://rwsdk.com"
         ogImageAlt="RedwoodSDK: A simple framework for humans"
         structuredData={structuredData}
@@ -65,7 +65,7 @@ export default function Home() {
               A simple framework for humans*
             </h1>
             <h3 className="text-[18px] sm:text-[24px] md:text-[32px] font-bold text-center leading-[0.9] max-w-[1060px] mx-auto">
-              Server-first React with zero magic. Built to stay understandable.
+              React and Cloudflare, without magic. Simple. Understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
               <Button>Get started</Button>
@@ -131,7 +131,7 @@ export default function Home() {
                   <tbody>
                     <tr className="border-b border-slate-800/50">
                       <td className="px-6 py-4 font-bold text-white text-sm">
-                        Zero Magic
+                        Without Magic
                       </td>
                       <td className="px-6 py-4 text-slate-300 text-sm">
                         No code generation or file-system conventions. What you
