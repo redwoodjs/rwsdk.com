@@ -74,7 +74,7 @@ export default function Home() {
                 href={link("/blog/:slug", {
                   slug: "why-cloudflare-unified-platform",
                 })}
-                className="!text-sm !text-slate-500"
+                className="!text-sm !text-slate-500 font-mono underline"
               >
                 Built for
                 <br />
