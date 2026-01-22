@@ -68,7 +68,12 @@ export default function Home() {
               React and Cloudflare, without magic. Simple. Understandable.
             </h3>
             <div className="flex flex-col items-center gap-3">
-              <Button>Get started</Button>
+              <a
+                href="#get-started"
+                className="inline-block !no-underline text-[16px] sm:text-[18px] md:text-[16px] px-4 sm:px-3 md:px-8 py-1 bg-[#E0E0E0] border-2 border-t-white border-l-white border-r-[#A0A0A0] border-b-[#A0A0A0] rounded-[4px] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),inset_0_-1px_0_0_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.1)] hover:bg-[#D0D0D0] active:border-t-[#A0A0A0] active:border-l-[#A0A0A0] active:border-r-white active:border-b-white active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] transition-all"
+              >
+                Get started
+              </a>
               <br />
               <a
                 href={link("/blog/:slug", {
@@ -191,7 +196,7 @@ export default function Home() {
 
       {/* Call to action section */}
 
-      <section className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+      <section id="get-started" className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
         <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-left">
           <div className="prose prose-slate max-w-none">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
