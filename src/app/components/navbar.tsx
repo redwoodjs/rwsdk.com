@@ -1,8 +1,8 @@
-import { CloudflareImage } from "./CloudflareImage";
+import { CloudflareImage } from "./cloudflare-image";
 import Constants from "src/lib/Constants";
 import { link } from "src/shared/links";
-import { GitHubStarWidget } from "./GitHubStarWidget";
-import { ScrollShadow } from "./ScrollShadow";
+import { GitHubStarWidget } from "./github-star-widget";
+import { ScrollShadow } from "./scroll-shadow";
 
 interface NavItem {
   href: string;

@@ -1,8 +1,8 @@
-import Post from "../components/Post";
+import Post from "../components/post";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { marked } from "marked";
 import { link } from "src/shared/links";
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 
 
 interface BlogPageProps {

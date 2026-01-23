@@ -1,7 +1,7 @@
-import { CloudflareImage } from "src/components/CloudflareImage";
+import { CloudflareImage } from "src/components/cloudflare-image";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { link } from "src/shared/links";
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 
 export default async function BlogList() {
   // Fetch and parse all blog posts

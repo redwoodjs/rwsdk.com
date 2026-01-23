@@ -1,8 +1,8 @@
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 import Constants from "src/lib/Constants";
-import { GitHubStarWidget } from "src/components/GitHubStarWidget";
-import { Button } from "src/components/Button";
-import { Copy } from "src/components/Copy";
+import { GitHubStarWidget } from "src/components/github-star-widget";
+import { Button } from "src/components/button";
+import { Copy } from "src/components/copy";
 import { link } from "src/shared/links";
 
 export default function StartPage() {

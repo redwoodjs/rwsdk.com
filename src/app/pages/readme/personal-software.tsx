@@ -1,7 +1,7 @@
-import Header from "src/components/Header";
-import HeroImage from "src/components/HeroImage";
+import Header from "src/components/header";
+import HeroImage from "src/components/hero-image";
 import { link } from "src/shared/links";
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 
 export default function PersonalSoftware() {
   const structuredData = {

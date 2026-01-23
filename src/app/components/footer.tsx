@@ -1,5 +1,5 @@
 import Constants from "../lib/Constants";
-import { CloudflareImage } from "./CloudflareImage";
+import { CloudflareImage } from "./cloudflare-image";
 import { link } from "src/shared/links";
 
 function FooterLink({

@@ -1,11 +1,11 @@
 import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
-import RouterWalkthrough from "src/components/RouterWalkthrough";
-import { Love } from "src/components/Love";
-import { Copy } from "src/components/Copy";
+import RouterWalkthrough from "src/components/router-walkthrough";
+import { Love } from "src/components/love";
+import { Copy } from "src/components/copy";
 
 import { link } from "src/shared/links";
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 
 export default function Home() {
   const structuredData = {

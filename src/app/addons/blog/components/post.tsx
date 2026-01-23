@@ -1,7 +1,7 @@
 "use client";
-import { CloudflareImage } from "src/components/CloudflareImage";
+import { CloudflareImage } from "src/components/cloudflare-image";
 import { BlogPost } from "../data/posts/types";
-import Content from "./Content";
+import Content from "./content";
 
 export default function Post({ post }: { post: BlogPost }) {
   return (

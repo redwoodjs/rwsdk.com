@@ -1,4 +1,4 @@
-import { SEO } from "src/components/SEO";
+import { SEO } from "src/components/seo";
 import Constants from "src/lib/Constants";
 
 export function HireUs() {

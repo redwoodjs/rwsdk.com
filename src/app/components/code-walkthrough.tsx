@@ -7,7 +7,7 @@ import {
   type TutorialStep,
   type Annotation,
 } from "src/data/tutorial";
-import RPCVisualizer from "./RPCVisualizer";
+import RPCVisualizer from "./rpc-visualizer";
 
 // Matching theme from StyledCodeBlock
 const walkthroughTheme: PrismTheme = {

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Button } from "./Button";
+import { Button } from "./button";
 
 interface GitHubRepoData {
   stargazers_count: number;

@@ -1,6 +1,6 @@
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
-import { SEO } from "src/components/SEO";
+import { Navbar } from "src/components/navbar";
+import { Footer } from "src/components/footer";
+import { SEO } from "src/components/seo";
 
 export default function NotFound() {
   return (

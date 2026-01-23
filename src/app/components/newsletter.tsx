@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { CloudflareImage } from "./CloudflareImage";
+import { CloudflareImage } from "./cloudflare-image";
 declare global {
   interface Window {
     __kwesformsScriptAdded?: boolean;

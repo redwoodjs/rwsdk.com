@@ -142,9 +142,9 @@ export const featureBlocks: FeatureBlock[] = [
       "You’re in control of the entire response, from status code to closing tag."
     ],
     code: [`
-    import { Document } from "@/pages/Document";
-    import { NoJSDocument } from "@/pages/NoJSDocument";
-    import { HomePage } from "@/pages/HomePage";
+    import { Document } from "@/pages/document";
+    import { NoJSDocument } from "@/pages/no-js-document";
+    import { HomePage } from "@/pages/home";
 
     export default defineApp([
       render(Document, [route("/", HomePage)]),

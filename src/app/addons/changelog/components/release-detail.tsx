@@ -1,7 +1,7 @@
 import { env } from "cloudflare:workers";
 
 import { type GitHubRelease } from "../types";
-import { LocalizedDate } from "./LocalizedDate";
+import { LocalizedDate } from "./localized-date";
 
 export const UserInfo = ({ author }: { author: GitHubRelease["author"] }) => {
   return (
