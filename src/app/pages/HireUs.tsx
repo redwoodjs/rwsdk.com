@@ -27,7 +27,7 @@ export function HireUs() {
         <div className="space-y-12 sm:space-y-16">
           <div className="prose prose-slate max-w-none">
             <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
-              00 HIRE US
+              HIRE US
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
               We build software that stays easy to run.

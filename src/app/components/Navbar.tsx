@@ -2,6 +2,7 @@ import { CloudflareImage } from "./CloudflareImage";
 import Constants from "src/lib/Constants";
 import { link } from "src/shared/links";
 import { GitHubStarWidget } from "./GitHubStarWidget";
+import { ScrollShadow } from "./ScrollShadow";
 
 interface NavItem {
   href: string;
@@ -38,15 +39,22 @@ interface NavbarProps {
 
 export function Navbar(props: NavbarProps) {
   return (
-    <div className="flex flex-col justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-shadow duration-200">
-      <a className="cursor-pointer" href={link("/")}>
+    <div
+      id="main-navbar"
+      className="group flex flex-col justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-all duration-200 max-md:group-data-[scrolled=true]:py-2"
+    >
+      <ScrollShadow />
+      <a
+        className="cursor-pointer mb-4 transition-all duration-300 overflow-hidden max-h-[100px] opacity-100 max-md:group-data-[scrolled=true]:max-h-0 max-md:group-data-[scrolled=true]:opacity-0 max-md:group-data-[scrolled=true]:mb-0"
+        href={link("/")}
+      >
         <CloudflareImage
           imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
           alt="logo"
-          className="w-[186px] mb-4"
+          className="w-[186px]"
         />
       </a>
-      <div className="flex flex-wrap justify-center gap-2 font-noto font-bold text-[16px] mt-4">
+      <div className="flex flex-nowrap whitespace-nowrap justify-center gap-1 sm:gap-2 font-noto font-bold text-sm sm:text-[16px] mt-4 transition-all duration-300 max-md:group-data-[scrolled=true]:mt-0">
         {navItems.map((item, index) => (
           <span key={item.label} className="contents">
             <NavLink href={item.href} label={item.label} />
@@ -54,17 +62,19 @@ export function Navbar(props: NavbarProps) {
           </span>
         ))}
         <NavSeparator />
-        <a
-          href={Constants.GITHUB_REPO}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 leading-none"
-        >
-          GitHub
+        <div className="inline-flex items-center gap-2 leading-none">
+          <a
+            href={Constants.GITHUB_REPO}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-orange-medium transition-colors"
+          >
+            GitHub
+          </a>
           <span className="!text-slate-400 !no-underline">
             <GitHubStarWidget />
           </span>
-        </a>
+        </div>
       </div>
     </div>
   );

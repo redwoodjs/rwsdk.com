@@ -4,7 +4,7 @@ import stylesUrl from "./styles.css?url";
 // CSP directives organized by type
 const cspDirectives = {
   "script-src":
-    "'self' 'unsafe-inline' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com",
+    "'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com",
   "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src": "'self' https://fonts.gstatic.com",
   "connect-src":

@@ -33,7 +33,7 @@ const gtmScript = `
 // CSP directives organized by type
 const cspDirectives = {
   "script-src":
-    "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
+    "'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
   "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src": "'self' https://fonts.gstatic.com",
   "connect-src":

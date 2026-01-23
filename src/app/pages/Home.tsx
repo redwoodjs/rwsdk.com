@@ -1,16 +1,7 @@
 import Constants from "src/lib/Constants";
-import {
-  CloudflareImage,
-  CloudflareBackground,
-} from "src/components/CloudflareImage";
 import { featureBlocks } from "src/data/features";
-import { Button } from "src/components/Button";
-import { Newsletter } from "src/components/Newsletter";
-import { Copy } from "src/components/Copy";
-import StyledCodeBlock from "src/components/StyledCodeBlock";
-import CodeWalkthrough from "src/components/CodeWalkthrough";
 import RouterWalkthrough from "src/components/RouterWalkthrough";
-import { homeWalkthroughBlocks } from "src/data/home_walkthrough_v2";
+
 import { link } from "src/shared/links";
 import { SEO } from "src/components/SEO";
 
@@ -59,7 +50,7 @@ export default function Home() {
         structuredData={structuredData}
       />
       {/* Hero section */}
-      <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20 top-[-60px]">
+      <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
             <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[1.1]">
@@ -91,7 +82,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
         <div className="prose prose-slate max-w-none space-y-6">
           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
             *... and AI
@@ -197,11 +188,15 @@ export default function Home() {
 
       {/* Router Walkthrough Section */}
       <section className="py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
-        <div className="mb-16 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            The Router
+          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+            The Code
+          </h3>
+
+        <div className="mb-6 text-left">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-6">
+            Routing
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl">
              Composable functions that describe your app using standard TypeScript.
           </p>
         </div>

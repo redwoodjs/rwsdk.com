@@ -13,6 +13,7 @@ export default defineApp([
   }),
 ])`,
     highlightLines: [5, 6, 7, 8],
+    focusLine: 11,
   },
   {
     title: "Response Types",
@@ -27,10 +28,13 @@ export default defineApp([
   }),
   route("/api", () => {
     // Returns Response objects
-    return new Response(JSON.stringify({ message: "Hello, World!" }))
+    return new Response(
+      JSON.stringify({ message: "Hello, World!" })
+    )
   }),
 ])`,
-    highlightLines: [6, 7, 10, 11,],
+    highlightLines: [6, 7, 10, 11, 12, 13],
+    focusLine: 7,
   },
   {
     title: "Composability",
@@ -52,6 +56,7 @@ export default defineApp([
   //     /api/posts
 ])`,
     highlightLines: [4, 5, 6, 7, 8, 12, 13, 14, 15],
+    focusLine: 12,
   },
   
   {
@@ -74,6 +79,7 @@ export default defineApp([
 ])`,
     
     highlightLines: [5, 6, 7, 8],
+    focusLine: 6,
   },
   {
     title: "Interrupters",
@@ -94,5 +100,6 @@ export default defineApp([
   ])
 ])`,
     highlightLines: [4, 5, 6, 7, 8, 12],
+    focusLine: 12,
   }
 ];
