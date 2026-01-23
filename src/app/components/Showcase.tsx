@@ -155,13 +155,6 @@ const QuoteCard = ({
         ${className}
       `}
     >
-      <a 
-        href={quote.url} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="absolute inset-0 z-0"
-        aria-label={`View post by ${quote.author}`}
-      />
       
       <div className="relative z-10 flex flex-col h-full">
         <blockquote className={`
@@ -183,19 +176,23 @@ const QuoteCard = ({
           <div className="flex items-center gap-3">
             <img 
               src={`https://unavatar.io/${quote.platform === 'x' ? 'twitter' : quote.platform}/${quote.handle}`} 
-              alt={quote.author}
-              className="w-10 h-10 rounded-full bg-slate-100 object-cover border border-slate-200/50"
+              alt=""
+              className="w-10 h-10 rounded-full bg-slate-100 object-cover border border-slate-200/50 overflow-hidden"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(quote.author)}&background=random`;
               }}
             />
             <div>
               <div className={`font-bold text-xs ${isDark ? 'text-white' : 'text-slate-900'}`}>{quote.author}</div>
-              <div className="flex items-center gap-2">
-                <span className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>@{quote.handle}</span>
-                <span className={`text-[10px] ${isDark ? 'text-slate-600' : 'text-slate-300'}`}>•</span>
-                <span className={`text-[10px] ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{quote.date}</span>
-              </div>
+              <div className={`text-[10px] ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>@{quote.handle}</div>
+              <a 
+                href={quote.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`text-[10px] ${isDark ? 'text-slate-500 hover:text-slate-300' : 'text-slate-400 hover:text-slate-600'} hover:underline transition-colors`}
+              >
+                {quote.date}
+              </a>
             </div>
           </div>
           <PlatformIcon platform={quote.platform} />
@@ -210,19 +207,17 @@ export default function Showcase() {
 
   return (
     <section className="py-24 px-4 sm:px-8 max-w-[1240px] mx-auto overflow-hidden">
-      <div className="text-center mb-16">
+      <div className="text-left mb-16 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
           Wall of Love
         </h2>
-        <p className="text-slate-500 text-lg sm:text-xl font-medium">
-          The best developers are building with RedwoodSDK.
-        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6 auto-rows-min mb-12">
-        <QuoteCard quote={quotes[0]} isLarge isWide />
-        <QuoteCard quote={quotes[1]} isDark className="md:col-span-3 lg:col-span-6" />
-        <QuoteCard quote={quotes[2]} className="md:col-span-3 lg:col-span-6" />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-min mb-12 px-4">
+        <QuoteCard quote={quotes[0]} className="col-span-1" />
+        <QuoteCard quote={quotes[4]} className="col-span-1" />
+        <QuoteCard quote={quotes[3]} className="col-span-1" />
+        <QuoteCard quote={quotes[5]} className="col-span-1" />
       </div>
 
       {/* Marquee for the rest */}
@@ -240,11 +235,15 @@ export default function Showcase() {
               ease: "linear",
             }}
           >
-            {[...quotes.slice(3), ...quotes.slice(3)].map((quote, i) => (
-              <div key={i} className="w-[300px] shrink-0">
-                <QuoteCard quote={quote} />
-              </div>
-            ))}
+            {(() => {
+              const displayedIndices = [0, 4, 3, 5];
+              const remainingQuotes = quotes.filter((_, i) => !displayedIndices.includes(i));
+              return [...remainingQuotes, ...remainingQuotes].map((quote, i) => (
+                <div key={i} className="w-[300px] shrink-0">
+                  <QuoteCard quote={quote} />
+                </div>
+              ));
+            })()}
           </motion.div>
         </div>
       </div>

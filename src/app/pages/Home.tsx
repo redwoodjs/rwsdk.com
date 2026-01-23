@@ -52,7 +52,7 @@ export default function Home() {
         structuredData={structuredData}
       />
       {/* Hero section */}
-      <div className="relative min-h-[70vh] sm:min-h-screen w-full mb-10 sm:mb-20">
+      <div className="relative min-h-[60vh] sm:min-h-[80vh] w-full mb-0">
         <div className="relative z-10 flex flex-col items-center justify-center min-h-[70vh] sm:min-h-screen px-3 sm:px-4 md:px-8 text-center max-w-[1260px] mx-auto">
           <div className="mb-[100px] sm:mb-[100px] md:mb-[63px] flex flex-col gap-3 sm:gap-8">
             <h1 className="text-[36px] sm:text-[48px] md:text-[72px] lg:text-[90px]  font-bold leading-[1.1]">
@@ -64,7 +64,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-3">
               <a
                 href="#get-started"
-                className="inline-block !no-underline text-[16px] sm:text-[18px] md:text-[16px] px-4 sm:px-3 md:px-8 py-1 bg-[#E0E0E0] border-2 border-t-white border-l-white border-r-[#A0A0A0] border-b-[#A0A0A0] rounded-[4px] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.5),inset_0_-1px_0_0_rgba(0,0,0,0.1),0_1px_2px_rgba(0,0,0,0.1)] hover:bg-[#D0D0D0] active:border-t-[#A0A0A0] active:border-l-[#A0A0A0] active:border-r-white active:border-b-white active:shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] transition-all"
+                className="inline-block !no-underline text-[16px] sm:text-[18px] md:text-[16px] px-4 sm:px-3 md:px-8 py-2 bg-slate-900 text-white rounded-[6px] shadow-lg hover:bg-slate-800 hover:-translate-y-0.5 active:translate-y-0 transition-all font-bold tracking-tight"
               >
                 Get started
               </a>
@@ -84,7 +84,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
+      <section className="py-20 sm:py-24 md:py-32 px-4 sm:px-8 max-w-[1240px] mx-auto -mt-24 relative z-20">
         <div className="prose prose-slate max-w-none space-y-6">
           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
             *... and AI
@@ -191,7 +191,7 @@ export default function Home() {
       {/* Call to action section */}
       <section
         id="get-started"
-        className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto"
+        className="flex flex-col items-start py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto"
       >
         <div className="flex flex-col gap-3 sm:gap-4 text-left">
           <div className="prose prose-slate max-w-none">
@@ -207,7 +207,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-black p-4 rounded-lg font-mono text-[14px] sm:text-[16px] md:text-[18px] flex items-center gap-2 max-w-[743px]">
+          <div className="bg-black p-4 rounded-lg font-mono text-[14px] sm:text-[16px] md:text-[18px] flex items-center gap-2 w-fit">
             <span className="text-orange">$</span>{" "}
             <span className="text-orange-light flex-1">
               npx create-rwsdk my-project-name
@@ -222,7 +222,8 @@ export default function Home() {
       <Showcase />
 
       {/* Router Walkthrough Section */}
-      <section className="py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
+      <section className="py-24 px-4 sm:px-8 bg-slate-50/80 border-y border-slate-100 mt-12">
+        <div className="max-w-[1200px] mx-auto text-left">
           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
             The Code
           </h3>
@@ -236,7 +237,8 @@ export default function Home() {
           </p>
         </div>
         
-        <RouterWalkthrough />
+          <RouterWalkthrough />
+        </div>
       </section>
 
       <div className="mt-20 mb-20 flex flex-col items-center gap-8">

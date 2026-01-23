@@ -213,8 +213,8 @@ function ActiveConnection({
            <stop offset="100%" stopColor="#22D3EE" /> {/* Cyan at Code */}
          </linearGradient>
          <linearGradient id="line-gradient-vertical" gradientUnits="userSpaceOnUse" x1={sx} y1={sy} x2={ex} y2={ey}>
-           <stop offset="0%" stopColor="#3B82F6" />   {/* Blue at Text (Start) */}
-           <stop offset="100%" stopColor="#22D3EE" /> {/* Cyan at Code (End) */}
+           <stop offset="0%" stopColor="#60A5FA" />   {/* Brighter Blue at Text (Start) */}
+           <stop offset="100%" stopColor="#67E8F9" /> {/* Brighter Cyan at Code (End) */}
          </linearGradient>
          <filter id="glow">
            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -226,10 +226,10 @@ function ActiveConnection({
        </defs>
 
        {/* Curve */}
-       <motion.path 
-         d={path} 
-         stroke={side === 'left-swing' ? "url(#line-gradient-vertical)" : "url(#line-gradient)"}
-         strokeWidth="3" 
+        <motion.path 
+          d={path} 
+          stroke={side === 'left-swing' ? "url(#line-gradient-vertical)" : "url(#line-gradient)"}
+          strokeWidth="5" 
          fill="none" 
          filter="url(#glow)"
          initial={{ pathLength: 0, opacity: 0 }} 
