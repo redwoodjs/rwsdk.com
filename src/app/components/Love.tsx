@@ -202,7 +202,7 @@ const QuoteCard = ({
   );
 };
 
-export default function Showcase() {
+export function Love() {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (

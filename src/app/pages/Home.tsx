@@ -1,7 +1,7 @@
 import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "src/components/RouterWalkthrough";
-import Showcase from "src/components/Showcase";
+import { Love } from "src/components/Love";
 import { Copy } from "src/components/Copy";
 
 import { link } from "src/shared/links";
@@ -219,7 +219,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Showcase />
+      <Love />
 
       {/* Router Walkthrough Section */}
       <section className="py-24 px-4 sm:px-8 bg-slate-50/80 border-y border-slate-100 mt-12">

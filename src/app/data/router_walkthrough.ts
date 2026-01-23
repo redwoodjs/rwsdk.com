@@ -13,7 +13,7 @@ export default defineApp([
   }),
 ])`,
     highlightLines: [5, 6, 7, 8],
-    focusLine: 11,
+    focusLine: 5,
   },
   {
     title: "Response Types",
@@ -56,7 +56,7 @@ export default defineApp([
   //     /api/posts
 ])`,
     highlightLines: [4, 5, 6, 7, 8, 12, 13, 14, 15],
-    focusLine: 12,
+    focusLine: 5,
   },
   
   {

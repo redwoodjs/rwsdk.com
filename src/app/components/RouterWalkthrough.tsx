@@ -284,7 +284,7 @@ function ActiveConnection({
 }
 
 export default function RouterWalkthrough() {
-  const [currentStep, setCurrentStep] = useState(4);
+  const [currentStep, setCurrentStep] = useState(0);
   const step = routerWalkthroughSteps[currentStep];
 
   // Track the code from the previous render to detect step changes
