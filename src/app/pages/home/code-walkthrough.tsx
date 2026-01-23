@@ -6,7 +6,7 @@ import {
   tutorialSteps,
   type TutorialStep,
   type Annotation,
-} from "src/data/tutorial";
+} from "../../data/tutorial";
 import RPCVisualizer from "./rpc-visualizer";
 
 // Matching theme from StyledCodeBlock

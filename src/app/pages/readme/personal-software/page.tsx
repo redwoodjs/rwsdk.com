@@ -1,5 +1,5 @@
-import Header from "src/components/header";
-import HeroImage from "src/components/hero-image";
+import Header from "./header";
+import HeroImage from "./hero-image";
 import { link } from "src/shared/links";
 import { SEO } from "src/components/seo";
 

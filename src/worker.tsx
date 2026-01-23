@@ -1,16 +1,16 @@
 import { defineApp } from "rwsdk/worker";
 import { index, render, route, prefix, layout } from "rwsdk/router";
 import { Document } from "src/document";
-import Home from "src/pages/home";
+import Home from "src/pages/home/page";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
-import PersonalSoftware from "src/pages/readme/personal-software";
+import PersonalSoftware from "src/pages/readme/personal-software/page";
 import { notFound } from "src/utils/notFound";
 
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
-import StartPage from "./app/pages/start";
-import { HireUs } from "./app/pages/hire-us";
+import StartPage from "./app/pages/start/page";
+import { HireUs } from "./app/pages/hire-us/page";
 import Layout from "./app/components/layout";
 
 export type AppContext = {};

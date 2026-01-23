@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Highlight } from "prism-react-renderer";
 import type { PrismTheme } from "prism-react-renderer";
 import { motion, AnimatePresence } from "framer-motion";
-import { routerWalkthroughSteps } from "../data/router_walkthrough";
+import { routerWalkthroughSteps } from "../../data/router_walkthrough";
 
 // Matching theme from StyledCodeBlock/CodeWalkthrough
 const walkthroughTheme: PrismTheme = {

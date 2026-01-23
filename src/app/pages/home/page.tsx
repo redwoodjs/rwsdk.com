@@ -1,7 +1,7 @@
 import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
-import RouterWalkthrough from "src/components/router-walkthrough";
-import { Love } from "src/components/love";
+import RouterWalkthrough from "./router-walkthrough";
+import { Love } from "./love";
 import { Copy } from "src/components/copy";
 
 import { link } from "src/shared/links";
