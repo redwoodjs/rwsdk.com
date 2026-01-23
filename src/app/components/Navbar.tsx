@@ -41,11 +41,11 @@ export function Navbar(props: NavbarProps) {
   return (
     <div
       id="main-navbar"
-      className="group flex flex-col justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 transition-all duration-200 max-md:group-data-[scrolled=true]:py-2"
+      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-baige z-99 items-center py-4 px-4 sm:px-8 md:px-12 transition-all duration-200 max-md:group-data-[scrolled=true]:py-2"
     >
       <ScrollShadow />
       <a
-        className="cursor-pointer mb-4 transition-all duration-300 overflow-hidden max-h-[100px] opacity-100 max-md:group-data-[scrolled=true]:max-h-0 max-md:group-data-[scrolled=true]:opacity-0 max-md:group-data-[scrolled=true]:mb-0"
+        className="cursor-pointer mb-4 md:mb-0 transition-all duration-300 overflow-hidden max-h-[100px] opacity-100 max-md:group-data-[scrolled=true]:max-h-0 max-md:group-data-[scrolled=true]:opacity-0 max-md:group-data-[scrolled=true]:mb-0"
         href={link("/")}
       >
         <CloudflareImage
@@ -54,7 +54,7 @@ export function Navbar(props: NavbarProps) {
           className="w-[186px]"
         />
       </a>
-      <div className="flex flex-nowrap whitespace-nowrap justify-center gap-1 sm:gap-2 font-noto font-bold text-sm sm:text-[16px] mt-4 transition-all duration-300 max-md:group-data-[scrolled=true]:mt-0">
+      <div className="flex flex-nowrap whitespace-nowrap justify-center gap-1 sm:gap-2 font-noto font-bold text-sm sm:text-[16px] mt-4 md:mt-0 transition-all duration-300 max-md:group-data-[scrolled=true]:mt-0">
         {navItems.map((item, index) => (
           <span key={item.label} className="contents">
             <NavLink href={item.href} label={item.label} />

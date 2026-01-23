@@ -110,7 +110,7 @@ export default function CodeWalkthrough({
                     getTokenProps,
                   }) => (
                     <pre
-                      className={`${className} font-mono text-xs sm:text-sm leading-relaxed`}
+                      className={`${className} font-mono text-[11px] sm:text-[13px] leading-relaxed`}
                       style={{ ...style, backgroundColor: "transparent" }}
                     >
                       {tokens.map((line, i) => {

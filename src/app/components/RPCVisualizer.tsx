@@ -38,7 +38,7 @@ export default function RPCVisualizer({ interactionKey }: RPCVisualizerProps) {
   }, [interactionKey]);
 
   return (
-    <div className="bg-slate-900 rounded-lg p-4 font-mono text-xs border border-white/10 shadow-2xl">
+    <div className="bg-slate-900 rounded-lg p-4 font-mono text-[11px] border border-white/10 shadow-2xl">
       <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-2">
         <div className="w-2 h-2 rounded-full bg-red-500" />
         <div className="w-2 h-2 rounded-full bg-yellow-500" />

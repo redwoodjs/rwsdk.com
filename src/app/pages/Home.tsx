@@ -1,6 +1,7 @@
 import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "src/components/RouterWalkthrough";
+import { Copy } from "src/components/Copy";
 
 import { link } from "src/shared/links";
 import { SEO } from "src/components/SEO";
@@ -182,6 +183,37 @@ export default function Home() {
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to action section */}
+      <section
+        id="get-started"
+        className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[1200px] mx-auto"
+      >
+        <div className="flex flex-col gap-3 sm:gap-4 text-left">
+          <div className="prose prose-slate max-w-none">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+              Get started
+            </h2>
+
+            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 leading-relaxed">
+              Running this command installs Vite and the RedwoodSDK plugin which
+              gives you React Server Components (RSC), a type-safe router,
+              type-safe SQL, a Cloudflare development environment, and{" "}
+              <a href="https://docs.rwsdk.com/core/overview/">more</a>.
+            </p>
+          </div>
+
+          <div className="bg-black p-4 rounded-lg font-mono text-[14px] sm:text-[16px] md:text-[18px] flex items-center gap-2 max-w-[743px]">
+            <span className="text-orange">$</span>{" "}
+            <span className="text-orange-light flex-1">
+              npx create-rwsdk my-project-name
+            </span>
+            <span className="text-orange-light">
+              <Copy text="npx create-rwsdk my-project-name" />
+            </span>
           </div>
         </div>
       </section>

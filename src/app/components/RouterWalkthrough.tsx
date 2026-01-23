@@ -306,7 +306,7 @@ export default function RouterWalkthrough() {
         />
         {/* Code Side */}
         <div className="lg:col-span-3 relative">
-          <div className="relative bg-[#1B1B1B] rounded-xl overflow-hidden shadow-2xl h-[500px] flex flex-col">
+          <div className="relative bg-[#1B1B1B] rounded-xl overflow-hidden shadow-2xl h-[440px] flex flex-col">
             <div className="p-4 overflow-auto custom-scrollbar grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
@@ -344,7 +344,7 @@ export default function RouterWalkthrough() {
 
                   const result = (
                     <pre
-                        className={`${className} font-mono text-xs sm:text-sm leading-relaxed relative`}
+                        className={`${className} font-mono text-[11px] sm:text-[13px] leading-relaxed relative`}
                         style={{ ...style, backgroundColor: "transparent" }}
                       >
                         {linesWithKeys.map(({ line, key, i }) => {
