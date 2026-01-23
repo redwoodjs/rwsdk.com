@@ -9,6 +9,7 @@ import { Newsletter } from "src/components/Newsletter";
 import { Copy } from "src/components/Copy";
 import StyledCodeBlock from "src/components/StyledCodeBlock";
 import CodeWalkthrough from "src/components/CodeWalkthrough";
+import RouterWalkthrough from "src/components/RouterWalkthrough";
 import { homeWalkthroughBlocks } from "src/data/home_walkthrough_v2";
 import { link } from "src/shared/links";
 import { SEO } from "src/components/SEO";
@@ -194,62 +195,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Call to action section */}
-
-      <section id="get-started" className="flex flex-col lg:flex-row gap-3 sm:gap-4 lg:gap-6 items-center justify-center py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="flex flex-col gap-3 sm:gap-4 max-w-[743px] text-left">
-          <div className="prose prose-slate max-w-none">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
-              Get started
-            </h2>
-
-            <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-4 leading-relaxed">
-              Running this command installs Vite and the RedwoodSDK plugin which
-              gives you React Server Components (RSC), a type-safe router,
-              type-safe SQL, a Cloudflare development environment, and{" "}
-              <a href="https://docs.rwsdk.com/core/overview/">more</a>.
-            </p>
-          </div>
-
-          <div className="bg-black p-4 rounded-lg font-mono text-[16px] sm:text-[18px] md:text-[20px] flex items-center gap-2">
-            <span className="text-orange">$</span>{" "}
-            <span className="text-orange-light flex-1">
-              npx create-rwsdk my-project-name
-            </span>
-            <span className="text-orange-light">
-              <Copy text="npx create-rwsdk my-project-name" />
-            </span>
-          </div>
+      {/* Router Walkthrough Section */}
+      <section className="py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
+        <div className="mb-16 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+            The Router
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+             Composable functions that describe your app using standard TypeScript.
+          </p>
         </div>
+        
+        <RouterWalkthrough />
       </section>
-
-      {/* Concept via code section */}
-      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-8 max-w-[800px] mx-auto">
-        <div className="prose prose-slate max-w-none mb-12">
-          <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
-            Code
-          </h3>
-        </div>
-
-        {homeWalkthroughBlocks.map((block, index: number) => (
-          <div key={block.title} className={index > 0 ? "mt-20" : ""}>
-            <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2 uppercase">
-              {String(index).padStart(2, "0")} {block.title}
-            </div>
-            <CodeWalkthrough
-              steps={block.steps.map((step, stepIndex: number) => ({
-                ...step,
-                code: step.code || block.code,
-                codeBlockIndex: index,
-                stepIndex: stepIndex,
-              }))}
-            />
-          </div>
-        ))}
-      </section>
-
-
-      {/* Footer section */}
     </div>
   );
 }

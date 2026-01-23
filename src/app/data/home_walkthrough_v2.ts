@@ -9,39 +9,71 @@ export const homeWalkthroughBlocks: ExtendedCodeBlock[] = [
   {
     title: "The Router",
     description: "Composable functions that describe your app using standard TypeScript.",
-    code: ``, 
+    code: "",
     steps: [
       {
-        code: `import { route } from "rwsdk/router";\n\nroute("/", () => <HomePage />)`,
-        description: "1. Simple route matching. Match a path to a request handler.",
-        highlightLines: [3]
+        code: `import { defineApp } from "@rwsdk/worker"
+import {  route } from "@rwsdk/router"
+
+export default defineApp([
+    route('/', function handler() { 
+       return new Response('Hello, world!')
+    })
+])`,
+        description:
+          "A route is a simple incoming request matches a route and then hand it off to a function which returns a response.",
+        highlightLines: [5, 6, 7],
       },
       {
-        code: `import { route } from "rwsdk/router";\n\nroute("/api/hello", () => {\n  return new Response("Hello World");\n})\n\nroute("/welcome", () => <h1>Welcome</h1>)`,
-        description: "2. Handlers can return JSX, and response objects.",
-        highlightLines: [3, 4, 5, 7]
+        code: `import { defineApp } from "@rwsdk/worker"
+import {  route, prefix } from "@rwsdk/router"
+
+export default defineApp([
+  // ...
+  prefix("/api", [
+    route("/users", UsersHandler),
+    route("/posts", PostsHandler)
+  ])
+])`,
+        description:
+          "These are standard language features, so they're super composable. You can group related routes using prefix.",
+        highlightLines: [6, 7, 8, 9],
       },
       {
-        code: `import { route, prefix } from "rwsdk/router";\n\nprefix("/admin", [\n  route("/users", UsersPage),\n  route("/settings", SettingsPage),\n])`,
-        description: "3. Group related routes under a common path.",
-        highlightLines: [3]
+        code: `export default defineApp([
+  async function middleware({ ctx }) {
+    ctx.startTime = Date.now();
+    ctx.user = await getUserFromSession();
+  },
+  route('/', HomePage)
+])`,
+        description:
+          "We have middleware that allows you to modify the context before it reaches your routes.",
+        highlightLines: [2, 3, 4, 5],
       },
       {
-        code: `import { adminRoutes } from "./admin/routes";\n\nexport default defineApp([\n  route("/", HomePage),\n  ...adminRoutes,\n]);`,
-        description: "4. Use standard language features to organize your routes.",
-        highlightLines: [5]
+        code: `route("/admin", [
+  function authCheck({ ctx }) {
+    if (!ctx.user.isAdmin) {
+      return new Response("Forbidden", { status: 403 });
+    }
+  },
+  AdminDashboard
+])`,
+        description:
+          "We have per-route middleware called Interrupters that allows you to short-circuit the response and create a readable, composable flow in your app.",
+        highlightLines: [2, 3, 4, 5, 6],
       },
       {
-        code: `defineApp([\n  async function logger({ request, ctx }) {\n    ctx.startTime = Date.now();\n  },\n  // ... routes\n]);`,
-        description: "5. Middleware. Mutate context or modify the request before it reaches your routes.",
-        highlightLines: [2, 3, 4]
+        code: `export default defineApp([
+  route("/api/data", () => new Response(JSON.stringify(data))),
+  route("/", () => <h1>Hello World</h1>)
+])`,
+        description:
+          "That response can either be a web standard response object or JSX.",
+        highlightLines: [2, 3],
       },
-      {
-        code: `route("/admin", [\n  ({ ctx }) => {\n    if (!ctx.user.isAdmin) return new Response("Forbidden", { status: 403 });\n  },\n  AdminPage\n])`,
-        description: "6. Interrupters (Per route middleware). Halt the request lifecycle early by returning a Response.",
-        highlightLines: [2, 3, 4]
-      }
-    ]
+    ],
   },
   {
     title: "Server Functions",
