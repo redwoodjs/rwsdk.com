@@ -126,10 +126,10 @@ export default function Home() {
                       <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
                         Principle
                       </th>
-                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                      <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
                         Technical Reality
                       </th>
-                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                      <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
                         Why it helps the AI
                       </th>
                     </tr>
