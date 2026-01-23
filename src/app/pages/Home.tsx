@@ -1,6 +1,7 @@
 import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "src/components/RouterWalkthrough";
+import Showcase from "src/components/Showcase";
 import { Copy } from "src/components/Copy";
 
 import { link } from "src/shared/links";
@@ -218,6 +219,8 @@ export default function Home() {
         </div>
       </section>
 
+      <Showcase />
+
       {/* Router Walkthrough Section */}
       <section className="py-20 px-4 sm:px-8 max-w-[1200px] mx-auto">
           <h3 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
@@ -235,6 +238,48 @@ export default function Home() {
         
         <RouterWalkthrough />
       </section>
+
+      <div className="mt-20 mb-20 flex flex-col items-center gap-8">
+        <div className="h-px w-24 bg-slate-200" />
+        <p className="text-slate-400 font-mono text-[10px] uppercase tracking-[0.3em]">
+          Join the community
+        </p>
+        <div className="flex gap-6">
+          <a
+            href="https://github.com/redwoodjs/redwood"
+            className="group flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors"
+          >
+            <img
+              src="/images/github.svg"
+              alt="GitHub"
+              className="w-5 h-5 grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all"
+            />
+            <span className="text-xs font-bold font-mono">GitHub</span>
+          </a>
+          <a
+            href="https://discord.gg/redwoodjs"
+            className="group flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors"
+          >
+            <img
+              src="/images/discord.svg"
+              alt="Discord"
+              className="w-5 h-5 grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all"
+            />
+            <span className="text-xs font-bold font-mono">Discord</span>
+          </a>
+          <a
+            href="https://x.com/redwoodjs"
+            className="group flex items-center gap-2 text-slate-400 hover:text-slate-900 transition-colors"
+          >
+            <img
+              src="/images/x.svg"
+              alt="X"
+              className="w-5 h-5 grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all"
+            />
+            <span className="text-xs font-bold font-mono">X / Twitter</span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
