@@ -4,6 +4,7 @@ import RouterWalkthrough from "./router-walkthrough";
 import { Love } from "./love";
 import { Tile1_ServerFirst, Tile2_ServerFunctions, Tile3_Navigation } from "./rsc-rpc-section";
 import { Copy } from "src/components/copy";
+import { Section } from "src/components/section";
 
 import { link } from "src/shared/links";
 import { SEO } from "src/components/seo";
@@ -53,8 +54,8 @@ export default function Home() {
         structuredData={structuredData}
       />
       {/* Hero section */}
-      <div className="relative min-h-[60vh] sm:min-h-[80vh] w-full mb-0 py-[160px]">
-        <div className="relative z-10 flex flex-col items-center justify-center px-3 sm:px-4 md:px-8 text-center max-w-[900px] mx-auto text-charcoal">
+      <Section className="relative min-h-[60vh] sm:min-h-[80vh] flex items-center justify-center">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center text-charcoal">
           <div className="flex flex-col gap-8">
             <h1 className="text-hero">A simple framework for humans*</h1>
             <h3 className="font-sans leading-[1.5] max-w-[600px] mx-auto">
@@ -70,16 +71,17 @@ export default function Home() {
                 })}
                 className="!text-[0.75rem] !text-slate-500 font-mono underline tracking-widest uppercase"
               >
-                Built for Cloudflare's Developer Platform
+                Built for Cloudflare
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </Section>
 
-      <section className="py-32 px-4 sm:px-8 max-w-[900px] mx-auto -mt-24 relative z-20">
+      {/* ... And AI */}
+      <Section className="-mt-24 relative z-20">
         <div className="space-y-6">
-          <h2 className="mb-6">
+          <h2 className="mb-4 mt-12">
             *... and AI
           </h2>
 
@@ -93,7 +95,7 @@ export default function Home() {
               complex library.
             </p>
 
-            <h3 className="mt-8 mb-4 font-serif">
+            <h3 className="mt-6 mb-2 font-serif">
               Our Principles
             </h3>
 
@@ -104,7 +106,7 @@ export default function Home() {
               understand, easier to change, and cheaper to maintain.
             </p>
 
-            <div className="bg-editor rounded-xl overflow-hidden mt-8 mb-12 border border-slate-800">
+            <div className="bg-editor rounded-xl overflow-hidden mt-4 mb-12 border border-slate-800">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -179,18 +181,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
-
-
-      {/* Call to action section */}
-      <section
-        id="get-started"
-        className="flex flex-col items-start py-32 px-4 sm:px-8 max-w-[900px] mx-auto"
-      >
+      {/* Get started */}
+      <Section id="get-started" className="flex flex-col items-start">
         <div className="flex flex-col gap-8 text-left">
-          <div className="flex flex-col gap-6">
-            <h2 className="">
+          <div className="flex flex-col gap-4">
+            <h2>
               Get started
             </h2>
 
@@ -212,19 +209,25 @@ export default function Home() {
             </span>
           </div>
         </div>
-      </section>
+      </Section>
 
-      <Love />
+      {/* Social proof */}
+      <Section>
+        <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
+          In Developers' Own Words
+        </div>
+        <Love />
+      </Section>
 
-      {/* Router Walkthrough Section */}
-      <section className="pt-32 pb-0 px-4 sm:px-8 mt-12 max-w-[900px] mx-auto">
+      {/* The code */}
+      <Section>
         <div className="text-left">
           <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
             The Code
           </div>
 
           <div className="mb-12 text-left">
-            <h2 className="mb-6">
+            <h2 className="mb-4">
               Routing
             </h2>
             <p className="max-w-2xl leading-relaxed">
@@ -236,21 +239,21 @@ export default function Home() {
           <RouterWalkthrough />
         </div>
 
-        <section className="pt-12 py-24">
+        <div className="mt-12">
           <div className="mb-12">
             <h2 className="mb-4">React Server Components</h2>
             <p className="max-w-2xl leading-relaxed opacity-80">
-              With React Server Components, your rendering, data logic, and navigation live in one place, working together by default.
+              At the core of our architecture is a unified mental model powered by React Server Components. Whether you are fetching data, handling a mutation, or navigating to a new page, you are working within a single, consistent system that works together by default.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Tile1_ServerFirst />
             <Tile2_ServerFunctions />
             <Tile3_Navigation />
           </div>
-        </section>
-      </section>
+        </div>
+      </Section>
 
 
     </div>

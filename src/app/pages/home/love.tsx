@@ -66,7 +66,7 @@ const authors = {
   },
 };
 
-const Citation = ({
+export const Citation = ({
   id,
   children
 }: {
@@ -102,35 +102,29 @@ const Citation = ({
 
 export function Love() {
   return (
-    <section className="py-32 px-4 sm:px-8 max-w-[900px] mx-auto">
-      <div className="mb-12">
-        <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
-          In Developers Own Words
-        </div>
 
-        <div className="space-y-12">
-          <p className="font-serif leading-relaxed text-2xl">
-            Modern development is a sea of hidden abstractions, but RedwoodSDK is built without magic. You get{" "}
-            <Citation id="Odd-Appeal6543">the boilerplate reduction of a monolith with the maximum control</Citation> of a modular system. It is{" "}
-            <Citation id="Zephraph">an incredibly smart</Citation>{" "}
-            <Citation id="wesbos">Server-First React architecture</Citation> that finally{" "}
-            <Citation id="dok2001">lives up to its documentation.</Citation>
-          </p>
 
-          <p className="font-serif leading-relaxed text-2xl">
-            This is a proper framework that{" "}
-            <Citation id="estebanrules">resets the bar for how fast "fast" can actually be.</Citation>{" "}
-            <Citation id="Frown360Turn">You don’t have to explain your order to a chef; you just step into the kitchen and make it.</Citation> It is{" "}
-            <Citation id="osener">the best approach for solo makers and small teams to own their entire stack without the "guillotine"</Citation> of complex infrastructure.
-          </p>
+    <div className="space-y-8">
+      <p className="font-serif leading-relaxed text-2xl">
+        Modern development is a sea of hidden abstractions, but RedwoodSDK is built without magic. You get{" "}
+        <Citation id="Odd-Appeal6543">the boilerplate reduction of a monolith with the maximum control</Citation> of a modular system. It is{" "}
+        <Citation id="Zephraph">an incredibly smart</Citation>{" "}
+        <Citation id="wesbos">Server-First React architecture</Citation> that finally{" "}
+        <Citation id="dok2001">lives up to its documentation.</Citation>
+      </p>
 
-          <p className="font-serif leading-relaxed text-2xl">
-            <Citation id="mojombo">If you like to SHIP PRODUCT,</Citation>{" "}
-            <Citation id="nwbotha">this is the full-stack experience you’ve been waiting for.</Citation>
-          </p>
-        </div>
-      </div>
+      <p className="font-serif leading-relaxed text-2xl">
+        This is a proper framework that{" "}
+        <Citation id="estebanrules">resets the bar for how fast "fast" can actually be.</Citation>{" "}
+        <Citation id="Frown360Turn">You don’t have to explain your order to a chef; you just step into the kitchen and make it.</Citation> It is{" "}
+        <Citation id="osener">the best approach for solo makers and small teams to own their entire stack without the "guillotine"</Citation> of complex infrastructure.
+      </p>
 
-    </section>
+      <p className="font-serif leading-relaxed text-2xl">
+        <Citation id="mojombo">If you like to SHIP PRODUCT,</Citation>{" "}
+        <Citation id="nwbotha">this is the full-stack experience you’ve been waiting for.</Citation>
+      </p>
+    </div>
+
   );
 }
