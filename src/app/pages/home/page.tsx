@@ -106,7 +106,7 @@ export default function Home() {
               understand, easier to change, and cheaper to maintain.
             </p>
 
-            <div className="bg-editor rounded-xl overflow-hidden mt-4 mb-12 border border-slate-800">
+            <div className="bg-editor rounded-xl overflow-hidden mt-4 border border-slate-800">
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
@@ -254,8 +254,6 @@ export default function Home() {
           </div>
         </div>
       </Section>
-
-
     </div>
   );
 }
