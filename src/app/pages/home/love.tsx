@@ -102,7 +102,7 @@ const Citation = ({
 
 export function Love() {
   return (
-    <section className="py-32 px-4 sm:px-8 max-w-[800px] mx-auto">
+    <section className="py-32 px-4 sm:px-8 max-w-[900px] mx-auto">
       <div className="mb-12">
         <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
           In Developers Own Words

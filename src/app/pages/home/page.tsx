@@ -2,6 +2,7 @@ import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "./router-walkthrough";
 import { Love } from "./love";
+import { Tile1_ServerFirst, Tile2_ServerFunctions, Tile3_Navigation } from "./rsc-rpc-section";
 import { Copy } from "src/components/copy";
 
 import { link } from "src/shared/links";
@@ -53,7 +54,7 @@ export default function Home() {
       />
       {/* Hero section */}
       <div className="relative min-h-[60vh] sm:min-h-[80vh] w-full mb-0 py-[160px]">
-        <div className="relative z-10 flex flex-col items-center justify-center px-3 sm:px-4 md:px-8 text-center max-w-[800px] mx-auto text-charcoal">
+        <div className="relative z-10 flex flex-col items-center justify-center px-3 sm:px-4 md:px-8 text-center max-w-[900px] mx-auto text-charcoal">
           <div className="flex flex-col gap-8">
             <h1 className="text-hero">A simple framework for humans*</h1>
             <h3 className="font-sans leading-[1.5] max-w-[600px] mx-auto">
@@ -76,7 +77,7 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="py-32 px-4 sm:px-8 max-w-[800px] mx-auto -mt-24 relative z-20">
+      <section className="py-32 px-4 sm:px-8 max-w-[900px] mx-auto -mt-24 relative z-20">
         <div className="space-y-6">
           <h2 className="mb-6">
             *... and AI
@@ -180,10 +181,12 @@ export default function Home() {
         </div>
       </section>
 
+
+
       {/* Call to action section */}
       <section
         id="get-started"
-        className="flex flex-col items-start py-32 px-4 sm:px-8 max-w-[800px] mx-auto"
+        className="flex flex-col items-start py-32 px-4 sm:px-8 max-w-[900px] mx-auto"
       >
         <div className="flex flex-col gap-8 text-left">
           <div className="flex flex-col gap-6">
@@ -214,8 +217,8 @@ export default function Home() {
       <Love />
 
       {/* Router Walkthrough Section */}
-      <section className="py-32 px-4 sm:px-8 mt-12">
-        <div className="max-w-[800px] mx-auto text-left">
+      <section className="pt-32 pb-0 px-4 sm:px-8 mt-12 max-w-[900px] mx-auto">
+        <div className="text-left">
           <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
             The Code
           </div>
@@ -232,7 +235,25 @@ export default function Home() {
 
           <RouterWalkthrough />
         </div>
+
+        <section className="pt-12 py-24">
+          <div className="mb-12">
+            <h2 className="mb-4">React Server Components</h2>
+            <p className="max-w-2xl leading-relaxed opacity-80">
+              Server-first allows you to focus on a single source of truth, queries and mutations make
+              it type safe, and client side navigation makes it fast!
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Tile1_ServerFirst />
+            <Tile2_ServerFunctions />
+            <Tile3_Navigation />
+          </div>
+        </section>
       </section>
+
+
     </div>
   );
 }
