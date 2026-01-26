@@ -66,31 +66,31 @@ const authors = {
   },
 };
 
-const Citation = ({ 
-  id, 
-  children 
-}: { 
-  id: keyof typeof authors, 
-  children: React.ReactNode 
+const Citation = ({
+  id,
+  children
+}: {
+  id: keyof typeof authors,
+  children: React.ReactNode
 }) => {
   const author = authors[id];
-  
+
   return (
     <span className="group relative inline cursor-help">
       <span className="relative z-10 border-b-2 border-orange-200 bg-orange-50/50 box-decoration-clone leading-[1.6] px-0.5 hover:bg-orange-100 transition-colors">
         {children}
         <span className="inline-flex items-center justify-center align-middle ml-2 -mt-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-slate-100 border border-white shadow-sm overflow-hidden select-none">
-            <img 
-              src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`} 
-              alt={author.name}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random`;
-              }}
-            />
+          <img
+            src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}
+            alt={author.name}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random`;
+            }}
+          />
         </span>
       </span>
-      
+
       {/* Tooltip */}
       <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-slate-900 text-white text-xs rounded-lg whitespace-nowrap z-50 pointer-events-none">
         {author.name} (@{author.handle})
@@ -107,7 +107,7 @@ export function Love() {
         <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
           In Developers Own Words
         </div>
-        
+
         <div className="space-y-12">
           <p className="font-serif leading-relaxed text-2xl">
             Modern development is a sea of hidden abstractions, but RedwoodSDK is built without magic. You get{" "}
