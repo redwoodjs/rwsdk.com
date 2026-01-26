@@ -13,10 +13,14 @@ import StartPage from "./app/pages/start/page";
 import { HireUs } from "./app/pages/hire-us/page";
 import Layout from "./app/components/layout";
 
-export type AppContext = {};
+import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
+
+export { SyncedStateServer };
 
 export default defineApp([
   setCommonHeaders(),
+
+  ...syncedStateRoutes((env: any) => env.SYNCED_STATE),
 
   render(Document, [
     ...layout(Layout, [

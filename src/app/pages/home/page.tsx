@@ -3,6 +3,7 @@ import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "./router-walkthrough";
 import { Love } from "./love";
 import { Tile1_ServerFirst, Tile2_ServerFunctions, Tile3_Navigation } from "./rsc-rpc-section";
+import RealtimeSection from "./realtime-section";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
 
@@ -252,6 +253,10 @@ export default function Home() {
             <Tile2_ServerFunctions />
             <Tile3_Navigation />
           </div>
+        </div>
+
+        <div className="mt-24">
+          <RealtimeSection />
         </div>
       </Section>
     </div>

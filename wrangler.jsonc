@@ -63,5 +63,19 @@
   // Environment variables
   "vars": {
     // Add your environment variables here
-  }
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "SYNCED_STATE",
+        "class_name": "SyncedStateServer"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_classes": ["SyncedStateServer"]
+    }
+  ]
 }
