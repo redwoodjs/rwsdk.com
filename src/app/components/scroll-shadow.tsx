@@ -9,10 +9,8 @@ export function ScrollShadow() {
 
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        navbar.classList.add("shadow-md");
         navbar.setAttribute("data-scrolled", "true");
       } else {
-        navbar.classList.remove("shadow-md");
         navbar.removeAttribute("data-scrolled");
       }
     };

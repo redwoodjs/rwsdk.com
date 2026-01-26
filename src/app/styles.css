@@ -1,11 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@100..900&family=Geist+Mono:wght@100..900&display=swap");
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
   --color-baige: #F9F7F2;
+  --color-parchment: #FDFCFA;
+  --color-charcoal: #1A1A1A;
+  --color-subtext: #4A4A4A;
   --color-orange: #f47238;
   --color-orange-light: #ffad48;
   --color-orange-dark: #e73c36;
@@ -14,8 +16,47 @@
   --color-purple-dark: #6b1a35;
   --color-light: #f2ece4;
   --color-editor: #1b1b1b;
-  --font-playfair: "Playfair Display", serif;
-  --font-noto: "Noto Sans", sans-serif;
+  --font-serif: "Newsreader", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-hero {
+  font-size: clamp(3rem, 10vw, 4.5rem);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-charcoal);
+}
+
+body {
+  background-color: var(--color-parchment);
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+}
+
+.btn-primary {
+  @apply inline-block !no-underline text-[14px] px-6 py-2.5 bg-orange text-white rounded-[4px] shadow-sm hover:bg-orange-dark hover:-translate-y-0.5 active:translate-y-0 transition-all font-medium tracking-tight;
 }
 
 

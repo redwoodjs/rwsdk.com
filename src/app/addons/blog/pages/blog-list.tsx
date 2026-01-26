@@ -32,21 +32,21 @@ export default async function BlogList() {
 
 
       {/* Hero Section */}
-      <div className="max-w-[800px] mx-auto px-4 sm:px-8 py-12 sm:py-16 md:py-20">
-        <div className="font-mono text-xs sm:text-sm text-slate-600 mb-2">
+      <div className="max-w-[800px] mx-auto px-4 sm:px-8 py-32">
+        <div className="font-mono text-xs sm:text-sm mb-2 opacity-50">
           BLOG
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-6 leading-tight">
+        <h1 className="mb-6">
           We build RedwoodSDK. We build for you.
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-slate-700 mb-6 leading-relaxed">
+        <p className="leading-relaxed mb-6">
           RedwoodSDK is loved because it&apos;s simple. We created it to stay
           understandable. This is our blog about building the framework and how
           we help teams ship high-velocity software on Cloudflare.
         </p>
         <a
           href={link("/hire-us")}
-          className="text-lg sm:text-xl font-bold text-orange hover:text-orange-dark transition-colors"
+          className="font-bold text-orange hover:text-orange-dark transition-colors"
         >
           Work with us &rarr;
         </a>
@@ -62,10 +62,10 @@ export default async function BlogList() {
                 className="block rounded-lg overflow-hidden transition-shadow duration-300 h-full no-underline group"
               >
                 <div className="p-0">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-2 group-hover:text-orange transition-colors">
+                  <h2 className="group-hover:text-orange transition-colors mb-2">
                     {blog.title}
                   </h2>
-                  <div className="flex flex-row items-center gap-1 mb-4 text-xs sm:text-sm text-slate-600">
+                  <div className="flex flex-row items-center gap-1 mb-4 text-xs sm:text-sm opacity-50">
                     {blog.author && (
                       <div className="flex items-center gap-1">
                         {blog.author.avatar && (
@@ -86,7 +86,7 @@ export default async function BlogList() {
                       })}
                     </div>
                   </div>
-                  <p className="text-slate-700 mb-4">{blog.description}</p>
+                  <p className="mb-4">{blog.description}</p>
 
 
                 </div>

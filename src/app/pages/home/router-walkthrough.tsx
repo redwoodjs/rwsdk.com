@@ -203,18 +203,19 @@ function ActiveConnection({
       cp2y = ey;
   }
   
-  const path = `M ${sx} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${ex} ${ey}`;
+  const pathEx = side === 'right' ? ex + 8 : ex - 8;
+  const path = `M ${sx} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${pathEx} ${ey}`;
 
   return (
     <svg className="absolute inset-0 w-full h-full pointer-events-none z-50 overflow-visible">
        <defs>
          <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-           <stop offset="0%" stopColor="#3B82F6" />   {/* Blue at Text */}
-           <stop offset="100%" stopColor="#22D3EE" /> {/* Cyan at Code */}
+           <stop offset="0%" stopColor="#F17543" />
+           <stop offset="100%" stopColor="#F17543" />
          </linearGradient>
          <linearGradient id="line-gradient-vertical" gradientUnits="userSpaceOnUse" x1={sx} y1={sy} x2={ex} y2={ey}>
-           <stop offset="0%" stopColor="#60A5FA" />   {/* Brighter Blue at Text (Start) */}
-           <stop offset="100%" stopColor="#67E8F9" /> {/* Brighter Cyan at Code (End) */}
+           <stop offset="0%" stopColor="#F17543" />
+           <stop offset="100%" stopColor="#F17543" />
          </linearGradient>
          <filter id="glow">
            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -244,36 +245,24 @@ function ActiveConnection({
        { side === 'left-swing' ? (
          // Pointing RIGHT (Target is approached from Left)
          <motion.path
-           d={`M ${ex - 6} ${ey - 5} L ${ex} ${ey} L ${ex - 6} ${ey + 5}`}
-           stroke="#22D3EE"
-           strokeWidth="3"
-           fill="none"
-           strokeLinecap="round"
-           strokeLinejoin="round"
+           d={`M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`}
+           fill="#F17543"
            initial={{ opacity: 0, x: -10 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.3, duration: 0.2 }}
          />
        ) : side === 'right' ? (
          <motion.path
-           d={`M ${ex + 6} ${ey - 5} L ${ex} ${ey} L ${ex + 6} ${ey + 5}`}
-           stroke="#22D3EE"
-           strokeWidth="3"
-           fill="none"
-           strokeLinecap="round"
-           strokeLinejoin="round"
+           d={`M ${ex + 8} ${ey - 6} L ${ex} ${ey} L ${ex + 8} ${ey + 6} Z`}
+           fill="#F17543"
            initial={{ opacity: 0, x: 10 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.3, duration: 0.2 }}
          />
        ) : (
          <motion.path
-           d={`M ${ex - 6} ${ey - 5} L ${ex} ${ey} L ${ex - 6} ${ey + 5}`}
-           stroke="#22D3EE"
-           strokeWidth="3"
-           fill="none"
-           strokeLinecap="round"
-           strokeLinejoin="round"
+           d={`M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`}
+           fill="#F17543"
            initial={{ opacity: 0, x: -10 }}
            animate={{ opacity: 1, x: 0 }}
            transition={{ delay: 0.3, duration: 0.2 }}
@@ -344,7 +333,7 @@ export default function RouterWalkthrough() {
 
                   const result = (
                     <pre
-                        className={`${className} font-mono text-[11px] sm:text-[13px] leading-relaxed relative`}
+                        className={`${className} text-[11px] sm:text-[13px] leading-relaxed relative font-mono`}
                         style={{ ...style, backgroundColor: "transparent" }}
                       >
                         {linesWithKeys.map(({ line, key, i }) => {
@@ -354,22 +343,22 @@ export default function RouterWalkthrough() {
 
                            const variants = {
                              initial: { 
-                               opacity: 1, 
-                               height: "auto",
-                               y: 0,
-                               backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
+                                opacity: 1, 
+                                height: "auto",
+                                y: 0,
+                                backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
                              },
                              enter: { 
-                               opacity: 1, 
-                               height: "auto",
-                               y: 0,
-                               backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
+                                opacity: 1, 
+                                height: "auto",
+                                y: 0,
+                                backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
                              },
                              stable: { 
-                               opacity: 1, 
-                               height: "auto",
-                               y: 0,
-                               backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
+                                opacity: 1, 
+                                height: "auto",
+                                y: 0,
+                                backgroundColor: isHighlighted ? "rgba(59, 130, 246, 0.15)" : "rgba(255, 255, 255, 0)"
                              }
                            };
 
@@ -384,7 +373,7 @@ export default function RouterWalkthrough() {
                                 const { key: _key, ...rest } = getLineProps({ line, key: i });
                                 return rest;
                               })()}
-                              className="flex w-full overflow-hidden shrink-0 relative"
+                               className="flex w-full overflow-hidden shrink-0 relative"
                               id={`code-line-${lineNumber}`}
                             >
                               <span className="shrink-0 text-right pr-4 select-none opacity-30 w-8">
@@ -427,7 +416,7 @@ export default function RouterWalkthrough() {
               </svg>
             </button>
 
-            <div className="font-mono text-sm text-gray-400">
+            <div className="font-mono text-sm text-orange-400">
               {currentStep + 1} / {routerWalkthroughSteps.length}
             </div>
 
@@ -458,10 +447,10 @@ export default function RouterWalkthrough() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                <h3 className="text-2xl font-normal mb-4">
                   <span>{step.title}</span>
                 </h3>
-                <p className="text-lg text-slate-600 leading-relaxed min-h-[80px]">
+                <p className="leading-relaxed min-h-[80px]">
                   {step.description}
                 </p>
               </motion.div>
