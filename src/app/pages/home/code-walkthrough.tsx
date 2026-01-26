@@ -92,9 +92,8 @@ export default function CodeWalkthrough({
             {/* Code Content Area (Sunken) */}
             <div className="flex-[2] bg-[#1B1B1B] overflow-auto custom-scrollbar p-3">
               <div
-                className={`transition-opacity duration-200 ${
-                  visible ? "opacity-100" : "opacity-0"
-                }`}
+                className={`transition-opacity duration-200 ${visible ? "opacity-100" : "opacity-0"
+                  }`}
               >
                 <Highlight
                   key={currentStep}
@@ -126,39 +125,37 @@ export default function CodeWalkthrough({
                           <div
                             key={i}
                             {...restLine}
-                            className={`flex gap-4 ${
-                              isHighlighted ? "bg-slate-700/50" : ""
-                            } ${
-                              hoveredAnnotation?.lines?.includes(lineNumber)
+                            className={`flex gap-4 border-y ${isHighlighted
+                                ? "border-dashed border-[#f47238]/50 bg-[#f47238]/10"
+                                : "border-transparent"
+                              } ${hoveredAnnotation?.lines?.includes(lineNumber)
                                 ? "bg-slate-700/30"
                                 : ""
-                            } transition-all duration-150 py-0.5`}
+                              } transition-all duration-150 py-0.5`}
                           >
                             {/* Line Number Gutter */}
                             <span
-                              className={`w-8 text-right select-none opacity-40 ${
-                                isHighlighted ||
-                                hoveredAnnotation?.lines?.includes(lineNumber)
+                              className={`w-8 text-right select-none opacity-40 ${isHighlighted ||
+                                  hoveredAnnotation?.lines?.includes(lineNumber)
                                   ? "text-white opacity-100"
                                   : ""
-                              }`}
+                                }`}
                             >
                               {lineNumber}
                             </span>
                             {/* Line Content */}
                             <div
-                              className={`flex-1 ${
-                                !isHighlighted &&
-                                !visible &&
-                                !hoveredAnnotation?.lines?.includes(lineNumber)
+                              className={`flex-1 ${!isHighlighted &&
+                                  !visible &&
+                                  !hoveredAnnotation?.lines?.includes(lineNumber)
                                   ? "opacity-0"
                                   : !isHighlighted &&
                                     !hoveredAnnotation?.lines?.includes(
                                       lineNumber
                                     )
-                                  ? "opacity-40"
-                                  : "opacity-100"
-                              }`}
+                                    ? "opacity-40"
+                                    : "opacity-100"
+                                }`}
                             >
                               {line.map((token, k) => {
                                 const { key: _key, ...restToken } =
@@ -184,11 +181,10 @@ export default function CodeWalkthrough({
                                   <span
                                     key={k}
                                     {...restToken}
-                                    className={`${
-                                      isHoveredText
+                                    className={`${isHoveredText
                                         ? "underline decoration-orange-400 decoration-2 underline-offset-4 transition-all duration-300"
                                         : ""
-                                    }`}
+                                      }`}
                                   />
                                 );
                               })}
@@ -205,34 +201,33 @@ export default function CodeWalkthrough({
             {/* Sidebar (Sunken) */}
             <div className="flex-1 bg-slate-800/50 p-4 overflow-auto custom-scrollbar">
               <div
-                className={`transition-opacity duration-200 ${
-                  visible ? "opacity-100" : "opacity-0"
-                }`}
+                className={`transition-opacity duration-200 ${visible ? "opacity-100" : "opacity-0"
+                  }`}
               >
                 <p className="text-[#E9B46A] text-xs sm:text-sm leading-relaxed mb-6">
                   {step.annotations
                     ? step.description.split(/(\s+)/).map((part, i) => {
-                        const cleanWord = part.replace(/[.,]/g, "").trim();
-                        const annotation = step.annotations?.find(
-                          (a) => a.word === cleanWord
-                        );
+                      const cleanWord = part.replace(/[.,]/g, "").trim();
+                      const annotation = step.annotations?.find(
+                        (a) => a.word === cleanWord
+                      );
 
-                        if (annotation) {
-                          return (
-                            <span
-                              key={i}
-                              onMouseEnter={() =>
-                                setHoveredAnnotation(annotation)
-                              }
-                              onMouseLeave={() => setHoveredAnnotation(null)}
-                              className="underline decoration-slate-500 hover:decoration-orange-400 cursor-help transition-colors"
-                            >
-                              {part}
-                            </span>
-                          );
-                        }
-                        return part;
-                      })
+                      if (annotation) {
+                        return (
+                          <span
+                            key={i}
+                            onMouseEnter={() =>
+                              setHoveredAnnotation(annotation)
+                            }
+                            onMouseLeave={() => setHoveredAnnotation(null)}
+                            className="underline decoration-slate-500 hover:decoration-orange-400 cursor-help transition-colors"
+                          >
+                            {part}
+                          </span>
+                        );
+                      }
+                      return part;
+                    })
                     : step.description}
                 </p>
 
@@ -252,11 +247,10 @@ export default function CodeWalkthrough({
         <button
           onClick={goToPrevious}
           disabled={isFirst}
-          className={`px-4 py-2 text-xs font-bold uppercase border-2 transition-all active:translate-y-[1px] ${
-            isFirst
+          className={`px-4 py-2 text-xs font-bold uppercase border-2 transition-all active:translate-y-[1px] ${isFirst
               ? "bg-[#E0E0E0] border-slate-200 text-slate-300 cursor-not-allowed"
               : "bg-[#C0C0C0] border-t-white border-l-white border-r-[#808080] border-b-[#808080] text-black active:border-t-[#808080] active:border-l-[#808080] active:border-r-white active:border-b-white hover:bg-[#D0D0D0]"
-          }`}
+            }`}
         >
           ←
         </button>
@@ -268,11 +262,10 @@ export default function CodeWalkthrough({
         <button
           onClick={goToNext}
           disabled={isLast}
-          className={`px-4 py-2 text-xs font-bold uppercase border-2 transition-all active:translate-y-[1px] ${
-            isLast
+          className={`px-4 py-2 text-xs font-bold uppercase border-2 transition-all active:translate-y-[1px] ${isLast
               ? "bg-[#E0E0E0] border-slate-200 text-slate-300 cursor-not-allowed"
               : "bg-[#C0C0C0] border-t-white border-l-white border-r-[#808080] border-b-[#808080] text-black active:border-t-[#808080] active:border-l-[#808080] active:border-r-white active:border-b-white hover:bg-[#D0D0D0]"
-          }`}
+            }`}
         >
           →
         </button>

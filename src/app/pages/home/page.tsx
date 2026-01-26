@@ -240,8 +240,7 @@ export default function Home() {
           <div className="mb-12">
             <h2 className="mb-4">React Server Components</h2>
             <p className="max-w-2xl leading-relaxed opacity-80">
-              Server-first allows you to focus on a single source of truth, queries and mutations make
-              it type safe, and client side navigation makes it fast!
+              With React Server Components, your rendering, data logic, and navigation live in one place, working together by default.
             </p>
           </div>
 
