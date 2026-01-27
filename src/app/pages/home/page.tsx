@@ -85,22 +85,22 @@ export default function Home() {
       </Section>
 
 
+
+
       {/* Get started */}
       <Section id="get-started">
-        <h2>
-          Get started
-        </h2>
+        <h2>Get started</h2>
         <p>
           Scaffold a Vite project powered by RedwoodSDK. Includes RSC, type-safe routing/SQL, and Cloudflare integration.
         </p>
         <br />
 
-        <div className="bg-editor p-4 rounded-xl font-mono text-sm sm:text-base flex items-center gap-2 w-fit border border-slate-800">
+        <div className="bg-editor p-4 rounded-xl font-mono text-sm sm:text-base flex items-center gap-2 w-fit border border-white/10">
           <span className="text-orange">$</span>{" "}
           <span className="text-orange-light flex-1">
             npx create-rwsdk my-project-name
           </span>
-          <span className="text-orange-light">
+          <span className="text-orange-light" id="get-started">
             <Copy text="npx create-rwsdk my-project-name" />
           </span>
         </div>
@@ -109,75 +109,72 @@ export default function Home() {
 
       {/* Principles */}
       <Section>
-
-        <h2>
-          Principles
-        </h2>
+        <h2>Principles</h2>
         <p>
           Simplicity for humans is clarity for AI. By using React, TypeScript, and Cloudflare without custom "noise," AI focuses on your business logic instead of navigating framework rules.
         </p>
         <br />
 
 
-        <div className="bg-editor rounded-xl overflow-hidden border border-slate-800">
+        <div className="bg-editor rounded-xl overflow-hidden border border-white/10">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-800/50">
-                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
                     Principle
                   </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
                     Technical Reality
                   </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
                     AI Advantage
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-slate-800/50">
+                <tr className="border-b border-white/5">
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Without Magic
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
                     No code-gen or implied routing
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
-                    <strong>Clarity:</strong> AI reads exactly what executes
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                    <strong className="text-[#F17543]">Clarity:</strong> AI reads exactly what executes
                   </td>
                 </tr>
-                <tr className="border-b border-slate-800/50">
+                <tr className="border-b border-white/5">
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Composability
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
                     Standard functions and types
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
-                    <strong>Logic:</strong> AI follows your code, not a policy
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                    <strong className="text-[#F17543]">Logic:</strong> AI follows your code, not a policy
                   </td>
                 </tr>
-                <tr className="border-b border-slate-800/50">
+                <tr className="border-b border-white/5">
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Web Standards
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
                     If the browser or platform has it, we use it
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
-                    <strong>Context:</strong> AI uses core web knowledge
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                    <strong className="text-[#F17543]">Context:</strong> AI uses core web knowledge
                   </td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Server-First
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
                     Linear data flow
                   </td>
-                  <td className="px-6 py-4 text-slate-300 text-sm">
-                    <strong>Signal:</strong> Higher accuracy for auditing/writing
+                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                    <strong className="text-[#F17543]">Signal:</strong> Higher accuracy for auditing/writing
                   </td>
                 </tr>
               </tbody>
@@ -189,13 +186,8 @@ export default function Home() {
 
       {/* Social proof */}
       <Section>
-        <h2>
-          In Developers' Own Words
-        </h2>
-
-        <div className="">
-          <Love />
-        </div>
+        <h2>In Developers' Own Words</h2>
+        <Love />
       </Section>
 
       {/* The code */}
@@ -212,6 +204,7 @@ export default function Home() {
 
         <br />
         <br />
+
         <h2>React Server Components</h2>
         <p>
           At the core of our architecture is a unified mental model powered by React Server Components. Whether you are fetching data, handling a mutation, or navigating to a new page, you are working within a single, consistent system that works together by default.
@@ -222,17 +215,17 @@ export default function Home() {
           <Tile2_ServerFunctions />
           <Tile3_Navigation />
         </div>
-        <br /><br />
+
+        <br />
+        <br />
 
         <h2>Realtime Consistency</h2>
         <p>
           RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
         </p>
         <br />
-
         <RealtimeSection />
       </Section>
-
     </div >
   );
 }

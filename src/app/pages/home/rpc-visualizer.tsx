@@ -12,7 +12,7 @@ export default function RPCVisualizer({ interactionKey }: RPCVisualizerProps) {
   useEffect(() => {
     setPhase("idle");
     setStream([]);
-    
+
     const sequence = async () => {
       // Step 1: Request
       setPhase("request");
@@ -24,10 +24,10 @@ export default function RPCVisualizer({ interactionKey }: RPCVisualizerProps) {
 
       // Step 3: Response (Streaming)
       setPhase("response");
-      const chunks = interactionKey === "rpc-query" 
+      const chunks = interactionKey === "rpc-query"
         ? ['{"id": 1, "status": "done"}', '{"id": 2, "status": "pending"}']
         : ['1:"$Sreact.suspense"', '2:I["./AddTodo.tsx",[]]', '3:HL["/style.css"]'];
-      
+
       for (const chunk of chunks) {
         setStream(prev => [...prev, chunk]);
         await new Promise(r => setTimeout(r, 400));
@@ -38,7 +38,7 @@ export default function RPCVisualizer({ interactionKey }: RPCVisualizerProps) {
   }, [interactionKey]);
 
   return (
-    <div className="bg-slate-900 rounded-lg p-4 font-mono text-[11px] border border-white/10 shadow-2xl">
+    <div className="bg-editor rounded-xl p-4 font-mono text-[11px] border border-white/10">
       <div className="flex items-center gap-2 mb-4 border-b border-white/5 pb-2">
         <div className="w-2 h-2 rounded-full bg-red-500" />
         <div className="w-2 h-2 rounded-full bg-yellow-500" />

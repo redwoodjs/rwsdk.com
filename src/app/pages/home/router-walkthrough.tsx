@@ -101,9 +101,9 @@ function ActiveConnection({
       let textX, textY;
 
       if (isStacked) {
-        // Stacked (Mobile): Connect to TOP CENTER of the Header
-        textX = (headerEl ? headerRect.left : descRect.left) - containerRect.left + (headerRect.width / 2);
-        textY = (headerEl ? headerRect.top : descRect.top) - containerRect.top;
+        // Stacked (Mobile): Connect to TOP of the Header (Left aligned)
+        textX = (headerEl ? headerRect.left : descRect.left) - containerRect.left + 10;
+        textY = (headerEl ? headerRect.top : descRect.top) - containerRect.top - 8;
       } else {
         // Desktop: Connect to LEFT of Header
         textX = (headerEl ? headerRect.left : descRect.left) - containerRect.left - 4;
@@ -276,7 +276,7 @@ export default function RouterWalkthrough() {
         />
         {/* Code Side */}
         <div className="lg:col-span-3 relative">
-          <div className="relative bg-[#0D0D0D] rounded-xl overflow-hidden shadow-2xl h-[440px] flex flex-col">
+          <div className="relative bg-[#0D0D0D] rounded-xl overflow-hidden h-[440px] flex flex-col">
             <div className="p-4 overflow-auto custom-scrollbar grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
@@ -423,9 +423,9 @@ export default function RouterWalkthrough() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
                 <h3 className="text-2xl font-normal mb-4">

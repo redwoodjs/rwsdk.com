@@ -96,13 +96,13 @@ export default function RealtimeSection() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 {/* Left Column: Interactive Demo */}
-                <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden group`}>
+                <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden group`}>
                     <div className="absolute top-4 left-6 text-[10px] font-mono uppercase tracking-widest text-slate-400">
                         Interactive Presence Demo
                     </div>
 
                     <motion.div
-                        className="bg-slate-900 border border-white/10 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-sm"
+                        className="bg-editor border border-white/10 rounded-xl p-8 flex flex-col items-center gap-6"
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
@@ -149,14 +149,14 @@ export default function RealtimeSection() {
                 {/* Right Column: State Inspector & Protocol Log */}
                 <div className="flex flex-col gap-4 h-[350px]">
                     {/* State Inspector */}
-                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] p-4 flex flex-col flex-[0.6] overflow-hidden`}>
+                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-4 flex flex-col flex-[0.6] overflow-hidden`}>
                         <div className="flex items-center justify-between mb-2">
                             <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
                                 State Inspector
                             </div>
                         </div>
 
-                        <div className="flex-1 font-mono text-xs overflow-auto bg-slate-950 rounded-lg p-3 border border-white/10">
+                        <div className="flex-1 font-mono text-xs overflow-auto bg-editor rounded-xl p-3 border border-white/10">
                             <pre className="text-[#9C9781]">
                                 <span className="opacity-50">{"{"}</span>
                                 {"\n  "}
@@ -177,7 +177,7 @@ export default function RealtimeSection() {
                     </div>
 
                     {/* Protocol Log (Debugging Information) */}
-                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] p-4 flex flex-col flex-[0.4] overflow-hidden`}>
+                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-4 flex flex-col flex-[0.4] overflow-hidden`}>
                         <div className="flex items-center justify-between mb-2">
                             <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
                                 Protocol Events (Debugging)
@@ -188,7 +188,7 @@ export default function RealtimeSection() {
                             </div>
                         </div>
 
-                        <div className="flex-1 font-mono text-[10px] overflow-auto bg-slate-950 rounded p-2 text-slate-400 space-y-1">
+                        <div className="flex-1 font-mono text-[10px] overflow-auto bg-editor rounded-xl p-2 text-slate-400 space-y-1">
                             <AnimatePresence mode="popLayout">
                                 {logs.map((log) => (
                                     <motion.div

@@ -58,7 +58,7 @@ export function Tile1_ServerFirst() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm p-6 flex flex-col items-center justify-between h-[400px] relative overflow-hidden`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl p-6 flex flex-col items-center justify-between h-[400px] relative overflow-hidden`}
       >
         <div className="flex flex-col items-center z-10">
           <IconServer className={`w-12 h-12 ${ACCENT} mb-2`} />
@@ -80,7 +80,7 @@ export function Tile1_ServerFirst() {
           <div className="mb-2 text-xs font-mono uppercase tracking-widest text-slate-400">
             Browser
           </div>
-          <div className="border border-white/10 rounded w-3/4 h-24 p-2 relative bg-slate-900">
+          <div className="border border-white/10 rounded-xl w-3/4 h-24 p-2 relative bg-editor">
             <div className="w-full h-2 bg-slate-800 mb-2 rounded" />
             <div className="w-2/3 h-2 bg-slate-800 rounded" />
             <motion.div
@@ -106,13 +106,13 @@ export function Tile2_ServerFunctions() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm relative overflow-hidden h-[400px] flex flex-col`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl relative overflow-hidden h-[400px] flex flex-col`}
       >
         <div className="flex flex-1 relative z-10">
           {/* Left: Action */}
           <div className="w-1/2 border-r border-white/10 px-2 pt-8 pb-4 flex flex-col items-center">
             <span className={`text-xs font-mono uppercase ${ACCENT} mb-4`}>Mutate</span>
-            <div className="border border-white/10 p-2 rounded w-full mb-2 bg-slate-900">
+            <div className="border border-white/10 p-2 rounded-xl w-full mb-2 bg-editor">
               <div className="w-full h-6 bg-slate-800 rounded mb-2 flex items-center justify-center text-[10px]">Submit</div>
             </div>
 
@@ -129,7 +129,7 @@ export function Tile2_ServerFunctions() {
 
             {/* Revalidation Flash */}
             <motion.div
-              className="w-full h-24 bg-slate-900 border border-white/5 rounded mt-2 mb-4"
+              className="w-full h-24 bg-editor border border-white/5 rounded-xl mt-2 mb-4"
               animate={{ backgroundColor: ["#0F172A", "rgba(241,117,67,0.15)", "#0F172A"] }}
               transition={{ duration: 2, repeat: Infinity, delay: 1 }}
             />
@@ -142,7 +142,7 @@ export function Tile2_ServerFunctions() {
           {/* Right: Query */}
           <div className="w-1/2 px-2 pt-8 pb-4 flex flex-col items-center">
             <span className={`text-xs font-mono uppercase ${ACCENT} mb-4`}>Fetch</span>
-            <div className="border border-white/10 p-2 rounded w-full mb-2 bg-slate-900">
+            <div className="border border-white/10 p-2 rounded-xl w-full mb-2 bg-editor">
               <div className="w-full h-6 border border-white/5 rounded mb-2 flex items-center px-2 text-[10px] text-slate-500">Search...</div>
             </div>
 
@@ -210,7 +210,7 @@ export function Tile3_Navigation() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm relative overflow-hidden h-[400px] flex flex-col`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl relative overflow-hidden h-[400px] flex flex-col`}
       >
         <div className="flex-1 flex flex-col items-center justify-center p-6 relative">
 
@@ -232,9 +232,9 @@ export function Tile3_Navigation() {
           <div className="text-center h-10 mb-6">
             <motion.div
               key={step}
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               className="flex flex-col items-center justify-center"
             >
               <span className={`font-mono text-xs uppercase tracking-widest ${ACCENT} mb-1`}>
@@ -284,7 +284,7 @@ export function Tile3_Navigation() {
           </div>
 
           {/* Browser Window (Hydration & View Transition) */}
-          <div className={`w-full max-w-[200px] aspect-[4/3] border rounded bg-slate-900 relative overflow-hidden transition-all duration-500 mt-8 ${[4, 5].includes(step) ? `border-[#F17543]/50 shadow-[0_0_20px_rgba(241,117,67,0.1)]` : "border-white/10"}`}>
+          <div className={`w-full max-w-[200px] aspect-[4/3] border rounded-xl bg-editor relative overflow-hidden transition-all duration-500 mt-8 ${[4, 5].includes(step) ? `border-[#F17543]/50` : "border-white/10"}`}>
             <div className="absolute top-0 w-full h-4 border-b border-white/5 flex items-center px-2 gap-1">
               <div className="w-2 h-2 rounded-full bg-slate-800" />
               <div className="w-2 h-2 rounded-full bg-slate-800" />
@@ -299,7 +299,7 @@ export function Tile3_Navigation() {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: "-100%", opacity: 0 }}
                     transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                    className="absolute inset-0 p-4 pt-8 bg-slate-900"
+                    className="absolute inset-0 p-4 pt-8 bg-editor"
                   >
                     <div className="flex flex-col gap-2">
                       {/* Header - Different visual for Page B */}
