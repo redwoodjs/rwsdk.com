@@ -7,7 +7,6 @@ import RealtimeSection from "./realtime-section";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
 
-import { link } from "src/shared/links";
 import { SEO } from "src/components/seo";
 
 export default function Home() {
@@ -54,211 +53,186 @@ export default function Home() {
         ogImageAlt="RedwoodSDK: A simple framework for humans"
         structuredData={structuredData}
       />
+
       {/* Hero section */}
-      <Section className="relative min-h-[60vh] sm:min-h-[80vh] flex items-center justify-center">
-        <div className="relative z-10 flex flex-col items-center justify-center text-center text-charcoal">
-          <div className="flex flex-col gap-8">
-            <h1 className="text-hero">A simple framework for humans*</h1>
-            <h3 className="font-sans leading-[1.5] max-w-[600px] mx-auto">
-              React and Cloudflare, without magic. Simple. Understandable.
+      <Section className="relative min-h-[60vh] sm:min-h-[80vh] !max-w-[700px] mx-auto flex items-center justify-center border-none !mt-0">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="flex flex-col">
+            <h1 className="text-hero">A simple framework for humans</h1>
+            <h3 className="leading-[1.5] mx-auto">
+              Server-first React, running on the Cloudflare platform.<br />Simple to build. Easy to maintain.
             </h3>
-            <div className="flex flex-col items-center gap-6 mt-4">
-              <a href="#get-started" className="btn-primary">
-                Get started
-              </a>
-              <a
-                href={link("/blog/:slug", {
-                  slug: "why-cloudflare-unified-platform",
-                })}
-                className="!text-[0.75rem] !text-slate-500 font-mono underline tracking-widest uppercase"
+            {/* Add a down arrow that shows the user they need to scroll */}
+            <div className="mt-12 flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="animate-subtle-bounce text-slate-400 opacity-30"
               >
-                Built for Cloudflare
-              </a>
+                <path d="M7 13l5 5 5-5" />
+                <path d="M7 6l5 5 5-5" />
+              </svg>
             </div>
           </div>
         </div>
       </Section>
 
-      {/* ... And AI */}
-      <Section className="-mt-24 relative z-20">
-        <div className="space-y-6">
-          <h2 className="mb-4 mt-12">
-            *... and AI
-          </h2>
-
-          <div className="space-y-6">
-            <p className="leading-relaxed">
-              <strong>Simplicity for humans is clarity for AI.</strong> We do
-              not use custom syntax or hidden logic. By using TypeScript and
-              providing direct access to the Request and Response, we remove the
-              "noise" of the framework. Your AI assistant focuses on your
-              specific logic rather than trying to navigate the rules of a
-              complex library.
-            </p>
-
-            <h3 className="mt-6 mb-2 font-serif">
-              Our Principles
-            </h3>
-
-            <p className="leading-relaxed">
-              We use the web the way it works: standards, the browser, and the
-              network. Built with React, TypeScript, Vite, and Cloudflare in a
-              straightforward way. The result: systems that are easier to
-              understand, easier to change, and cheaper to maintain.
-            </p>
-
-            <div className="bg-editor rounded-xl overflow-hidden mt-4 border border-slate-800">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="border-b border-slate-800/50">
-                      <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
-                        Principle
-                      </th>
-                      <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
-                        Technical Reality
-                      </th>
-                      <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
-                        Why it helps the AI
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b border-slate-800/50">
-                      <td className="px-6 py-4 font-bold text-white text-sm">
-                        Without Magic
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        No code generation or file-system conventions. What you
-                        write is what runs.
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        No guessing. AI sees the exact code the engine executes.
-                      </td>
-                    </tr>
-                    <tr className="border-b border-slate-800/50">
-                      <td className="px-6 py-4 font-bold text-white text-sm">
-                        Composability
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        Build with functions and types. No rigid structures or
-                        opinionated wrappers.
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        Predictable intent. AI follows your logic, not a
-                        framework's policy.
-                      </td>
-                    </tr>
-                    <tr className="border-b border-slate-800/50">
-                      <td className="px-6 py-4 font-bold text-white text-sm">
-                        Web Standards
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        We avoid rebuilding primitives the browser already
-                        provides. If the platform gives you a tool like the
-                        Request object, you use it directly.
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        Standard training. AI uses its core web knowledge, not
-                        custom workarounds.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-4 font-bold text-white text-sm">
-                        Server-First
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        Each request is processed on the server through a clear
-                        path to the response.
-                      </td>
-                      <td className="px-6 py-4 text-slate-300 text-sm">
-                        High signal. A linear data flow is easier for AI to
-                        audit and write.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
 
       {/* Get started */}
-      <Section id="get-started" className="flex flex-col items-start">
-        <div className="flex flex-col gap-8 text-left">
-          <div className="flex flex-col gap-4">
-            <h2>
-              Get started
-            </h2>
+      <Section id="get-started">
+        <h2>
+          Get started
+        </h2>
+        <p>
+          Scaffold a Vite project powered by RedwoodSDK. Includes RSC, type-safe routing/SQL, and Cloudflare integration.
+        </p>
+        <br />
 
-            <p className="leading-relaxed">
-              Running this command installs Vite and the RedwoodSDK plugin which
-              gives you React Server Components (RSC), a type-safe router,
-              type-safe SQL, a Cloudflare development environment, and{" "}
-              <a href="https://docs.rwsdk.com/core/overview/">more</a>.
-            </p>
-          </div>
+        <div className="bg-editor p-4 rounded-xl font-mono text-sm sm:text-base flex items-center gap-2 w-fit border border-slate-800">
+          <span className="text-orange">$</span>{" "}
+          <span className="text-orange-light flex-1">
+            npx create-rwsdk my-project-name
+          </span>
+          <span className="text-orange-light">
+            <Copy text="npx create-rwsdk my-project-name" />
+          </span>
+        </div>
 
-          <div className="bg-editor p-4 rounded-xl font-mono text-sm sm:text-base flex items-center gap-2 w-fit border border-slate-800">
-            <span className="text-orange">$</span>{" "}
-            <span className="text-orange-light flex-1">
-              npx create-rwsdk my-project-name
-            </span>
-            <span className="text-orange-light">
-              <Copy text="npx create-rwsdk my-project-name" />
-            </span>
+      </Section>
+
+      {/* Principles */}
+      <Section>
+
+        <h2>
+          Principles
+        </h2>
+        <p>
+          Simplicity for humans is clarity for AI. By using React, TypeScript, and Cloudflare without custom "noise," AI focuses on your business logic instead of navigating framework rules.
+        </p>
+        <br />
+
+
+        <div className="bg-editor rounded-xl overflow-hidden border border-slate-800">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-slate-800/50">
+                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                    Principle
+                  </th>
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                    Technical Reality
+                  </th>
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-slate-400">
+                    AI Advantage
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-slate-800/50">
+                  <td className="px-6 py-4 font-bold text-white text-sm">
+                    Without Magic
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    No code-gen or implied routing
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    <strong>Clarity:</strong> AI reads exactly what executes
+                  </td>
+                </tr>
+                <tr className="border-b border-slate-800/50">
+                  <td className="px-6 py-4 font-bold text-white text-sm">
+                    Composability
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    Standard functions and types
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    <strong>Logic:</strong> AI follows your code, not a policy
+                  </td>
+                </tr>
+                <tr className="border-b border-slate-800/50">
+                  <td className="px-6 py-4 font-bold text-white text-sm">
+                    Web Standards
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    If the browser or platform has it, we use it
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    <strong>Context:</strong> AI uses core web knowledge
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-6 py-4 font-bold text-white text-sm">
+                    Server-First
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    Linear data flow
+                  </td>
+                  <td className="px-6 py-4 text-slate-300 text-sm">
+                    <strong>Signal:</strong> Higher accuracy for auditing/writing
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </Section>
+      </Section >
+
 
       {/* Social proof */}
       <Section>
-        <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
+        <h2>
           In Developers' Own Words
+        </h2>
+
+        <div className="">
+          <Love />
         </div>
-        <Love />
       </Section>
 
       {/* The code */}
       <Section>
-        <div className="text-left">
-          <div className="font-mono text-xs sm:text-sm mb-2 opacity-50 uppercase leading-none">
-            The Code
-          </div>
+        <h2>
+          Routing
+        </h2>
+        <p>
+          Composable functions that describe your app using standard
+          TypeScript.
+        </p>
+        <br />
+        <RouterWalkthrough />
 
-          <div className="mb-12 text-left">
-            <h2 className="mb-4">
-              Routing
-            </h2>
-            <p className="max-w-2xl leading-relaxed">
-              Composable functions that describe your app using standard
-              TypeScript.
-            </p>
-          </div>
-
-          <RouterWalkthrough />
+        <br />
+        <br />
+        <h2>React Server Components</h2>
+        <p>
+          At the core of our architecture is a unified mental model powered by React Server Components. Whether you are fetching data, handling a mutation, or navigating to a new page, you are working within a single, consistent system that works together by default.
+        </p>
+        <br />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Tile1_ServerFirst />
+          <Tile2_ServerFunctions />
+          <Tile3_Navigation />
         </div>
+        <br /><br />
 
-        <div className="mt-12">
-          <div className="mb-12">
-            <h2 className="mb-4">React Server Components</h2>
-            <p className="max-w-2xl leading-relaxed opacity-80">
-              At the core of our architecture is a unified mental model powered by React Server Components. Whether you are fetching data, handling a mutation, or navigating to a new page, you are working within a single, consistent system that works together by default.
-            </p>
-          </div>
+        <h2>Realtime Consistency</h2>
+        <p>
+          RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
+        </p>
+        <br />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Tile1_ServerFirst />
-            <Tile2_ServerFunctions />
-            <Tile3_Navigation />
-          </div>
-        </div>
-
-        <div className="mt-24">
-          <RealtimeSection />
-        </div>
+        <RealtimeSection />
       </Section>
-    </div>
+
+    </div >
   );
 }

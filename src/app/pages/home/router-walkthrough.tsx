@@ -5,26 +5,7 @@ import type { PrismTheme } from "prism-react-renderer";
 import { motion, AnimatePresence } from "framer-motion";
 import { routerWalkthroughSteps } from "../../data/router_walkthrough";
 
-// Matching theme from StyledCodeBlock/CodeWalkthrough
-const walkthroughTheme: PrismTheme = {
-  plain: {
-    backgroundColor: "#1B1B1B",
-    color: "#E9B46A",
-  },
-  styles: [
-    { types: ["keyword"], style: { color: "#C55447" } },
-    { types: ["function"], style: { color: "#D58052" } },
-    { types: ["string", "attr-value"], style: { color: "#E9B46A" } },
-    { types: ["number"], style: { color: "#995369" } },
-    {
-      types: ["comment"],
-      style: { color: "#3B82F6", fontStyle: "italic" as const },
-    },
-    { types: ["punctuation", "variable"], style: { color: "#9C9781" } },
-    { types: ["tag"], style: { color: "#C55447" } },
-    { types: ["attr-name"], style: { color: "#D58052" } },
-  ],
-};
+import { rwsdkCodeTheme } from "./styled-code-block";
 
 
 function ActiveConnection({
@@ -179,7 +160,7 @@ function ActiveConnection({
     // Stacked Mode: "Swing" C-Curve
     // Curve starts STRAIGHT UP (vertical) then swings left
 
-    const swingX = -10; // 40px left of container edge
+    const swingX = 0; // Align with left edge instead of swinging outside
 
     // Control Point 1 (Text): Go STRAIGHT UP from Text (sx)
     // This enforces the "straight start" from the text source
@@ -207,7 +188,7 @@ function ActiveConnection({
   const path = `M ${sx} ${sy} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${pathEx} ${ey}`;
 
   return (
-    <svg className="absolute inset-0 w-full h-full pointer-events-none z-50 overflow-visible">
+    <svg className="absolute inset-0 w-full h-full pointer-events-none z-50 overflow-hidden">
       <defs>
         <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#F17543" />
@@ -295,12 +276,12 @@ export default function RouterWalkthrough() {
         />
         {/* Code Side */}
         <div className="lg:col-span-3 relative">
-          <div className="relative bg-[#1B1B1B] rounded-xl overflow-hidden shadow-2xl h-[440px] flex flex-col">
+          <div className="relative bg-[#0D0D0D] rounded-xl overflow-hidden shadow-2xl h-[440px] flex flex-col">
             <div className="p-4 overflow-auto custom-scrollbar grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
                 language="tsx"
-                theme={walkthroughTheme}
+                theme={rwsdkCodeTheme}
               >
                 {({
                   className,
@@ -404,7 +385,7 @@ export default function RouterWalkthrough() {
                 }}
               </Highlight>
             </div>
-            <div className="flex justify-center items-center gap-4 py-4 shrink-0 bg-[#1B1B1B] relative z-10 border-t border-white/5">
+            <div className="flex justify-center items-center gap-4 py-4 shrink-0 bg-[#0D0D0D] relative z-10 border-t border-white/5">
               <button
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0}

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export function ScrollShadow() {
+export function ScrollMonitoring() {
   useEffect(() => {
     const navbar = document.getElementById("main-navbar");
     if (!navbar) return;

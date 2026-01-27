@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Highlight } from "prism-react-renderer";
 import type { PrismTheme } from "prism-react-renderer";
 
-const customTheme: PrismTheme = {
+export const rwsdkCodeTheme: PrismTheme = {
   plain: {
-    backgroundColor: "#1B1B1B",
+    backgroundColor: "#0D0D0D",
     color: "#E9B46A",
   },
   styles: [
@@ -13,9 +13,11 @@ const customTheme: PrismTheme = {
     { types: ["function"], style: { color: "#D58052" } },
     { types: ["string", "attr-value"], style: { color: "#E9B46A" } },
     { types: ["number"], style: { color: "#995369" } },
-    { types: ["comment"], style: { color: "#6E6A5E", fontStyle: "italic" as const } },
-    { types: ["punctuation"], style: { color: "#9C9781" } },
-    { types: ["variable"], style: { color: "#9C9781" } },
+    {
+      types: ["comment"],
+      style: { color: "#3B82F6", fontStyle: "italic" as const }
+    },
+    { types: ["punctuation", "variable"], style: { color: "#9C9781" } },
     // HTML specific
     { types: ["tag"], style: { color: "#C55447" } },
     { types: ["attr-name"], style: { color: "#D58052" } },
@@ -64,56 +66,56 @@ export default function StyledCodeBlock({ codeBlocks }: Props) {
 
   return (
     <>
-    <div
-      style={{
-        minHeight: `${maxLines * 1.5}em`,
-        backgroundColor: customTheme.plain.backgroundColor,
-        borderRadius: "8px",
-        padding: "1em",
-      }}
-    >
-      <div className={`transition-opacity duration-500 ${visible ? 'opacity-100' : 'opacity-0'}`}>
-      <Highlight key={index} code={blocks[index]} language="tsx" theme={customTheme}>
-        {({ className = "", style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={className}
-            style={{
-              ...style,
-              padding: "1em",
-              borderRadius: "8px",
-              overflow: "auto",
-            }}
-          >
-            {tokens.map((line, i) => {
-              const { key: _k, ...restLine } = getLineProps({ line, key: i });
-              return (
-                <div key={i} {...restLine}>
-                  {line.map((token, k) => {
-                    const { key: _key, ...restToken } = getTokenProps({ token, key: k });
-                    return <span key={k} {...restToken} />;
-                  })}
-                </div>
-              );
-            })}
-          </pre>
-        )}
-      </Highlight>
+      <div
+        style={{
+          minHeight: `${maxLines * 1.5}em`,
+          backgroundColor: rwsdkCodeTheme.plain.backgroundColor,
+          borderRadius: "8px",
+          padding: "1em",
+        }}
+      >
+        <div className={`transition-opacity duration-500 ${visible ? 'opacity-100' : 'opacity-0'}`}>
+          <Highlight key={index} code={blocks[index]} language="tsx" theme={rwsdkCodeTheme}>
+            {({ className = "", style, tokens, getLineProps, getTokenProps }) => (
+              <pre
+                className={className}
+                style={{
+                  ...style,
+                  padding: "1em",
+                  borderRadius: "8px",
+                  overflow: "auto",
+                }}
+              >
+                {tokens.map((line, i) => {
+                  const { key: _k, ...restLine } = getLineProps({ line, key: i });
+                  return (
+                    <div key={i} {...restLine}>
+                      {line.map((token, k) => {
+                        const { key: _key, ...restToken } = getTokenProps({ token, key: k });
+                        return <span key={k} {...restToken} />;
+                      })}
+                    </div>
+                  );
+                })}
+              </pre>
+            )}
+          </Highlight>
+        </div>
       </div>
-    </div>
 
-    {/* pagination dots */}
-    {blocks.length > 1 && (
-      <div className="flex justify-center gap-2 mt-2">
-        {blocks.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => fadeTo(i)}
-            className={`w-2 h-2 rounded-full cursor-pointer focus:outline-none ${i === index ? 'bg-orange-400' : 'bg-gray-500 opacity-50'}`}
-            aria-label={`Show code snippet ${i + 1}`}
-          />
-        ))}
-      </div>
-    )}
+      {/* pagination dots */}
+      {blocks.length > 1 && (
+        <div className="flex justify-center gap-2 mt-2">
+          {blocks.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => fadeTo(i)}
+              className={`w-2 h-2 rounded-full cursor-pointer focus:outline-none ${i === index ? 'bg-orange-400' : 'bg-gray-500 opacity-50'}`}
+              aria-label={`Show code snippet ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }

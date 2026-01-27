@@ -2,7 +2,7 @@ import { CloudflareImage } from "./cloudflare-image";
 import Constants from "src/lib/Constants";
 import { link } from "src/shared/links";
 import { GitHubStarWidget } from "./github-star-widget";
-import { ScrollShadow } from "./scroll-shadow";
+import { ScrollMonitoring } from "./scroll-monitoring";
 
 interface NavItem {
   href: string;
@@ -12,8 +12,9 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { href: Constants.DOCS_URL, label: "Docs" },
+  { href: "/#get-started", label: "Get started" },
   { href: link("/blog"), label: "Blog" },
-  { href: link("/hire-us"), label: "Hire us" },
+
 ];
 
 interface NavLinkProps {
@@ -41,9 +42,9 @@ export function Navbar(props: NavbarProps) {
   return (
     <div
       id="main-navbar"
-      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-99 items-center py-4 px-4 sm:px-8 md:px-12 transition-all duration-200 shadow-none max-md:group-data-[scrolled=true]:py-2"
+      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-99 items-center pt-12 pb-4 px-4 sm:px-8 md:px-12 transition-all duration-200 shadow-none data-[scrolled=true]:pt-4 data-[scrolled=true]:pb-2"
     >
-      <ScrollShadow />
+      <ScrollMonitoring />
       <a
         className="cursor-pointer mb-4 md:mb-0 transition-all duration-300 overflow-hidden max-h-[100px] opacity-100 max-md:group-data-[scrolled=true]:max-h-0 max-md:group-data-[scrolled=true]:opacity-0 max-md:group-data-[scrolled=true]:mb-0"
         href={link("/")}
@@ -71,7 +72,7 @@ export function Navbar(props: NavbarProps) {
           >
             GitHub
           </a>
-          <span className="!text-slate-400 !no-underline">
+          <span className="text-orange-medium !no-underline">
             <GitHubStarWidget />
           </span>
         </div>

@@ -4,21 +4,26 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-baige: #F9F7F2;
-  --color-parchment: #FDFCFA;
-  --color-charcoal: #1A1A1A;
-  --color-subtext: #4A4A4A;
-  --color-orange: #f47238;
+  --color-baige: #f9f7f2;
+  --color-parchment: #fdfcfa;
+  --color-charcoal: #1a1a1a;
+  --color-subtext: #4a4a4a;
+  --color-orange: #F17543;
   --color-orange-light: #ffad48;
   --color-orange-dark: #e73c36;
-  --color-orange-medium: #f37238;
+  --color-orange-medium: #F17543;
   --color-purple: #8b2243;
   --color-purple-dark: #6b1a35;
   --color-light: #f2ece4;
-  --color-editor: #1b1b1b;
+  --color-editor: #0D0D0D;
   --font-serif: "Newsreader", serif;
   --font-sans: "Inter", sans-serif;
   --font-mono: "Geist Mono", monospace;
+
+  /* Custom Signal Tokens */
+  --space-unit: 8px;
+  --signal-black: #1a1a1a;
+  --signal-gray: #737373;
 }
 
 h1 {
@@ -29,7 +34,8 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
   font-weight: 400;
   line-height: 1.2;
 }
@@ -55,6 +61,14 @@ body {
   color: var(--color-charcoal);
 }
 
+.technical-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--signal-gray);
+  letter-spacing: 0.1em;
+}
+
 .btn-primary {
   @apply inline-block !no-underline text-[14px] px-6 py-2.5 bg-orange text-white rounded-[4px] shadow-sm hover:bg-orange-dark hover:-translate-y-0.5 active:translate-y-0 transition-all font-medium tracking-tight;
 }
@@ -76,6 +90,21 @@ body {
   50% {
     color: transparent;
   }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-subtle-bounce {
+  animation: subtle-bounce 2s infinite;
 }
 
 .language-bash {

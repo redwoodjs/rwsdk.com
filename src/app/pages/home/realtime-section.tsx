@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Section } from "src/components/section";
 import StyledCodeBlock from "./styled-code-block";
 
-const BLUEPRINT_BG = "bg-[#1A1A1A]";
-const BLUEPRINT_LINE = "border-white/20";
-const ACCENT = "text-[#f47238]";
-const ACCENT_BG = "bg-[#f47238]";
+const BLUEPRINT_BG = "bg-[#0D0D0D]";
+const BLUEPRINT_LINE = "border-white/10";
+const ACCENT = "text-[#F17543]";
+const ACCENT_BG = "bg-[#F17543]";
 const TEXT_MAIN = "text-white";
-const TEXT_SUB = "text-white/60";
+const TEXT_SUB = "text-slate-400";
 
 const clientCode = `"use client";
 import { useSyncedState } from "rwsdk/use-synced-state/client";
@@ -91,23 +91,18 @@ export default function RealtimeSection() {
     };
 
     return (
-        <Section>
-            <div className="mb-12">
-                <h2 className="mb-4">Realtime Consistency</h2>
-                <p className="max-w-2xl leading-relaxed opacity-80">
-                    RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
-                </p>
-            </div>
+        <div>
+
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 {/* Left Column: Interactive Demo */}
-                <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-8 flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden group`}>
-                    <div className="absolute top-4 left-6 text-[10px] font-mono uppercase tracking-widest text-white/30">
+                <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm flex flex-col items-center justify-center min-h-[350px] relative overflow-hidden group`}>
+                    <div className="absolute top-4 left-6 text-[10px] font-mono uppercase tracking-widest text-slate-400">
                         Interactive Presence Demo
                     </div>
 
                     <motion.div
-                        className="bg-white/5 border border-white/10 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-2xl backdrop-blur-sm"
+                        className="bg-slate-900 border border-white/10 rounded-2xl p-8 flex flex-col items-center gap-6 shadow-sm"
                         whileHover={{ scale: 1.02 }}
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
@@ -123,7 +118,7 @@ export default function RealtimeSection() {
                         <div className="flex items-center gap-8">
                             <button
                                 onClick={() => handleUpdate(-1)}
-                                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-2xl hover:bg-white/10 transition-colors active:scale-90"
+                                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-2xl text-white hover:bg-slate-800 transition-colors active:scale-90"
                             >
                                 -
                             </button>
@@ -131,21 +126,21 @@ export default function RealtimeSection() {
                                 key={presence.count}
                                 initial={{ y: 10, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
-                                className="text-5xl font-mono font-bold w-20 text-center"
+                                className="text-5xl font-mono font-bold w-20 text-center text-white"
                             >
                                 {presence.count}
                             </motion.span>
                             <button
                                 onClick={() => handleUpdate(1)}
-                                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-2xl hover:bg-white/10 transition-colors active:scale-90"
+                                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-2xl text-white hover:bg-slate-800 transition-colors active:scale-90"
                             >
                                 +
                             </button>
                         </div>
                     </motion.div>
 
-                    <div className="absolute bottom-4 text-center">
-                        <p className="text-[10px] font-mono text-white/30 uppercase tracking-[0.2em]">
+                    <div className="absolute bottom-4 left-0 right-0 text-center">
+                        <p className="!text-[10px] font-mono text-slate-400 uppercase tracking-[0.2em] mb-0">
                             Synced across all instances of this "lobby"
                         </p>
                     </div>
@@ -154,37 +149,37 @@ export default function RealtimeSection() {
                 {/* Right Column: State Inspector & Protocol Log */}
                 <div className="flex flex-col gap-4 h-[350px]">
                     {/* State Inspector */}
-                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-4 flex flex-col flex-[0.6] overflow-hidden`}>
+                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] p-4 flex flex-col flex-[0.6] overflow-hidden`}>
                         <div className="flex items-center justify-between mb-2">
-                            <div className="text-[10px] font-mono uppercase tracking-widest text-white/30">
+                            <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
                                 State Inspector
                             </div>
                         </div>
 
-                        <div className="flex-1 font-mono text-xs overflow-auto bg-black/30 rounded-lg p-3 border border-white/5">
-                            <pre className="text-blue-300">
-                                <span className="text-white/40">{"{"}</span>
+                        <div className="flex-1 font-mono text-xs overflow-auto bg-slate-950 rounded-lg p-3 border border-white/10">
+                            <pre className="text-[#9C9781]">
+                                <span className="opacity-50">{"{"}</span>
                                 {"\n  "}
-                                <span className="text-orange-300">"roomId"</span>: <span className="text-green-300">"lobby"</span>,
+                                <span className="text-[#C55447]">"roomId"</span>: <span className="text-[#E9B46A]">"lobby"</span>,
                                 {"\n  "}
-                                <span className="text-orange-300">"state"</span>: <span className="text-white/40">{"{"}</span>
+                                <span className="text-[#C55447]">"state"</span>: <span className="opacity-50">{"{"}</span>
                                 {"\n    "}
-                                <span className="text-orange-300">"count"</span>: <motion.span key={presence.count} animate={{ color: ["#fff", "#f47238", "#fff"] }} transition={{ duration: 0.5 }}>{presence.count}</motion.span>,
+                                <span className="text-[#C55447]">"count"</span>: <motion.span key={presence.count} animate={{ color: ["#fff", "#F17543", "#fff"] }} transition={{ duration: 0.5 }}>{presence.count}</motion.span>,
                                 {"\n    "}
-                                <span className="text-orange-300">"flag"</span>: <span className="text-green-300">"{presence.flag}"</span>
+                                <span className="text-[#C55447]">"flag"</span>: <span className="text-[#E9B46A]">"{presence.flag}"</span>
                                 {"\n  "}
-                                <span className="text-white/40">{"}"}</span>,
+                                <span className="opacity-50">{"}"}</span>,
                                 {"\n  "}
-                                <span className="text-orange-300">"protocol"</span>: <span className="text-green-300">"Cap'n Web"</span>
-                                {"\n"}<span className="text-white/40">{"}"}</span>
+                                <span className="text-[#C55447]">"protocol"</span>: <span className="text-[#E9B46A]">"Cap'n Web"</span>
+                                {"\n"}<span className="opacity-50">{"}"}</span>
                             </pre>
                         </div>
                     </div>
 
                     {/* Protocol Log (Debugging Information) */}
-                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-4 flex flex-col flex-[0.4] overflow-hidden`}>
+                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-[4px] p-4 flex flex-col flex-[0.4] overflow-hidden`}>
                         <div className="flex items-center justify-between mb-2">
-                            <div className="text-[10px] font-mono uppercase tracking-widest text-white/30">
+                            <div className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
                                 Protocol Events (Debugging)
                             </div>
                             <div className="flex items-center gap-2">
@@ -193,7 +188,7 @@ export default function RealtimeSection() {
                             </div>
                         </div>
 
-                        <div className="flex-1 font-mono text-[10px] overflow-auto bg-black/20 rounded p-2 text-white/50 space-y-1">
+                        <div className="flex-1 font-mono text-[10px] overflow-auto bg-slate-950 rounded p-2 text-slate-400 space-y-1">
                             <AnimatePresence mode="popLayout">
                                 {logs.map((log) => (
                                     <motion.div
@@ -202,14 +197,14 @@ export default function RealtimeSection() {
                                         animate={{ opacity: 1, x: 0 }}
                                         className="flex gap-2"
                                     >
-                                        <span className="opacity-30">[{log.timestamp}]</span>
-                                        <span className={`uppercase font-bold ${log.type === 'in' ? 'text-blue-400' : log.type === 'out' ? 'text-orange-400' : 'text-slate-400'}`}>
+                                        <span className="opacity-40">[{log.timestamp}]</span>
+                                        <span className={`uppercase font-bold ${log.type === 'in' ? 'text-[#3B82F6]' : log.type === 'out' ? 'text-[#F17543]' : 'text-slate-500'}`}>
                                             {log.type === 'in' ? '← IN' : log.type === 'out' ? '→ OUT' : 'SYS'}
                                         </span>
                                         <span className="flex-1 break-all">{log.message}</span>
                                     </motion.div>
                                 ))}
-                                {logs.length === 0 && <div className="opacity-20 italic">Waiting for connection...</div>}
+                                {logs.length === 0 && <div className="opacity-40 italic">Waiting for connection...</div>}
                             </AnimatePresence>
                         </div>
                     </div>
@@ -241,7 +236,7 @@ export default function RealtimeSection() {
                     <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-400 group-hover:text-orange-500 transition-colors">
                         {showCode ? "Hide Implementation" : "View Implementation"}
                     </div>
-                    <div className={`w-8 h-[1px] bg-slate-300 group-hover:bg-orange-400 transition-all duration-300 ${showCode ? 'w-12 text-orange-400' : 'w-8'}`} />
+                    <div className={`w-8 h-[1px] bg-white/20 group-hover:bg-[#F17543] transition-all duration-300 ${showCode ? 'w-12 text-[#F17543]' : 'w-8'}`} />
                 </button>
 
                 <AnimatePresence>
@@ -252,8 +247,8 @@ export default function RealtimeSection() {
                             exit={{ height: 0, opacity: 0 }}
                             className="w-full overflow-hidden"
                         >
-                            <div className="bg-editor rounded-xl border border-slate-800 overflow-hidden">
-                                <div className="flex border-b border-slate-800">
+                            <div className="bg-editor rounded-xl border border-white/10 overflow-hidden">
+                                <div className="flex border-b border-white/10">
                                     <button
                                         onClick={() => setActiveTab("client")}
                                         className={`px-6 py-3 text-xs font-mono uppercase tracking-widest transition-colors ${activeTab === "client" ? "bg-white/5 text-orange-400 border-b border-orange-400" : "text-slate-500 hover:text-white"}`}
@@ -275,6 +270,6 @@ export default function RealtimeSection() {
                     )}
                 </AnimatePresence>
             </div>
-        </Section>
+        </div>
     );
 }

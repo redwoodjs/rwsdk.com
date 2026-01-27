@@ -32,28 +32,22 @@ export default async function BlogList() {
 
 
       {/* Hero Section */}
-      <div className="max-w-[800px] mx-auto px-4 sm:px-8 py-32">
+      <div className="max-w-[800px] mx-auto py-16">
         <div className="font-mono text-xs sm:text-sm mb-2 opacity-50">
           BLOG
         </div>
-        <h1 className="mb-6">
+        <h2>
           We build RedwoodSDK. We build for you.
-        </h1>
-        <p className="leading-relaxed mb-6">
+        </h2>
+        <p>
           RedwoodSDK is loved because it&apos;s simple. We created it to stay
           understandable. This is our blog about building the framework and how
           we help teams ship high-velocity software on Cloudflare.
         </p>
-        <a
-          href={link("/hire-us")}
-          className="font-bold text-orange hover:text-orange-dark transition-colors"
-        >
-          Work with us &rarr;
-        </a>
       </div>
 
-     
-      <div className="max-w-[800px] mx-auto px-4 sm:px-8 pb-20">
+
+      <div className="max-w-[800px] mx-auto">
         <div className="flex flex-col gap-12 max-w-[600px]">
           {otherBlogs.map((blog) => (
             <article key={blog.slug} className="group">
@@ -62,10 +56,10 @@ export default async function BlogList() {
                 className="block rounded-lg overflow-hidden transition-shadow duration-300 h-full no-underline group"
               >
                 <div className="p-0">
-                  <h2 className="group-hover:text-orange transition-colors mb-2">
+                  <h3 className="group-hover:text-orange transition-colors mb-2">
                     {blog.title}
-                  </h2>
-                  <div className="flex flex-row items-center gap-1 mb-4 text-xs sm:text-sm opacity-50">
+                  </h3>
+                  <div className="flex flex-row items-center gap-1 mb-4 text-xs sm:text-sm">
                     {blog.author && (
                       <div className="flex items-center gap-1">
                         {blog.author.avatar && (

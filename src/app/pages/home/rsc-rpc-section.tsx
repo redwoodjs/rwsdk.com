@@ -3,12 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const BLUEPRINT_BG = "bg-[#1A1A1A]"; // Charcoal
-const BLUEPRINT_LINE = "border-white/20";
-const ACCENT = "text-[#f47238]"; // Redwood Orange
-const ACCENT_BG = "bg-[#f47238]";
+const BLUEPRINT_BG = "bg-[#0D0D0D]";
+const BLUEPRINT_LINE = "border-white/10";
+const ACCENT = "text-[#F17543]";
+const ACCENT_BG = "bg-[#F17543]";
 const TEXT_MAIN = "text-white";
-const TEXT_SUB = "text-white/60";
+const TEXT_SUB = "text-slate-400";
 
 const IconServer = ({ className }: { className?: string }) => (
   <svg
@@ -58,17 +58,17 @@ export function Tile1_ServerFirst() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl p-6 flex flex-col items-center justify-between h-[400px] relative overflow-hidden`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm p-6 flex flex-col items-center justify-between h-[400px] relative overflow-hidden`}
       >
         <div className="flex flex-col items-center z-10">
           <IconServer className={`w-12 h-12 ${ACCENT} mb-2`} />
-          <span className="text-xs font-mono uppercase tracking-widest text-white/50">
+          <span className="text-xs font-mono uppercase tracking-widest text-slate-400">
             Source of Truth
           </span>
         </div>
 
         {/* Animated Stream */}
-        <div className="flex-1 w-[2px] bg-white/10 relative overflow-hidden my-4">
+        <div className="flex-1 w-[2px] bg-slate-200 relative overflow-hidden my-4">
           <motion.div
             className={`absolute top-0 left-0 w-full h-[40%] ${ACCENT_BG}`}
             animate={{ top: ["-40%", "100%"] }}
@@ -77,12 +77,12 @@ export function Tile1_ServerFirst() {
         </div>
 
         <div className="flex flex-col items-center z-10 w-full">
-          <div className="mb-2 text-xs font-mono uppercase tracking-widest text-white/50">
+          <div className="mb-2 text-xs font-mono uppercase tracking-widest text-slate-400">
             Browser
           </div>
-          <div className="border border-white/20 rounded w-3/4 h-24 p-2 relative">
-            <div className="w-full h-2 bg-white/10 mb-2 rounded" />
-            <div className="w-2/3 h-2 bg-white/10 rounded" />
+          <div className="border border-white/10 rounded w-3/4 h-24 p-2 relative bg-slate-900">
+            <div className="w-full h-2 bg-slate-800 mb-2 rounded" />
+            <div className="w-2/3 h-2 bg-slate-800 rounded" />
             <motion.div
               className={`absolute inset-0 bg-gradient-to-b from-${ACCENT}/20 to-transparent`}
               initial={{ opacity: 0 }}
@@ -106,14 +106,14 @@ export function Tile2_ServerFunctions() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl relative overflow-hidden h-[400px] flex flex-col`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm relative overflow-hidden h-[400px] flex flex-col`}
       >
         <div className="flex flex-1 relative z-10">
           {/* Left: Action */}
           <div className="w-1/2 border-r border-white/10 px-2 pt-8 pb-4 flex flex-col items-center">
             <span className={`text-xs font-mono uppercase ${ACCENT} mb-4`}>Mutate</span>
-            <div className="border border-white/20 p-2 rounded w-full mb-2 bg-white/5">
-              <div className="w-full h-6 bg-white/10 rounded mb-2 flex items-center justify-center text-[10px]">Submit</div>
+            <div className="border border-white/10 p-2 rounded w-full mb-2 bg-slate-900">
+              <div className="w-full h-6 bg-slate-800 rounded mb-2 flex items-center justify-center text-[10px]">Submit</div>
             </div>
 
             {/* Flow Animation */}
@@ -125,16 +125,16 @@ export function Tile2_ServerFunctions() {
               />
             </div>
 
-            <IconDatabase className="w-6 h-6 text-white/50 mb-2" />
+            <IconDatabase className="w-6 h-6 text-slate-300 mb-2" />
 
             {/* Revalidation Flash */}
             <motion.div
-              className="w-full h-24 bg-white/5 border border-white/10 rounded mt-2 mb-4"
-              animate={{ backgroundColor: ["rgba(255,255,255,0.05)", "rgba(244,114,56,0.2)", "rgba(255,255,255,0.05)"] }}
+              className="w-full h-24 bg-slate-900 border border-white/5 rounded mt-2 mb-4"
+              animate={{ backgroundColor: ["#0F172A", "rgba(241,117,67,0.15)", "#0F172A"] }}
               transition={{ duration: 2, repeat: Infinity, delay: 1 }}
             />
 
-            <p className="text-[10px] text-white/40 text-center leading-tight mt-auto text-balance px-1">
+            <p className="!text-[10px] text-slate-400 text-center leading-tight pb-4 text-balance px-1">
               Page automatically reloads with new server supplied state.
             </p>
           </div>
@@ -142,33 +142,33 @@ export function Tile2_ServerFunctions() {
           {/* Right: Query */}
           <div className="w-1/2 px-2 pt-8 pb-4 flex flex-col items-center">
             <span className={`text-xs font-mono uppercase ${ACCENT} mb-4`}>Fetch</span>
-            <div className="border border-white/20 p-2 rounded w-full mb-2 bg-white/5">
-              <div className="w-full h-6 border border-white/10 rounded mb-2 flex items-center px-2 text-[10px] text-white/40">Search...</div>
+            <div className="border border-white/10 p-2 rounded w-full mb-2 bg-slate-900">
+              <div className="w-full h-6 border border-white/5 rounded mb-2 flex items-center px-2 text-[10px] text-slate-500">Search...</div>
             </div>
 
             {/* Flow Animation */}
             <div className="h-16 w-[1px] bg-white/10 relative my-2">
               <motion.div
-                className="absolute top-0 w-full h-4 bg-white"
+                className="absolute top-0 w-full h-4 bg-slate-400"
                 animate={{ top: ["0%", "100%", "0%"] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>
 
-            <IconServer className="w-6 h-6 text-white/50 mb-2" />
+            <IconServer className="w-6 h-6 text-slate-300 mb-2" />
 
             <div className="w-full space-y-1 mt-2 mb-4">
-              <div className="h-2 w-full bg-white/10 rounded" />
+              <div className="h-2 w-full bg-slate-800 rounded" />
               <motion.div
-                className={`h-2 w-2/3 bg-white/10 rounded`}
+                className={`h-2 w-2/3 bg-slate-800 rounded`}
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 2, repeat: Infinity, delay: 1 }}
               />
-              <div className="h-2 w-full bg-white/10 rounded" />
-              <div className="h-2 w-4/5 bg-white/10 rounded" />
+              <div className="h-2 w-full bg-slate-800 rounded" />
+              <div className="h-2 w-4/5 bg-slate-800 rounded" />
             </div>
 
-            <p className="text-[10px] text-white/40 text-center leading-tight mt-auto text-balance px-1">
+            <p className="!text-[10px] text-slate-400 text-center leading-tight pb-4 text-balance px-1">
               State is managed client side.
             </p>
           </div>
@@ -210,7 +210,7 @@ export function Tile3_Navigation() {
   return (
     <div className="flex flex-col gap-4">
       <div
-        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-xl relative overflow-hidden h-[400px] flex flex-col`}
+        className={`${BLUEPRINT_BG} ${TEXT_MAIN} border ${BLUEPRINT_LINE} rounded-[4px] shadow-sm relative overflow-hidden h-[400px] flex flex-col`}
       >
         <div className="flex-1 flex flex-col items-center justify-center p-6 relative">
 
@@ -219,10 +219,10 @@ export function Tile3_Navigation() {
             {steps.map((s, i) => (
               <div key={i} className="contents">
                 {/* Dot */}
-                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${i <= step ? `${ACCENT_BG} scale-125` : "bg-white/10"}`} />
+                <div className={`w-2 h-2 rounded-full transition-all duration-300 ${i <= step ? `${ACCENT_BG} scale-125` : "bg-white/5"}`} />
                 {/* Line (if not last) */}
                 {i < steps.length - 1 && (
-                  <div className={`flex-1 h-[2px] mx-1 transition-colors duration-300 ${i < step ? ACCENT_BG : "bg-white/10"}`} />
+                  <div className={`flex-1 h-[2px] mx-1 transition-colors duration-300 ${i < step ? ACCENT_BG : "bg-white/5"}`} />
                 )}
               </div>
             ))}
@@ -240,7 +240,7 @@ export function Tile3_Navigation() {
               <span className={`font-mono text-xs uppercase tracking-widest ${ACCENT} mb-1`}>
                 {steps[step].sub}
               </span>
-              <span className="text-[10px] text-white/50 font-mono uppercase tracking-widest">
+              <span className="text-[10px] text-slate-400 font-mono uppercase tracking-widest">
                 {steps[step].label}
               </span>
             </motion.div>
@@ -250,15 +250,15 @@ export function Tile3_Navigation() {
             {/* Browser/Link */}
             <div className={`flex flex-col items-center transition-opacity duration-300 ${[0, 1].includes(step) ? "opacity-100" : "opacity-30"}`}>
               <motion.div
-                className={`w-8 h-8 rounded-full border flex items-center justify-center ${step === 0 ? `border-${ACCENT} shadow-[0_0_15px_rgba(244,114,56,0.3)]` : "border-white/20"}`}
+                className={`w-8 h-8 rounded-full border flex items-center justify-center ${step === 0 ? `border-${ACCENT} shadow-[0_0_15px_rgba(244,114,56,0.2)]` : "border-slate-200"}`}
                 animate={step === 0 ? { scale: [1, 0.9, 1] } : { scale: 1 }}
               >
-                <div className={`w-2 h-2 rounded-full ${step === 0 ? "bg-white" : "bg-white/20"}`} />
+                <div className={`w-2 h-2 rounded-full ${step === 0 ? "bg-[#f47238]" : "bg-slate-200"}`} />
               </motion.div>
             </div>
 
             {/* Connection Pipe */}
-            <div className="flex-1 h-[2px] bg-white/10 relative overflow-hidden">
+            <div className="flex-1 h-[2px] bg-white/5 relative overflow-hidden">
               {step === 1 && (
                 <motion.div
                   className={`absolute left-0 h-full w-12 ${ACCENT_BG}`}
@@ -271,7 +271,7 @@ export function Tile3_Navigation() {
 
             {/* Server Steps */}
             <div className={`flex flex-col items-center transition-opacity duration-300 ${[2, 3].includes(step) ? "opacity-100" : "opacity-30"}`}>
-              <IconServer className={`w-8 h-8 ${[2, 3].includes(step) ? "text-white" : "text-white/50"}`} />
+              <IconServer className={`w-8 h-8 ${[2, 3].includes(step) ? "text-white" : "text-slate-700"}`} />
 
               {/* Server Activity Indicator */}
               {[2, 3].includes(step) && (
@@ -284,10 +284,10 @@ export function Tile3_Navigation() {
           </div>
 
           {/* Browser Window (Hydration & View Transition) */}
-          <div className={`w-full max-w-[200px] aspect-[4/3] border rounded bg-black/20 relative overflow-hidden transition-all duration-500 mt-8 ${[4, 5].includes(step) ? `border-${ACCENT}/50 shadow-[0_0_20px_rgba(244,114,56,0.1)]` : "border-white/20"}`}>
-            <div className="absolute top-0 w-full h-4 border-b border-white/10 flex items-center px-2 gap-1">
-              <div className="w-2 h-2 rounded-full bg-white/20" />
-              <div className="w-2 h-2 rounded-full bg-white/20" />
+          <div className={`w-full max-w-[200px] aspect-[4/3] border rounded bg-slate-900 relative overflow-hidden transition-all duration-500 mt-8 ${[4, 5].includes(step) ? `border-[#F17543]/50 shadow-[0_0_20px_rgba(241,117,67,0.1)]` : "border-white/10"}`}>
+            <div className="absolute top-0 w-full h-4 border-b border-white/5 flex items-center px-2 gap-1">
+              <div className="w-2 h-2 rounded-full bg-slate-800" />
+              <div className="w-2 h-2 rounded-full bg-slate-800" />
             </div>
 
             <div className="p-4 pt-8 h-full relative overflow-hidden">
@@ -299,13 +299,13 @@ export function Tile3_Navigation() {
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: "-100%", opacity: 0 }}
                     transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                    className="absolute inset-0 p-4 pt-8 bg-[#1A1A1A]"
+                    className="absolute inset-0 p-4 pt-8 bg-slate-900"
                   >
                     <div className="flex flex-col gap-2">
                       {/* Header - Different visual for Page B */}
                       <div className={`w-1/2 h-4 ${ACCENT_BG} rounded mb-2 opacity-80`} />
-                      <div className="w-full h-2 bg-white/10 rounded" />
-                      <div className="w-3/4 h-2 bg-white/10 rounded" />
+                      <div className={`w-full h-2 bg-slate-800 rounded`}></div>
+                      <div className="w-3/4 h-2 bg-slate-800 rounded" />
                     </div>
                     <div className={`mt-4 text-[10px] ${ACCENT} font-mono uppercase tracking-widest`}>Page B</div>
                   </motion.div>
@@ -326,11 +326,11 @@ export function Tile3_Navigation() {
                     className="absolute inset-0 p-4 pt-8"
                   >
                     <div className="flex flex-col gap-2">
-                      <div className="w-1/2 h-4 bg-white/10 rounded mb-2" />
-                      <div className="w-full h-2 bg-white/5 rounded" />
-                      <div className="w-3/4 h-2 bg-white/5 rounded" />
+                      <div className="w-1/2 h-4 bg-slate-800 rounded mb-2" />
+                      <div className="w-full h-2 bg-slate-800 rounded" />
+                      <div className="w-3/4 h-2 bg-slate-800 rounded" />
                     </div>
-                    <div className="mt-4 text-[10px] text-white/20 font-mono uppercase tracking-widest">Page A</div>
+                    <div className="mt-4 text-[10px] text-slate-500 font-mono uppercase tracking-widest">Page A</div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -338,7 +338,7 @@ export function Tile3_Navigation() {
               {/* Hydration Flash for Step 4 */}
               {step === 4 && (
                 <motion.div
-                  className="absolute inset-0 bg-white/5 pointer-events-none"
+                  className="absolute inset-0 bg-white/10 pointer-events-none"
                   animate={{ opacity: [0, 1, 0] }}
                   transition={{ duration: 1 }}
                 />
