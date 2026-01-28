@@ -1,8 +1,7 @@
-import Header from "src/components/Header";
-import HeroImage from "src/components/HeroImage";
-import { Navbar } from "src/components/Navbar";
-import { Footer } from "src/components/Footer";
+import Header from "./header";
+import HeroImage from "./hero-image";
 import { link } from "src/shared/links";
+import { SEO } from "src/components/seo";
 
 export default function PersonalSoftware() {
   const structuredData = {
@@ -37,37 +36,15 @@ export default function PersonalSoftware() {
 
   return (
     <div>
-      <Navbar activePage="personal-software" />
-      <div className="flex flex-col lg:flex-row min-h-screen bg-baige text-black">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      <div className="flex flex-col lg:flex-row min-h-screen">
+        <SEO
+          title="Personal Software | RedwoodSDK"
+          description="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
+          ogTitle="The Personal Software Revolution | RedwoodSDK"
+          ogUrl="https://rwsdk.com/personal-software"
+          ogImage="https://rwsdk.com/images/PersonalSoftware-og.png"
+          structuredData={structuredData}
         />
-        <title>Personal Software | RedwoodSDK</title>
-        <meta
-          name="description"
-          content="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
-        />
-        <meta
-          property="og:title"
-          content="The Personal Software Revolution | RedwoodSDK"
-        />
-        <meta
-          property="og:description"
-          content="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
-        />
-        <meta property="og:url" content="https://rwsdk.com/personal-software" />
-        <meta
-          property="og:image"
-          content="https://rwsdk.com/images/PersonalSoftware-og.png"
-        />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          property="og:logo"
-          content="https://rwsdk.com/images/logo--light.svg"
-        />
-        <meta property="og:locale" content="en_US" />
         <HeroImage />
         <div className="flex-1 flex flex-col">
           <Header />
@@ -81,7 +58,11 @@ export default function PersonalSoftware() {
           </div>
 
           <main className="flex-1 overflow-y-auto px-6 lg:pr-16 py-8 space-y-12">
-            <a href={link("/")} aria-label="RedwoodSDK" className="hidden lg:block">
+            <a
+              href={link("/")}
+              aria-label="RedwoodSDK"
+              className="hidden lg:block no-underline"
+            >
               <img
                 src="/images/logo--light.svg"
                 alt="RedwoodSDK"
@@ -89,14 +70,14 @@ export default function PersonalSoftware() {
               />
             </a>
             <section className="space-y-6">
-              <h1 className="text-[28px] sm:text-[52px] lg:text-[60px] font-bold font-playfair leading-[81%] mix-blend-multiply mb-4 sm:mb-8 grid-bg">
+              <h1 className="text-[28px] sm:text-[52px] lg:text-[60px] font-playfair font-bold leading-[81%] mb-4 sm:mb-8 grid-bg text-slate-800">
                 <div>
                   It started with a blinking cursor
                   <span className="text-orange cursor-blink"> | </span>
                 </div>
               </h1>
 
-              <p className="text-base lg:text-md font-light leading-8">
+              <p className="text-base lg:text-md font-light leading-8 text-slate-700">
                 A blank file.
                 <br />
                 A few keystrokes.
@@ -109,7 +90,7 @@ export default function PersonalSoftware() {
                 <br />
                 And the computer responded.
                 <br />
-                <strong className="font-bold">
+                <strong className="font-bold text-slate-800">
                   You told a machine what to do – and it listened.
                 </strong>
                 <br />
@@ -127,16 +108,16 @@ export default function PersonalSoftware() {
                 They shared zip files on forums. Burned CDs for friends.
                 <br />
                 They made things.{" "}
-                <strong className="font-bold">Because they could!</strong>
+                <strong className="font-bold text-slate-800">Because they could!</strong>
               </p>
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h2 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 But the software we built changed
               </h2>
 
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 Small tools made by small teams gave way to big tools and big
                 teams.
                 <br />
@@ -150,18 +131,18 @@ export default function PersonalSoftware() {
                 <br />
                 Software became a business.
                 <br />
-                <strong className="font-bold">
+                <strong className="font-bold text-slate-800">
                   And business became the reason software existed.
                 </strong>
               </p>
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h2 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 There's nothing inherently wrong with software at scale
               </h2>
 
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 Enterprise software pays the bills.
                 <br />
                 It keeps the lights on. But something got lost along the way.
@@ -172,15 +153,15 @@ export default function PersonalSoftware() {
                 <br />
                 That spark.
                 <br />
-                <strong className="font-bold">That joy of creation.</strong>
+                <strong className="font-bold text-slate-800">That joy of creation.</strong>
               </p>
             </section>
 
             <section className="space-y-6">
-              <h2 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h2 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 What if it could be different?
               </h2>
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 What if you could build a tool just for you &ndash; because you
                 needed it?
                 <br />
@@ -197,11 +178,11 @@ export default function PersonalSoftware() {
                 That you can share (if you want to).
               </p>
 
-              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h3 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 Personal software is coming back
               </h3>
 
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 AI is lowering the barrier to entry.
                 <br />
                 Serverless hosting is erasing the friction.
@@ -220,16 +201,16 @@ export default function PersonalSoftware() {
                 <br />
                 A thing to build.
                 <br />
-                <strong className="font-bold">
+                <strong className="font-bold text-slate-800">
                   It's a personal software revolution. And it's coming.
                 </strong>
               </p>
 
-              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h3 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 Redwood is here for that reason
               </h3>
 
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 We started Redwood to help developers build faster.
                 <br />
                 To reduce friction. To accelerate creation.
@@ -249,7 +230,7 @@ export default function PersonalSoftware() {
                 <br />
                 Because here's the thing:
                 <br />
-                <strong className="font-bold">
+                <strong className="font-bold text-slate-800">
                   The joy of writing software, and the joy of using it - they
                   should go hand in hand.{" "}
                 </strong>
@@ -257,11 +238,11 @@ export default function PersonalSoftware() {
                 We want to bring that joy back.
               </p>
 
-              <h3 className="text-xl font-bold font-playfair uppercase text-[28px]">
+              <h3 className="text-xl font-playfair font-bold uppercase text-[28px] text-slate-800">
                 The Personal Software Revolution
               </h3>
 
-              <p className="text-base lg:text-md leading-8 font-light">
+              <p className="text-base lg:text-md leading-8 font-light text-slate-700">
                 We believe software can be personal again.
                 <br />
                 Not just technically, but philosophically.
@@ -276,7 +257,7 @@ export default function PersonalSoftware() {
                 <br />
                 If this resonates with you, come join us. We're not just
                 building a framework. <br />
-                <strong className="font-bold">
+                <strong className="font-bold text-slate-800">
                   We're building a future where software is yours again.
                 </strong>
               </p>
@@ -284,7 +265,6 @@ export default function PersonalSoftware() {
           </main>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

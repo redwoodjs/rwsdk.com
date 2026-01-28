@@ -1,47 +1,18 @@
+import { TurnstileScript } from "rwsdk/turnstile";
 import stylesUrl from "./styles.css?url";
-
-declare global {
-  interface Window {
-    dataLayer: any[];
-    gtag: (...args: any[]) => void;
-  }
-}
-
-interface DocumentProps {
-  children: React.ReactNode;
-  nonce?: string;
-}
-
-const GA_ID = import.meta.env.VITE_GA_ID;
-const GTM_ID = "GTM-FVTZFB44";
-
-const gaScript = `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '${GA_ID}');
-`;
-
-const gtmScript = `
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','${GTM_ID}');
-`;
 
 // CSP directives organized by type
 const cspDirectives = {
   "script-src":
-    "'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.google-analytics.com https://www.googletagmanager.com https://buttons.github.io https://kwesforms.com",
+    "'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com",
   "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src": "'self' https://fonts.gstatic.com",
   "connect-src":
-    "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://www.google-analytics.com",
-  "frame-src": "https://tagmanager.google.com https://ghbtns.com",
+    "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://simpleanalyticscdn.com https://queue.simpleanalyticscdn.com",
+  "frame-src":
+    "https://ghbtns.com https://www.youtube.com https://youtube.com https://www.youtube.com/",
   "object-src": "'none'",
-  "img-src":
-    "'self' https://www.google-analytics.com https://www.googletagmanager.com data: https:",
+  "img-src": "'self' data: https: https://queue.simpleanalyticscdn.com",
 };
 
 const cspContent = Object.entries(cspDirectives)
@@ -50,17 +21,20 @@ const cspContent = Object.entries(cspDirectives)
 
 const canonicalUrl = "https://rwsdk.com";
 
-export const MarkdownDocument: React.FC<DocumentProps> = ({
-  children,
-  nonce,
-}) => {
+export const Document: React.FC<{
+  children: React.ReactNode;
+  nonce?: string;
+}> = ({ children, nonce }) => {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>RedwoodSDK Blog | A simple framework for humans</title>{" "}
+
+        <title>RedwoodSDK: A simple framework for humans</title>
+
         <link rel="canonical" href={canonicalUrl} />
+        <TurnstileScript />
         {/* Icons */}
         <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
         <link rel="logo" type="image/svg+xml" href="/images/logo--light.svg" />
@@ -104,29 +78,24 @@ export const MarkdownDocument: React.FC<DocumentProps> = ({
         <meta name="author" content="RedwoodJS" />
         {/* Security */}
         <meta httpEquiv="Content-Security-Policy" content={cspContent} />
-        {/* Analytics */}
-        <script dangerouslySetInnerHTML={{ __html: gtmScript }} nonce={nonce} />
+        {/* Styles and Scripts */}
+        <link rel="stylesheet" href={stylesUrl} />
+        <link rel="modulepreload" href="/src/client.tsx" />
+      </head>
+      <body className="bg-parchment text-charcoal font-sans">
+        <div id="root">{children}</div>
+        <script>import("/src/client.tsx")</script>
         <script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          nonce={nonce}
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
         ></script>
-        <script dangerouslySetInnerHTML={{ __html: gaScript }} nonce={nonce} />
-        {/* Styles and Scripts */}
-        <script type="module" src="/src/client.tsx" nonce={nonce}></script>
-        <link rel="stylesheet" href={stylesUrl} />
-      </head>
-      <body>
         <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-            title="Google Tag Manager"
+          <img
+            src="https://queue.simpleanalyticscdn.com/noscript.gif"
+            alt=""
+            referrerPolicy="no-referrer-when-downgrade"
           />
         </noscript>
-        <div id="root">{children}</div>
       </body>
     </html>
   );

@@ -1,28 +1,34 @@
 import { defineApp } from "rwsdk/worker";
-import { index, render, route, prefix } from "rwsdk/router";
-import { Document } from "src/Document";
-import Home from "src/pages/Home";
+import { index, render, route, prefix, layout } from "rwsdk/router";
+import { Document } from "src/document";
+import Home from "src/pages/home/page";
 import { setCommonHeaders } from "src/headers";
 import sitemap from "./sitemap";
-import PersonalSoftware from "src/pages/readme/PersonalSoftware";
+import PersonalSoftware from "src/pages/readme/personal-software/page";
 import { notFound } from "src/utils/notFound";
 
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
-import StartPage from "./app/pages/Start";
+import StartPage from "./app/pages/start/page";
+import Layout from "./app/components/layout";
 
-export type AppContext = {};
+import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
+
+export { SyncedStateServer };
 
 export default defineApp([
   setCommonHeaders(),
 
+  ...syncedStateRoutes((env: any) => env.SYNCED_STATE),
+
   render(Document, [
-    route("/", Home),
-    route("/personal-software", PersonalSoftware),
+    ...layout(Layout, [
+      route("/", Home),
+      route("/personal-software", PersonalSoftware),
+      prefix("/blog", blogRoutes),
+    ]),
 
-    prefix("/blog", blogRoutes),
-
-    route('/start', StartPage),
+    route("/start", StartPage),
 
     route("/docs", async () => {
       return new Response(null, {
@@ -51,7 +57,6 @@ export default defineApp([
       });
     }),
     route("/robots.txt", async () => {
-      // This should also become an addon
       const robotsTxt = `User-agent: *
         Allow: /
         Disallow: /start

@@ -1,50 +1,79 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@100..900&family=Geist+Mono:wght@100..900&display=swap");
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-baige: #f4eedf;
-  --color-orange: #f47238;
+  --color-baige: #f9f7f2;
+  --color-parchment: #fdfcfa;
+  --color-charcoal: #1a1a1a;
+  --color-subtext: #4a4a4a;
+  --color-orange: #F17543;
   --color-orange-light: #ffad48;
   --color-orange-dark: #e73c36;
-  --color-orange-medium: #f37238;
+  --color-orange-medium: #F17543;
   --color-purple: #8b2243;
   --color-purple-dark: #6b1a35;
   --color-light: #f2ece4;
-  --color-editor: #1b1b1b;
-  --font-playfair: "Playfair Display", serif;
-  --font-noto: "Noto Sans", sans-serif;
+  --color-editor: #0D0D0D;
+  --font-serif: "Newsreader", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+
+  /* Custom Signal Tokens */
+  --space-unit: 8px;
+  --signal-black: #1a1a1a;
+  --signal-gray: #737373;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2.25rem;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-hero {
+  font-size: clamp(3rem, 10vw, 4.5rem);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--color-charcoal);
 }
 
 body {
-  @apply bg-baige text-black font-noto;
+  background-color: var(--color-parchment);
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
 }
 
-.blog-page p,
-.blog-page ol,
-.blog-page ul {
-  font-size: 16px;
-  font-weight: 500;
-  @apply font-noto;
+.technical-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--signal-gray);
+  letter-spacing: 0.1em;
 }
 
-h1,
-h2,
-h3 {
-  line-height: 1;
+.btn-primary {
+  @apply inline-block !no-underline text-[14px] px-6 py-2.5 bg-orange text-white rounded-[4px] shadow-sm hover:bg-orange-dark hover:-translate-y-0.5 active:translate-y-0 transition-all font-medium tracking-tight;
 }
 
-.blog-page h1,
-.blog-page h2,
-.blog-page h3,
-.blog-page h4,
-.blog-page h5,
-.blog-page h6 {
-  line-height: 1.2;
-  @apply font-playfair;
-}
+
 
 .grid-bg {
   background-image: linear-gradient(#e5e5e5 1px, transparent 1px),
@@ -63,20 +92,27 @@ h3 {
   }
 }
 
+@keyframes subtle-bounce {
+  0%, 100% {
+    transform: translateY(-5%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-subtle-bounce {
+  animation: subtle-bounce 2s infinite;
+}
+
 .language-bash {
   @apply text-orange-light;
 }
 
 .language-typescript {
   @apply text-orange-light;
-}
-
-.hover\:fill-orange:hover {
-  fill: #ffa500; /* Replace with your specific orange color */
-}
-
-.github-start:hover svg path {
-  fill: #ffa500; /* Replace with your specific orange color */
 }
 
 .prose code:not(.hljs) {
@@ -181,7 +217,4 @@ footer a:focus img[src$=".svg"] {
 .hljs-deletion {
   color: #ffdcd7;
   background-color: #67060c;
-}
-
-.addon-changelog {
 }

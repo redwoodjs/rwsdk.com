@@ -16,12 +16,12 @@ const Copy = ({ text }: { text: string }) => {
   return (
     <button
       onClick={handleCopy}
-      className="cursor-pointer flex items-center justify-center"
+      className="cursor-pointer flex items-center justify-center ml-4"
     >
       {copied ? (
-        <img src="/images/check.svg" alt="Copied" className="size-6" />
+        <img src="/images/check.svg" alt="Copied" className="size-4" />
       ) : (
-        <img src="/images/clipboard.svg" alt="Copy" className="size-6" />
+        <img src="/images/clipboard.svg" alt="Copy" className="size-4" />
       )}
     </button>
   );

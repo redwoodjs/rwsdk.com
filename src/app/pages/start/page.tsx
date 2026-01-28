@@ -1,15 +1,18 @@
+import { SEO } from "src/components/seo";
 import Constants from "src/lib/Constants";
-import { GitHubStarWidget } from "src/components/GitHubStarWidget";
-import { SDKButton } from "src/components/SDKButton";
-import { Copy } from "src/components/Copy";
+import { GitHubStarWidget } from "src/components/github-star-widget";
+import { Button } from "src/components/button";
+import { Copy } from "src/components/copy";
 import { link } from "src/shared/links";
 
 export default function StartPage() {
   return (
     <div className="max-w-[1100px] mx-auto px-3 sm:px-4 md:px-8 py-10 sm:py-14 md:py-20">
-      {/* Instruct robots not to index this page */}
-      <meta name="robots" content="noindex, nofollow" />
-      <meta name="googlebot" content="noindex, nofollow" />
+      <SEO
+        title="Welcome to RedwoodSDK"
+        description="Get started with RedwoodSDK - a React framework for Cloudflare."
+        robots="noindex, nofollow"
+      />
       <div className="flex items-center gap-3 mb-6">
         <a
           href={link("/")}
@@ -25,19 +28,19 @@ export default function StartPage() {
         </a>
       </div>
       <div className="mb-10 sm:mb-12 md:mb-16">
-        <h1 className="text-[34px] sm:text-[48px] md:text-[64px] font-playfair font-bold leading-[0.9]">
+        <h1 className="text-[34px] sm:text-[48px] md:text-[64px] font-playfair font-bold leading-[0.9] text-slate-800">
           Welcome to RedwoodSDK
         </h1>
-        <p className="text-[18px] sm:text-[22px] md:text-[26px] font-noto mt-3">
+        <p className="text-[18px] sm:text-[22px] md:text-[26px] mt-3 text-slate-700">
           You’ve just installed the minimal project. Here’s what to do next.
         </p>
       </div>
 
       <section className="mb-10 sm:mb-12 md:mb-16">
-        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-playfair font-bold mb-4">
+        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-playfair font-bold mb-4 text-slate-800">
           Next steps
         </h2>
-        <ol className="list-decimal pl-6 space-y-3 text-[16px] sm:text-[18px] md:text-[20px]">
+        <ol className="list-decimal pl-6 space-y-3 text-[16px] sm:text-[18px] md:text-[20px] text-slate-700">
           <li>
             Read the quick start to learn the basics.{" "}
             <a
@@ -62,31 +65,30 @@ export default function StartPage() {
           </li>
         </ol>
         <div className="mt-6">
-          <SDKButton text="Read the Quick Start" />
+          <Button>Read the Quick Start</Button>
         </div>
       </section>
 
       <section className="mb-10 sm:mb-12 md:mb-16">
-        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-playfair font-bold mb-4">
+        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-bold mb-4 text-slate-800">
           Star the repo
         </h2>
-        <p className="mb-4">
+        <p className="mb-4 text-slate-700">
           If this project helps you, please give us a star on GitHub:
         </p>
         {/* Server Component */}
-        {/* @ts-expect-error Async Server Component */}
         <GitHubStarWidget />
       </section>
 
       <section className="mb-10 sm:mb-12 md:mb-16">
-        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-playfair font-bold mb-4">
+        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-bold mb-4 text-slate-800">
           Share RedwoodSDK
         </h2>
-        <div className="space-y-3 text-[16px] sm:text-[18px] md:text-[20px]">
+        <div className="space-y-3 text-[16px] sm:text-[18px] md:text-[20px] text-slate-700">
           <p>Tell your friends you’re trying RedwoodSDK:</p>
           <div className="flex flex-col sm:flex-row gap-3">
             <a
-              className="border-2 border-black px-3 py-1 bg-black text-orange-medium hover:text-orange-light font-playfair"
+              className="border-2 border-slate-800 px-3 py-1 bg-slate-800 text-orange-medium hover:text-orange-light font-bold no-underline"
               href={`https://x.com/intent/tweet?text=${encodeURIComponent(
                 "I’m trying RedwoodSDK — a React framework for @Cloudflare. Check it out!"
               )}&url=${encodeURIComponent("https://rwsdk.com")}`}
@@ -96,7 +98,7 @@ export default function StartPage() {
               Share on X
             </a>
             <a
-              className="border-2 border-black px-3 py-1 bg-black text-orange-medium hover:text-orange-light font-playfair"
+              className="border-2 border-slate-800 px-3 py-1 bg-slate-800 text-orange-medium hover:text-orange-light font-bold no-underline"
               href={`https://wa.me/?text=${encodeURIComponent(
                 "I’m trying RedwoodSDK — a React framework for @Cloudflare. Check it out! https://rwsdk.com"
               )}`}
@@ -106,7 +108,7 @@ export default function StartPage() {
               Share on WhatsApp
             </a>
             <a
-              className="border-2 border-black px-3 py-1 bg-black text-orange-medium hover:text-orange-light font-playfair"
+              className="border-2 border-slate-800 px-3 py-1 bg-slate-800 text-orange-medium hover:text-orange-light font-bold no-underline"
               href={`https://bsky.app/intent/compose?text=${encodeURIComponent(
                 "I’m trying RedwoodSDK — a React framework for @Cloudflare. Check it out! https://rwsdk.com"
               )}`}
@@ -115,7 +117,7 @@ export default function StartPage() {
             >
               Share on Bluesky
             </a>
-            <div className="bg-black p-2 border-2 border-orange-light inline-flex items-center gap-2">
+            <div className="bg-slate-800 p-2 border-2 border-orange-light inline-flex items-center gap-2">
               <code className="text-orange-light text-[14px] sm:text-[16px]">
                 rwsdk.com
               </code>
@@ -126,7 +128,7 @@ export default function StartPage() {
       </section>
 
       <section>
-        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-playfair font-bold mb-4">
+        <h2 className="text-[26px] sm:text-[32px] md:text-[40px] font-bold mb-4 text-slate-800">
           Deploy to Cloudflare
         </h2>
         <p className="text-[16px] sm:text-[18px] md:text-[20px] mb-4">
