@@ -10,7 +10,6 @@ import { notFound } from "src/utils/notFound";
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/start/page";
-import { HireUs } from "./app/pages/hire-us/page";
 import Layout from "./app/components/layout";
 
 import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
@@ -26,7 +25,6 @@ export default defineApp([
     ...layout(Layout, [
       route("/", Home),
       route("/personal-software", PersonalSoftware),
-      route("/hire-us", HireUs),
       prefix("/blog", blogRoutes),
     ]),
 

@@ -121,13 +121,13 @@ export default function Home() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-800/50">
-                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
+                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#e73c36]">
                     Principle
                   </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
                     Technical Reality
                   </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#3B82F6]">
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#ffad48]">
                     AI Advantage
                   </th>
                 </tr>
@@ -137,44 +137,44 @@ export default function Home() {
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Without Magic
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                  <td className="px-6 py-4 text-white text-sm">
                     No code-gen or implied routing
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
-                    <strong className="text-[#F17543]">Clarity:</strong> AI reads exactly what executes
+                  <td className="px-6 py-4 text-white text-sm">
+                    <strong className="text-[#ffad48]">Clarity:</strong> AI reads exactly what executes
                   </td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Composability
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                  <td className="px-6 py-4 text-white text-sm">
                     Standard functions and types
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
-                    <strong className="text-[#F17543]">Logic:</strong> AI follows your code, not a policy
+                  <td className="px-6 py-4 text-white text-sm">
+                    <strong className="text-[#ffad48]">Logic:</strong> AI follows your code, not a policy
                   </td>
                 </tr>
                 <tr className="border-b border-white/5">
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Web Standards
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                  <td className="px-6 py-4 text-white text-sm">
                     If the browser or platform has it, we use it
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
-                    <strong className="text-[#F17543]">Context:</strong> AI uses core web knowledge
+                  <td className="px-6 py-4 text-white text-sm">
+                    <strong className="text-[#ffad48]">Context:</strong> AI uses core web knowledge
                   </td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-bold text-white text-sm">
                     Server-First
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
+                  <td className="px-6 py-4 text-white text-sm">
                     Linear data flow
                   </td>
-                  <td className="px-6 py-4 text-[#9C9781] text-sm">
-                    <strong className="text-[#F17543]">Signal:</strong> Higher accuracy for auditing/writing
+                  <td className="px-6 py-4 text-white text-sm">
+                    <strong className="text-[#ffad48]">Signal:</strong> Higher accuracy for auditing/writing
                   </td>
                 </tr>
               </tbody>
