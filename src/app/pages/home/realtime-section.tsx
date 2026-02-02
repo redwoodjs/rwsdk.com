@@ -214,15 +214,15 @@ export default function RealtimeSection() {
             {/* Technical Positioning Callouts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12 text-balance">
                 <div className="space-y-4">
-                    <h4 className="text-sm font-mono uppercase tracking-widest text-slate-500">JSON is for APIs, Cap’n Web is for State</h4>
+                    <h4 className="text-sm font-mono uppercase tracking-widest text-slate-500">Cap’n Web: Skip the Wait</h4>
                     <p className="text-sm leading-relaxed text-slate-600">
-                        Updates aren't just strings sent over a socket. RedwoodSDK uses a binary-packed format that makes state synchronization virtually lag-free and extremely efficient on the wire.
+                        JSON makes you wait for an answer before you can ask your next question. Cap’n Web lets you send a whole list of steps at once. The server finishes the entire job without stopping to talk back to you, which cuts out the lag and makes your app feel instant.
                     </p>
                 </div>
                 <div className="space-y-4">
-                    <h4 className="text-sm font-mono uppercase tracking-widest text-slate-500">Durable Objects as the "Brain"</h4>
+                    <h4 className="text-sm font-mono uppercase tracking-widest text-slate-500">Durable Objects: One "Brain" for Everyone</h4>
                     <p className="text-sm leading-relaxed text-slate-600">
-                        Unlike standard stateless workers, the SyncedStateServer is a stateful entity (a Durable Object) that lives in a specific data center, acting as a single, consistent source of truth for all connected clients.
+                        Normal servers are scattered and don't remember things. This server lives in one specific spot and remembers everything for every user. Because there is only one "brain," every person using your app sees the exact same thing at the exact same time.
                     </p>
                 </div>
             </div>

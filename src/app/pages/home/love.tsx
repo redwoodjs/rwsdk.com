@@ -145,15 +145,15 @@ export const Citation = ({
 
       {/* Tooltip */}
       <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-editor text-white text-xs rounded-xl z-50 pointer-events-none w-max max-w-[250px] whitespace-normal text-center">
-        <div className="font-bold border-b border-slate-700 pb-1 mb-1">
+        <span className="block font-bold border-b border-slate-700 pb-1 mb-1">
           {author.name} (@{author.handle})
-        </div>
+        </span>
         {author.quote && (
-          <div className="italic text-slate-300 leading-relaxed">
+          <span className="block italic text-slate-300 leading-relaxed">
             "{author.quote}"
-          </div>
+          </span>
         )}
-        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
+        <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
       </span>
     </span>
   );

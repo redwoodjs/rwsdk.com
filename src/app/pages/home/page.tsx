@@ -2,7 +2,7 @@ import Constants from "src/lib/Constants";
 import { featureBlocks } from "src/data/features";
 import RouterWalkthrough from "./router-walkthrough";
 import { Love } from "./love";
-import { Tile1_ServerFirst, Tile2_ServerFunctions, Tile3_Navigation } from "./rsc-rpc-section";
+import { Tile1_AsyncEngine, Tile2_StreamingBridge, Tile3_ActionLoop } from "./async-react-section";
 import RealtimeSection from "./realtime-section";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
@@ -121,13 +121,13 @@ export default function Home() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-800/50">
-                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#e73c36]">
+                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
                     Principle
                   </th>
                   <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
                     Technical Reality
                   </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#ffad48]">
+                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
                     AI Advantage
                   </th>
                 </tr>
@@ -141,7 +141,7 @@ export default function Home() {
                     No code-gen or implied routing
                   </td>
                   <td className="px-6 py-4 text-white text-sm">
-                    <strong className="text-[#ffad48]">Clarity:</strong> AI reads exactly what executes
+                    <strong>Clarity:</strong> AI reads exactly what executes
                   </td>
                 </tr>
                 <tr className="border-b border-white/5">
@@ -152,7 +152,7 @@ export default function Home() {
                     Standard functions and types
                   </td>
                   <td className="px-6 py-4 text-white text-sm">
-                    <strong className="text-[#ffad48]">Logic:</strong> AI follows your code, not a policy
+                    <strong>Logic:</strong> AI follows your code, not a policy
                   </td>
                 </tr>
                 <tr className="border-b border-white/5">
@@ -163,7 +163,7 @@ export default function Home() {
                     If the browser or platform has it, we use it
                   </td>
                   <td className="px-6 py-4 text-white text-sm">
-                    <strong className="text-[#ffad48]">Context:</strong> AI uses core web knowledge
+                    <strong>Context:</strong> AI uses core web knowledge
                   </td>
                 </tr>
                 <tr>
@@ -174,7 +174,7 @@ export default function Home() {
                     Linear data flow
                   </td>
                   <td className="px-6 py-4 text-white text-sm">
-                    <strong className="text-[#ffad48]">Signal:</strong> Higher accuracy for auditing/writing
+                    <strong>Signal:</strong> Higher accuracy for auditing/writing
                   </td>
                 </tr>
               </tbody>
@@ -205,15 +205,15 @@ export default function Home() {
         <br />
         <br />
 
-        <h2>React Server Components</h2>
+        <h2>Async React</h2>
         <p>
-          At the core of our architecture is a unified mental model powered by React Server Components. Whether you are fetching data, handling a mutation, or navigating to a new page, you are working within a single, consistent system that works together by default.
+          A unified mental model for bridging the gap between the client and server.
         </p>
         <br />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Tile1_ServerFirst />
-          <Tile2_ServerFunctions />
-          <Tile3_Navigation />
+          <Tile1_AsyncEngine />
+          <Tile2_StreamingBridge />
+          <Tile3_ActionLoop />
         </div>
 
         <br />
