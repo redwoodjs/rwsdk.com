@@ -219,9 +219,12 @@ export default function Home() {
         <br />
         <br />
 
-        <h2>Realtime Consistency</h2>
+        <h2>Realtime</h2>
         <p>
           RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
+        </p>
+        <p className="mt-2 text-slate-500 italic">
+          Try it: Open this in multiple tabs to see how state is synced from client → server → client.
         </p>
         <br />
         <RealtimeSection />

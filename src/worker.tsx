@@ -13,8 +13,65 @@ import StartPage from "./app/pages/start/page";
 import Layout from "./app/components/layout";
 
 import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
+import { env } from "cloudflare:workers";
 
 export { SyncedStateServer };
+
+// Server-side state aggregation and activity tracking
+SyncedStateServer.registerSetStateHandler(async (key: any, value: any) => {
+  if (typeof key === "string" && key.startsWith("user-counter:")) {
+    const globalKey = "global-stats";
+    const lastKey = `last:${key}`;
+    const namespace = (env as any).SYNCED_STATE as DurableObjectNamespace<SyncedStateServer>;
+
+    // We get a stub to the same room (default is "syncedState")
+    const stub = namespace.get(namespace.idFromName("syncedState"));
+
+    try {
+      // 1. Get previous recorded count for this user and current global stats
+      // Since it's the same DO instance, this is quick.
+      const [lastCount, globalState] = await Promise.all([
+        stub.getState(lastKey),
+        stub.getState(globalKey)
+      ]);
+
+      const currentCount = value?.count || 0;
+      const prevCount = (lastCount as number) || 0;
+      const diff = currentCount - prevCount;
+
+      if (diff > 0) {
+        const newGlobalState: any = (globalState as any) || {
+          count: 1000,
+          history: Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0 }))
+        };
+
+        newGlobalState.count += diff;
+
+        // 2. Update 24-hour activity history
+        const currentHour = new Date().getUTCHours();
+        if (!newGlobalState.history || newGlobalState.history.length === 0) {
+          newGlobalState.history = Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0 }));
+        }
+
+        const historyItem = newGlobalState.history.find((h: any) => h.hour === currentHour);
+        if (historyItem) {
+          historyItem.count += diff;
+        } else {
+          newGlobalState.history.push({ hour: currentHour, count: diff });
+          if (newGlobalState.history.length > 24) newGlobalState.history.shift();
+        }
+
+        // 3. Persist and broadcast updates
+        await Promise.all([
+          stub.setState(newGlobalState, globalKey),
+          stub.setState(currentCount, lastKey)
+        ]);
+      }
+    } catch (err) {
+      console.error("Aggregation Error:", err);
+    }
+  }
+});
 
 export default defineApp([
   setCommonHeaders(),

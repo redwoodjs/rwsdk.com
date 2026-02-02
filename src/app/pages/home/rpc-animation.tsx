@@ -110,7 +110,7 @@ export default function RPCAnimation() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-[#F17543]/5 pointer-events-none"
+                            className="absolute inset-0 bg-[#F17543]/5 pointer-events-none z-10"
                         />
                     )}
                 </AnimatePresence>
