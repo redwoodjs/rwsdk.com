@@ -86,8 +86,22 @@ export default function RealtimeSection() {
     // Global stats
     const [globalState] = useSyncedState({
         count: 0,
-        history: Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0 }))
+        history: Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0, date: "" }))
     }, "global-stats");
+
+    // Live presence
+    const [presence] = useSyncedState(0, "global-presence");
+
+    // Heartbeat: keeps this user counted as "online" while on the page.
+    // Server drops the entry after 45s of no ping.
+    const [, setHeartbeat] = useSyncedState({ ts: 0 }, `user-presence-heartbeat:${userId}`);
+    useEffect(() => {
+        if (!userId) return;
+        const ping = () => setHeartbeat({ ts: Date.now() });
+        ping(); // immediate on mount
+        const id = setInterval(ping, 20_000);
+        return () => clearInterval(id);
+    }, [userId]);
 
     const [showCode, setShowCode] = useState(false);
     const [activeTab, setActiveTab] = useState<"client" | "worker">("client");
@@ -116,6 +130,7 @@ export default function RealtimeSection() {
         setUserState({ count: userState.count + 1 });
     };
 
+    console.log("[Client] globalState", globalState.count, globalState.history.find(h => h.hour === new Date().getUTCHours())?.count);
     const maxActivity = useMemo(() => Math.max(...globalState.history.map(h => h.count), 1), [globalState.history]);
 
     return (
@@ -173,30 +188,44 @@ export default function RealtimeSection() {
                                 <span className="text-sm font-semibold text-slate-400 uppercase tracking-widest mt-1">Interactions</span>
                             </h3>
                         </div>
-                        <div className="flex items-center gap-2 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-mono text-green-500 font-bold uppercase">Live</span>
+                        <div className="flex flex-col items-end gap-2">
+                            <div className="flex items-center gap-2 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                <span className="text-[10px] font-mono text-green-500 font-bold uppercase">Live</span>
+                            </div>
+                            {presence > 0 && (
+                                <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                                    {presence} online now
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    <div className="flex-1 flex items-end gap-1.5 h-48 mb-8">
-                        {globalState.history.map((h, i) => (
-                            <div key={i} className="flex-1 flex flex-col items-center gap-2 group/bar">
-                                <div className="relative w-full h-full flex items-end">
-                                    <motion.div
-                                        initial={{ height: 0 }}
-                                        animate={{ height: `${(h.count / maxActivity) * 100}%` }}
-                                        className={`w-full rounded-t-sm transition-colors duration-300 ${h.hour === new Date().getUTCHours() ? "bg-orange-500 shadow-[0_0_20px_rgba(241,117,67,0.4)]" : "bg-white/10 group-hover/bar:bg-white/30"}`}
-                                    />
-                                    <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-opacity text-[10px] font-mono text-white bg-slate-800 px-1.5 py-0.5 rounded shadow-lg border border-white/5 z-10">
-                                        {h.count}
+                    <div className="flex items-end gap-1.5" style={{ height: "192px" }} >
+                        {globalState.history.map((h, i) => {
+                            const barHeight = Math.round((h.count / maxActivity) * 160);
+                            const isCurrentHour = h.hour === new Date().getUTCHours();
+                            return (
+                                <div key={i} className="flex-1 flex flex-col items-center group/bar" style={{ height: "192px" }}>
+                                    {/* spacer pushes bar to bottom */}
+                                    <div className="flex-1" />
+                                    <div className="relative w-full flex justify-center">
+                                        <div
+                                            style={{ height: `${barHeight}px`, minHeight: h.count > 0 ? "2px" : "0px", transition: "height 0.5s ease" }}
+                                            className={`w-full rounded-t-sm ${isCurrentHour ? "bg-orange-500 shadow-[0_0_20px_rgba(241,117,67,0.4)]" : "bg-white/10 group-hover/bar:bg-white/30"}`}
+                                        />
+                                        {h.count > 0 && (
+                                            <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-opacity text-[10px] font-mono text-white bg-slate-800 px-1.5 py-0.5 rounded shadow-lg border border-white/5 z-10">
+                                                {h.count}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className={`text-[8px] font-mono uppercase mt-1 ${h.hour % 4 === 0 ? "text-slate-300 font-bold" : "text-slate-600"}`}>
+                                        {h.hour}h
                                     </div>
                                 </div>
-                                <div className={`text-[8px] font-mono uppercase transform transition-colors ${h.hour % 4 === 0 ? "text-slate-300 font-bold" : "text-slate-600"}`}>
-                                    {h.hour}h
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">

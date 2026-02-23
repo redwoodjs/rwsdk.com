@@ -164,7 +164,7 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
 
         <div className="text-center">
             <h3 className="text-lg font-medium mb-1 text-slate-100">{title}</h3>
-            <p className="text-sm text-slate-400 text-balance px-2 h-[40px]">
+            <p className="text-sm text-slate-400 text-balance px-2">
                 {description}
             </p>
         </div>

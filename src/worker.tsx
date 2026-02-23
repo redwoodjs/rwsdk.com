@@ -1,5 +1,5 @@
 import { defineApp } from "rwsdk/worker";
-import { index, render, route, prefix, layout } from "rwsdk/router";
+import { render, route, prefix, layout } from "rwsdk/router";
 import { Document } from "src/document";
 import Home from "src/pages/home/page";
 import { setCommonHeaders } from "src/headers";
@@ -15,63 +15,121 @@ import Layout from "./app/components/layout";
 import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
 import { env } from "cloudflare:workers";
 
-export { SyncedStateServer };
+const GLOBAL_STATS_KEY = "global-stats";
+const PRESENCE_KEY = "global-presence";
 
-// Server-side state aggregation and activity tracking
-SyncedStateServer.registerSetStateHandler(async (key: any, value: any) => {
-  if (typeof key === "string" && key.startsWith("user-counter:")) {
-    const globalKey = "global-stats";
-    const lastKey = `last:${key}`;
-    const namespace = (env as any).SYNCED_STATE as DurableObjectNamespace<SyncedStateServer>;
+type GlobalStats = {
+  count: number;
+  history: { hour: number; count: number; date: string }[];
+};
 
-    // We get a stub to the same room (default is "syncedState")
-    const stub = namespace.get(namespace.idFromName("syncedState"));
+/**
+ * Extends the base SyncedStateServer Durable Object to add:
+ * - KV-backed persistence for global stats (survives DO restarts).
+ * - Expiring 24h activity history (per-hour buckets reset each new day).
+ * - Real-time presence tracking via WebSocket connection counting.
+ */
+export class ActivitySyncedStateServer extends SyncedStateServer {
+  /** Tracks last-seen timestamp per userId for heartbeat presence. */
+  private presenceMap = new Map<string, number>();
+  private initialized = false;
 
-    try {
-      // 1. Get previous recorded count for this user and current global stats
-      // Since it's the same DO instance, this is quick.
-      const [lastCount, globalState] = await Promise.all([
-        stub.getState(lastKey),
-        stub.getState(globalKey)
-      ]);
-
-      const currentCount = value?.count || 0;
-      const prevCount = (lastCount as number) || 0;
-      const diff = currentCount - prevCount;
-
-      if (diff > 0) {
-        const newGlobalState: any = (globalState as any) || {
-          count: 1000,
-          history: Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0 }))
-        };
-
-        newGlobalState.count += diff;
-
-        // 2. Update 24-hour activity history
-        const currentHour = new Date().getUTCHours();
-        if (!newGlobalState.history || newGlobalState.history.length === 0) {
-          newGlobalState.history = Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0 }));
-        }
-
-        const historyItem = newGlobalState.history.find((h: any) => h.hour === currentHour);
-        if (historyItem) {
-          historyItem.count += diff;
-        } else {
-          newGlobalState.history.push({ hour: currentHour, count: diff });
-          if (newGlobalState.history.length > 24) newGlobalState.history.shift();
-        }
-
-        // 3. Persist and broadcast updates
-        await Promise.all([
-          stub.setState(newGlobalState, globalKey),
-          stub.setState(currentCount, lastKey)
-        ]);
+  /** Hydrate in-memory state from KV before serving the first request. */
+  private async ensureInitialized() {
+    if (this.initialized) return;
+    this.initialized = true;
+    const kv = (env as any).SYNCED_STATE_KV as KVNamespace;
+    const persisted = await kv.get<GlobalStats>(GLOBAL_STATS_KEY, "json");
+    if (persisted) {
+      // Normalize: old KV data may be missing the `date` field; adding it
+      // prevents the expiry check from resetting every bucket on first write.
+      if (Array.isArray(persisted.history)) {
+        persisted.history = persisted.history.map((h) => ({
+          ...h,
+          date: (h as any).date ?? "",
+        })) as GlobalStats["history"];
       }
-    } catch (err) {
-      console.error("Aggregation Error:", err);
+      super.setState(persisted, GLOBAL_STATS_KEY);
     }
   }
-});
+
+  override async fetch(request: Request): Promise<Response> {
+    await this.ensureInitialized();
+    return super.fetch(request);
+  }
+
+  override setState(value: unknown, key: string): void {
+    super.setState(value, key);
+
+    if (typeof key !== "string") return;
+
+    if (key.startsWith("user-counter:")) {
+      void this.aggregateUserCounter(key, value);
+    }
+
+    // Heartbeat presence: client calls setHeartbeat({ts}) every 20s.
+    // We record the timestamp and recount how many are within 45s.
+    if (key.startsWith("user-presence-heartbeat:")) {
+      const ts = typeof (value as any)?.ts === "number" ? (value as any).ts : Date.now();
+      this.presenceMap.set(key, ts);
+      const cutoff = Date.now() - 45_000;
+      let active = 0;
+      for (const seen of this.presenceMap.values()) {
+        if (seen > cutoff) active++;
+      }
+      super.setState(active, PRESENCE_KEY);
+    }
+  }
+
+  private async aggregateUserCounter(userKey: string, value: unknown) {
+    const lastKey = `last:${userKey}`;
+    const currentCount = typeof (value as any)?.count === "number" ? (value as any).count : 0;
+    const prevCount = (super.getState(lastKey) as number) ?? 0;
+    const diff = currentCount - prevCount;
+
+    console.log(`[Activity] key=${userKey} current=${currentCount} prev=${prevCount} diff=${diff}`);
+
+    if (diff <= 0) return;
+
+    super.setState(currentCount, lastKey);
+
+    const existing = super.getState(GLOBAL_STATS_KEY) as GlobalStats | undefined;
+
+    // Deep-copy history items so we don't mutate the stored references
+    const newGlobal: GlobalStats = {
+      count: (existing?.count ?? 0) + diff,
+      history: existing?.history
+        ? existing.history.map((h) => ({ ...h }))
+        : Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0, date: "" })),
+    };
+
+    // Update the hourly bucket — reset count if we're on a new UTC day
+    const nowDate = new Date().toISOString().slice(0, 10);
+    const currentHour = new Date().getUTCHours();
+    const bucket = newGlobal.history.find((h) => h.hour === currentHour);
+    if (bucket) {
+      if (bucket.date !== nowDate) {
+        bucket.count = 0;
+        bucket.date = nowDate;
+      }
+      bucket.count += diff;
+    }
+
+    console.log(`[Activity] global count=${newGlobal.count} hour=${currentHour} bucket=${bucket?.count}`);
+
+    super.setState(newGlobal, GLOBAL_STATS_KEY);
+
+    // Persist to KV
+    try {
+      const kv = (env as any).SYNCED_STATE_KV as KVNamespace;
+      await kv.put(GLOBAL_STATS_KEY, JSON.stringify(newGlobal));
+    } catch (err) {
+      console.error("[ActivitySyncedStateServer] KV put failed:", err);
+    }
+  }
+}
+
+export { SyncedStateServer };
 
 export default defineApp([
   setCommonHeaders(),
