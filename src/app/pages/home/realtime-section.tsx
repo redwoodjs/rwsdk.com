@@ -1,67 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Section } from "src/components/section";
-import StyledCodeBlock from "./styled-code-block";
-import { useSyncedState } from "rwsdk/use-synced-state/client";
-
-const BLUEPRINT_BG = "bg-[#0D0D0D]";
-const BLUEPRINT_LINE = "border-white/10";
-const ACCENT = "text-[#F17543]";
-const ACCENT_BG = "bg-[#F17543]";
-const TEXT_MAIN = "text-white";
-const TEXT_SUB = "text-slate-400";
-
-const clientCode = `"use client";
-import { useSyncedState } from "rwsdk/use-synced-state/client";
-
-export const RealtimeApp = ({ userId }) => {
-  // 1. User-scoped state (synced across your tabs)
-  const [userState, setUserState] = useSyncedState(
-    { count: 0 }, 
-    "user-counter", 
-    userId
-  );
-
-  // 2. Read-only global stats (aggregated by server)
-  const [globalState] = useSyncedState(
-    { count: 0, history: [] }, 
-    "global-stats"
-  );
-
-  return (
-    <div>
-      <h3>Global: {globalState.count}</h3>
-      <button onClick={() => setUserState(s => ({ count: s.count + 1 }))}>
-        Your Count: {userState.count}
-      </button>
-    </div>
-  );
-};`;
-
-const workerCode = `// src/worker.tsx
-import { SyncedStateServer } from "rwsdk/use-synced-state/worker";
-
-// Server-side Aggregator
-SyncedStateServer.registerSetStateHandler(async (key, value, { env }) => {
-  if (key.startsWith("user-counter:")) {
-    const globalState = await env.SYNCED_STATE.get("global-stats");
-    
-    // Increment global total and update 24h history
-    globalState.count += 1; 
-    globalState.history[new Date().getUTCHours()].count += 1;
-    
-    await env.SYNCED_STATE.put("global-stats", globalState);
-  }
-});`;
-
-interface LogEntry {
-    id: string;
-    timestamp: string;
-    type: "in" | "out" | "sys";
-    message: string;
-}
+import { useActivityData } from "./use-activity-data";
+import { useState, useEffect } from "react";
 
 const getUserId = () => {
     if (typeof window === "undefined") return null;
@@ -73,215 +13,276 @@ const getUserId = () => {
     return id;
 };
 
+// Represents 60 bins for the 100% of the page height
+const NUM_BINS = 60;
+const BIN_SIZE = 100 / NUM_BINS;
+const BINS = Array.from({ length: NUM_BINS }, (_, i) => i);
+
 export default function RealtimeSection() {
     const [userId, setUserId] = useState<string | null>(null);
+    const [showMinimap, setShowMinimap] = useState(false);
+
+    // Animation states
+    const [particles, setParticles] = useState<Array<{ id: number, bin: number, type: string }>>([]);
 
     useEffect(() => {
         setUserId(getUserId());
+
+        // Hide the scrollbar physically on html and body while on the homepage
+        document.documentElement.classList.add('hide-native-scrollbar');
+        document.body.classList.add('hide-native-scrollbar');
+
+        const handleScroll = () => {
+            setShowMinimap(window.scrollY > 200); // 200px down to clear the header
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        // Initial check
+        handleScroll();
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            document.documentElement.classList.remove('hide-native-scrollbar');
+            document.body.classList.remove('hide-native-scrollbar');
+        };
     }, []);
 
-    // Scoped user state
-    const [userState, setUserState] = useSyncedState({ count: 0 }, `user-counter:${userId}`);
+    const { stats, viewportRange, actionEvent } = useActivityData(userId);
 
-    // Global stats
-    const [globalState] = useSyncedState({
-        count: 0,
-        history: Array.from({ length: 24 }, (_, i) => ({ hour: i, count: 0, date: "" }))
-    }, "global-stats");
+    // Calculate current user's active bin index, clamping it to the maximum bin
+    const currentActiveBinIndex = Math.min(NUM_BINS - 1, Math.floor(viewportRange.bottom / BIN_SIZE));
 
-    // Live presence
-    const [presence] = useSyncedState(0, "global-presence");
-
-    // Heartbeat: keeps this user counted as "online" while on the page.
-    // Server drops the entry after 45s of no ping.
-    const [, setHeartbeat] = useSyncedState({ ts: 0 }, `user-presence-heartbeat:${userId}`);
+    // Fire particle animation whenever an action occurs
     useEffect(() => {
-        if (!userId) return;
-        const ping = () => setHeartbeat({ ts: Date.now() });
-        ping(); // immediate on mount
-        const id = setInterval(ping, 20_000);
-        return () => clearInterval(id);
-    }, [userId]);
+        if (!actionEvent) return;
 
-    const [showCode, setShowCode] = useState(false);
-    const [activeTab, setActiveTab] = useState<"client" | "worker">("client");
-    const lastUserCount = useRef(userState.count);
-    const lastGlobalCount = useRef(globalState.count);
+        // Force the animation and highlight to spawn exactly on the cell "You" are tracking
+        const actionBin = currentActiveBinIndex;
 
-    // Monitor updates
-    useEffect(() => {
-        if (userState.count !== lastUserCount.current) {
-            lastUserCount.current = userState.count;
-        }
-    }, [userState.count]);
+        // Add particle
+        const newParticle = { id: actionEvent.id, bin: actionBin, type: actionEvent.type };
+        setParticles(prev => [...prev, newParticle]);
 
-    useEffect(() => {
-        if (globalState.count !== lastGlobalCount.current) {
-            lastGlobalCount.current = globalState.count;
-        }
-    }, [globalState.count]);
+        // Remove particle after animation completes (600ms)
+        setTimeout(() => {
+            setParticles(prev => prev.filter(p => p.id !== newParticle.id));
+        }, 600);
+    }, [actionEvent, currentActiveBinIndex]);
 
-    // Initial connection simulation
-    useEffect(() => {
-        // Ready
-    }, []);
+    const scrollToPercent = (percent: number) => {
+        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+        const targetY = (percent / 100) * scrollHeight;
+        // The minimap percentage represents the *bottom* of the user's viewport.
+        // So we subtract the window height to find the actual top-edge scroll position,
+        // and aggressively clamp it so it never evaluates out of bounds bounds (e.g., negative).
+        const maxScroll = scrollHeight - window.innerHeight;
+        const clampedTop = Math.max(0, Math.min(targetY - window.innerHeight, maxScroll));
 
-    const handleIncrement = () => {
-        setUserState({ count: userState.count + 1 });
+        window.scrollTo({
+            top: clampedTop,
+            behavior: "smooth"
+        });
     };
 
-    console.log("[Client] globalState", globalState.count, globalState.history.find(h => h.hour === new Date().getUTCHours())?.count);
-    const maxActivity = useMemo(() => Math.max(...globalState.history.map(h => h.count), 1), [globalState.history]);
+    // Safe destructuring of stats with fallbacks
+    const scrollBins = stats?.scrollBins || {};
+    const clickBins = stats?.clickBins || {};
+    const activeViewports = stats?.activeViewports || {};
+
+    const totalGlobalScrolls = Object.values(scrollBins).reduce((acc: any, val: any) => acc + val, 0) as number;
+    const totalGlobalClicks = Object.values(clickBins).reduce((acc: any, val: any) => acc + val, 0) as number;
 
     return (
-        <div className="space-y-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                {/* Left Column: User Session (PRIMARY) */}
-                <div className="flex flex-col gap-4 min-h-[400px]">
-                    {/* User Controls */}
-                    <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-10 flex flex-col items-center justify-center flex-1 relative overflow-hidden bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-500/10 to-transparent`}>
-                        <div className="absolute top-6 left-8 text-[10px] font-mono uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(241,117,67,0.8)]" />
-                            Your Session: <span className="text-white">#{userId}</span>
-                        </div>
+        <>
+            <div
+                className={`fixed right-0 top-0 h-screen w-[16px] z-[100] flex flex-col justify-center transition-all duration-700 pointer-events-none ${showMinimap ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full"}`}
+            >
+                <div className="relative flex flex-col items-end w-full h-full justify-center">
 
-                        <div className="flex flex-col items-center gap-8">
-                            <div className="text-center">
-                                <motion.div
-                                    key={userState.count}
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    animate={{ scale: 1, opacity: 1 }}
-                                    className="text-8xl font-mono font-bold text-white mb-2"
-                                >
-                                    {userState.count}
-                                </motion.div>
-                                <div className="text-[12px] font-mono uppercase tracking-[0.4em] text-slate-500">Your Contributions</div>
-                            </div>
+                    {/* Floating labels for 'You' and other active readers tracking their current cell */}
+                    {BINS.map(binIndex => {
+                        const isCurrentUserHere = binIndex === currentActiveBinIndex;
 
-                            <button
-                                onClick={handleIncrement}
-                                className="px-12 py-5 bg-white text-black font-bold rounded-xl hover:bg-orange-500 hover:text-white transition-all active:scale-95 shadow-2xl shadow-orange-500/20 text-lg"
+                        let otherCount = 0;
+                        Object.entries(activeViewports).forEach(([uid, viewportPercent]) => {
+                            if (uid !== userId) {
+                                const otherActiveBinIndex = Math.min(NUM_BINS - 1, Math.floor((viewportPercent as number) / BIN_SIZE));
+                                if (otherActiveBinIndex === binIndex) otherCount++;
+                            }
+                        });
+
+                        if (!isCurrentUserHere && otherCount === 0) return null;
+
+                        const isOnlyYou = isCurrentUserHere && otherCount === 0;
+                        const isBoth = isCurrentUserHere && otherCount > 0;
+                        const isOnlyOthers = !isCurrentUserHere && otherCount > 0;
+
+                        let text = "";
+                        let textColor = "";
+                        let lineColor = "";
+                        let zIndex = "";
+
+                        if (isOnlyYou) {
+                            text = "You";
+                            textColor = "text-slate-500";
+                            lineColor = "bg-slate-400";
+                            zIndex = "z-40";
+                        } else if (isBoth) {
+                            text = `You +${otherCount}`;
+                            textColor = "text-slate-500";
+                            lineColor = "bg-slate-400";
+                            zIndex = "z-40";
+                        } else if (isOnlyOthers) {
+                            text = `+${otherCount}`;
+                            textColor = "text-slate-600";
+                            lineColor = "bg-slate-600";
+                            zIndex = "z-30";
+                        }
+
+                        return (
+                            <div
+                                key={`indicator-${binIndex}`}
+                                className={`absolute right-[12px] flex items-center justify-end gap-1.5 flex-row transition-all duration-300 ease-out ${zIndex} opacity-100 pointer-events-none w-max`}
+                                style={{
+                                    top: `${((binIndex + 0.5) / NUM_BINS) * 100}%`,
+                                    transform: 'translateY(-50%)',
+                                    marginTop: '0px'
+                                }}
                             >
-                                Increment
-                            </button>
-                        </div>
-
-                        <p className="absolute bottom-6 text-[9px] font-mono text-slate-600 uppercase tracking-widest">
-                            Syncing to Global DO via binary delta
-                        </p>
-                    </div>
-                </div>
-
-                {/* Right Column: Collective Activity Graph */}
-                <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl p-8 flex flex-col min-h-[400px] relative overflow-hidden group shadow-inner`}>
-                    <div className="flex justify-between items-start mb-10">
-                        <div>
-                            <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-400 mb-2 font-semibold">Collective Activity</div>
-                            <h3 className="text-4xl font-bold flex items-center gap-3">
-                                <motion.span
-                                    key={globalState.count}
-                                    animate={{ scale: [1, 1.05, 1], color: ["#fff", "#F17543", "#fff"] }}
-                                    className="text-white"
-                                >
-                                    {globalState.count.toLocaleString()}
-                                </motion.span>
-                                <span className="text-sm font-semibold text-slate-400 uppercase tracking-widest mt-1">Interactions</span>
-                            </h3>
-                        </div>
-                        <div className="flex flex-col items-end gap-2">
-                            <div className="flex items-center gap-2 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">
-                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                <span className="text-[10px] font-mono text-green-500 font-bold uppercase">Live</span>
+                                <span className={`text-[10px] whitespace-nowrap font-mono font-semibold ${textColor} uppercase leading-none tracking-widest drop-shadow-sm`}>
+                                    {text}
+                                </span>
+                                <div className={`w-1 h-[1px] ${lineColor}`} />
                             </div>
-                            {presence > 0 && (
-                                <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                                    {presence} online now
-                                </div>
-                            )}
-                        </div>
-                    </div>
+                        );
+                    })}
 
-                    <div className="flex items-end gap-1.5" style={{ height: "192px" }} >
-                        {globalState.history.map((h, i) => {
-                            const barHeight = Math.round((h.count / maxActivity) * 160);
-                            const isCurrentHour = h.hour === new Date().getUTCHours();
+                    <div
+                        className="relative flex flex-col justify-center gap-0 h-full bg-transparent py-0 pr-1 rounded-l-md pointer-events-auto group"
+                        title="Activity Minimap: Click a cell to scroll"
+                    >
+                        {BINS.map((binIndex) => {
+                            const startPct = binIndex * BIN_SIZE;
+                            const endPct = (binIndex + 1) * BIN_SIZE;
+
+                            let scrollHeat = 0;
+                            let clickHeat = 0;
+                            for (let p = Math.floor(startPct); p < Math.ceil(endPct); p++) {
+                                scrollHeat += scrollBins[p] || 0;
+                                clickHeat += clickBins[p] || 0;
+                            }
+
+                            // Score scrolls and clicks exactly the same (+1 each)
+                            const totalHeat = scrollHeat + clickHeat;
+
+                            // GitHub style activity colors
+                            let bgColorClass = "bg-black/5 border-transparent"; // Empty/Cold
+                            if (totalHeat > 8) bgColorClass = "bg-[#39D353]/80 border-transparent"; // Hottest
+                            else if (totalHeat > 4) bgColorClass = "bg-[#26A641]/80 border-transparent";
+                            else if (totalHeat > 2) bgColorClass = "bg-[#006D32]/80 border-transparent";
+                            else if (totalHeat > 0) bgColorClass = "bg-[#0E4429]/80 border-transparent"; // Warm
+
+                            // Is the current user bottom anchored here?
+                            const isCurrentUserBottom = binIndex === currentActiveBinIndex;
+
+                            // Does this bin have an active particle animation right now?
+                            const activeParticlesInBin = particles.filter(p => p.bin === binIndex);
+                            const justAnimated = activeParticlesInBin.length > 0;
+
+                            // Is another active user bottom anchored here?
+                            const isOtherUserBottom = Object.entries(activeViewports).some(([uid, viewportPercent]) => {
+                                if (uid === userId) return false;
+                                const otherActiveBinIndex = Math.min(NUM_BINS - 1, Math.floor(viewportPercent / BIN_SIZE));
+                                return binIndex === otherActiveBinIndex;
+                            });
+
                             return (
-                                <div key={i} className="flex-1 flex flex-col items-center group/bar" style={{ height: "192px" }}>
-                                    {/* spacer pushes bar to bottom */}
-                                    <div className="flex-1" />
-                                    <div className="relative w-full flex justify-center">
+                                <div
+                                    key={binIndex}
+                                    onClick={() => scrollToPercent(startPct)}
+                                    title={`Total interactions: ${totalHeat}`}
+                                    className={`w-[8px] flex-1 rounded-[1px] cursor-pointer transition-all duration-300 relative flex items-center justify-center border border-solid ${bgColorClass} hover:bg-white/20 hover:border-white/30 ${justAnimated ? 'scale-[1.2] shadow-[0_0_8px_rgba(255,255,255,0.2)] brightness-125 z-30' : 'z-10'} my-[1px]`}
+                                >
+
+                                    {/* Particle Animation coming from the 'You' label */}
+                                    {activeParticlesInBin.map((p, i) => (
                                         <div
-                                            style={{ height: `${barHeight}px`, minHeight: h.count > 0 ? "2px" : "0px", transition: "height 0.5s ease" }}
-                                            className={`w-full rounded-t-sm ${isCurrentHour ? "bg-orange-500 shadow-[0_0_20px_rgba(241,117,67,0.4)]" : "bg-white/10 group-hover/bar:bg-white/30"}`}
+                                            key={`${p.id}-${i}`}
+                                            className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-2 h-[2px] bg-white rounded-full z-50 pointer-events-none animate-[slideInRight_0.3s_ease-out_forwards]"
                                         />
-                                        {h.count > 0 && (
-                                            <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover/bar:opacity-100 transition-opacity text-[10px] font-mono text-white bg-slate-800 px-1.5 py-0.5 rounded shadow-lg border border-white/5 z-10">
-                                                {h.count}
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className={`text-[8px] font-mono uppercase mt-1 ${h.hour % 4 === 0 ? "text-slate-300 font-bold" : "text-slate-600"}`}>
-                                        {h.hour}h
-                                    </div>
+                                    ))}
+
+                                    {/* Current User Bottom Highlight */}
+                                    {isCurrentUserBottom && (
+                                        <div className="absolute inset-[-1px] rounded-[2px] border-[1.5px] border-orange-500 z-20 pointer-events-none" />
+                                    )}
+
+                                    {/* Other Active Users Indicator (Subtle Hollow Box) */}
+                                    {isOtherUserBottom && !isCurrentUserBottom && (
+                                        <div className="absolute inset-[0px] border border-slate-600/50 rounded-[1px] z-10 animate-[pulse_3s_ease-in-out_infinite] pointer-events-none" />
+                                    )}
                                 </div>
                             );
                         })}
-                    </div>
 
-                    <div className="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
-                        <p className="text-[10px] text-slate-500 italic max-w-[200px]">
-                            Aggregated server-side from all connected client buckets.
-                        </p>
-                        <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                            Last 24 Hours
+                        {/* Floating Label / Legend */}
+                        <div className="absolute w-[200px] left-[-230px] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none flex py-4 justify-end z-50">
+                            <div className="bg-[#0A0A0A] text-white border border-white/5 px-4 py-3 rounded-lg text-xs font-mono shadow-[0_0_40px_rgba(0,0,0,0.8)] flex flex-col gap-3">
+                                <div className="font-bold text-slate-400 uppercase tracking-widest text-[10px] pb-1 border-b border-white/10 flex justify-between items-center">
+                                    <span>Activity Map</span>
+                                    <span className="text-white/40">{totalGlobalScrolls + totalGlobalClicks} Total</span>
+                                </div>
+
+                                <div className="flex flex-col gap-2">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-2.5 h-2.5 rounded-[2px] bg-[#161B22] border-[1.5px] border-orange-500 shadow-[0_0_4px_rgba(255,255,255,0.2)]" />
+                                        <span className="text-slate-300">You</span>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-2.5 h-2.5 bg-[#161B22] border-[1.5px] border-slate-600 rounded-[2px]" />
+                                        <span className="text-slate-300">Other Readers</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-1 mt-1">
+                                    <div className="flex justify-between text-[10px] text-slate-400">
+                                        <span>Scroll Pauses</span>
+                                        <span className="text-slate-300 font-bold">{totalGlobalScrolls}</span>
+                                    </div>
+                                    <div className="flex justify-between text-[10px] text-slate-400">
+                                        <span>Clicks</span>
+                                        <span className="text-slate-300 font-bold">{totalGlobalClicks}</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col gap-1.5 mt-1 pt-2 border-t border-white/10">
+                                    <span className="text-[10px] text-slate-400">Activity Level</span>
+                                    <div className="flex items-center justify-between text-[10px] text-slate-500">
+                                        Less
+                                        <div className="flex gap-[3px]">
+                                            <div className="w-2 h-2 rounded-[1px] bg-[#161B22] border border-white/5" />
+                                            <div className="w-2 h-2 rounded-[1px] bg-[#0E4429] border border-[#0E4429]/50" />
+                                            <div className="w-2 h-2 rounded-[1px] bg-[#006D32] border border-[#006D32]/50" />
+                                            <div className="w-2 h-2 rounded-[1px] bg-[#26A641] border border-[#26A641]/50" />
+                                            <div className="w-2 h-2 rounded-[1px] bg-[#39D353] border border-[#39D353]/50" />
+                                        </div>
+                                        More
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {/* Implementation Details */}
-            <div className="flex flex-col items-center mt-12">
-                <button
-                    onClick={() => setShowCode(!showCode)}
-                    className="group flex flex-col items-center gap-2 mb-8 focus:outline-none"
-                >
-                    <div className="text-[10px] font-mono uppercase tracking-[0.3em] text-slate-400 group-hover:text-orange-500 transition-colors">
-                        {showCode ? "Hide Implementation" : "View Implementation"}
-                    </div>
-                    <div className={`w-8 h-[1px] bg-white/20 group-hover:bg-orange-500 transition-all duration-300 ${showCode ? 'w-12 bg-orange-500' : 'w-8'}`} />
-                </button>
-
-                <AnimatePresence>
-                    {showCode && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="w-full overflow-hidden"
-                        >
-                            <div className="bg-editor rounded-xl border border-white/10 overflow-hidden shadow-2xl">
-                                <div className="flex border-b border-white/10 bg-white/5">
-                                    <button
-                                        onClick={() => setActiveTab("client")}
-                                        className={`px-6 py-4 text-xs font-mono uppercase tracking-widest transition-colors ${activeTab === "client" ? "text-orange-500 border-b border-orange-500 bg-white/5" : "text-slate-500 hover:text-white"}`}
-                                    >
-                                        Client Hook
-                                    </button>
-                                    <button
-                                        onClick={() => setActiveTab("worker")}
-                                        className={`px-6 py-4 text-xs font-mono uppercase tracking-widest transition-colors ${activeTab === "worker" ? "text-orange-500 border-b border-orange-500 bg-white/5" : "text-slate-500 hover:text-white"}`}
-                                    >
-                                        Server Aggregator
-                                    </button>
-                                </div>
-                                <div className="p-4 bg-[#0D0D0D]">
-                                    <StyledCodeBlock codeBlocks={[activeTab === "client" ? clientCode : workerCode]} />
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </div>
+            {/* Inject local keyframes for the particle animation */}
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                @keyframes slideInRight {
+                    0% { transform: translate(-10px, -50%); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translate(10px, -50%); opacity: 0; width: 4px; }
+                }
+            `}} />
+        </>
     );
 }

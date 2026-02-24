@@ -63,7 +63,7 @@ export default function RPCAnimation() {
                         {({ className, style, tokens, getLineProps, getTokenProps }) => (
                             <pre className={className} style={{ ...style, background: "transparent" }}>
                                 {tokens.map((line, i) => {
-                                    const lineProps = getLineProps({ line, key: i });
+                                    const { key: _lineKey, ...lineProps } = getLineProps({ line, key: i });
                                     const isSaveDataLine = line.some(t => t.content.includes("saveData"));
                                     const isDbLine = line.some(t => t.content.includes("db.save"));
 
@@ -86,7 +86,7 @@ export default function RPCAnimation() {
                                             )}
 
                                             {line.map((token, k) => {
-                                                const tokenProps = getTokenProps({ token, key: k });
+                                                const { key: _tokenKey, ...tokenProps } = getTokenProps({ token, key: k });
                                                 return (
                                                     <span
                                                         key={k}

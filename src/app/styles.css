@@ -61,6 +61,15 @@ body {
   color: var(--color-charcoal);
 }
 
+.hide-native-scrollbar {
+  /* Hide native scrollbar since we have an activity minimap */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-native-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
 .technical-label {
   font-family: var(--font-mono);
   text-transform: uppercase;

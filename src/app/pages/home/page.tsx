@@ -44,6 +44,7 @@ export default function Home() {
     },
   };
 
+
   return (
     <div>
       <SEO
@@ -219,12 +220,12 @@ export default function Home() {
         <br />
         <br />
 
-        <h2>Realtime</h2>
+        <h2>Activity Minimap</h2>
         <p>
-          RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
+          RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with simple hooks that stream collective activity in real-time. Look to your right to see a live 7-day activity heatmap tracking scroll depth, text selections, clicks, and live users.
         </p>
         <p className="mt-2 text-slate-500 italic">
-          Try it: Open this in multiple tabs to see how state is synced from client → server → client.
+          Try it: Click anywhere on the map to jump to that section of the page.
         </p>
         <br />
         <RealtimeSection />

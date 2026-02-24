@@ -17,10 +17,21 @@ import { env } from "cloudflare:workers";
 
 const GLOBAL_STATS_KEY = "global-stats";
 const PRESENCE_KEY = "global-presence";
+const ACTIVITY_STATS_KEY = "global-activity-stats";
 
 type GlobalStats = {
   count: number;
   history: { hour: number; count: number; date: string }[];
+};
+
+type GlobalActivityStats = {
+  // Bins representing percentage down the page (0-100)
+  scrollBins: Record<number, number>;
+  clickBins: Record<number, number>;
+  selectionBins: Record<number, number>;
+
+  // High-frequency active users
+  activeViewports: Record<string, number>;
 };
 
 /**
@@ -58,6 +69,18 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     return super.fetch(request);
   }
 
+  // Initialize empty activity stats if missing
+  private getOrCreateActivityStats(): GlobalActivityStats {
+    const existing = super.getState(ACTIVITY_STATS_KEY) as GlobalActivityStats | undefined;
+    if (existing) return existing;
+    return {
+      scrollBins: {},
+      clickBins: {},
+      selectionBins: {},
+      activeViewports: {}
+    };
+  }
+
   override setState(value: unknown, key: string): void {
     super.setState(value, key);
 
@@ -67,6 +90,12 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
       void this.aggregateUserCounter(key, value);
     }
 
+    // Activity Minimap: handle individual user activity streams
+    if (key.startsWith("user-activity:")) {
+      const userId = key.split(":")[1];
+      void this.aggregateUserActivity(userId, value);
+    }
+
     // Heartbeat presence: client calls setHeartbeat({ts}) every 20s.
     // We record the timestamp and recount how many are within 45s.
     if (key.startsWith("user-presence-heartbeat:")) {
@@ -74,10 +103,65 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
       this.presenceMap.set(key, ts);
       const cutoff = Date.now() - 45_000;
       let active = 0;
-      for (const seen of this.presenceMap.values()) {
-        if (seen > cutoff) active++;
+      for (const [pKey, seen] of this.presenceMap.entries()) {
+        if (seen > cutoff) {
+          active++;
+        } else {
+          // Cleanup stale active viewports
+          const staleUserId = pKey.split(":")[1];
+          if (staleUserId) {
+            const stats = this.getOrCreateActivityStats();
+            if (stats.activeViewports[staleUserId] !== undefined) {
+              delete stats.activeViewports[staleUserId];
+              super.setState(stats, ACTIVITY_STATS_KEY);
+            }
+          }
+        }
       }
       super.setState(active, PRESENCE_KEY);
+    }
+  }
+
+  private async aggregateUserActivity(userId: string, value: unknown) {
+    if (!userId || !value || typeof value !== "object") return;
+
+    const stats = this.getOrCreateActivityStats();
+    let updated = false;
+
+    // The client sends small deltas: { clicks: [pct1, pct2], selections: [pct], scrollPercent: pct }
+    const delta = value as any;
+
+    if (typeof delta.scrollPercent === "number") {
+      stats.activeViewports[userId] = delta.scrollPercent;
+
+      // Also slowly build heatmap based on lingering
+      const bin = Math.floor(delta.scrollPercent);
+      stats.scrollBins[bin] = (stats.scrollBins[bin] || 0) + 1;
+      updated = true;
+    }
+
+    if (Array.isArray(delta.clicks)) {
+      for (const pct of delta.clicks) {
+        if (typeof pct === "number") {
+          const bin = Math.floor(pct);
+          stats.clickBins[bin] = (stats.clickBins[bin] || 0) + 1;
+          updated = true;
+        }
+      }
+    }
+
+    if (Array.isArray(delta.selections)) {
+      for (const pct of delta.selections) {
+        if (typeof pct === "number") {
+          const bin = Math.floor(pct);
+          stats.selectionBins[bin] = (stats.selectionBins[bin] || 0) + 1;
+          updated = true;
+        }
+      }
+    }
+
+    if (updated) {
+      super.setState(stats, ACTIVITY_STATS_KEY);
     }
   }
 
