@@ -24,7 +24,7 @@ interface NavLinkProps {
 
 function NavLink({ href, label }: NavLinkProps) {
   return (
-    <a href={href} className="hover:text-orange-medium transition-colors">
+    <a href={href} className="hover:text-[#e05236] transition-colors">
       {label}
     </a>
   );
@@ -42,7 +42,7 @@ export function Navbar(props: NavbarProps) {
   return (
     <div
       id="main-navbar"
-      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-99 items-center pt-12 pb-4 px-4 sm:px-8 md:px-12 transition-all duration-200 shadow-none data-[scrolled=true]:pt-4 data-[scrolled=true]:pb-2"
+      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-99 items-center max-w-7xl w-full mx-auto pt-8 pb-6 px-6 sm:px-8 border-b border-zinc-200/60 transition-all duration-200 shadow-none data-[scrolled=true]:pt-4 data-[scrolled=true]:pb-2"
     >
       <ScrollMonitoring />
       <a

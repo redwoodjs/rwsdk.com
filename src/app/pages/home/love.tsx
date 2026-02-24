@@ -129,9 +129,9 @@ export const Citation = ({
 
   return (
     <span className="group relative inline cursor-help">
-      <span className="relative z-10 box-decoration-clone px-0.5 transition-colors group-hover:bg-orange-50/50 group-hover:border-b-2 group-hover:border-orange-200">
+      <span className="relative z-10 box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30">
         {children}
-        <span className="inline-flex items-center justify-center align-middle ml-2 -mt-1 w-4 h-4 md:w-5 md:h-5 rounded-full bg-slate-100 border border-white shadow-sm overflow-hidden select-none">
+        <span className="inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md overflow-hidden select-none">
           <img
             src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}
             alt={author.name}
@@ -144,16 +144,17 @@ export const Citation = ({
       </span>
 
       {/* Tooltip */}
-      <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-editor text-white text-xs rounded-xl z-50 pointer-events-none w-max max-w-[250px] whitespace-normal text-center">
-        <span className="block font-bold border-b border-slate-700 pb-1 mb-1">
-          {author.name} (@{author.handle})
+      <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-4 px-4 py-3 bg-[#2b1810] text-[#e8d5c4] text-sm md:text-base font-sans rounded-xl z-50 pointer-events-none w-max max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]">
+        <span className="block font-bold border-b border-[#4a2b1f] pb-2 mb-2 text-[#f27d26]">
+          {author.name} <span className="text-[#d4b8a8] font-normal text-xs md:text-sm">@{author.handle}</span>
         </span>
         {author.quote && (
-          <span className="block italic text-slate-300 leading-relaxed">
+          <span className="block italic text-[#d4b8a8] leading-relaxed">
             "{author.quote}"
           </span>
         )}
-        <span className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-slate-900" />
+        <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#4a2b1f]" />
+        <span className="absolute top-full mt-[-1px] left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#2b1810]" />
       </span>
     </span>
   );
@@ -161,26 +162,27 @@ export const Citation = ({
 
 export function Love() {
   return (
-    <div className="leading-[2]">
+    <div className="space-y-10 text-[#2b1810] text-2xl md:text-4xl font-serif leading-snug text-center max-w-3xl mx-auto">
       <p>
-        RedwoodSDK <Citation id="wesbos">is composable.</Citation> It is
+        RedwoodSDK <Citation id="wesbos">is composable.</Citation> It is{" "}
         <Citation id="Zephraph">
           built to be server-first, centering entirely on the request-response lifecycle.
-        </Citation>
+        </Citation>{" "}
         <Citation id="nwbotha">
           This makes the architecture intuitive and easy to grasp.
         </Citation>
       </p>
-      <br />
 
-      <p>
-        <Citation id="mojombo">But simple doesn’t mean limited.</Citation>
+      <p className="text-zinc-500 italic font-light">
+        <Citation id="mojombo">But simple doesn't mean limited.</Citation>{" "}
         <Citation id="Odd-Appeal6543">
           The framework is deeply powerful, stripping away complexity without sacrificing scale.
         </Citation>
       </p>
-      <br />
-      <p><Citation id="Frown360Turn">You are in total control.</Citation></p>
+
+      <p className="font-medium text-black">
+        <Citation id="Frown360Turn">You are in total control.</Citation>
+      </p>
     </div>
   );
 }

@@ -56,15 +56,17 @@ export default function Home() {
       />
 
       {/* Hero section */}
-      <Section className="relative min-h-[60vh] sm:min-h-[80vh] !max-w-[700px] mx-auto flex items-center justify-center border-none !mt-0">
+      <Section className="relative max-w-7xl mx-auto px-6 pt-32 pb-24 border-none !mt-0">
         <div className="relative z-10 flex flex-col items-center justify-center text-center">
           <div className="flex flex-col">
-            <h1 className="text-hero">A simple framework for humans</h1>
-            <h3 className="leading-[1.5] mx-auto">
+            <h1 className="font-serif text-7xl md:text-[110px] tracking-tight leading-[0.95] font-medium text-zinc-900">
+              A simple framework<br /><span className="italic font-light text-zinc-700">for humans</span>
+            </h1>
+            <p className="mt-10 text-xl md:text-2xl text-zinc-500 max-w-2xl mx-auto leading-relaxed font-light">
               Server-first React, running on the Cloudflare platform.<br />Simple to build. Easy to maintain.
-            </h3>
+            </p>
             {/* Add a down arrow that shows the user they need to scroll */}
-            <div className="mt-12 flex justify-center">
+            <div className="mt-20 flex justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -72,13 +74,12 @@ export default function Home() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="1.5"
+                strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="animate-subtle-bounce text-slate-400 opacity-30"
+                className="animate-subtle-bounce text-zinc-300"
               >
-                <path d="M7 13l5 5 5-5" />
-                <path d="M7 6l5 5 5-5" />
+                <path d="M6 9l6 6 6-6" />
               </svg>
             </div>
           </div>
@@ -89,19 +90,18 @@ export default function Home() {
 
 
       {/* Get started */}
-      <Section id="get-started">
-        <h2>Get started</h2>
-        <p>
+      <Section id="get-started" className="max-w-5xl mx-auto px-6 pb-32">
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">Get started</h2>
+        <p className="text-xl text-zinc-500 mb-8 font-light leading-relaxed">
           Scaffold a Vite project powered by RedwoodSDK. Includes RSC, type-safe routing/SQL, and Cloudflare integration.
         </p>
-        <br />
 
-        <div className="bg-editor p-4 rounded-xl font-mono text-sm sm:text-base flex items-center gap-2 w-fit border border-white/10">
-          <span className="text-orange">$</span>{" "}
-          <span className="text-orange-light flex-1">
+        <div className="bg-[#2b1810] border border-[#4a2b1f] text-[#f27d26] font-mono text-sm p-6 rounded-2xl flex items-center justify-between shadow-2xl">
+          <span className="flex-1">
+            <span className="text-[#d4b8a8] mr-2">$</span>
             npx create-rwsdk my-project-name
           </span>
-          <span className="text-orange-light" id="get-started">
+          <span className="text-[#d4b8a8] hover:text-[#e8d5c4] transition-colors" id="get-started">
             <Copy text="npx create-rwsdk my-project-name" />
           </span>
         </div>
@@ -109,126 +109,90 @@ export default function Home() {
       </Section>
 
       {/* Principles */}
-      <Section>
-        <h2>Principles</h2>
-        <p>
+      <Section className="max-w-5xl mx-auto px-6 pb-32">
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">Principles</h2>
+        <p className="text-xl text-zinc-500 mb-10 font-light leading-relaxed">
           Simplicity for humans is clarity for AI. By using React, TypeScript, and Cloudflare without custom "noise," AI focuses on your business logic instead of navigating framework rules.
         </p>
-        <br />
 
 
-        <div className="bg-editor rounded-xl overflow-hidden border border-white/10">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-slate-800/50">
-                  <th className="px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
-                    Principle
-                  </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
-                    Technical Reality
-                  </th>
-                  <th className="w-[40%] px-6 py-4 font-mono text-xs sm:text-sm text-[#F17543]">
-                    AI Advantage
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-white/5">
-                  <td className="px-6 py-4 font-bold text-white text-sm">
-                    Without Magic
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    No code-gen or implied routing
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    <strong>Clarity:</strong> AI reads exactly what executes
-                  </td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="px-6 py-4 font-bold text-white text-sm">
-                    Composability
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    Standard functions and types
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    <strong>Logic:</strong> AI follows your code, not a policy
-                  </td>
-                </tr>
-                <tr className="border-b border-white/5">
-                  <td className="px-6 py-4 font-bold text-white text-sm">
-                    Web Standards
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    If the browser or platform has it, we use it
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    <strong>Context:</strong> AI uses core web knowledge
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 font-bold text-white text-sm">
-                    Server-First
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    Linear data flow
-                  </td>
-                  <td className="px-6 py-4 text-white text-sm">
-                    <strong>Signal:</strong> Higher accuracy for auditing/writing
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="bg-[#2b1810] text-[#e8d5c4] rounded-[2.5rem] p-10 md:p-16 shadow-2xl border border-[#4a2b1f]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 opacity-80">Principle</div>
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 hidden md:block opacity-80">Technical Reality</div>
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 hidden md:block opacity-80">AI Advantage</div>
+
+            {/* Row 1 */}
+            <div className="font-serif text-2xl md:text-3xl font-medium text-white">Without<br /><span className="italic font-light text-[#d4b8a8]">Magic</span></div>
+            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">No code-gen or implied routing</div>
+            <div className="text-base md:text-lg font-light leading-relaxed"><span className="font-medium text-white">Clarity:</span> <span className="text-[#d4b8a8]">AI reads exactly what executes</span></div>
+
+            {/* Row 2 */}
+            <div className="font-serif text-2xl md:text-3xl font-medium text-white">Composability</div>
+            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">Standard functions and types</div>
+            <div className="text-base md:text-lg font-light leading-relaxed"><span className="font-medium text-white">Logic:</span> <span className="text-[#d4b8a8]">AI follows your code, not a policy</span></div>
+
+            {/* Row 3 */}
+            <div className="font-serif text-2xl md:text-3xl font-medium text-white">Web<br /><span className="italic font-light text-[#d4b8a8]">Standards</span></div>
+            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">If the browser or platform has it, we use it</div>
+            <div className="text-base md:text-lg font-light leading-relaxed"><span className="font-medium text-white">Context:</span> <span className="text-[#d4b8a8]">AI uses core web knowledge</span></div>
+
+            {/* Row 4 */}
+            <div className="font-serif text-2xl md:text-3xl font-medium text-white">Server-First</div>
+            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">Linear data flow</div>
+            <div className="text-base md:text-lg font-light leading-relaxed"><span className="font-medium text-white">Signal:</span> <span className="text-[#d4b8a8]">Higher accuracy for auditing/writing</span></div>
           </div>
         </div>
-      </Section >
+      </Section>
 
 
       {/* Social proof */}
-      <Section>
-        <h2>In Developers' Own Words</h2>
+      <Section className="py-12">
+        <h2 className="font-mono text-lg! text-zinc-500! tracking-widest! uppercase mb-10 text-center">
+          In Developers' Own Words
+        </h2>
         <Love />
       </Section>
 
       {/* The code */}
-      <Section>
-        <h2>
+      <Section className="max-w-5xl mx-auto px-6 pb-32">
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">
           Routing
         </h2>
-        <p>
+        <p className="text-xl text-zinc-500 mb-10 font-light leading-relaxed">
           Composable functions that describe your app using standard
           TypeScript.
         </p>
-        <br />
         <RouterWalkthrough />
 
-        <br />
-        <br />
+        <div className="my-32"></div>
 
-        <h2>Async React</h2>
-        <p>
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">Async React</h2>
+        <p className="text-xl text-zinc-500 mb-12 font-light leading-relaxed">
           A unified mental model for bridging the gap between the client and server.
         </p>
-        <br />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Tile1_AsyncEngine />
           <Tile2_StreamingBridge />
           <Tile3_ActionLoop />
         </div>
 
-        <br />
-        <br />
+        <div className="my-32"></div>
 
-        <h2>Activity Minimap</h2>
-        <p>
-          RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with simple hooks that stream collective activity in real-time. Look to your right to see a live 7-day activity heatmap tracking scroll depth, text selections, clicks, and live users.
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">Realtime</h2>
+        <p className="text-xl text-zinc-500 mb-4 font-light leading-relaxed">
+          RedwoodSDK provides a unified state synchronization layer. Move beyond complex WebSockets with a simple hook that synchronizes state across all clients in real-time using a binary-packed protocol.
         </p>
-        <p className="mt-2 text-slate-500 italic">
-          Try it: Click anywhere on the map to jump to that section of the page.
+        <p className="italic text-zinc-400 mb-12 font-light">
+          Try it: Open this in multiple tabs to see how state is synced from client &rarr; server &rarr; client.
         </p>
-        <br />
         <RealtimeSection />
+
+        <div className="mt-16 text-center">
+          <a href="#" className="font-mono text-xs text-zinc-400 tracking-widest hover:text-zinc-600 transition-colors uppercase border-b border-zinc-300 pb-1">
+            View Implementation
+          </a>
+        </div>
       </Section>
     </div >
   );

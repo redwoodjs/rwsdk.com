@@ -16,7 +16,7 @@ const COLOR_SUCCESS = "#22c55e"; // Green-500
 
 // --- Icons ---
 const IconDatabase = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} style={style}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={className} style={style}>
         <ellipse cx="12" cy="5" rx="9" ry="3" />
         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -24,7 +24,7 @@ const IconDatabase = ({ className, style }: { className?: string; style?: React.
 );
 
 const IconChip = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className} style={style}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className={className} style={style}>
         <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
         <rect x="9" y="9" width="6" height="6" />
         <line x1="9" y1="1" x2="9" y2="4" />
@@ -68,8 +68,8 @@ interface StageProps {
 // --- REVISED TILE 1 & LAYOUT ---
 
 const LayoutWrapper = ({ children, title, description, isLoading, overlay, serverActivity, variant = "default" }: StageProps) => (
-    <div className="flex flex-col gap-4">
-        <div className={`${BLUEPRINT_BG} border ${BLUEPRINT_LINE} rounded-xl relative overflow-hidden h-[340px]`}>
+    <div className="flex flex-col items-center text-center">
+        <div className="w-full h-[340px] bg-[#2b1810] border border-[#4a2b1f] rounded-[2rem] mb-8 relative overflow-hidden shadow-2xl">
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10"
                 style={{
@@ -131,8 +131,8 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
                     <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[2px] h-[10%] bg-gradient-to-b from-white/10 to-transparent z-0" />
 
                     {/* --- Bottom Half: Browser --- */}
-                    <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#1a1a1a] rounded-lg border border-white/10 shadow-2xl overflow-hidden flex flex-col z-20">
-                        <div className="h-6 bg-[#252525] border-b border-white/5 flex items-center px-2 gap-1.5 shrink-0 relative">
+                    <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] rounded-lg border border-[#4a2b1f] shadow-2xl overflow-hidden flex flex-col z-20">
+                        <div className="h-6 bg-[#3d241a] border-b border-[#4a2b1f] flex items-center px-2 gap-1.5 shrink-0 relative">
                             <div className="w-2 h-2 rounded-full bg-red-500/40" />
                             <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                             <div className="w-2 h-2 rounded-full bg-green-500/40" />
@@ -163,8 +163,8 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
         </div>
 
         <div className="text-center">
-            <h3 className="text-lg font-medium mb-1 text-slate-100">{title}</h3>
-            <p className="text-sm text-slate-400 text-balance px-2">
+            <h3 className="font-serif text-2xl mb-3 font-medium text-slate-100">{title}</h3>
+            <p className="text-base text-zinc-500 font-light leading-relaxed px-2">
                 {description}
             </p>
         </div>

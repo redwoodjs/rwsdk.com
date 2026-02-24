@@ -43,14 +43,7 @@ export default function RPCAnimation() {
     }, []);
 
     return (
-        <div ref={containerRef} className="relative w-full h-full flex flex-col items-stretch bg-black/40 rounded-xl overflow-hidden shadow-inner border border-white/5">
-            {/* Background Grid */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{
-                    backgroundImage: "radial-gradient(#fff 1px, transparent 1px)",
-                    backgroundSize: "20px 20px"
-                }}
-            />
+        <div ref={containerRef} className="relative w-full h-full flex flex-col items-stretch">
 
             {/* --- Top Section: Server Runtime (40%) --- */}
             <div className="absolute top-0 left-0 w-full h-[40%] bg-white/[0.02] border-b border-white/5 overflow-hidden flex flex-col items-center">
@@ -158,8 +151,8 @@ export default function RPCAnimation() {
             </AnimatePresence>
 
             {/* --- Bottom Section: Client Runtime (Browser Window) --- */}
-            <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#1a1a1a] rounded-lg border border-white/10 shadow-2xl overflow-hidden flex flex-col z-20">
-                <div className="h-6 bg-[#252525] border-b border-white/5 flex items-center px-2 gap-1.5 shrink-0 relative">
+            <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] rounded-lg border border-[#4a2b1f] shadow-2xl overflow-hidden flex flex-col z-20">
+                <div className="h-6 bg-[#3d241a] border-b border-[#4a2b1f] flex items-center px-2 gap-1.5 shrink-0 relative">
                     <div className="w-2 h-2 rounded-full bg-red-500/40" />
                     <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                     <div className="w-2 h-2 rounded-full bg-green-500/40" />
@@ -179,12 +172,12 @@ export default function RPCAnimation() {
                         <motion.div
                             animate={{
                                 scale: phase === "click" ? 0.92 : phase === "resolve" ? [1, 1.05, 1] : 1,
-                                backgroundColor: phase === "resolve" ? "#22c55e" : "#252525"
+                                backgroundColor: phase === "resolve" ? "#22c55e" : "#3d241a"
                             }}
                             className={`
                   relative px-4 py-2 rounded font-bold text-[9px] tracking-wide overflow-hidden
                   transition-colors duration-400 ease-out
-                  ${phase === "resolve" ? "text-white shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "text-white/90 border border-white/10"}
+                  ${phase === "resolve" ? "text-white shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "text-[#e8d5c4]/90 border border-[#4a2b1f]"}
                   shadow-[0_2px_8px_-1px_rgba(0,0,0,0.5)]
               `}
                         >

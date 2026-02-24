@@ -267,7 +267,7 @@ export default function RouterWalkthrough() {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start relative" ref={containerRef}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-16 items-center relative" ref={containerRef}>
         <ActiveConnection
           key={currentStep}
           activeLine={step.focusLine}
@@ -275,8 +275,8 @@ export default function RouterWalkthrough() {
           scrollRef={scrollContainerRef}
         />
         {/* Code Side */}
-        <div className="lg:col-span-3 relative">
-          <div className="relative bg-[#0D0D0D] rounded-xl overflow-hidden h-[440px] flex flex-col">
+        <div className="lg:col-span-1 relative w-full">
+          <div className="relative bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-4 md:p-6 shadow-2xl overflow-hidden h-[440px] flex flex-col">
             <div className="p-4 overflow-auto custom-scrollbar grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
@@ -385,11 +385,11 @@ export default function RouterWalkthrough() {
                 }}
               </Highlight>
             </div>
-            <div className="flex justify-center items-center gap-4 py-4 shrink-0 bg-[#0D0D0D] relative z-10 border-t border-white/5">
+            <div className="flex justify-center items-center gap-6 py-6 shrink-0 bg-[#2b1810] relative z-10 border-t border-[#4a2b1f]">
               <button
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0}
-                className="p-2 text-orange-400 hover:text-orange-500 disabled:opacity-30 disabled:hover:text-slate-400 transition-colors"
+                className="p-2 text-[#f27d26] hover:text-white disabled:opacity-30 disabled:hover:text-[#f27d26] transition-colors"
                 aria-label="Previous step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -397,14 +397,14 @@ export default function RouterWalkthrough() {
                 </svg>
               </button>
 
-              <div className="font-mono text-sm text-orange-400">
+              <div className="font-mono text-xs tracking-widest text-[#f27d26] opacity-80">
                 {currentStep + 1} / {routerWalkthroughSteps.length}
               </div>
 
               <button
                 onClick={() => setCurrentStep(Math.min(routerWalkthroughSteps.length - 1, currentStep + 1))}
                 disabled={currentStep === routerWalkthroughSteps.length - 1}
-                className="p-2 text-orange-400 hover:text-orange-500 disabled:opacity-30 disabled:hover:text-slate-400 transition-colors"
+                className="p-2 text-[#f27d26] hover:text-white disabled:opacity-30 disabled:hover:text-[#f27d26] transition-colors"
                 aria-label="Next step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -416,7 +416,7 @@ export default function RouterWalkthrough() {
         </div>
 
         {/* Description Side */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-1 space-y-6">
 
 
           <div className="space-y-4" id="description-panel">
@@ -428,10 +428,10 @@ export default function RouterWalkthrough() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <h3 className="text-2xl font-normal mb-4">
+                <h3 className="font-serif text-3xl mb-4 font-medium">
                   <span>{step.title}</span>
                 </h3>
-                <p className="leading-relaxed min-h-[80px]">
+                <p className="text-lg text-zinc-500 font-light leading-relaxed min-h-[80px]">
                   {step.description}
                 </p>
               </motion.div>
