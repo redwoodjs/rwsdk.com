@@ -229,8 +229,8 @@ export function Tile1_AsyncEngine() {
 
     return (
         <LayoutWrapper
-            title="Streamed Components"
-            description="Partial UI. The server sends the page in flight. The layout appears instantly; the data fills the gaps as it arrives."
+            title="Streamed components"
+            description="Streamed components deliver the page in flight, rendering layout shells instantly while data-heavy sections load progressively. This partial UI strategy ensures the user sees a functional page immediately, with content filling the gaps as it arrives."
             isLoading={phase !== "idle" && phase !== "complete"}
             serverActivity={{
                 compute: phase === "processing",
@@ -495,8 +495,8 @@ export function Tile1_AsyncEngine() {
 export function Tile2_StreamingBridge() {
     return (
         <LayoutWrapper
-            title="RPC with RSC"
-            description="Direct Logic. No APIs. Buttons call server functions directly. The UI and server act as one unified loop."
+            title="RPC over RSC"
+            description="React Server Components (RSC) enable a unified loop where buttons trigger server functions directly, bypassing traditional API layers. This Remote Procedure Call (RPC) pattern treats the client and server as a single execution environment, simplifying data flow and logic."
             variant="vertical"
         >
             <RPCAnimation />
@@ -507,8 +507,8 @@ export function Tile2_StreamingBridge() {
 export function Tile3_ActionLoop() {
     return (
         <LayoutWrapper
-            title="Latency"
-            description="Fake Speed. Optimistic: Update the UI before the server finishes. Morph: Use animations to hide the fetch time."
+            title="Fake speed until you make speed"
+            description="Optimistic updates provide instant UI feedback, while Transitions mask latency with fluid motion. For unavoidable delays, Suspense replaces jarring blank states with structured skeleton fallbacks, ensuring a smooth, predictable, and continuous experience."
             variant="vertical"
         >
             <ActionLoopAnimation />

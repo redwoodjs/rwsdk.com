@@ -88,7 +88,7 @@ export function Footer() {
                 <img
                   src="/images/discord.svg"
                   alt="Discord"
-                  className="w-4 h-4 inline-block mr-2"
+                  className="w-4 h-4 inline-block mr-2 invert"
                 />{" "}
                 Discord
               </FooterLink>
@@ -96,7 +96,7 @@ export function Footer() {
                 <img
                   src="/images/x.svg"
                   alt="X"
-                  className="w-4 h-4 inline-block mr-2"
+                  className="w-4 h-4 inline-block mr-2 invert"
                 />{" "}
                 X
               </FooterLink>
@@ -104,7 +104,7 @@ export function Footer() {
           </div>
           <div className="md:col-span-1 text-xs text-zinc-500 leading-relaxed font-light">
             <p className="mb-6">
-              A simple framework for humans. Server-first React with zero magic.
+              A simple framework <span className="text-[#d4b8a8] italic font-normal">for humans</span>. Server-first React with zero magic.
               Built to stay understandable. RedwoodSDK begins as a Vite plugin
               that unlocks SSR, React Server Components, Server Functions, and
               realtime features. Its standards-based router, with support for
