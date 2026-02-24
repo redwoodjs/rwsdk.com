@@ -74,7 +74,7 @@ export default function Home() {
             `,
               }}
             />
-            <h1 className="hero-h1 font-serif tracking-tight leading-[0.95] font-medium text-zinc-900">
+            <h1 className="hero-h1 font-serif tracking-tight leading-[0.95] font-medium text-zinc-900 break-words">
               A simple framework
               <br />
               <span className="italic font-light text-zinc-700">
@@ -117,8 +117,8 @@ export default function Home() {
           routing/SQL, and Cloudflare integration.
         </p>
 
-        <div className="bg-[#2b1810] border border-[#4a2b1f] text-[#f27d26] font-mono text-sm p-6 rounded-2xl flex items-center justify-between shadow-2xl">
-          <span className="flex-1">
+        <div className="bg-[#2b1810] border border-[#4a2b1f] text-[#f27d26] font-mono text-sm p-4 sm:p-6 rounded-2xl flex items-center justify-between shadow-2xl overflow-x-auto">
+          <span className="flex-1 whitespace-nowrap pr-4">
             <span className="text-[#d4b8a8] mr-2">$</span>
             npx create-rwsdk my-project-name
           </span>
@@ -219,7 +219,7 @@ export default function Home() {
 
       {/* Social proof */}
       <Section className="py-12">
-        <h2 className="font-mono text-lg! text-zinc-500! tracking-widest! uppercase mb-10 text-center">
+        <h2 className="font-mono text-sm! text-zinc-400 font-light tracking-widest! uppercase mb-10 text-center">
           In Developers' Own Words
         </h2>
         <Love />

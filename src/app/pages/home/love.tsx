@@ -126,35 +126,69 @@ export const Citation = ({
   children: React.ReactNode
 }) => {
   const author = authors[id];
+  const [strategy, setStrategy] = React.useState<'center' | 'left' | 'right'>('center');
+  const avatarRef = React.useRef<HTMLSpanElement>(null);
+
+  const handleInteract = () => {
+    if (window.innerWidth < 768 && avatarRef.current) {
+      const rect = avatarRef.current.getBoundingClientRect();
+      // Measure the exact position of the avatar to determine tooltip strategy
+      const center = rect.left + rect.width / 2;
+      if (center < 120) setStrategy('left');
+      else if (window.innerWidth - center < 120) setStrategy('right');
+      else setStrategy('center');
+    }
+  };
+
+  let tooltipPosition = "left-1/2 -translate-x-1/2 md:-translate-x-1/2";
+  let arrowPosition = "left-1/2 -translate-x-1/2 md:left-1/2 md:-translate-x-1/2";
+
+  if (strategy === 'left') {
+    tooltipPosition = "left-0 md:left-auto md:left-1/2 md:-translate-x-1/2";
+    arrowPosition = "left-[16px] -translate-x-1/2 md:left-[16px] md:-translate-x-1/2 md:left-1/2";
+  } else if (strategy === 'right') {
+    tooltipPosition = "right-0 md:right-auto md:left-1/2 md:-translate-x-1/2";
+    arrowPosition = "right-[16px] translate-x-1/2 md:right-auto md:left-1/2 md:-translate-x-1/2";
+  }
 
   return (
-    <span className="group relative inline cursor-help">
-      <span className="relative z-10 box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30">
+    <span
+      className="group inline cursor-help"
+      tabIndex={0}
+      onMouseEnter={handleInteract}
+      onFocus={handleInteract}
+      onTouchStart={handleInteract}
+    >
+      <span className="relative z-10 box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30 group-focus:bg-[#f27d26]/10 group-focus:border-b-2 group-focus:border-[#f27d26]/30">
         {children}
-        <span className="inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md overflow-hidden select-none">
-          <img
-            src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}
-            alt={author.name}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random`;
-            }}
-          />
-        </span>
       </span>
+      <span
+        ref={avatarRef}
+        className="relative z-10 inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md select-none"
+      >
+        <img
+          src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}
+          alt={author.name}
+          className="w-full h-full object-cover rounded-full overflow-hidden"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random`;
+          }}
+        />
 
-      {/* Tooltip */}
-      <span className="opacity-0 group-hover:opacity-100 transition-opacity absolute bottom-full left-1/2 -translate-x-1/2 mb-4 px-4 py-3 bg-[#2b1810] text-[#e8d5c4] text-sm md:text-base font-sans rounded-xl z-50 pointer-events-none w-max max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]">
-        <span className="block font-bold border-b border-[#4a2b1f] pb-2 mb-2 text-[#f27d26]">
-          {author.name} <span className="text-[#d4b8a8] font-normal text-xs md:text-sm">@{author.handle}</span>
-        </span>
-        {author.quote && (
-          <span className="block italic text-[#d4b8a8] leading-relaxed">
-            "{author.quote}"
+        {/* Tooltip anchored directly to the Avatar */}
+        <span className={`opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity absolute bottom-[calc(100%+10px)] md:bottom-[calc(100%+14px)] ${tooltipPosition} px-3 md:px-4 py-2.5 md:py-3 bg-[#2b1810] text-[#e8d5c4] text-xs md:text-base font-sans rounded-lg md:rounded-xl z-[60] pointer-events-none w-[180px] md:w-max md:max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]`}>
+          <span className="block font-bold border-b border-[#4a2b1f] pb-1.5 md:pb-2 mb-1.5 md:mb-2 text-[#f27d26] text-[11px] md:text-base leading-tight md:leading-normal">
+            {author.name} <span className="text-[#d4b8a8] font-normal text-[9px] md:text-sm">@{author.handle}</span>
           </span>
-        )}
-        <span className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#4a2b1f]" />
-        <span className="absolute top-full mt-[-1px] left-1/2 -translate-x-1/2 border-8 border-transparent border-t-[#2b1810]" />
+          {author.quote && (
+            <span className="block italic text-[#d4b8a8] text-[10px] md:text-base leading-relaxed">
+              "{author.quote}"
+            </span>
+          )}
+          {/* Arrows */}
+          <span className={`absolute top-full ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-[#4a2b1f]`} />
+          <span className={`absolute top-full mt-[-1px] ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-[#2b1810]`} />
+        </span>
       </span>
     </span>
   );
