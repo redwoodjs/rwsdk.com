@@ -176,12 +176,12 @@ export const Citation = ({
         />
 
         {/* Tooltip anchored directly to the Avatar */}
-        <span className={`opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity absolute bottom-[calc(100%+10px)] md:bottom-[calc(100%+14px)] ${tooltipPosition} px-3 md:px-4 py-2.5 md:py-3 bg-[#2b1810] text-[#e8d5c4] text-xs md:text-base font-sans rounded-lg md:rounded-xl z-[60] pointer-events-none w-[180px] md:w-max md:max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]`}>
-          <span className="block font-bold border-b border-[#4a2b1f] pb-1.5 md:pb-2 mb-1.5 md:mb-2 text-[#f27d26] text-[11px] md:text-base leading-tight md:leading-normal">
-            {author.name} <span className="text-[#d4b8a8] font-normal text-[9px] md:text-sm">@{author.handle}</span>
+        <span className={`opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity absolute bottom-[calc(100%+10px)] md:bottom-[calc(100%+14px)] ${tooltipPosition} px-3 md:px-4 py-2.5 md:py-3 bg-[#2b1810] text-[#e8d5c4] text-xs md:text-base font-sans rounded-lg md:rounded-xl z-[60] pointer-events-none w-[240px] md:w-max md:max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]`}>
+          <span className="block font-bold border-b border-[#4a2b1f] pb-1.5 md:pb-2 mb-1.5 md:mb-2 text-[#f27d26] text-sm md:text-base leading-tight md:leading-normal">
+            {author.name} <span className="text-[#d4b8a8] font-normal text-xs md:text-sm">@{author.handle}</span>
           </span>
           {author.quote && (
-            <span className="block italic text-[#d4b8a8] text-[10px] md:text-base leading-relaxed">
+            <span className="block italic text-[#d4b8a8] text-xs md:text-base leading-relaxed">
               "{author.quote}"
             </span>
           )}

@@ -8,6 +8,7 @@ import {
   Tile3_ActionLoop,
 } from "./async-react-section";
 import RealtimeSection from "./realtime-section";
+import LatestBlogs from "./latest-blogs";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
 
@@ -77,7 +78,7 @@ export default function Home() {
             <h1 className="hero-h1 font-serif tracking-tight leading-[0.95] font-medium text-zinc-900 break-words">
               A simple framework
               <br />
-              <span className="italic font-light text-zinc-700">
+              <span className="italic font-light text-[#4a2b1f]">
                 for humans
               </span>
             </h1>
@@ -143,75 +144,145 @@ export default function Home() {
         </p>
 
         <div className="bg-[#2b1810] text-[#e8d5c4] rounded-[2.5rem] p-10 md:p-16 shadow-2xl border border-[#4a2b1f]">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
-            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 opacity-80">
+          <div className="hidden md:grid grid-cols-3 gap-16 mb-16">
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest opacity-80">
               Principle
             </div>
-            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 hidden md:block opacity-80">
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest opacity-80">
               Technical Reality
             </div>
-            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-2 md:mb-8 hidden md:block opacity-80">
+            <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest opacity-80">
               AI Advantage
             </div>
+          </div>
 
+          <div className="flex flex-col gap-12 md:gap-16">
             {/* Row 1 */}
-            <div className="font-serif text-2xl md:text-3xl font-medium text-white">
-              Without
-              <br />
-              <span className="italic font-light text-[#d4b8a8]">Magic</span>
-            </div>
-            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
-              No code-gen or implied routing
-            </div>
-            <div className="text-base md:text-lg font-light leading-relaxed">
-              <span className="font-medium text-white">Clarity:</span>{" "}
-              <span className="text-[#d4b8a8]">
-                AI reads exactly what executes
-              </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 border-b border-[#4a2b1f]/50 pb-12 md:pb-0 md:border-0 last:border-0 last:pb-0">
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Principle
+                </div>
+                <div className="font-serif text-2xl md:text-3xl font-medium text-white">
+                  Without
+                  <br />
+                  <span className="italic font-light text-[#d4b8a8]">Magic</span>
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Technical Reality
+                </div>
+                <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
+                  No code-gen or implied routing
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  AI Advantage
+                </div>
+                <div className="text-base md:text-lg font-light leading-relaxed">
+                  <span className="font-medium text-white">Clarity:</span>{" "}
+                  <span className="text-[#d4b8a8]">
+                    AI reads exactly what executes
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Row 2 */}
-            <div className="font-serif text-2xl md:text-3xl font-medium text-white">
-              Composability
-            </div>
-            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
-              Standard functions and types
-            </div>
-            <div className="text-base md:text-lg font-light leading-relaxed">
-              <span className="font-medium text-white">Logic:</span>{" "}
-              <span className="text-[#d4b8a8]">
-                AI follows your code, not a policy
-              </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 border-b border-[#4a2b1f]/50 pb-12 md:pb-0 md:border-0 last:border-0 last:pb-0">
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Principle
+                </div>
+                <div className="font-serif text-2xl md:text-3xl font-medium text-white">
+                  Composability
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Technical Reality
+                </div>
+                <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
+                  Standard functions and types
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  AI Advantage
+                </div>
+                <div className="text-base md:text-lg font-light leading-relaxed">
+                  <span className="font-medium text-white">Logic:</span>{" "}
+                  <span className="text-[#d4b8a8]">
+                    AI follows your code, not a policy
+                  </span>
+                </div>
+              </div>
             </div>
 
             {/* Row 3 */}
-            <div className="font-serif text-2xl md:text-3xl font-medium text-white">
-              Web
-              <br />
-              <span className="italic font-light text-[#d4b8a8]">
-                Standards
-              </span>
-            </div>
-            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
-              If the browser or platform has it, we use it
-            </div>
-            <div className="text-base md:text-lg font-light leading-relaxed">
-              <span className="font-medium text-white">Context:</span>{" "}
-              <span className="text-[#d4b8a8]">AI uses core web knowledge</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 border-b border-[#4a2b1f]/50 pb-12 md:pb-0 md:border-0 last:border-0 last:pb-0">
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Principle
+                </div>
+                <div className="font-serif text-2xl md:text-3xl font-medium text-white">
+                  Web
+                  <br className="hidden md:block" />
+                  <span className="italic font-light text-[#d4b8a8]">
+                    Standards
+                  </span>
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Technical Reality
+                </div>
+                <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
+                  If the browser or platform has it, we use it
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  AI Advantage
+                </div>
+                <div className="text-base md:text-lg font-light leading-relaxed">
+                  <span className="font-medium text-white">Context:</span>{" "}
+                  <span className="text-[#d4b8a8]">AI uses core web knowledge</span>
+                </div>
+              </div>
             </div>
 
             {/* Row 4 */}
-            <div className="font-serif text-2xl md:text-3xl font-medium text-white">
-              Server-First
-            </div>
-            <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
-              Linear data flow
-            </div>
-            <div className="text-base md:text-lg font-light leading-relaxed">
-              <span className="font-medium text-white">Signal:</span>{" "}
-              <span className="text-[#d4b8a8]">
-                Higher accuracy for auditing/writing
-              </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-16 border-b border-[#4a2b1f]/50 pb-12 md:pb-0 md:border-0 last:border-0 last:pb-0">
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Principle
+                </div>
+                <div className="font-serif text-2xl md:text-3xl font-medium text-white">
+                  Server-First
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  Technical Reality
+                </div>
+                <div className="text-[#d4b8a8] text-base md:text-lg font-light leading-relaxed">
+                  Linear data flow
+                </div>
+              </div>
+              <div>
+                <div className="text-[#f27d26] font-mono text-xs uppercase tracking-widest mb-3 opacity-80 md:hidden">
+                  AI Advantage
+                </div>
+                <div className="text-base md:text-lg font-light leading-relaxed">
+                  <span className="font-medium text-white">Signal:</span>{" "}
+                  <span className="text-[#d4b8a8]">
+                    Higher accuracy for auditing/writing
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -275,6 +346,8 @@ export default function Home() {
           </a>
         </div>
       </Section>
+
+      <LatestBlogs />
     </div>
   );
 }
