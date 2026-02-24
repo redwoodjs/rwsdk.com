@@ -30,9 +30,6 @@ function NavLink({ href, label }: NavLinkProps) {
   );
 }
 
-function NavSeparator() {
-  return <span className="text-slate-200">|</span>;
-}
 
 interface NavbarProps {
   activePage?: string;
@@ -42,7 +39,7 @@ export function Navbar(props: NavbarProps) {
   return (
     <div
       id="main-navbar"
-      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-99 items-center max-w-7xl w-full mx-auto pt-8 pb-6 px-6 sm:px-8 border-b border-zinc-200/60 transition-all duration-200 shadow-none data-[scrolled=true]:pt-4 data-[scrolled=true]:pb-2"
+      className="group flex flex-col md:flex-row justify-between sticky top-0 bg-parchment z-[99] items-center max-w-7xl w-full mx-auto pt-8 pb-6 px-6 sm:px-8 border-b border-zinc-200/60 transition-all duration-200 shadow-none data-[scrolled=true]:pt-4 data-[scrolled=true]:pb-2"
     >
       <ScrollMonitoring />
       <a
@@ -55,14 +52,10 @@ export function Navbar(props: NavbarProps) {
           className="w-[186px]"
         />
       </a>
-      <div className="flex flex-nowrap whitespace-nowrap justify-center gap-1 sm:gap-2 font-sans font-bold text-sm sm:text-[16px] mt-4 md:mt-0 transition-all duration-300 max-md:group-data-[scrolled=true]:mt-0">
-        {navItems.map((item, index) => (
-          <span key={item.label} className="contents">
-            <NavLink href={item.href} label={item.label} />
-            {index < navItems.length - 1 && <NavSeparator />}
-          </span>
+      <div className="flex flex-wrap md:flex-nowrap whitespace-nowrap items-center justify-center gap-4 md:gap-6 font-sans text-sm font-medium mt-4 md:mt-0 transition-all duration-300 max-md:group-data-[scrolled=true]:mt-0">
+        {navItems.map((item) => (
+          <NavLink key={item.label} href={item.href} label={item.label} />
         ))}
-        <NavSeparator />
         <div className="inline-flex items-center gap-2 leading-none">
           <a
             href={Constants.GITHUB_REPO}
@@ -72,7 +65,7 @@ export function Navbar(props: NavbarProps) {
           >
             GitHub
           </a>
-          <span className="text-orange-medium !no-underline">
+          <span className="text-zinc-500 !no-underline">
             <GitHubStarWidget />
           </span>
         </div>
