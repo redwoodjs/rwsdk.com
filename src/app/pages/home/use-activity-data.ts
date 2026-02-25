@@ -13,7 +13,7 @@ const ACTIVITY_STATS_KEY = "global-activity-stats";
 export function useActivityData(userId: string | null): { 
   stats: GlobalActivityStats;
   viewportRange: { top: number; bottom: number };
-  actionEvent: { id: number; type: 'heat' | 'click'; percent: number } | null;
+  actionEvent: { id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number } | null;
 } {
   // Read global aggregates
   const [globalStats] = useSyncedState<GlobalActivityStats>({
@@ -30,17 +30,16 @@ export function useActivityData(userId: string | null): {
 
   // Local state for immediate smooth rendering of the current user's viewport
   const [viewportRange, setViewportRange] = useState({ top: 0, bottom: 0 });
-  const [actionEvent, setActionEvent] = useState<{ id: number; type: 'heat' | 'click'; percent: number } | null>(null);
+  const [actionEvent, setActionEvent] = useState<{ id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number } | null>(null);
 
   // Trigger an animation event
-  const fireEvent = (type: 'heat' | 'click', percent: number) => {
-      setActionEvent({ id: Date.now(), type, percent });
+  const fireEvent = (type: 'heat' | 'click', percent: number, clientX?: number, clientY?: number) => {
+      setActionEvent({ id: Date.now(), type, percent, clientX, clientY });
   };
 
   // Queues for batching events before sending to server
   const clickQueue = useRef<number[]>([]);
   const flushTimeoutId = useRef<any>(null);
-  const heatingTimeoutId = useRef<any>(null);
 
   useEffect(() => {
     if (!userId) return;
@@ -75,26 +74,24 @@ export function useActivityData(userId: string | null): {
     };
 
     // 1. Scroll tracking
-    let scrollTimeout: any;
     const handleScroll = () => {
-       if (scrollTimeout) clearTimeout(scrollTimeout);
-       
        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
        const topPercent = (window.scrollY / scrollHeight) * 100;
        const bottomPercent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
        
        setViewportRange({ top: topPercent, bottom: bottomPercent });
-       
-       // Reset heating state
-       if (heatingTimeoutId.current) clearTimeout(heatingTimeoutId.current);
-
-       // Wait 1s of pausing before logging heat
-       scrollTimeout = setTimeout(() => {
-           // We track the *bottom* of the viewport (where you've read up to)
-           flushActivity(bottomPercent);
-           fireEvent('heat', bottomPercent);
-       }, 1000);
     };
+
+    // Continuous heat logging while focused
+    const heatInterval = setInterval(() => {
+        if (document.hasFocus()) {
+            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const bottomPercent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
+            
+            flushActivity(bottomPercent);
+            fireEvent('heat', bottomPercent);
+        }
+    }, 1000);
 
     // 2. Click tracking
     const handleClick = (e: MouseEvent) => {
@@ -103,7 +100,7 @@ export function useActivityData(userId: string | null): {
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
         const percent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
 
-        fireEvent('click', percent);
+        fireEvent('click', percent, e.clientX, e.clientY);
         clickQueue.current.push(percent);
         scheduleFlush();
     };
@@ -126,7 +123,7 @@ export function useActivityData(userId: string | null): {
        window.removeEventListener("scroll", handleScroll);
        document.removeEventListener("click", handleClick);
        if (flushTimeoutId.current) clearTimeout(flushTimeoutId.current);
-       if (scrollTimeout) clearTimeout(scrollTimeout);
+       clearInterval(heatInterval);
        clearInterval(heartbeatInterval);
     };
   }, [userId]);

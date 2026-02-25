@@ -24,11 +24,16 @@ type GlobalStats = {
   history: { hour: number; count: number; date: string }[];
 };
 
+type ActivityHourBucket = {
+  hourId: number;
+  scrollBins: Record<number, number>;
+  clickBins: Record<number, number>;
+};
+
 type GlobalActivityStats = {
   // Bins representing percentage down the page (0-100)
   scrollBins: Record<number, number>;
   clickBins: Record<number, number>;
-  selectionBins: Record<number, number>;
 
   // High-frequency active users
   activeViewports: Record<string, number>;
@@ -44,6 +49,8 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
   /** Tracks last-seen timestamp per userId for heartbeat presence. */
   private presenceMap = new Map<string, number>();
   private initialized = false;
+  private activityBuckets: ActivityHourBucket[] = [];
+  private activityWriteTimeout: any = null;
 
   /** Hydrate in-memory state from KV before serving the first request. */
   private async ensureInitialized() {
@@ -62,6 +69,12 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
       }
       super.setState(persisted, GLOBAL_STATS_KEY);
     }
+
+    const persistedActivity = await kv.get<{ buckets: ActivityHourBucket[] }>(ACTIVITY_STATS_KEY, "json");
+    if (persistedActivity && Array.isArray(persistedActivity.buckets)) {
+      this.activityBuckets = persistedActivity.buckets;
+      this.recalculateActivityStats();
+    }
   }
 
   override async fetch(request: Request): Promise<Response> {
@@ -76,9 +89,43 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     return {
       scrollBins: {},
       clickBins: {},
-      selectionBins: {},
       activeViewports: {}
     };
+  }
+
+  private recalculateActivityStats() {
+    const stats = this.getOrCreateActivityStats();
+
+    // clean up deprecated selectionBins
+    delete (stats as any).selectionBins;
+
+    stats.scrollBins = {};
+    stats.clickBins = {};
+
+    const currentHourId = Math.floor(Date.now() / (1000 * 60 * 60));
+    // this.activityBuckets = this.activityBuckets.filter(b => b.hourId >= currentHourId - 24);
+
+    for (const b of this.activityBuckets) {
+      for (const [bin, count] of Object.entries(b.scrollBins)) {
+        stats.scrollBins[Number(bin)] = (stats.scrollBins[Number(bin)] || 0) + count;
+      }
+      for (const [bin, count] of Object.entries(b.clickBins)) {
+        stats.clickBins[Number(bin)] = (stats.clickBins[Number(bin)] || 0) + count;
+      }
+    }
+
+    super.setState(stats, ACTIVITY_STATS_KEY);
+  }
+
+  private scheduleActivitySave() {
+    if (this.activityWriteTimeout) return;
+    this.activityWriteTimeout = setTimeout(() => {
+      this.activityWriteTimeout = null;
+      const kv = (env as any).SYNCED_STATE_KV as KVNamespace;
+      kv.put(ACTIVITY_STATS_KEY, JSON.stringify({ buckets: this.activityBuckets })).catch(err => {
+        console.error("[ActivitySyncedStateServer] KV put for ACTIVITY_STATS_KEY failed:", err);
+      });
+    }, 10000);
   }
 
   override setState(value: unknown, key: string): void {
@@ -125,42 +172,44 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
   private async aggregateUserActivity(userId: string, value: unknown) {
     if (!userId || !value || typeof value !== "object") return;
 
-    const stats = this.getOrCreateActivityStats();
-    let updated = false;
-
-    // The client sends small deltas: { clicks: [pct1, pct2], selections: [pct], scrollPercent: pct }
     const delta = value as any;
+    const stats = this.getOrCreateActivityStats();
+    let updatedViewports = false;
+    let updatedBuckets = false;
 
     if (typeof delta.scrollPercent === "number") {
       stats.activeViewports[userId] = delta.scrollPercent;
+      updatedViewports = true;
+    }
 
-      // Also slowly build heatmap based on lingering
+    const currentHourId = Math.floor(Date.now() / (1000 * 60 * 60));
+    let currentBucket = this.activityBuckets.find(b => b.hourId === currentHourId);
+    if (!currentBucket) {
+      currentBucket = { hourId: currentHourId, scrollBins: {}, clickBins: {} };
+      this.activityBuckets.push(currentBucket);
+      updatedBuckets = true;
+    }
+
+    if (typeof delta.scrollPercent === "number") {
       const bin = Math.floor(delta.scrollPercent);
-      stats.scrollBins[bin] = (stats.scrollBins[bin] || 0) + 1;
-      updated = true;
+      currentBucket.scrollBins[bin] = (currentBucket.scrollBins[bin] || 0) + 1;
+      updatedBuckets = true;
     }
 
     if (Array.isArray(delta.clicks)) {
       for (const pct of delta.clicks) {
         if (typeof pct === "number") {
           const bin = Math.floor(pct);
-          stats.clickBins[bin] = (stats.clickBins[bin] || 0) + 1;
-          updated = true;
+          currentBucket.clickBins[bin] = (currentBucket.clickBins[bin] || 0) + 1;
+          updatedBuckets = true;
         }
       }
     }
 
-    if (Array.isArray(delta.selections)) {
-      for (const pct of delta.selections) {
-        if (typeof pct === "number") {
-          const bin = Math.floor(pct);
-          stats.selectionBins[bin] = (stats.selectionBins[bin] || 0) + 1;
-          updated = true;
-        }
-      }
-    }
-
-    if (updated) {
+    if (updatedBuckets) {
+      this.recalculateActivityStats();
+      this.scheduleActivitySave();
+    } else if (updatedViewports) {
       super.setState(stats, ACTIVITY_STATS_KEY);
     }
   }

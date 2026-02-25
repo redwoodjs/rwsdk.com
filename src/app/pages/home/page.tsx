@@ -7,7 +7,7 @@ import {
   Tile2_StreamingBridge,
   Tile3_ActionLoop,
 } from "./async-react-section";
-import RealtimeSection from "./realtime-section";
+import ActivityTrack from "./activity-track";
 import LatestBlogs from "./latest-blogs";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
@@ -335,7 +335,7 @@ export default function Home() {
           Try it: Open this in multiple tabs to see how state is synced from
           client &rarr; server &rarr; client.
         </p>
-        <RealtimeSection />
+        <ActivityTrack />
 
         <div className="mt-16 text-center">
           <a
