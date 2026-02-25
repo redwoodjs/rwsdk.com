@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Constants from "src/lib/Constants";
 
 export function Countdown() {
     const targetDate = new Date("2026-03-07T15:00:00Z").getTime();
@@ -23,7 +24,7 @@ export function Countdown() {
     return (
         <div className="mt-16 flex flex-col items-center justify-center animate-fade-in relative z-20">
             <div className="font-mono text-sm  tracking-widest mb-4 opacity-80">
-                v1.0 shipping on the 7th of March:
+                v1.0 shipping on the 7th of March
             </div>
             <div className="flex gap-4 sm:gap-6 text-[#f27d26] font-mono text-2xl sm:text-3xl md:text-4xl bg-[#2b1810] border border-[#4a2b1f] px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-2xl">
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
@@ -45,6 +46,9 @@ export function Countdown() {
                     <span className="font-medium">{timeLeft.seconds.toString().padStart(2, '0')}</span>
                     <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] mt-1 md:mt-2 opacity-70 tracking-widest">SEC</span>
                 </div>
+            </div>
+            <div className="font-mono text-sm tracking-widest mt-6 opacity-80">
+                Wanna help? <a href={Constants.GITHUB_REPO} target="_blank" rel="noreferrer" className="text-[#f27d26] hover:text-[#e8d5c4] transition-colors underline decoration-[#f27d26]/40 hover:decoration-[#e8d5c4]/40 underline-offset-4">Star us!</a>
             </div>
         </div>
     );
