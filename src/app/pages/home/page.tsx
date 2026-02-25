@@ -320,7 +320,7 @@ export default function Home() {
 
         {/* Drop-in replacement section */}
         <div className="mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-stretch">
             {/* Left Box: Text and Code */}
             <div className="flex flex-col">
               <div className="bg-dark-code-bg rounded-[1.5rem] overflow-hidden shadow-xl border border-[#4a2b1f] dark:border-dark-border mb-10 transition-colors duration-200">
