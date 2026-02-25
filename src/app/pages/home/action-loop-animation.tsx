@@ -4,11 +4,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 
 // --- Icons ---
-const COLOR_DATA = "#3B82F6"; // Blue for request
-const COLOR_SYNC = "#F17543"; // Orange for sync
+const COLOR_DATA = "var(--color-dark-accent)"; // Blue for request
+const COLOR_SYNC = "var(--color-dark-accent)"; // Orange for sync
 
 const IconCursor = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} style={{ filter: "drop-shadow(0 0 4px #F17543)" }}>
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} style={{ filter: "drop-shadow(0 0 4px var(--color-dark-accent))" }}>
         <path d="M5.5 3.5L11 18.5L13.5 13L19 10.5L5.5 3.5Z" />
     </svg>
 );
@@ -161,9 +161,9 @@ export default function ActionLoopAnimation() {
                                         scale: [0.5, 1, 1, 0.5]
                                     }}
                                     transition={{ duration: 1.2, repeat: Infinity }}
-                                    className="absolute w-1.5 h-1.5 rounded-full bg-orange-400 shadow-[0_0_12px_#F17543]"
+                                    className="absolute w-1.5 h-1.5 rounded-full bg-dark-accent shadow-[0_0_12px_var(--color-dark-accent)]"
                                 >
-                                    <div className="absolute top-full h-12 bg-gradient-to-t from-transparent to-orange-500/40 left-1/2 -translate-x-1/2 w-[1px]" />
+                                    <div className="absolute top-full h-12 bg-gradient-to-t from-transparent to-dark-accent/40 left-1/2 -translate-x-1/2 w-[1px]" />
                                 </motion.div>
                             ))}
                         </div>
@@ -171,8 +171,8 @@ export default function ActionLoopAnimation() {
                 </AnimatePresence>
 
                 {/* Scene 1: Initial List View in Browser */}
-                <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] rounded-lg border border-[#4a2b1f] shadow-2xl overflow-hidden flex flex-col z-20">
-                    <div className="h-6 bg-[#3d241a] border-b border-[#4a2b1f] flex items-center px-2 gap-1.5 shrink-0 relative">
+                <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] dark:bg-dark-panel rounded-lg border border-[#4a2b1f] dark:border-dark-border shadow-2xl overflow-hidden flex flex-col z-20 transition-colors duration-200">
+                    <div className="h-6 bg-[#3d241a] dark:bg-dark-panel-light border-b border-[#4a2b1f] dark:border-dark-border flex items-center px-2 gap-1.5 shrink-0 relative transition-colors duration-200">
                         <div className="w-2 h-2 rounded-full bg-red-500/40" />
                         <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                         <div className="w-2 h-2 rounded-full bg-green-500/40" />
@@ -252,12 +252,12 @@ export default function ActionLoopAnimation() {
                                             <motion.div
                                                 animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
                                                 transition={{ duration: 2, repeat: Infinity }}
-                                                className="absolute inset-0 bg-orange-500/30 blur-xl rounded-full"
+                                                className="absolute inset-0 bg-dark-accent/30 dark:bg-dark-accent/30 blur-xl rounded-full"
                                             />
                                         )}
                                         <motion.div
                                             layoutId="profile-avatar"
-                                            className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F17543] to-[#E9B46A] shadow-2xl relative z-10"
+                                            className="w-14 h-14 rounded-full bg-gradient-to-br from-dark-accent to-[#E9B46A] dark:to-dark-accent/50 shadow-2xl relative z-10"
                                         />
                                     </div>
 

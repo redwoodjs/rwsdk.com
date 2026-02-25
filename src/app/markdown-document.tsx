@@ -95,11 +95,11 @@ export const MarkdownDocument: React.FC<DocumentProps> = ({
         <meta name="sitemap" content="/sitemap.xml" />
         <meta
           name="description"
-          content="Server-first React with zero magic. Built to stay understandable."
+          content="Server-first React, running on the Cloudflare platform. Simple to build. Easy to maintain."
         />
         <meta
           name="keywords"
-          content="Server-first React, zero magic, understandable, framework, React, TypeScript, Cloudflare Workers"
+          content="Server-first React, Cloudflare, framework, React, TypeScript, Cloudflare Workers"
         />
         <meta name="author" content="RedwoodJS" />
         {/* Security */}

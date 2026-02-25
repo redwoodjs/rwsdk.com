@@ -159,7 +159,7 @@ export const Citation = ({
       onFocus={handleInteract}
       onTouchStart={handleInteract}
     >
-      <span className="relative z-10 group-hover:z-[100] group-focus:z-[100] box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30 group-focus:bg-[#f27d26]/10 group-focus:border-b-2 group-focus:border-[#f27d26]/30">
+      <span className="relative z-10 group-hover:z-[100] group-focus:z-[100] box-decoration-clone px-0.5 transition-colors group-hover:bg-dark-accent/10 group-hover:border-b-2 group-hover:border-dark-accent/30 group-focus:bg-dark-accent/10 group-focus:border-b-2 group-focus:border-dark-accent/30">
         {children}
       </span>
       <span
@@ -176,18 +176,18 @@ export const Citation = ({
         />
 
         {/* Tooltip anchored directly to the Avatar */}
-        <span className={`opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity absolute bottom-[calc(100%+10px)] md:bottom-[calc(100%+14px)] ${tooltipPosition} px-3 md:px-4 py-2.5 md:py-3 bg-[#2b1810] text-[#e8d5c4] text-xs md:text-base font-sans rounded-lg md:rounded-xl z-[60] pointer-events-none w-[240px] md:w-max md:max-w-[300px] whitespace-normal text-left shadow-2xl border border-[#4a2b1f]`}>
-          <span className="block font-bold border-b border-[#4a2b1f] pb-1.5 md:pb-2 mb-1.5 md:mb-2 text-[#f27d26] text-sm md:text-base leading-tight md:leading-normal">
-            {author.name} <span className="text-[#d4b8a8] font-normal text-xs md:text-sm">@{author.handle}</span>
+        <span className={`opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity absolute bottom-[calc(100%+10px)] md:bottom-[calc(100%+14px)] ${tooltipPosition} px-3 md:px-4 py-2.5 md:py-3 bg-[#2b1810] dark:bg-dark-panel text-dark-primary text-xs md:text-base font-sans rounded-lg md:rounded-xl z-[60] pointer-events-none w-[240px] md:w-max md:max-w-[300px] whitespace-normal text-left shadow-2xl border border-dark-border`}>
+          <span className="block font-bold border-b border-[#4a2b1f] dark:border-dark-border pb-1.5 md:pb-2 mb-1.5 md:mb-2 text-dark-accent text-sm md:text-base leading-tight md:leading-normal">
+            {author.name} <span className="text-[#d4b8a8] dark:text-dark-secondary font-normal text-xs md:text-sm">@{author.handle}</span>
           </span>
           {author.quote && (
-            <span className="block italic text-[#d4b8a8] text-xs md:text-base leading-relaxed">
+            <span className="block italic text-[#d4b8a8] dark:text-dark-secondary text-xs md:text-base leading-relaxed">
               "{author.quote}"
             </span>
           )}
           {/* Arrows */}
-          <span className={`absolute top-full ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-[#4a2b1f]`} />
-          <span className={`absolute top-full mt-[-1px] ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-[#2b1810]`} />
+          <span className={`absolute top-full ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-dark-border`} />
+          <span className={`absolute top-full mt-[-1px] ${arrowPosition} border-[6px] md:border-8 border-transparent border-t-dark-panel`} />
         </span>
       </span>
     </span>
@@ -196,7 +196,7 @@ export const Citation = ({
 
 export function Love() {
   return (
-    <div className="space-y-10 text-[#2b1810] text-2xl md:text-4xl font-serif leading-snug text-center max-w-3xl mx-auto">
+    <div className="space-y-10 text-dark-panel dark:text-dark-primary text-2xl md:text-4xl font-serif leading-snug text-center max-w-3xl mx-auto">
       <p>
         RedwoodSDK <Citation id="wesbos">is composable.</Citation> It is{" "}
         <Citation id="Zephraph">
@@ -207,14 +207,14 @@ export function Love() {
         </Citation>
       </p>
 
-      <p className="text-zinc-500 italic font-light">
+      <p className="text-zinc-500 dark:text-dark-secondary italic font-light">
         <Citation id="mojombo">But simple doesn't mean limited.</Citation>{" "}
         <Citation id="Odd-Appeal6543">
           The framework is deeply powerful, stripping away complexity without sacrificing scale.
         </Citation>
       </p>
 
-      <p className="font-medium text-black">
+      <p className="font-medium text-black dark:text-dark-primary">
         <Citation id="Frown360Turn">You are in total control.</Citation>
       </p>
     </div>

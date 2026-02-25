@@ -7,10 +7,10 @@ export default function Post({ post }: { post: BlogPost }) {
   return (
     <div className="w-full max-w-[800px] mx-auto px-4 py-8 overflow-x-hidden">
       <header className="mb-12">
-        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-900 mb-6 leading-tight">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-900 dark:text-dark-primary mb-6 leading-tight">
           {post.title}
         </h1>
-        <div className="flex flex-row items-center gap-2 mb-8 font-mono text-xs font-semibold text-[#f27d26] uppercase tracking-widest opacity-80">
+        <div className="flex flex-row items-center gap-2 mb-8 font-mono text-xs font-semibold text-dark-accent uppercase tracking-widest opacity-80">
           {post.author && (
             <div className="flex items-center gap-2">
               {post.author.avatar && (

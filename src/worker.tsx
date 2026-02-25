@@ -7,6 +7,12 @@ import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/personal-software/page";
 import { notFound } from "src/utils/notFound";
 
+declare module "rwsdk/worker" {
+  export interface DefaultAppContext {
+    theme?: "dark" | "light" | "system";
+  }
+}
+
 import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/start/page";
@@ -290,6 +296,12 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
 export { SyncedStateServer };
 
 export default defineApp([
+  ({ ctx, request }) => {
+    // Read theme from cookie
+    const cookie = request.headers.get("Cookie");
+    const match = cookie?.match(/theme=([^;]+)/);
+    ctx.theme = (match?.[1] as "dark" | "light" | "system") || "system";
+  },
   setCommonHeaders(),
 
   ...syncedStateRoutes((env: any) => env.SYNCED_STATE),

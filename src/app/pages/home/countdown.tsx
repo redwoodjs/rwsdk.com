@@ -23,32 +23,32 @@ export function Countdown() {
 
     return (
         <div className="mt-16 flex flex-col items-center justify-center animate-fade-in relative z-20">
-            <div className="font-mono text-sm  tracking-widest mb-4 opacity-80">
+            <div className="font-mono text-sm tracking-widest mb-4 opacity-80 text-charcoal dark:text-dark-secondary">
                 v1.0 shipping on the 7th of March
             </div>
-            <div className="flex gap-4 sm:gap-6 text-[#f27d26] font-mono text-2xl sm:text-3xl md:text-4xl bg-[#2b1810] border border-[#4a2b1f] px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-2xl">
+            <div className="flex gap-4 sm:gap-6 text-[#f27d26] dark:text-dark-accent font-mono text-2xl sm:text-3xl md:text-4xl bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-2xl transition-colors duration-200">
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
                     <span className="font-medium">{timeLeft.days.toString().padStart(2, '0')}</span>
-                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] mt-1 md:mt-2 opacity-70 tracking-widest">DAYS</span>
+                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">DAYS</span>
                 </div>
-                <div className="text-[#4a2b1f] font-light mt-1">:</div>
+                <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
                     <span className="font-medium">{timeLeft.hours.toString().padStart(2, '0')}</span>
-                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] mt-1 md:mt-2 opacity-70 tracking-widest">HRS</span>
+                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">HRS</span>
                 </div>
-                <div className="text-[#4a2b1f] font-light mt-1">:</div>
+                <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
                     <span className="font-medium">{timeLeft.minutes.toString().padStart(2, '0')}</span>
-                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] mt-1 md:mt-2 opacity-70 tracking-widest">MIN</span>
+                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">MIN</span>
                 </div>
-                <div className="text-[#4a2b1f] font-light mt-1">:</div>
+                <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
                     <span className="font-medium">{timeLeft.seconds.toString().padStart(2, '0')}</span>
-                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] mt-1 md:mt-2 opacity-70 tracking-widest">SEC</span>
+                    <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">SEC</span>
                 </div>
             </div>
-            <div className="font-mono text-sm tracking-widest mt-6 opacity-80">
-                Wanna help? <a href={Constants.GITHUB_REPO} target="_blank" rel="noreferrer" className="text-[#f27d26] hover:text-[#e8d5c4] transition-colors underline decoration-[#f27d26]/40 hover:decoration-[#e8d5c4]/40 underline-offset-4">Star us!</a>
+            <div className="font-mono text-sm tracking-widest mt-6 opacity-80 text-charcoal dark:text-dark-secondary">
+                Wanna help? <a href={Constants.GITHUB_REPO} target="_blank" rel="noreferrer" className="text-dark-accent hover:text-dark-primary transition-colors underline decoration-dark-accent/40 hover:decoration-dark-primary/40 dark:hover:decoration-dark-primary/40 underline-offset-4">Star us!</a>
             </div>
         </div>
     );

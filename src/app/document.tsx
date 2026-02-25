@@ -1,5 +1,6 @@
 import { TurnstileScript } from "rwsdk/turnstile";
 import stylesUrl from "./styles.css?url";
+import { requestInfo } from "rwsdk/worker";
 
 // CSP directives organized by type
 const cspDirectives = {
@@ -25,6 +26,8 @@ export const Document: React.FC<{
   children: React.ReactNode;
   nonce?: string;
 }> = ({ children, nonce }) => {
+  const theme = requestInfo?.ctx?.theme || "system";
+
   return (
     <html lang="en">
       <head>
@@ -69,11 +72,11 @@ export const Document: React.FC<{
         <meta name="sitemap" content="/sitemap.xml" />
         <meta
           name="description"
-          content="Server-first React with zero magic. Built to stay understandable."
+          content="Server-first React, running on the Cloudflare platform. Simple to build. Easy to maintain."
         />
         <meta
           name="keywords"
-          content="Server-first React, zero magic, understandable, framework, React, TypeScript, Cloudflare Workers"
+          content="Server-first React, Cloudflare, framework, React, TypeScript, Cloudflare Workers"
         />
         <meta name="author" content="RedwoodJS" />
         {/* Security */}
@@ -82,7 +85,24 @@ export const Document: React.FC<{
         <link rel="stylesheet" href={stylesUrl} />
         <link rel="modulepreload" href="/src/client.tsx" />
       </head>
-      <body className="bg-parchment text-charcoal font-sans">
+      <body className="bg-parchment dark:bg-dark-bg text-charcoal dark:text-dark-primary font-sans transition-colors duration-200">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = ${JSON.stringify(theme)};
+                const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const shouldBeDark = theme === 'dark' || (theme === 'system' && isSystemDark);
+                if (shouldBeDark) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+              })();
+            `,
+          }}
+        />
         <div id="root">{children}</div>
         <script>import("/src/client.tsx")</script>
         <script

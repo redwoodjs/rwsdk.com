@@ -53,7 +53,7 @@ export default function Content({ content }: { content: string }) {
   return (
     <div
       ref={ref}
-      className="prose prose-slate prose-lg w-full max-w-none prose-headings:font-bold prose-headings:text-slate-800 prose-headings:leading-tight prose-p:text-slate-700 prose-p:leading-relaxed"
+      className="prose prose-slate dark:prose-invert prose-lg w-full max-w-none prose-headings:font-bold prose-headings:text-slate-800 dark:prose-headings:text-dark-primary prose-headings:leading-tight prose-p:text-slate-700 dark:prose-p:text-dark-secondary prose-p:leading-relaxed dark:prose-strong:text-dark-primary dark:prose-a:text-dark-accent dark:prose-blockquote:text-dark-secondary dark:prose-code:text-dark-primary dark:prose-li:text-dark-secondary"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );

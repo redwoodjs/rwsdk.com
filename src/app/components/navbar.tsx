@@ -1,8 +1,9 @@
-import { CloudflareImage } from "./cloudflare-image";
 import Constants from "src/lib/Constants";
 import { link } from "src/shared/links";
 import { GitHubStarWidget } from "./github-star-widget";
 import { ScrollMonitoring } from "./scroll-monitoring";
+import { ThemeToggle } from "./theme-toggle";
+import { requestInfo } from "rwsdk/worker";
 
 interface NavItem {
   href: string;
@@ -14,7 +15,7 @@ const navItems: NavItem[] = [
   { href: Constants.DOCS_URL, label: "Docs" },
   { href: "/#get-started", label: "Get started" },
   { href: link("/blog"), label: "Blog" },
-
+  { href: link("/personal-software"), label: "Manifesto" },
 ];
 
 interface NavLinkProps {
@@ -24,7 +25,7 @@ interface NavLinkProps {
 
 function NavLink({ href, label }: NavLinkProps) {
   return (
-    <a href={href} className="hover:text-[#e05236] transition-colors">
+    <a href={href} className="hover:text-[#e05236] dark:hover:text-dark-accent transition-colors">
       {label}
     </a>
   );
@@ -36,6 +37,8 @@ interface NavbarProps {
 }
 
 export function Navbar(props: NavbarProps) {
+  const theme = requestInfo?.ctx?.theme || "system";
+
   return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -71,7 +74,7 @@ export function Navbar(props: NavbarProps) {
       <div className="fixed md:sticky top-0 left-0 w-full z-[99]">
         <div
           id="main-navbar"
-          className="group flex flex-col md:flex-row justify-between bg-parchment items-center max-w-7xl w-full mx-auto px-6 sm:px-8 border-b border-zinc-200/60 shadow-none"
+          className="group flex flex-col md:flex-row justify-between bg-parchment dark:bg-dark-bg items-center max-w-7xl w-full mx-auto px-6 sm:px-8 border-b border-zinc-200/60 dark:border-dark-border shadow-none transition-colors duration-200"
         >
           <ScrollMonitoring />
           <a
@@ -79,13 +82,11 @@ export function Navbar(props: NavbarProps) {
             className="cursor-pointer mb-4 md:mb-0 overflow-hidden"
             href={link("/")}
           >
-            <CloudflareImage
-              imageId="37162c6c-890c-48e3-790a-48b2b87fcd00"
-              alt="logo"
-              className="w-[186px]"
-            />
+            <img src="/images/logo--light.svg" alt="logo" className="w-[186px] dark:hidden" />
+            <img src="/images/logo--dark.svg" alt="logo" className="w-[186px] hidden dark:block" />
           </a>
           <div id="main-navbar-links" className="flex flex-wrap md:flex-nowrap whitespace-nowrap items-center justify-center gap-4 md:gap-6 font-sans text-sm font-medium mt-4 md:mt-0">
+            <ThemeToggle initialTheme={theme} />
             {navItems.map((item) => (
               <NavLink key={item.label} href={item.href} label={item.label} />
             ))}
@@ -98,7 +99,7 @@ export function Navbar(props: NavbarProps) {
               >
                 GitHub
               </a>
-              <span className="text-zinc-500 !no-underline">
+              <span className="text-zinc-500 dark:text-dark-secondary !no-underline">
                 <GitHubStarWidget />
               </span>
             </div>

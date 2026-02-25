@@ -6,10 +6,9 @@ import { Highlight } from "prism-react-renderer";
 import { rwsdkCodeTheme } from "./styled-code-block";
 
 const CODE_SNIPPET = `// actions.ts
-export const saveData = 
-  async (text: string) => {
-    await db.save(text);
-  };`;
+export const saveData = async (text: string) => {
+  await db.save(text);
+};`;
 
 export default function RPCAnimation() {
     const [phase, setPhase] = useState<"cursor" | "click" | "label" | "travel" | "server" | "resolve">("cursor");
@@ -46,7 +45,7 @@ export default function RPCAnimation() {
         <div ref={containerRef} className="relative w-full h-full flex flex-col items-stretch">
 
             {/* --- Top Section: Server Runtime (40%) --- */}
-            <div className="absolute top-0 left-0 w-full h-[40%] bg-white/[0.02] border-b border-white/5 overflow-hidden flex flex-col items-center">
+            <div className="absolute top-0 left-0 w-full h-[40%] bg-white/[0.02] border-b border-white/5 overflow-hidden flex flex-col items-start">
                 <div className="text-[7px] absolute top-2 right-4 uppercase tracking-[0.2em] text-white/10 font-mono font-bold">
                     Server Runtime
                 </div>
@@ -151,8 +150,8 @@ export default function RPCAnimation() {
             </AnimatePresence>
 
             {/* --- Bottom Section: Client Runtime (Browser Window) --- */}
-            <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] rounded-lg border border-[#4a2b1f] shadow-2xl overflow-hidden flex flex-col z-20">
-                <div className="h-6 bg-[#3d241a] border-b border-[#4a2b1f] flex items-center px-2 gap-1.5 shrink-0 relative">
+            <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] dark:bg-dark-panel rounded-lg border border-[#4a2b1f] dark:border-dark-border shadow-2xl overflow-hidden flex flex-col z-20">
+                <div className="h-6 bg-[#3d241a] dark:bg-dark-panel-light border-b border-[#4a2b1f] dark:border-dark-border flex items-center px-2 gap-1.5 shrink-0 relative">
                     <div className="w-2 h-2 rounded-full bg-red-500/40" />
                     <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                     <div className="w-2 h-2 rounded-full bg-green-500/40" />
@@ -172,12 +171,12 @@ export default function RPCAnimation() {
                         <motion.div
                             animate={{
                                 scale: phase === "click" ? 0.92 : phase === "resolve" ? [1, 1.05, 1] : 1,
-                                backgroundColor: phase === "resolve" ? "#22c55e" : "#3d241a"
+                                backgroundColor: phase === "resolve" ? "#22c55e" : "var(--color-dark-panel-light)"
                             }}
                             className={`
                   relative px-4 py-2 rounded font-bold text-[9px] tracking-wide overflow-hidden
                   transition-colors duration-400 ease-out
-                  ${phase === "resolve" ? "text-white shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "text-[#e8d5c4]/90 border border-[#4a2b1f]"}
+                  ${phase === "resolve" ? "text-white shadow-[0_0_15px_rgba(34,197,94,0.3)]" : "text-dark-primary/90 border border-dark-border"}
                   shadow-[0_2px_8px_-1px_rgba(0,0,0,0.5)]
               `}
                         >

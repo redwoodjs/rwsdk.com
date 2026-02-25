@@ -33,31 +33,31 @@ export function RealtimeCounter() {
     };
 
     return (
-        <div className="bg-[#2b1810] rounded-[2.5rem] p-8 md:p-10 flex flex-col items-center justify-between min-h-[450px] shadow-2xl relative border border-[#4a2b1f] w-full">
+        <div className="bg-[#2b1810] dark:bg-dark-panel rounded-[2.5rem] p-8 md:p-10 flex flex-col items-center justify-between min-h-[450px] shadow-2xl relative border border-[#4a2b1f] dark:border-dark-border w-full transition-colors duration-200">
             <div className="absolute top-8 left-8 right-8 flex items-center justify-between">
-                <div className="flex items-center gap-3 font-mono text-[10px] text-[#d4b8a8] tracking-widest">
-                    <div className="w-2 h-2 rounded-full bg-[#f27d26]"></div>
+                <div className="flex items-center gap-3 font-mono text-[10px] text-[#d4b8a8] dark:text-dark-secondary tracking-widest">
+                    <div className="w-2 h-2 rounded-full bg-dark-accent"></div>
                     YOUR SESSION: {userId ? `#${userId}` : '...'}
                 </div>
-                <div className="flex items-center gap-2 bg-green-950/30 text-green-400 px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+                <div className="flex items-center gap-2 bg-green-950/30 dark:bg-dark-success-bg text-green-400 dark:text-dark-success-text px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50 dark:border-dark-success-border transition-colors duration-200">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 dark:bg-dark-success-text animate-pulse"></div>
                     LIVE
                 </div>
             </div>
 
             <div className="flex-1 flex flex-col items-center justify-center w-full mt-12">
-                <div className="min-w-32 h-36 px-8 border-[3px] border-[#e8d5c4]/20 rounded-[3rem] flex items-center justify-center mb-10 transition-transform active:scale-95 duration-150">
-                    <span className="text-[#e8d5c4] text-7xl font-light tabular-nums">{count || 0}</span>
+                <div className="min-w-32 h-36 px-8 border-[3px] border-dark-primary/20 rounded-[3rem] flex items-center justify-center mb-10 transition-transform active:scale-95 duration-150">
+                    <span className="text-dark-primary text-7xl font-light tabular-nums">{count || 0}</span>
                 </div>
                 <button
                     onClick={handleIncrement}
-                    className="bg-[#e8d5c4] text-[#2b1810] font-medium px-10 py-4 rounded-xl hover:bg-white transition-all w-full max-w-[220px] text-sm active:scale-95"
+                    className="bg-dark-primary text-dark-panel font-medium px-10 py-4 rounded-xl hover:bg-white transition-all w-full max-w-[220px] text-sm active:scale-95"
                 >
                     Increment
                 </button>
             </div>
 
-            <div className="font-mono text-[10px] text-[#d4b8a8]/60 tracking-widest mt-10 uppercase text-center">
+            <div className="font-mono text-[10px] text-[#d4b8a8]/60 dark:text-dark-secondary/60 tracking-widest mt-10 uppercase text-center">
                 Syncing to Cloudflare KV
             </div>
         </div>
@@ -253,9 +253,9 @@ export default function ActivityTrack() {
                     <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" preserveAspectRatio="none" viewBox="0 0 100 1">
                         <defs>
                             <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
-                                <stop offset="40%" stopColor="rgba(255,255,255,0.05)" />
-                                <stop offset="100%" stopColor="rgba(0,0,0,0.6)" />
+                                <stop offset="0%" stopColor="rgba(255,255,255,0.15)" className="dark:stop-color-[rgba(244,235,225,0.15)]" />
+                                <stop offset="40%" stopColor="rgba(255,255,255,0.05)" className="dark:stop-color-[rgba(244,235,225,0.05)]" />
+                                <stop offset="100%" stopColor="rgba(0,0,0,0.6)" className="dark:stop-color-[rgba(10,10,10,0.8)]" />
                             </linearGradient>
                         </defs>
 
@@ -273,7 +273,7 @@ export default function ActivityTrack() {
                             stroke="#000000"
                             strokeWidth="0.04" /* Thicker than the white line */
                             strokeLinecap="round"
-                            className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
+                            className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] dark:stroke-dark-bg"
                             pointerEvents="none"
                         />
 
@@ -284,7 +284,7 @@ export default function ActivityTrack() {
                             stroke="#ffffff"
                             strokeWidth="0.015" /* ~ 1.5px in viewbox scaling coords */
                             strokeLinecap="round"
-                            className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+                            className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] dark:stroke-dark-primary/60 dark:drop-shadow-[0_0_8px_rgba(244,235,225,0.4)]"
                             pointerEvents="none"
                         />
                     </svg>
@@ -298,7 +298,7 @@ export default function ActivityTrack() {
 
                             const isClick = p.type === 'click';
                             // Clicks get the fiery orange beam, scrolls/pauses get a subtle white beam
-                            const gradientColor = isClick ? "from-[#f27d26]/80" : "from-white/40";
+                            const gradientColor = isClick ? "from-dark-accent/80" : "from-white/40 dark:from-dark-primary/30";
 
                             return (
                                 <div
@@ -325,9 +325,9 @@ export default function ActivityTrack() {
                                     className="h-full flex-1 cursor-pointer hover:bg-white/10 transition-colors relative group/bin"
                                 >
                                     {/* Hover popup with interaction count */}
-                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover/bin:opacity-100 transition-opacity pointer-events-none bg-[#2b1810] text-[#e8d5c4] border border-[#4a2b1f] px-3 py-1.5 rounded-lg text-[10px] font-mono shadow-[0_0_20px_rgba(0,0,0,0.8)] z-[60] whitespace-nowrap flex flex-col items-center">
-                                        <span className="text-[#d4b8a8] pb-1 border-b border-[#4a2b1f]/50 w-full text-center mb-1">SECTION {binIndex + 1}</span>
-                                        <span className="font-bold text-xs">{heat} <span className="font-normal text-[#d4b8a8]/60 text-[10px]">Interactions</span></span>
+                                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover/bin:opacity-100 transition-opacity pointer-events-none bg-[#2b1810] dark:bg-dark-panel text-dark-primary border border-[#4a2b1f] dark:border-dark-border px-3 py-1.5 rounded-lg text-[10px] font-mono shadow-[0_0_20px_rgba(0,0,0,0.8)] z-[60] whitespace-nowrap flex flex-col items-center">
+                                        <span className="text-[#d4b8a8] dark:text-dark-secondary pb-1 border-b border-dark-border/50 w-full text-center mb-1">SECTION {binIndex + 1}</span>
+                                        <span className="font-bold text-xs">{heat} <span className="font-normal text-[#d4b8a8]/60 dark:text-dark-secondary/60 text-[10px]">Interactions</span></span>
                                     </div>
                                 </div>
                             );
@@ -351,7 +351,7 @@ export default function ActivityTrack() {
                             return (
                                 <div
                                     key={uid}
-                                    className="absolute w-3 h-3 rounded-full bg-white border-2 border-[#2b1810] transition-all duration-75 ease-linear pointer-events-none"
+                                    className="absolute w-3 h-3 rounded-full bg-white border-2 border-dark-panel transition-all duration-75 ease-linear pointer-events-none"
                                     style={{
                                         left: `calc(${otherCenterX}% - 6px)`,
                                         top: `${otherYPx - 6}px`
@@ -371,7 +371,7 @@ export default function ActivityTrack() {
                     </div>
 
                     {/* Simple Graph Legend Hover */}
-                    <div className="absolute -top-14 right-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-[#2b1810] text-[#e8d5c4] border border-[#4a2b1f] px-4 py-2 rounded-lg text-xs font-mono shadow-[0_0_20px_rgba(0,0,0,0.8)] z-50 flex gap-4">
+                    <div className="absolute -top-14 right-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-[#2b1810] dark:bg-dark-panel text-dark-primary border border-[#4a2b1f] dark:border-dark-border px-4 py-2 rounded-lg text-xs font-mono shadow-[0_0_20px_rgba(0,0,0,0.8)] z-50 flex gap-4">
                         <div className="flex items-center gap-2">
                             <div className="w-2.5 h-2.5 rounded-full bg-red-500 border border-white" />
                             <span>You</span>

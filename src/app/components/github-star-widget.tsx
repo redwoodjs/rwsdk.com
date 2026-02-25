@@ -31,7 +31,7 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
           width="16.524"
           height="15.715"
           viewBox="0 0 16.524 15.715"
-          className="text-[#f27d26]"
+          className="text-dark-accent"
         >
           <path
             d="M8.262.443,10.6,5.178l5.227.764L12.044,9.626l.893,5.2L8.262,12.372,3.587,14.831l.893-5.2L.7,5.942l5.227-.764Z"
@@ -43,7 +43,7 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
             className="hover:fill-orange"
           />
         </svg>
-        <span className="font-medium no-underline">
+        <span className="font-medium no-underline text-dark-accent">
           {error
             ? "1376"
             : starCount === null

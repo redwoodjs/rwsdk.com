@@ -8,11 +8,11 @@ import ActionLoopAnimation from "./action-loop-animation";
 // --- Visual Constants ---
 const BLUEPRINT_BG = "bg-[#0D0D0D]";
 const BLUEPRINT_LINE = "border-white/10";
-const COLOR_DB = "#F17543"; // Orange (Brand)
+const COLOR_DB = "var(--color-dark-accent)"; // Orange (Brand)
 const COLOR_COMPUTE = "#fbbf24"; // Amber-400
-const COLOR_DATA = "#F17543"; // Orange
+const COLOR_DATA = "var(--color-dark-accent)"; // Orange
 const COLOR_UI = "#fbbf24"; // Amber
-const COLOR_SUCCESS = "#22c55e"; // Green-500
+const COLOR_SUCCESS = "var(--color-dark-success-text)"; // Green-500
 
 // --- Icons ---
 const IconDatabase = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
@@ -69,7 +69,7 @@ interface StageProps {
 
 const LayoutWrapper = ({ children, title, description, isLoading, overlay, serverActivity, variant = "default" }: StageProps) => (
     <div className="flex flex-col items-center text-center">
-        <div className="w-full h-[340px] bg-[#2b1810] border border-[#4a2b1f] rounded-[2rem] mb-8 relative overflow-hidden shadow-2xl">
+        <div className="w-full h-[340px] bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border rounded-[2rem] mb-8 relative overflow-hidden shadow-2xl">
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10"
                 style={{
@@ -99,14 +99,14 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
                             <motion.div
                                 animate={{
                                     scale: serverActivity?.db ? 1.2 : 1,
-                                    color: serverActivity?.db ? "#F17543" : "#F1754390",
+                                    color: serverActivity?.db ? "var(--color-dark-accent)" : "rgba(242, 125, 38, 0.4)",
                                     x: serverActivity?.db ? [0, -1, 1, -1, 1, 0] : 0,
                                     y: serverActivity?.db ? [0, 1, -1, 1, -1, 0] : 0
                                 }}
                                 transition={serverActivity?.db ? { repeat: Infinity, duration: 0.2 } : {}}
                                 className="p-2"
                             >
-                                <IconDatabase className="w-8 h-8" style={{ filter: serverActivity?.db ? "drop-shadow(0 0 12px #F17543)" : "none" }} />
+                                <IconDatabase className="w-8 h-8" style={{ filter: serverActivity?.db ? "drop-shadow(0 0 12px var(--color-dark-accent))" : "none" }} />
                             </motion.div>
                         </div>
 
@@ -131,8 +131,8 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
                     <div className="absolute top-[40%] left-1/2 -translate-x-1/2 w-[2px] h-[10%] bg-gradient-to-b from-white/10 to-transparent z-0" />
 
                     {/* --- Bottom Half: Browser --- */}
-                    <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] rounded-lg border border-[#4a2b1f] shadow-2xl overflow-hidden flex flex-col z-20">
-                        <div className="h-6 bg-[#3d241a] border-b border-[#4a2b1f] flex items-center px-2 gap-1.5 shrink-0 relative">
+                    <div className="absolute bottom-4 left-4 right-4 top-[50%] bg-[#2b1810] dark:bg-dark-panel rounded-lg border border-[#4a2b1f] dark:border-dark-border shadow-2xl overflow-hidden flex flex-col z-20 transition-colors duration-200">
+                        <div className="h-6 bg-[#3d241a] dark:bg-dark-panel-light border-b border-[#4a2b1f] dark:border-dark-border flex items-center px-2 gap-1.5 shrink-0 relative transition-colors duration-200">
                             <div className="w-2 h-2 rounded-full bg-red-500/40" />
                             <div className="w-2 h-2 rounded-full bg-yellow-500/40" />
                             <div className="w-2 h-2 rounded-full bg-green-500/40" />
@@ -164,7 +164,7 @@ const LayoutWrapper = ({ children, title, description, isLoading, overlay, serve
 
         <div className="text-center">
             <h3 className="font-serif text-2xl mb-3 font-medium text-slate-100">{title}</h3>
-            <p className="text-base text-zinc-500 font-light leading-relaxed px-2">
+            <p className="text-base text-zinc-500 dark:text-dark-secondary font-light leading-relaxed px-2">
                 {description}
             </p>
         </div>
@@ -248,7 +248,7 @@ export function Tile1_AsyncEngine() {
                                 animate={{ top: "20%", opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
                                 transition={{ duration: 0.4, ease: "easeOut" }}
-                                className="absolute w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_0_15px_#F17543]"
+                                className="absolute w-2.5 h-2.5 rounded-full bg-dark-accent shadow-[0_0_15px_var(--color-dark-accent)]"
                                 style={{ transform: "translate(-50%, -50%)" }}
                             />
                         )}
@@ -260,7 +260,7 @@ export function Tile1_AsyncEngine() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: [0, 1, 0] }}
                                 transition={{ duration: 0.8 }}
-                                className="absolute top-[20%] left-[50%] -translate-y-1/2 w-[15%] h-[1px] bg-orange-400"
+                                className="absolute top-[20%] left-[50%] -translate-y-1/2 w-[15%] h-[1px] bg-dark-accent"
                                 style={{ transform: "translateX(-100%)" }}
                             />
                         )}

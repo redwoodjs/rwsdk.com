@@ -23,7 +23,7 @@ export default async function BlogList() {
   const otherBlogs = sortedBlogs.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#FDFCFB] text-zinc-800 font-sans selection:bg-[#F27D26] selection:text-white">
+    <div className="min-h-screen bg-[#FDFCFB] dark:bg-dark-bg text-zinc-800 dark:text-dark-primary font-sans selection:bg-dark-accent selection:text-dark-primary">
       <SEO
         title="Blog | RedwoodSDK"
         description="RedwoodSDK is loved because it's simple. This is our blog about building the framework and how we help teams ship high-velocity software on Cloudflare."
@@ -34,10 +34,10 @@ export default async function BlogList() {
       <main className="max-w-6xl mx-auto px-6 pt-32 pb-24 border-none !mt-0">
         <div className="relative z-10 max-w-4xl mx-auto w-full mb-16">
           <div className="flex flex-col">
-            <h1 className="!font-serif !text-5xl md:!text-6xl !mb-6 !font-medium !tracking-tight !text-zinc-900 !break-words">
+            <h1 className="!font-serif !text-5xl md:!text-6xl !mb-6 !font-medium !tracking-tight !text-zinc-900 dark:!text-dark-primary !break-words">
               Our Blog
             </h1>
-            <p className="!text-xl !text-zinc-500 !mb-10 !font-light !leading-relaxed max-w-2xl">
+            <p className="!text-xl !text-zinc-500 dark:!text-dark-secondary !mb-10 !font-light !leading-relaxed max-w-2xl">
               RedwoodSDK is loved because it&apos;s simple. We created it to stay
               understandable. This is our blog about building the framework and how
               we help teams ship high-velocity software on Cloudflare.
@@ -53,7 +53,7 @@ export default async function BlogList() {
                 className="flex flex-col h-full no-underline"
               >
                 <div className="flex flex-col">
-                  <div className="flex flex-row items-center gap-2 mb-6 text-[#f27d26] font-mono text-xs font-semibold uppercase tracking-widest opacity-80">
+                  <div className="flex flex-row items-center gap-2 mb-6 text-dark-accent font-mono text-xs font-semibold uppercase tracking-widest opacity-80">
                     {topBlog.author && (
                       <div className="flex items-center gap-2">
                         {topBlog.author.avatar && (
@@ -76,15 +76,15 @@ export default async function BlogList() {
                     </div>
                   </div>
 
-                  <h3 className="!font-serif !text-[1.75rem] sm:!text-[2rem] md:!text-[2.5rem] lg:!text-[3rem] !font-medium !mb-8 group-hover:!text-[#f27d26] !transition-colors !text-zinc-900 !leading-tight !tracking-tight">
+                  <h3 className="!font-serif !text-[1.75rem] sm:!text-[2rem] md:!text-[2.5rem] lg:!text-[3rem] !font-medium !mb-8 group-hover:!text-dark-accent !transition-colors !text-zinc-900 dark:!text-dark-primary !leading-tight !tracking-tight">
                     {topBlog.title}
                   </h3>
 
-                  <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mb-6 flex-grow line-clamp-4">
+                  <p className="text-zinc-600 dark:text-dark-secondary text-lg md:text-xl leading-relaxed mb-6 flex-grow line-clamp-4">
                     {topBlog.description}
                   </p>
 
-                  <div className="text-[#f27d26] font-mono text-xs font-semibold uppercase tracking-widest flex items-center group-hover:translate-x-1 transition-transform opacity-80">
+                  <div className="text-dark-accent font-mono text-xs font-semibold uppercase tracking-widest flex items-center group-hover:translate-x-1 transition-transform opacity-80">
                     Read featured post <span className="ml-2 font-serif text-base">&rarr;</span>
                   </div>
                 </div>
@@ -94,13 +94,13 @@ export default async function BlogList() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto w-full">
             {otherBlogs.map((blog) => (
-              <article key={blog.slug} className="group flex flex-col h-full bg-[#fcfaf8] rounded-3xl border border-zinc-200/60 overflow-hidden relative transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-zinc-300/80">
+              <article key={blog.slug} className="group flex flex-col h-full bg-[#fcfaf8] dark:bg-dark-panel rounded-3xl border border-zinc-200/60 dark:border-dark-border overflow-hidden relative transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:hover:border-dark-accent/30">
                 <a
                   href={link("/blog/:slug", { slug: blog.slug })}
                   className="flex flex-col h-full no-underline"
                 >
                   <div className="p-8 flex flex-col h-full">
-                    <div className="flex flex-row items-center gap-2 mb-6 text-[#f27d26] font-mono text-xs font-semibold uppercase tracking-widest opacity-80">
+                    <div className="flex flex-row items-center gap-2 mb-6 text-dark-accent font-mono text-xs font-semibold uppercase tracking-widest opacity-80">
                       {blog.author && (
                         <div className="flex items-center gap-2">
                           {blog.author.avatar && (
@@ -123,15 +123,15 @@ export default async function BlogList() {
                       </div>
                     </div>
 
-                    <h3 className="font-serif text-xl md:text-2xl font-medium mb-4 group-hover:text-[#f27d26] transition-colors text-zinc-900 leading-tight">
+                    <h3 className="font-serif text-xl md:text-2xl font-medium mb-4 group-hover:text-dark-accent transition-colors text-zinc-900 dark:text-dark-primary leading-tight">
                       {blog.title}
                     </h3>
 
-                    <p className="text-zinc-600 text-base md:text-lg leading-relaxed mb-8 flex-grow line-clamp-3">
+                    <p className="text-zinc-600 dark:text-dark-secondary text-base md:text-lg leading-relaxed mb-8 flex-grow line-clamp-3">
                       {blog.description}
                     </p>
 
-                    <div className="mt-auto text-[#f27d26] font-mono text-xs font-semibold uppercase tracking-widest flex items-center group-hover:translate-x-1 transition-transform opacity-80">
+                    <div className="mt-auto text-dark-accent font-mono text-xs font-semibold uppercase tracking-widest flex items-center group-hover:translate-x-1 transition-transform opacity-80">
                       Read post <span className="ml-2 font-serif text-base">&rarr;</span>
                     </div>
                   </div>

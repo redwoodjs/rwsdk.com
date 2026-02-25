@@ -3,6 +3,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-baige: #f9f7f2;
   --color-parchment: #fdfcfa;
@@ -24,6 +26,25 @@
   --space-unit: 8px;
   --signal-black: #1a1a1a;
   --signal-gray: #737373;
+
+  /* Dark Mode Palette "Zip" */
+  --color-dark-bg: #1A1412;
+  --color-dark-panel: #281D16;
+  --color-dark-panel-light: #33251C;
+  
+  /* Core Typography Colors */
+  --color-dark-primary: #F4EBE1;
+  --color-dark-secondary: #BBAFA5;
+  --color-dark-accent: #F07135;
+  
+  --color-dark-border: #3A2A20;
+  --color-dark-footer: #110D0B;
+  --color-dark-redwood: #D9453A;
+  --color-dark-success-bg: #1A4D2E;
+  --color-dark-code-bg: #281D16;
+  --color-dark-success-border: #1A4D2E;
+  --color-dark-success-text: #4ADE80;
+  --color-dark-suspense: #3A2210;
 }
 
 h1 {
@@ -53,14 +74,35 @@ h3 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-serif) !important;
   color: var(--color-charcoal);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: var(--color-dark-primary);
 }
 
 body {
   background-color: var(--color-parchment);
-  font-family: var(--font-sans);
+  font-family: var(--font-sans) !important;
   color: var(--color-charcoal);
+}
+
+.dark body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-primary);
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+.font-mono {
+  font-family: var(--font-mono) !important;
 }
 
 .hide-native-scrollbar {
@@ -229,4 +271,44 @@ footer a:focus img[src$=".svg"] {
 .hljs-deletion {
   color: #ffdcd7;
   background-color: #67060c;
+}
+
+/* Dark mode overrides for highlight.js */
+.dark .hljs {
+  color: var(--color-dark-secondary);
+  background: var(--color-dark-panel);
+}
+
+.dark .hljs-keyword,
+.dark .hljs-built_in,
+.dark .hljs-literal {
+  color: var(--color-dark-accent);
+}
+
+.dark .hljs-string {
+  color: #A8C7FA;
+}
+
+.dark .hljs-title.function_ {
+  color: #D2A8FF;
+}
+
+.dark .hljs-name,
+.dark .hljs-selector-tag {
+  color: #7EE787;
+}
+
+.dark .hljs-comment {
+  color: #8B949E;
+}
+
+.dark .hljs-addition {
+  background-color: transparent !important;
+  color: var(--color-dark-success-text) !important;
+}
+
+.dark .hljs-deletion {
+  background-color: transparent !important;
+  color: rgba(187, 175, 165, 0.5) !important;
+  text-decoration: line-through;
 }

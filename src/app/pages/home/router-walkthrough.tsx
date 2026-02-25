@@ -191,12 +191,12 @@ function ActiveConnection({
     <svg className="absolute inset-0 w-full h-full pointer-events-none z-50 overflow-hidden">
       <defs>
         <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#F17543" />
-          <stop offset="100%" stopColor="#F17543" />
+          <stop offset="0%" stopColor="var(--color-dark-accent)" className="stop-color-dark-accent" />
+          <stop offset="100%" stopColor="var(--color-dark-accent)" className="stop-color-dark-accent" />
         </linearGradient>
         <linearGradient id="line-gradient-vertical" gradientUnits="userSpaceOnUse" x1={sx} y1={sy} x2={ex} y2={ey}>
-          <stop offset="0%" stopColor="#F17543" />
-          <stop offset="100%" stopColor="#F17543" />
+          <stop offset="0%" stopColor="var(--color-dark-accent)" className="stop-color-dark-accent" />
+          <stop offset="100%" stopColor="var(--color-dark-accent)" className="stop-color-dark-accent" />
         </linearGradient>
         <filter id="glow">
           <feGaussianBlur stdDeviation="2" result="coloredBlur" />
@@ -229,7 +229,7 @@ function ActiveConnection({
             ? `M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`
             : `M ${ex + 8} ${ey - 6} L ${ex} ${ey} L ${ex + 8} ${ey + 6} Z`
         }}
-        fill="#F17543"
+        className="fill-dark-accent"
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
       />
     </svg>
@@ -250,15 +250,15 @@ export default function RouterWalkthrough() {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-16 items-center relative" ref={containerRef}>
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 items-center relative" ref={containerRef}>
         <ActiveConnection
           activeLine={step.focusLine}
           containerRef={containerRef}
           scrollRef={scrollContainerRef}
         />
         {/* Code Side */}
-        <div className="lg:col-span-1 relative w-full lg:w-[480px]">
-          <div className="relative bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-4 md:px-6 md:pt-6 md:pb-4 shadow-2xl overflow-hidden h-[480px] flex flex-col">
+        <div className="lg:col-span-1 relative w-full">
+          <div className="relative bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border rounded-[2.5rem] p-4 md:px-6 md:pt-6 md:pb-4 shadow-2xl overflow-hidden h-[480px] flex flex-col transition-colors duration-200">
             <div className="p-4 overflow-hidden grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
@@ -367,11 +367,11 @@ export default function RouterWalkthrough() {
                 }}
               </Highlight>
             </div>
-            <div className="flex justify-center items-center gap-6 py-4 shrink-0 bg-[#2b1810] relative z-10 border-t border-[#4a2b1f]">
+            <div className="flex justify-center items-center gap-6 py-4 shrink-0 bg-[#2b1810] dark:bg-dark-panel relative z-10 border-t border-[#4a2b1f] dark:border-dark-border transition-colors duration-200">
               <button
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0}
-                className="p-2 text-[#f27d26] hover:text-white disabled:opacity-30 disabled:hover:text-[#f27d26] transition-colors"
+                className="p-2 text-dark-accent hover:text-white dark:hover:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent dark:disabled:hover:text-dark-accent transition-colors"
                 aria-label="Previous step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -379,14 +379,14 @@ export default function RouterWalkthrough() {
                 </svg>
               </button>
 
-              <div className="font-mono text-xs tracking-widest text-[#f27d26] opacity-80">
+              <div className="font-mono text-xs tracking-widest text-dark-accent opacity-80">
                 {currentStep + 1} / {routerWalkthroughSteps.length}
               </div>
 
               <button
                 onClick={() => setCurrentStep(Math.min(routerWalkthroughSteps.length - 1, currentStep + 1))}
                 disabled={currentStep === routerWalkthroughSteps.length - 1}
-                className="p-2 text-[#f27d26] hover:text-white disabled:opacity-30 disabled:hover:text-[#f27d26] transition-colors"
+                className="p-2 text-dark-accent hover:text-white dark:hover:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent dark:disabled:hover:text-dark-accent transition-colors"
                 aria-label="Next step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -413,7 +413,7 @@ export default function RouterWalkthrough() {
                 <h3 className="font-serif text-3xl mb-4 font-medium">
                   <span>{step.title}</span>
                 </h3>
-                <p className="text-lg text-zinc-500 font-light leading-relaxed min-h-[80px]">
+                <p className="text-lg text-zinc-500 dark:text-dark-secondary font-light leading-relaxed min-h-[80px]">
                   {step.description}
                 </p>
               </motion.div>

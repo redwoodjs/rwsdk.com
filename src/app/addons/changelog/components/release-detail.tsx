@@ -37,7 +37,7 @@ export const ReleaseDetail = async ({ cacheKey }: { cacheKey: string }) => {
 
         <div
           dangerouslySetInnerHTML={{ __html: release.body }}
-          className="max-w-2xl prose"
+          className="max-w-2xl prose dark:prose-invert"
         />
       </div>
     </div>

@@ -15,7 +15,7 @@ function FooterLink({
     <li>
       <a
         href={href}
-        className={`hover:text-white transition-colors ${className || ""
+        className={`hover:text-dark-primary transition-colors ${className || ""
           }`}
       >
         {children}
@@ -26,14 +26,14 @@ function FooterLink({
 
 export function Footer() {
   return (
-    <footer className="bg-[#2b1810] border-t border-[#4a2b1f] text-white py-24 px-6">
+    <footer className="bg-[#2b1810] dark:bg-dark-panel border-t border-[#4a2b1f] dark:border-dark-border text-[#e8d5c4] dark:text-dark-primary py-24 px-6 transition-colors duration-200">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 md:gap-8">
           <div>
-            <h4 className="font-mono text-xs text-zinc-500 tracking-widest mb-8 uppercase">
+            <h4 className="font-mono text-xs text-dark-secondary tracking-widest mb-8 uppercase">
               About
             </h4>
-            <ul className="list-none text-sm text-zinc-400 font-light space-y-4">
+            <ul className="list-none text-sm text-dark-secondary font-light space-y-4">
               <FooterLink
                 href={link("/blog/:slug", {
                   slug: "why-cloudflare-unified-platform",
@@ -50,10 +50,10 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-mono text-xs text-zinc-500 tracking-widest mb-8 uppercase">
+            <h4 className="font-mono text-xs text-dark-secondary tracking-widest mb-8 uppercase">
               Resources
             </h4>
-            <ul className="list-none text-sm text-zinc-400 font-light space-y-4">
+            <ul className="list-none text-sm text-dark-secondary font-light space-y-4">
               <FooterLink href={Constants.QUICK_START_URL}>
                 Quick Start
               </FooterLink>
@@ -67,10 +67,10 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="font-mono text-xs text-zinc-500 tracking-widest mb-8 uppercase">
+            <h4 className="font-mono text-xs text-dark-secondary tracking-widest mb-8 uppercase">
               Social
             </h4>
-            <ul className="list-none text-sm text-zinc-400 font-light space-y-4">
+            <ul className="list-none text-sm text-dark-secondary font-light space-y-4">
               <FooterLink
                 href={Constants.GITHUB_REPO}
                 className="flex items-center"
@@ -103,10 +103,10 @@ export function Footer() {
               </FooterLink>
             </ul>
           </div>
-          <div className="md:col-span-1 text-xs text-zinc-500 leading-relaxed font-light">
+          <div className="md:col-span-1 text-xs text-dark-secondary leading-relaxed font-light">
             <p className="mb-6">
-              A simple framework <span className="text-[#d4b8a8] italic font-normal">for humans</span>. Server-first React with zero magic.
-              Built to stay understandable. RedwoodSDK begins as a Vite plugin
+              A simple framework <span className="text-dark-secondary italic font-normal transition-colors duration-200">for humans</span>. Server-first React, running on the Cloudflare platform.
+              Simple to build. Easy to maintain. RedwoodSDK begins as a Vite plugin
               that unlocks SSR, React Server Components, Server Functions, and
               realtime features. Its standards-based router, with support for
               middleware and interruptors, gives you fine-grained control over
@@ -114,7 +114,7 @@ export function Footer() {
               Workers, D1 (Database), R2 (Storage), Queues, AI, and full local
               emulation via Miniflare, development feels just like production.
             </p>
-            <p className="text-zinc-600 mt-6">
+            <p className="text-dark-secondary/60 mt-6">
               Copyright © 2026 RedwoodJS Inc. All rights reserved.
             </p>
           </div>
