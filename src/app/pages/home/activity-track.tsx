@@ -60,7 +60,7 @@ export default function ActivityTrack() {
         };
     }, []);
 
-    const { stats, viewportRange, actionEvent } = useActivityData(userId);
+    const { stats, activeViewports, viewportRange, actionEvent } = useActivityData(userId);
 
     // Calculate current user's active bin index, clamping it to the maximum bin
     const currentActiveBinIndex = Math.min(NUM_BINS - 1, Math.floor(viewportRange.bottom / BIN_SIZE));
@@ -103,7 +103,6 @@ export default function ActivityTrack() {
     // Safe destructuring of stats with fallbacks
     const scrollBins = stats?.scrollBins || {};
     const clickBins = stats?.clickBins || {};
-    const activeViewports = stats?.activeViewports || {};
 
     const totalGlobalScrolls = Object.values(scrollBins).reduce((acc: any, val: any) => acc + val, 0) as number;
     const totalGlobalClicks = Object.values(clickBins).reduce((acc: any, val: any) => acc + val, 0) as number;

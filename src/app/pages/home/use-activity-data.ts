@@ -5,22 +5,25 @@ import { useSyncedState } from "rwsdk/use-synced-state/client";
 export type GlobalActivityStats = {
   scrollBins: Record<number, number>;
   clickBins: Record<number, number>;
-  activeViewports: Record<string, number>;
 };
 
 const ACTIVITY_STATS_KEY = "global-activity-stats";
+const ACTIVITY_PRESENCE_KEY = "global-activity-presence";
 
 export function useActivityData(userId: string | null): { 
   stats: GlobalActivityStats;
+  activeViewports: Record<string, number>;
   viewportRange: { top: number; bottom: number };
   actionEvent: { id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number } | null;
 } {
   // Read global aggregates
   const [globalStats] = useSyncedState<GlobalActivityStats>({
     scrollBins: {},
-    clickBins: {},
-    activeViewports: {}
+    clickBins: {}
   }, ACTIVITY_STATS_KEY);
+
+  // Read presence
+  const [activeViewports] = useSyncedState<Record<string, number>>({}, ACTIVITY_PRESENCE_KEY);
 
   // Write individual stream
   const [_, setUserActivity] = useSyncedState<any>(null, `user-activity:${userId}`);
@@ -40,6 +43,10 @@ export function useActivityData(userId: string | null): {
   // Queues for batching events before sending to server
   const clickQueue = useRef<number[]>([]);
   const flushTimeoutId = useRef<any>(null);
+
+  // We debounce the actual scroll sync a bit so we don't bombard the server during fast scrolling
+  const scrollTimeoutId = useRef<any>(null);
+  const lastScrollPercent = useRef<number>(-1);
 
   useEffect(() => {
     if (!userId) return;
@@ -73,6 +80,12 @@ export function useActivityData(userId: string | null): {
         flushTimeoutId.current = setTimeout(() => flushActivity(), 1000);
     };
 
+    const flushScrollPresence = (percent: number) => {
+        if (Math.abs(lastScrollPercent.current - percent) < 1) return; // Don't flush if it's practically the same spot
+        lastScrollPercent.current = percent;
+        flushActivity(percent);
+    };
+
     // 1. Scroll tracking
     const handleScroll = () => {
        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
@@ -80,6 +93,12 @@ export function useActivityData(userId: string | null): {
        const bottomPercent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
        
        setViewportRange({ top: topPercent, bottom: bottomPercent });
+
+       // Debounce scroll for live presence marker updates (~200ms is a good "paused scroll" threshold)
+       if (scrollTimeoutId.current) clearTimeout(scrollTimeoutId.current);
+       scrollTimeoutId.current = setTimeout(() => {
+           flushScrollPresence(bottomPercent);
+       }, 200);
     };
 
     // Continuous heat logging while focused
@@ -119,14 +138,32 @@ export function useActivityData(userId: string | null): {
     // Initial position
     handleScroll();
 
+    // Instant disconnection handler (pagehide/visibilitychange/unmount)
+    const handleDisconnect = () => {
+        if (!userId) return;
+        setUserActivity({ ts: Date.now(), disconnected: true });
+    };
+
+    window.addEventListener("pagehide", handleDisconnect);
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === 'hidden') {
+            handleDisconnect();
+        }
+    });
+
     return () => {
        window.removeEventListener("scroll", handleScroll);
        document.removeEventListener("click", handleClick);
+       window.removeEventListener("pagehide", handleDisconnect);
        if (flushTimeoutId.current) clearTimeout(flushTimeoutId.current);
+       if (scrollTimeoutId.current) clearTimeout(scrollTimeoutId.current);
        clearInterval(heatInterval);
        clearInterval(heartbeatInterval);
+       
+       // Fire disconnect natively on React unmount
+       handleDisconnect();
     };
   }, [userId]);
 
-  return { stats: globalStats, viewportRange, actionEvent };
+  return { stats: globalStats, activeViewports, viewportRange, actionEvent };
 }

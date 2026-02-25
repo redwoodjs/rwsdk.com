@@ -18,6 +18,7 @@ import { env } from "cloudflare:workers";
 const GLOBAL_STATS_KEY = "global-stats";
 const PRESENCE_KEY = "global-presence";
 const ACTIVITY_STATS_KEY = "global-activity-stats";
+const ACTIVITY_PRESENCE_KEY = "global-activity-presence";
 
 type GlobalStats = {
   count: number;
@@ -34,9 +35,6 @@ type GlobalActivityStats = {
   // Bins representing percentage down the page (0-100)
   scrollBins: Record<number, number>;
   clickBins: Record<number, number>;
-
-  // High-frequency active users
-  activeViewports: Record<string, number>;
 };
 
 /**
@@ -82,15 +80,31 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     return super.fetch(request);
   }
 
+  private commitActivityStats(stats: GlobalActivityStats) {
+    super.setState({
+      scrollBins: { ...stats.scrollBins },
+      clickBins: { ...stats.clickBins }
+    }, ACTIVITY_STATS_KEY);
+  }
+
+  private commitActivityPresence(presence: Record<string, number>) {
+    super.setState({ ...presence }, ACTIVITY_PRESENCE_KEY);
+  }
+
   // Initialize empty activity stats if missing
   private getOrCreateActivityStats(): GlobalActivityStats {
     const existing = super.getState(ACTIVITY_STATS_KEY) as GlobalActivityStats | undefined;
     if (existing) return existing;
     return {
       scrollBins: {},
-      clickBins: {},
-      activeViewports: {}
+      clickBins: {}
     };
+  }
+
+  private getOrCreateActivityPresence(): Record<string, number> {
+    const existing = super.getState(ACTIVITY_PRESENCE_KEY) as Record<string, number> | undefined;
+    if (existing) return existing;
+    return {};
   }
 
   private recalculateActivityStats() {
@@ -114,7 +128,7 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
       }
     }
 
-    super.setState(stats, ACTIVITY_STATS_KEY);
+    this.commitActivityStats(stats);
   }
 
   private scheduleActivitySave() {
@@ -150,6 +164,8 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
       this.presenceMap.set(key, ts);
       const cutoff = Date.now() - 45_000;
       let active = 0;
+      let hasDeletions = false;
+      const presence = this.getOrCreateActivityPresence();
       for (const [pKey, seen] of this.presenceMap.entries()) {
         if (seen > cutoff) {
           active++;
@@ -157,13 +173,15 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
           // Cleanup stale active viewports
           const staleUserId = pKey.split(":")[1];
           if (staleUserId) {
-            const stats = this.getOrCreateActivityStats();
-            if (stats.activeViewports[staleUserId] !== undefined) {
-              delete stats.activeViewports[staleUserId];
-              super.setState(stats, ACTIVITY_STATS_KEY);
+            if (presence[staleUserId] !== undefined) {
+              delete presence[staleUserId];
+              hasDeletions = true;
             }
           }
         }
+      }
+      if (hasDeletions) {
+        this.commitActivityPresence(presence);
       }
       super.setState(active, PRESENCE_KEY);
     }
@@ -173,13 +191,21 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     if (!userId || !value || typeof value !== "object") return;
 
     const delta = value as any;
-    const stats = this.getOrCreateActivityStats();
     let updatedViewports = false;
     let updatedBuckets = false;
 
     if (typeof delta.scrollPercent === "number") {
-      stats.activeViewports[userId] = delta.scrollPercent;
+      const presence = this.getOrCreateActivityPresence();
+      presence[userId] = delta.scrollPercent;
+      this.commitActivityPresence(presence);
       updatedViewports = true;
+    } else if (delta.disconnected === true) {
+      const presence = this.getOrCreateActivityPresence();
+      if (presence[userId] !== undefined) {
+        delete presence[userId];
+        this.commitActivityPresence(presence);
+      }
+      return; // Stop processing stats logging if they just disconnected
     }
 
     const currentHourId = Math.floor(Date.now() / (1000 * 60 * 60));
@@ -209,8 +235,6 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     if (updatedBuckets) {
       this.recalculateActivityStats();
       this.scheduleActivitySave();
-    } else if (updatedViewports) {
-      super.setState(stats, ACTIVITY_STATS_KEY);
     }
   }
 
