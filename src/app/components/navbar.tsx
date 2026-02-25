@@ -74,7 +74,7 @@ export function Navbar(props: NavbarProps) {
       <div className="fixed md:sticky top-0 left-0 w-full z-[99]">
         <div
           id="main-navbar"
-          className="group flex flex-col md:flex-row justify-between bg-parchment dark:bg-dark-bg items-center max-w-7xl w-full mx-auto px-6 sm:px-8 border-b border-zinc-200/60 dark:border-dark-border shadow-none transition-colors duration-200"
+          className="group flex flex-col md:flex-row justify-between bg-parchment dark:bg-dark-bg items-center w-full px-6 sm:px-8 border-b border-zinc-200/60 dark:border-dark-border shadow-none transition-colors duration-200"
         >
           <ScrollMonitoring />
           <a
@@ -86,7 +86,6 @@ export function Navbar(props: NavbarProps) {
             <img src="/images/logo--dark.svg" alt="logo" className="w-[186px] hidden dark:block" />
           </a>
           <div id="main-navbar-links" className="flex flex-wrap md:flex-nowrap whitespace-nowrap items-center justify-center gap-4 md:gap-6 font-sans text-sm font-medium mt-4 md:mt-0">
-            <ThemeToggle initialTheme={theme} />
             {navItems.map((item) => (
               <NavLink key={item.label} href={item.href} label={item.label} />
             ))}
@@ -103,6 +102,7 @@ export function Navbar(props: NavbarProps) {
                 <GitHubStarWidget />
               </span>
             </div>
+            <ThemeToggle initialTheme={theme} />
           </div>
         </div>
       </div>
