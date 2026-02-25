@@ -9,8 +9,6 @@ ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/d4d284e4-8dfc-43c5-97
 tags: ["cloudflare", "platform", "unified-platform", "redwoodsdk"]
 ---
 
-# Why Cloudflare? The Case for a Unified Platform
-
 In a [previous post](https://rwsdk.com/blog/saas-is-just-vendor-lock-in-with-better-branding), I wrote about how modern SaaS is often just "vendor lock-in with better branding." Every time you bolt a "Best of Breed" service onto your stack, whether it's Auth, Queuing, or Storage, you pay a series of hidden taxes: Discovery, Sign-up, Integration, Local Dev setup, and Production taxes.
 
 When I took over RedwoodJS, I realized that for developers to be truly competitive, we have to stop paying these taxes. We need to move away from the "Service Soup" and toward a **Unified Platform**: a place where you no longer have to think about the framework or the infrastructure, so you can focus entirely on your code and the problem's it's trying to solve.

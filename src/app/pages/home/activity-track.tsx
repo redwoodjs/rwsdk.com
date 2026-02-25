@@ -2,6 +2,7 @@
 
 import { useActivityData } from "./use-activity-data";
 import { useState, useEffect } from "react";
+import { useSyncedState } from "rwsdk/use-synced-state/client";
 
 const getUserId = () => {
     if (typeof window === "undefined") return null;
@@ -18,6 +19,50 @@ const getUserId = () => {
 const NUM_BINS = 80;
 const BIN_SIZE = 100 / NUM_BINS;
 const BINS = Array.from({ length: NUM_BINS }, (_, i) => i);
+
+export function RealtimeCounter() {
+    const [userId, setUserId] = useState<string | null>(null);
+    const [count, setCount] = useSyncedState<number>(0, 'global-count');
+
+    useEffect(() => {
+        setUserId(getUserId());
+    }, []);
+
+    const handleIncrement = () => {
+        setCount(c => (c || 0) + 1);
+    };
+
+    return (
+        <div className="bg-[#2b1810] rounded-[2.5rem] p-8 md:p-10 flex flex-col items-center justify-between min-h-[450px] shadow-2xl relative border border-[#4a2b1f] w-full">
+            <div className="absolute top-8 left-8 right-8 flex items-center justify-between">
+                <div className="flex items-center gap-3 font-mono text-[10px] text-[#d4b8a8] tracking-widest">
+                    <div className="w-2 h-2 rounded-full bg-[#f27d26]"></div>
+                    YOUR SESSION: {userId ? `#${userId}` : '...'}
+                </div>
+                <div className="flex items-center gap-2 bg-green-950/30 text-green-400 px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
+                    LIVE
+                </div>
+            </div>
+
+            <div className="flex-1 flex flex-col items-center justify-center w-full mt-12">
+                <div className="min-w-32 h-36 px-8 border-[3px] border-[#e8d5c4]/20 rounded-[3rem] flex items-center justify-center mb-10 transition-transform active:scale-95 duration-150">
+                    <span className="text-[#e8d5c4] text-7xl font-light tabular-nums">{count || 0}</span>
+                </div>
+                <button
+                    onClick={handleIncrement}
+                    className="bg-[#e8d5c4] text-[#2b1810] font-medium px-10 py-4 rounded-xl hover:bg-white transition-all w-full max-w-[220px] text-sm active:scale-95"
+                >
+                    Increment
+                </button>
+            </div>
+
+            <div className="font-mono text-[10px] text-[#d4b8a8]/60 tracking-widest mt-10 uppercase text-center">
+                Syncing to Cloudflare KV
+            </div>
+        </div>
+    );
+}
 
 export default function ActivityTrack() {
     const [userId, setUserId] = useState<string | null>(null);
@@ -126,12 +171,12 @@ export default function ActivityTrack() {
     const reachableHeatData = heatData.slice(unreachableBins);
     const maxHeat = Math.max(1, ...reachableHeatData); // avoid div by zero
 
-    // Points normalized. X = 0 to 100 (percentage), Y = 0 to 1 (normalized heat factor)
     const pointsNormalized = reachableHeatData.map((heat, i) => {
         return {
             x: i * VISUAL_BIN_SIZE + (VISUAL_BIN_SIZE / 2),
             // Boost small blips, cap massive spikes so graph stays relatively "organic"
-            y: Math.pow(heat / maxHeat, 0.4)
+            // Multiply by 0.85 to make provision for the top edge so stroke/glow isn't cut off
+            y: Math.pow(heat / maxHeat, 0.4) * 0.85
         };
     });
 
@@ -198,74 +243,6 @@ export default function ActivityTrack() {
 
     return (
         <div>
-            {/* The Cards from zip App.tsx wrapped around live data */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                {/* Left Card */}
-                <div className="bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-10 flex flex-col items-center justify-between min-h-[450px] shadow-2xl relative">
-                    <div className="absolute top-8 left-8 flex items-center gap-3 font-mono text-[10px] text-[#d4b8a8] tracking-widest">
-                        <div className="w-2 h-2 rounded-full bg-[#f27d26]"></div>
-                        YOUR SESSION: {userId ? `#${userId}` : '...'}
-                    </div>
-
-                    <div className="flex-1 flex flex-col items-center justify-center w-full mt-12">
-                        <div className="w-28 h-36 border-[3px] border-[#e8d5c4]/20 rounded-[3rem] flex items-center justify-center mb-10">
-                            <span className="text-[#e8d5c4] text-7xl font-light">0</span>
-                        </div>
-                        <div className="text-[#d4b8a8] font-mono text-xs tracking-widest mb-8">YOUR CONTRIBUTIONS</div>
-                        <button className="bg-[#e8d5c4] text-[#2b1810] font-medium px-10 py-4 rounded-xl hover:bg-white transition-colors w-full max-w-[220px] text-sm">
-                            Increment
-                        </button>
-                    </div>
-
-                    <div className="font-mono text-[10px] text-[#d4b8a8]/60 tracking-widest mt-10">
-                        SYNCING TO GLOBAL DB VIA BINARY DELTA
-                    </div>
-                </div>
-
-                {/* Right Card */}
-                <div className="bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-10 flex flex-col min-h-[450px] shadow-2xl relative">
-                    <div className="flex justify-between items-start mb-16">
-                        <div className="font-mono text-[10px] text-[#d4b8a8] tracking-widest">
-                            COLLECTIVE ACTIVITY
-                        </div>
-                        <div className="flex items-center gap-2 bg-green-950/30 text-green-400 px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50">
-                            <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
-                            LIVE
-                        </div>
-                    </div>
-
-                    <div className="mb-auto">
-                        <div className="flex items-baseline gap-4">
-                            <span className="text-[#e8d5c4] text-6xl font-light tracking-tight">{totalGlobalScrolls + totalGlobalClicks}</span>
-                            <span className="text-[#d4b8a8] font-mono text-xs tracking-widest">INTERACTIONS</span>
-                        </div>
-                    </div>
-                    <div className="mt-16">
-                        {/* Chart */}
-                        <div className="h-36 w-full flex items-end mb-6 relative border-b-4 border-[#5c3a21]">
-                            {rawHeatData.map((val, idx) => (
-                                <div
-                                    key={idx}
-                                    className="flex-1 bg-[#f27d26] opacity-80 hover:opacity-100 transition-opacity border-t-[3px] border-[#f27d26]"
-                                    style={{
-                                        height: `${(val / globalMaxHeat) * 90}%`,
-                                        background: 'linear-gradient(to bottom, rgba(242, 125, 38, 0.4), rgba(242, 125, 38, 0.05))'
-                                    }}
-                                />
-                            ))}
-                        </div>
-                        <div className="flex justify-between items-end">
-                            <p className="text-[#d4b8a8] text-xs max-w-[220px] leading-relaxed font-light">
-                                Aggregated server-side from all connected client buckets.
-                            </p>
-                            <div className="text-right">
-                                <div className="text-[#d4b8a8] font-mono text-[10px] tracking-widest mb-1">ALL</div>
-                                <div className="text-[#d4b8a8] font-mono text-[10px] tracking-widest">TIME</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <div
                 className={`fixed right-0 left-0 bottom-0 w-full h-[60px] z-[100] flex flex-col justify-end transition-all duration-700 pointer-events-none ${showMinimap ? "opacity-100 translate-y-0" : "opacity-0 translate-y-full"}`}

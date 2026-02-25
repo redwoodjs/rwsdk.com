@@ -7,25 +7,24 @@ export default function Post({ post }: { post: BlogPost }) {
   return (
     <div className="w-full max-w-[800px] mx-auto px-4 py-8 overflow-x-hidden">
       <header className="mb-12">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 mb-4 leading-tight">
+        <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium text-zinc-900 mb-6 leading-tight">
           {post.title}
         </h1>
-        <div className="flex flex-row items-center gap-2 mb-8 font-mono text-xs sm:text-sm text-slate-600 uppercase">
+        <div className="flex flex-row items-center gap-2 mb-8 font-mono text-xs font-semibold text-[#f27d26] uppercase tracking-widest opacity-80">
           {post.author && (
-            <div className="flex items-center gap-2 text-slate-400">
-              <span>by</span>
+            <div className="flex items-center gap-2">
               {post.author.avatar && (
                 <CloudflareImage
                   imageId={post.author.avatar}
                   alt={post.author.name}
-                  className="w-6 h-6 rounded-sm object-cover [image-rendering:pixelated] grayscale"
+                  className="w-8 h-8 rounded-full object-cover [image-rendering:pixelated]"
                   loading="eager"
                 />
               )}
               <span>{post.author.name}</span>
             </div>
           )}
-          {post.author && <span>•</span>}
+          {post.author && <span className="opacity-50">&bull;</span>}
           <div>
             {new Date(post.date).toLocaleDateString("en-US", {
               year: "numeric",
@@ -39,7 +38,7 @@ export default function Post({ post }: { post: BlogPost }) {
             <CloudflareImage
               imageId={post.image}
               alt={post.title}
-              className="w-full h-auto"
+              className="w-full h-auto rounded-xl"
               loading="eager"
             />
           </div>

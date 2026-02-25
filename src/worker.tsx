@@ -11,6 +11,7 @@ import { changelogRoutes } from "src/addons/changelog/routes";
 import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/start/page";
 import Layout from "./app/components/layout";
+import { Talks } from "./app/pages/talks/page";
 
 import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
 import { env } from "cloudflare:workers";
@@ -298,6 +299,7 @@ export default defineApp([
       route("/", Home),
       route("/personal-software", PersonalSoftware),
       prefix("/blog", blogRoutes),
+      route("/talks", Talks),
     ]),
 
     route("/start", StartPage),

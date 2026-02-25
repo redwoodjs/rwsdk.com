@@ -7,10 +7,11 @@ import {
   Tile2_StreamingBridge,
   Tile3_ActionLoop,
 } from "./async-react-section";
-import ActivityTrack from "./activity-track";
+import ActivityTrack, { RealtimeCounter } from "./activity-track";
 import LatestBlogs from "./latest-blogs";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
+import { Countdown } from "./countdown";
 
 import { SEO } from "src/components/seo";
 
@@ -87,23 +88,8 @@ export default function Home() {
               <br />
               Simple to build. Easy to maintain.
             </p>
-            {/* Add a down arrow that shows the user they need to scroll */}
-            <div className="mt-20 flex justify-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="animate-subtle-bounce text-zinc-300"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
-            </div>
+            {/* Countdown section */}
+            <Countdown />
           </div>
         </div>
       </Section>
@@ -326,25 +312,56 @@ export default function Home() {
         <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">
           Realtime
         </h2>
-        <p className="text-xl text-zinc-500 mb-4 font-light leading-relaxed">
-          RedwoodSDK provides a unified state synchronization layer. Move beyond
-          complex WebSockets with a simple hook that synchronizes state across
-          all clients in real-time using a binary-packed protocol.
-        </p>
+        <div className="text-xl text-zinc-500 mb-12 font-light leading-relaxed space-y-6">
+          <p>
+            <code className="bg-black/5 text-zinc-800 px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60">useSyncedState</code> is a drop-in replacement for <code className="bg-black/5 text-zinc-800 px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60">useState</code> that synchronizes state across all connected clients in real-time.
+          </p>
+        </div>
+
+        {/* Drop-in replacement section */}
+        <div className="mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            {/* Left Box: Text and Code */}
+            <div className="flex flex-col">
+              <div className="bg-[#1e1c19] rounded-[1.5rem] overflow-hidden shadow-xl border border-[#2c2a26] mb-10">
+                <div className="flex items-center px-6 py-5">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-[#4a4744]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#4a4744]"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#4a4744]"></div>
+                  </div>
+                </div>
+
+                <div className="pb-8 pt-2 font-mono text-[13px] md:text-[15px] tracking-wide">
+                  <div className="flex px-6 md:px-10 py-3 items-center">
+                    <span className="text-[#f87171] w-8 select-none shrink-0 font-medium">-</span>
+                    <span className="text-[#84817a] line-through decoration-[#84817a]/80">const [count, setCount] = useState(0);</span>
+                  </div>
+                  <div className="flex bg-[#172a20] px-6 md:px-10 py-4 items-center">
+                    <span className="text-[#10b981] w-8 select-none shrink-0 font-medium">+</span>
+                    <span className="text-[#10b981]">
+                      const [count, setCount] = useSyncedState('global-count', 0);
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-lg md:text-xl text-zinc-500 font-light leading-relaxed mt-auto">
+                Transform any local state into a globally synchronized, bi-directional data stream. When you call <code className="bg-black/5 text-zinc-800 px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60">useSyncedState</code>, it persists the state on your server automatically. Your server can push data down to the clients, or the clients can push data up to the server—all without writing a single WebSocket handler.
+              </p>
+            </div>
+
+            {/* Right Box: Live Counter */}
+            <div className="flex">
+              <RealtimeCounter />
+            </div>
+          </div>
+        </div>
+
         <p className="italic text-zinc-400 mb-12 font-light">
-          Try it: Open this in multiple tabs to see how state is synced from
-          client &rarr; server &rarr; client.
+          Try it: The activity bar below shows multiple users interacting with our website and updates in real-time. Open this page in multiple tabs to see how state is synced from client &rarr; server &rarr; client.
         </p>
         <ActivityTrack />
-
-        <div className="mt-16 text-center">
-          <a
-            href="#"
-            className="font-mono text-xs text-zinc-400 tracking-widest hover:text-zinc-600 transition-colors uppercase border-b border-zinc-300 pb-1"
-          >
-            View Implementation
-          </a>
-        </div>
       </Section>
 
       <LatestBlogs />

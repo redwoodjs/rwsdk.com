@@ -46,6 +46,7 @@ export function Footer() {
               </FooterLink>
 
               <FooterLink href={link("/blog")}>Blog</FooterLink>
+              <FooterLink href={link("/talks")}>Media</FooterLink>
             </ul>
           </div>
           <div>

@@ -209,46 +209,29 @@ function ActiveConnection({
 
       {/* Curve */}
       <motion.path
-        d={path}
         stroke={side === 'left-swing' ? "url(#line-gradient-vertical)" : "url(#line-gradient)"}
         strokeWidth="2"
         strokeDasharray="6 4"
         fill="none"
         initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        animate={{ pathLength: 1, opacity: 1, d: path }}
         transition={{
           pathLength: { duration: 0.4, ease: "easeOut" },
-          opacity: { duration: 0.2 }
+          opacity: { duration: 0.2 },
+          d: { type: "spring", stiffness: 400, damping: 30 }
         }}
       />
 
       {/* Arrowhead at Code (Target) */}
-      {side === 'left-swing' ? (
-        // Pointing RIGHT (Target is approached from Left)
-        <motion.path
-          d={`M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`}
-          fill="#F17543"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.2 }}
-        />
-      ) : side === 'right' ? (
-        <motion.path
-          d={`M ${ex + 8} ${ey - 6} L ${ex} ${ey} L ${ex + 8} ${ey + 6} Z`}
-          fill="#F17543"
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.2 }}
-        />
-      ) : (
-        <motion.path
-          d={`M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`}
-          fill="#F17543"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3, duration: 0.2 }}
-        />
-      )}
+      <motion.path
+        animate={{
+          d: side === 'left-swing'
+            ? `M ${ex - 8} ${ey - 6} L ${ex} ${ey} L ${ex - 8} ${ey + 6} Z`
+            : `M ${ex + 8} ${ey - 6} L ${ex} ${ey} L ${ex + 8} ${ey + 6} Z`
+        }}
+        fill="#F17543"
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      />
     </svg>
   );
 }
@@ -269,15 +252,14 @@ export default function RouterWalkthrough() {
     <div className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-16 items-center relative" ref={containerRef}>
         <ActiveConnection
-          key={currentStep}
           activeLine={step.focusLine}
           containerRef={containerRef}
           scrollRef={scrollContainerRef}
         />
         {/* Code Side */}
-        <div className="lg:col-span-1 relative w-full">
-          <div className="relative bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-4 md:p-6 shadow-2xl overflow-hidden h-[440px] flex flex-col">
-            <div className="p-4 overflow-auto custom-scrollbar grow" ref={scrollContainerRef}>
+        <div className="lg:col-span-1 relative w-full lg:w-[480px]">
+          <div className="relative bg-[#2b1810] border border-[#4a2b1f] rounded-[2.5rem] p-4 md:px-6 md:pt-6 md:pb-4 shadow-2xl overflow-hidden h-[480px] flex flex-col">
+            <div className="p-4 overflow-hidden grow" ref={scrollContainerRef}>
               <Highlight
                 code={step.code}
                 language="tsx"
@@ -385,7 +367,7 @@ export default function RouterWalkthrough() {
                 }}
               </Highlight>
             </div>
-            <div className="flex justify-center items-center gap-6 py-6 shrink-0 bg-[#2b1810] relative z-10 border-t border-[#4a2b1f]">
+            <div className="flex justify-center items-center gap-6 py-4 shrink-0 bg-[#2b1810] relative z-10 border-t border-[#4a2b1f]">
               <button
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0}

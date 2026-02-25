@@ -17,48 +17,63 @@ export function Talks() {
             date: "Feb 2026",
             source: "Cloudflare TV",
             speaker: "Peter Pistorius",
+            url: "https://cloudflare.tv/",
         },
         {
             title: "RedwoodSDK: Web Standards Meet Full-Stack React",
             date: "Jan 2026",
             source: "React Conf 2025",
             speaker: "Peter Pistorius & Aurora Scharff",
+            youtubeUrl: "https://www.youtube.com/watch?v=react-conf-2025-peter",
+            url: "https://conf.react.dev/",
         },
         {
             title: "Interview with Peter Pistorius and Aurora Scharff",
             date: "Jan 2026",
             source: "React Conf 2025",
             speaker: "Peter Pistorius & Aurora Scharff",
+            youtubeUrl: "https://www.youtube.com/watch?v=react-conf-2025-interview",
+            url: "https://conf.react.dev/",
         },
         {
             title: "Peter Pistorius - Redwood SDK",
             date: "Jun 2025",
             source: "DevTools FM",
             speaker: "Peter Pistorius",
+            youtubeUrl: "https://www.youtube.com/watch?v=devtools-fm-87",
+            url: "https://www.devtools.fm/episode/87",
         },
         {
             title: "669: Peter Pistorius on Developing RedwoodSDK",
             date: "Jun 2025",
             source: "ShopTalk Show",
             speaker: "Peter Pistorius",
+            youtubeUrl: "https://www.youtube.com/watch?v=kY_4j_x_uRE",
+            url: "https://shoptalkshow.com/669/",
         },
         {
             title: "Fullstack Cloudflare with React and Vite (Redwood SDK)",
             date: "May 2025",
             source: "Syntax podcast",
             speaker: "Peter Pistorius",
+            youtubeUrl: "https://www.youtube.com/watch?v=syntax-902",
+            url: "https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk",
         },
         {
             title: "RedwoodSDK with Peter Pistorius",
             date: "May 2025",
             source: "PodRocket",
             speaker: "Peter Pistorius",
+            youtubeUrl: "https://www.youtube.com/watch?v=FjI5jY6pT3E",
+            url: "https://logrocket.com/podcasts/podrocket/redwoodsdk-peter-pistorius/",
         },
         {
             title: "Redwood Talk and Demo",
             date: "Apr 2020",
             source: "RedwoodJS",
             speaker: "Peter Pistorius",
+            youtubeUrl: "https://www.youtube.com/watch?v=ZT82h7tq2LY",
+            url: "https://redwoodjs.com/",
         }
     ];
 
@@ -86,29 +101,46 @@ export function Talks() {
                 </div>
 
                 <div className="space-y-6">
-                    {talks.map((talk, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-white border border-zinc-200/60 p-6 sm:p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
-                        >
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div>
-                                    <div className="flex items-center gap-3 mb-2">
-                                        <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#F47238]">
-                                            {talk.source}
-                                        </span>
-                                        <span className="text-zinc-600 text-sm">{talk.date}</span>
+                    {talks.map((talk, idx) => {
+                        const targetUrl = talk.youtubeUrl || talk.url;
+                        return (
+                            <a
+                                key={idx}
+                                href={targetUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block bg-[#fcfaf8] p-6 sm:p-8 rounded-3xl border border-transparent overflow-hidden relative transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-zinc-300/80 group"
+                            >
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#F47238]">
+                                                {talk.source}
+                                            </span>
+                                            <span className="text-zinc-500 text-xs font-mono uppercase tracking-widest opacity-80">{talk.date}</span>
+                                        </div>
+                                        <h3 className="text-xl md:text-2xl font-serif font-medium text-zinc-900 group-hover:text-[#F47238] transition-colors leading-tight mb-4">
+                                            {talk.title}
+                                        </h3>
+                                        <p className="text-zinc-500 font-light text-sm md:text-base">
+                                            By <span className="font-medium">{talk.speaker}</span>
+                                        </p>
                                     </div>
-                                    <h3 className="text-xl md:text-2xl font-serif font-medium text-zinc-900 leading-tight mb-2">
-                                        {talk.title}
-                                    </h3>
-                                    <p className="text-zinc-500 font-light mt-2 text-sm md:text-base">
-                                        By <span className="font-medium">{talk.speaker}</span>
-                                    </p>
+                                    <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-zinc-100 group-hover:bg-[#F47238]/10 text-zinc-400 group-hover:text-[#F47238] transition-colors">
+                                        {talk.youtubeUrl ? (
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M9.6,15.2V8.8l6.4,3.2L9.6,15.2z" />
+                                            </svg>
+                                        ) : (
+                                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
+                            </a>
+                        );
+                    })}
                 </div>
             </main>
         </div>

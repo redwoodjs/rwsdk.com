@@ -159,12 +159,12 @@ export const Citation = ({
       onFocus={handleInteract}
       onTouchStart={handleInteract}
     >
-      <span className="relative z-10 box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30 group-focus:bg-[#f27d26]/10 group-focus:border-b-2 group-focus:border-[#f27d26]/30">
+      <span className="relative z-10 group-hover:z-[100] group-focus:z-[100] box-decoration-clone px-0.5 transition-colors group-hover:bg-[#f27d26]/10 group-hover:border-b-2 group-hover:border-[#f27d26]/30 group-focus:bg-[#f27d26]/10 group-focus:border-b-2 group-focus:border-[#f27d26]/30">
         {children}
       </span>
       <span
         ref={avatarRef}
-        className="relative z-10 inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md select-none"
+        className="relative z-10 group-hover:z-[100] group-focus:z-[100] inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md select-none"
       >
         <img
           src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}

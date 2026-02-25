@@ -47,7 +47,7 @@ export default async function LatestBlogs() {
                                                 <CloudflareImage
                                                     imageId={blog.author.avatar}
                                                     alt={blog.author.name}
-                                                    className="w-5 h-5 rounded-full object-cover [image-rendering:pixelated] grayscale opacity-80"
+                                                    className="w-5 h-5 rounded-full object-cover [image-rendering:pixelated]"
                                                 />
                                             )}
                                             <span>{blog.author.name}</span>
