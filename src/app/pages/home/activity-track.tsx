@@ -1,7 +1,7 @@
 "use client";
 
 import { useActivityData } from "./use-activity-data";
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { useSyncedState } from "rwsdk/use-synced-state/client";
 
 const getUserId = () => {
@@ -23,13 +23,22 @@ const BINS = Array.from({ length: NUM_BINS }, (_, i) => i);
 export function RealtimeCounter() {
     const [userId, setUserId] = useState<string | null>(null);
     const [count, setCount] = useSyncedState<number>(0, 'global-count');
+    const [optimisticCount, setOptimisticCount] = useState<number | null>(null);
 
     useEffect(() => {
         setUserId(getUserId());
     }, []);
 
+    useEffect(() => {
+        setOptimisticCount(null);
+    }, [count]);
+
     const handleIncrement = () => {
-        setCount(c => (c || 0) + 1);
+        const nextValue = (optimisticCount !== null ? optimisticCount : (count || 0)) + 1;
+        setOptimisticCount(nextValue);
+        startTransition(() => {
+            setCount(c => (c || 0) + 1);
+        });
     };
 
     return (
@@ -47,7 +56,7 @@ export function RealtimeCounter() {
 
             <div className="flex-1 flex flex-col items-center justify-center w-full mt-12">
                 <div className="min-w-32 h-36 px-8 border-[3px] border-dark-primary/20 rounded-[3rem] flex items-center justify-center mb-10 transition-transform active:scale-95 duration-150">
-                    <span className="text-dark-primary text-7xl font-light tabular-nums">{count || 0}</span>
+                    <span className="text-dark-primary text-7xl font-light tabular-nums">{optimisticCount !== null ? optimisticCount : (count || 0)}</span>
                 </div>
                 <button
                     onClick={handleIncrement}
@@ -105,28 +114,22 @@ export default function ActivityTrack() {
         };
     }, []);
 
-    const { stats, activeViewports, viewportRange, actionEvent } = useActivityData(userId);
+    const { stats, activeViewports, viewportRange } = useActivityData(userId, (event) => {
+        startTransition(() => {
+            const actionBin = Math.min(NUM_BINS - 1, Math.floor(event.percent / BIN_SIZE));
+            const newParticle = { id: event.id, bin: actionBin, type: event.type };
+            setParticles(prev => [...prev, newParticle]);
+
+            setTimeout(() => {
+                startTransition(() => {
+                    setParticles(prev => prev.filter(p => p.id !== newParticle.id));
+                });
+            }, 600);
+        });
+    });
 
     // Calculate current user's active bin index, clamping it to the maximum bin
     const currentActiveBinIndex = Math.min(NUM_BINS - 1, Math.floor(viewportRange.bottom / BIN_SIZE));
-
-    // Fire particle animation whenever an action occurs
-    useEffect(() => {
-        if (!actionEvent) return;
-
-        // Force the animation and highlight to spawn exactly on the cell "You" are tracking
-        const actionBin = currentActiveBinIndex;
-
-        // Add particle immediately for heat (scroll pauses and clicks)
-        // This provides the visual beam overlay for the interaction
-        const newParticle = { id: actionEvent.id, bin: actionBin, type: actionEvent.type };
-        setParticles(prev => [...prev, newParticle]);
-
-        // Remove particle after animation completes (600ms)
-        setTimeout(() => {
-            setParticles(prev => prev.filter(p => p.id !== newParticle.id));
-        }, 600);
-    }, [actionEvent, currentActiveBinIndex]);
 
     const scrollToPercent = (percent: number) => {
         const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;

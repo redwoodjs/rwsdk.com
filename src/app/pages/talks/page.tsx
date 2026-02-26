@@ -24,15 +24,15 @@ export function Talks() {
             date: "Jan 2026",
             source: "React Conf 2025",
             speaker: "Peter Pistorius & Aurora Scharff",
-            youtubeUrl: "https://www.youtube.com/watch?v=react-conf-2025-peter",
+            youtubeUrl: "https://www.youtube.com/watch?v=WQUI--qe9x4",
             url: "https://conf.react.dev/",
         },
         {
-            title: "Interview with Peter Pistorius and Aurora Scharff",
+            title: "Interview: Peter Pistorius and Aurora Scharff",
             date: "Jan 2026",
             source: "React Conf 2025",
             speaker: "Peter Pistorius & Aurora Scharff",
-            youtubeUrl: "https://www.youtube.com/watch?v=react-conf-2025-interview",
+            youtubeUrl: "https://www.youtube.com/watch?v=edUaW2WKEc0",
             url: "https://conf.react.dev/",
         },
         {
@@ -54,26 +54,24 @@ export function Talks() {
         {
             title: "Fullstack Cloudflare with React and Vite (Redwood SDK)",
             date: "May 2025",
-            source: "Syntax podcast",
+            source: "Syntax.fm",
             speaker: "Peter Pistorius",
-            youtubeUrl: "https://www.youtube.com/watch?v=syntax-902",
             url: "https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk",
+        },
+        {
+            title: "Why Redwood's Cloudflare Pivot Matters for Devs",
+            date: "May 2025",
+            source: "PodRocket",
+            speaker: "Peter Pistorius",
+            url: "https://podcasts.apple.com/il/podcast/redwoodsdk-with-peter-pistorius/id1539945251?i=1000708590120",
         },
         {
             title: "RedwoodSDK with Peter Pistorius",
             date: "May 2025",
-            source: "PodRocket",
+            source: "ajcwebdev",
             speaker: "Peter Pistorius",
-            youtubeUrl: "https://www.youtube.com/watch?v=FjI5jY6pT3E",
-            url: "https://logrocket.com/podcasts/podrocket/redwoodsdk-peter-pistorius/",
-        },
-        {
-            title: "Redwood Talk and Demo",
-            date: "Apr 2020",
-            source: "RedwoodJS",
-            speaker: "Peter Pistorius",
-            youtubeUrl: "https://www.youtube.com/watch?v=ZT82h7tq2LY",
-            url: "https://redwoodjs.com/",
+            youtubeUrl: "https://www.youtube.com/watch?v=th3gcQSt6so",
+            url: "https://www.youtube.com/watch?v=th3gcQSt6so",
         }
     ];
 

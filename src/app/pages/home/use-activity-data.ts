@@ -10,11 +10,13 @@ export type GlobalActivityStats = {
 const ACTIVITY_STATS_KEY = "global-activity-stats";
 const ACTIVITY_PRESENCE_KEY = "global-activity-presence";
 
-export function useActivityData(userId: string | null): { 
+export function useActivityData(
+  userId: string | null,
+  onAction?: (event: { id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number }) => void
+): { 
   stats: GlobalActivityStats;
   activeViewports: Record<string, number>;
   viewportRange: { top: number; bottom: number };
-  actionEvent: { id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number } | null;
 } {
   // Read global aggregates
   const [globalStats] = useSyncedState<GlobalActivityStats>({
@@ -33,11 +35,10 @@ export function useActivityData(userId: string | null): {
 
   // Local state for immediate smooth rendering of the current user's viewport
   const [viewportRange, setViewportRange] = useState({ top: 0, bottom: 0 });
-  const [actionEvent, setActionEvent] = useState<{ id: number; type: 'heat' | 'click'; percent: number, clientX?: number, clientY?: number } | null>(null);
 
   // Trigger an animation event
   const fireEvent = (type: 'heat' | 'click', percent: number, clientX?: number, clientY?: number) => {
-      setActionEvent({ id: Date.now(), type, percent, clientX, clientY });
+      onAction?.({ id: Date.now(), type, percent, clientX, clientY });
   };
 
   // Queues for batching events before sending to server
@@ -165,5 +166,5 @@ export function useActivityData(userId: string | null): {
     };
   }, [userId]);
 
-  return { stats: globalStats, activeViewports, viewportRange, actionEvent };
+  return { stats: globalStats, activeViewports, viewportRange };
 }
