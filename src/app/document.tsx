@@ -1,5 +1,5 @@
 import { TurnstileScript } from "rwsdk/turnstile";
-import stylesUrl from "./styles.css?url";
+import stylesInline from "./styles.css?inline";
 import { requestInfo } from "rwsdk/worker";
 
 // CSP directives organized by type
@@ -81,8 +81,12 @@ export const Document: React.FC<{
         <meta name="author" content="RedwoodJS" />
         {/* Security */}
         <meta httpEquiv="Content-Security-Policy" content={cspContent} />
+        {/* Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" />
         {/* Styles and Scripts */}
-        <link rel="stylesheet" href={stylesUrl} />
+        <style dangerouslySetInnerHTML={{ __html: stylesInline }} />
         <link rel="modulepreload" href="/src/client.tsx" />
       </head>
       <body className="bg-parchment dark:bg-dark-bg text-charcoal dark:text-dark-primary font-sans transition-colors duration-200">

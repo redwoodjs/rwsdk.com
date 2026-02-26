@@ -110,13 +110,26 @@ function ActiveConnection({
         textY = (headerEl ? headerRect.top : descRect.top) - containerRect.top + (headerRect.height / 2);
       }
 
-      setCoords({
-        sx: textX,
-        sy: textY,
-        ex: codeX,
-        ey: codeY,
-        side: isStacked ? 'left-swing' : 'right',
-        containerLeft: 0
+      setCoords((prev) => {
+        const newSide = isStacked ? 'left-swing' : 'right';
+        if (
+          prev &&
+          prev.sx === textX &&
+          prev.sy === textY &&
+          prev.ex === codeX &&
+          prev.ey === codeY &&
+          prev.side === newSide
+        ) {
+          return prev;
+        }
+        return {
+          sx: textX,
+          sy: textY,
+          ex: codeX,
+          ey: codeY,
+          side: newSide,
+          containerLeft: 0
+        };
       });
     };
 

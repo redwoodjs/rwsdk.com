@@ -7,19 +7,13 @@ export function Countdown() {
     const targetDate = new Date("2026-03-07T15:00:00Z").getTime();
 
     const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
-    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        setIsMounted(true);
         const interval = setInterval(() => {
             setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
         return () => clearInterval(interval);
     }, [targetDate]);
-
-    if (!isMounted) {
-        return null; // Avoid hydration mismatch on first render
-    }
 
     return (
         <div className="mt-16 flex flex-col items-center justify-center animate-fade-in relative z-20">
@@ -28,22 +22,22 @@ export function Countdown() {
             </div>
             <div className="flex gap-4 sm:gap-6 text-[#f27d26] dark:text-dark-accent font-mono text-2xl sm:text-3xl md:text-4xl bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-2xl transition-colors duration-200">
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
-                    <span className="font-medium">{timeLeft.days.toString().padStart(2, '0')}</span>
+                    <span className="font-medium" suppressHydrationWarning>{timeLeft.days.toString().padStart(2, '0')}</span>
                     <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">DAYS</span>
                 </div>
                 <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
-                    <span className="font-medium">{timeLeft.hours.toString().padStart(2, '0')}</span>
+                    <span className="font-medium" suppressHydrationWarning>{timeLeft.hours.toString().padStart(2, '0')}</span>
                     <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">HRS</span>
                 </div>
                 <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
-                    <span className="font-medium">{timeLeft.minutes.toString().padStart(2, '0')}</span>
+                    <span className="font-medium" suppressHydrationWarning>{timeLeft.minutes.toString().padStart(2, '0')}</span>
                     <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">MIN</span>
                 </div>
                 <div className="text-[#4a2b1f] font-light mt-1 opacity-50">:</div>
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
-                    <span className="font-medium">{timeLeft.seconds.toString().padStart(2, '0')}</span>
+                    <span className="font-medium" suppressHydrationWarning>{timeLeft.seconds.toString().padStart(2, '0')}</span>
                     <span className="text-[0.65rem] md:text-xs text-[#d4b8a8] dark:text-dark-secondary mt-1 md:mt-2 opacity-70 tracking-widest">SEC</span>
                 </div>
             </div>

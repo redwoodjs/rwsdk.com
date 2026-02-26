@@ -89,10 +89,6 @@ export default function ActivityTrack() {
   useEffect(() => {
     setUserId(getUserId());
 
-    // Hide the scrollbar physically on html and body while on the homepage
-    document.documentElement.classList.add("hide-native-scrollbar");
-    document.body.classList.add("hide-native-scrollbar");
-
     const handleScroll = () => {
       setShowMinimap(window.scrollY > 200); // 200px down to clear the header
     };
@@ -115,8 +111,6 @@ export default function ActivityTrack() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateUnreachable);
-      document.documentElement.classList.remove("hide-native-scrollbar");
-      document.body.classList.remove("hide-native-scrollbar");
     };
   }, []);
 
