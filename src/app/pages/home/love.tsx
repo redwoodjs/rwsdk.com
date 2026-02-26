@@ -159,7 +159,7 @@ export const Citation = ({
       onFocus={handleInteract}
       onTouchStart={handleInteract}
     >
-      <span className="relative z-10 group-hover:z-[100] group-focus:z-[100] box-decoration-clone px-0.5 transition-colors group-hover:bg-dark-accent/10 group-hover:border-b-2 group-hover:border-dark-accent/30 group-focus:bg-dark-accent/10 group-focus:border-b-2 group-focus:border-dark-accent/30">
+      <span className="relative z-10 group-hover:z-[100] group-focus:z-[100] box-decoration-clone px-0.5 transition-colors border-b-2 border-transparent group-hover:bg-dark-accent/10 group-hover:border-b-2 group-hover:border-dark-accent/30 group-focus:bg-dark-accent/10 group-focus:border-b-2 group-focus:border-dark-accent/30">
         {children}
       </span>
       <span

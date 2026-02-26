@@ -28,8 +28,8 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
           data-name="Github Star"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
-          width="16.524"
-          height="15.715"
+          width="15"
+          height="14"
           viewBox="0 0 16.524 15.715"
           className="text-dark-accent"
         >

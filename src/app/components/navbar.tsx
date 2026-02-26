@@ -56,8 +56,8 @@ export function Navbar(props: NavbarProps) {
 
         @media (max-width: 767px) {
           #main-navbar {
-            padding-top: calc(2rem - (1rem * var(--scroll-progress, 0)));
-            padding-bottom: calc(1.5rem - (1rem * var(--scroll-progress, 0)));
+            padding-top: calc(1rem - (0.5rem * var(--scroll-progress, 0)));
+            padding-bottom: calc(1rem - (0.5rem * var(--scroll-progress, 0)));
           }
           #main-navbar-logo {
             max-height: calc(100px * (1 - var(--scroll-progress, 0)));
@@ -70,7 +70,7 @@ export function Navbar(props: NavbarProps) {
         }
       `}} />
       {/* Placeholder to prevent layout shift */}
-      <div className="h-[212px] md:h-auto w-full md:hidden" />
+      <div className="h-[140px] md:h-auto w-full md:hidden" />
       <div className="fixed md:sticky top-0 left-0 w-full z-[99]">
         <div
           id="main-navbar"

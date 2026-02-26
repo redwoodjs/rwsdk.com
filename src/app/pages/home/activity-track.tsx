@@ -256,9 +256,9 @@ export default function ActivityTrack() {
                     <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" preserveAspectRatio="none" viewBox="0 0 100 1">
                         <defs>
                             <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="rgba(255,255,255,0.15)" className="dark:stop-color-[rgba(244,235,225,0.15)]" />
-                                <stop offset="40%" stopColor="rgba(255,255,255,0.05)" className="dark:stop-color-[rgba(244,235,225,0.05)]" />
-                                <stop offset="100%" stopColor="rgba(0,0,0,0.6)" className="dark:stop-color-[rgba(10,10,10,0.8)]" />
+                                <stop offset="0%" stopColor="rgba(74,43,31,0.15)" className="dark:stop-color-[rgba(244,235,225,0.15)]" />
+                                <stop offset="40%" stopColor="rgba(74,43,31,0.05)" className="dark:stop-color-[rgba(244,235,225,0.05)]" />
+                                <stop offset="100%" stopColor="rgba(43,24,16,0.6)" className="dark:stop-color-[rgba(10,10,10,0.8)]" />
                             </linearGradient>
                         </defs>
 

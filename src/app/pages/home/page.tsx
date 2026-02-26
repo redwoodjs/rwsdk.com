@@ -61,7 +61,7 @@ export default function Home() {
       />
 
       {/* Hero section */}
-      <Section className="relative max-w-7xl mx-auto px-6 pt-32 pb-24 border-none !mt-0">
+      <Section className="relative max-w-7xl mx-auto px-6 pt-12 md:pt-32 pb-24 border-none !mt-0">
         <div className="relative z-10 flex flex-col items-center justify-center text-center">
           <div className="flex flex-col">
             <style
