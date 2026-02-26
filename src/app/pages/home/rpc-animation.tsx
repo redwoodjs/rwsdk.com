@@ -50,7 +50,7 @@ export default function RPCAnimation() {
                     Server Runtime
                 </div>
 
-                <div className="mt-6 font-mono text-[9px] leading-tight relative z-10 w-full px-4">
+                <div className="mt-6 font-mono text-[9px] leading-tight relative z-10 w-full px-4 text-left">
                     <Highlight code={CODE_SNIPPET} language="tsx" theme={rwsdkCodeTheme}>
                         {({ className, style, tokens, getLineProps, getTokenProps }) => (
                             <pre className={className} style={{ ...style, background: "transparent" }}>

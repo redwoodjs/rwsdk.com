@@ -333,7 +333,7 @@ export default function Home() {
                 </div>
 
                 <div className="pb-8 pt-2 font-mono text-[9px] md:text-[11px] tracking-wide">
-                  <div className="flex bg-red-950/40 px-4 md:px-6 py-3 items-start">
+                  <div className="flex bg-red-900/50 px-4 md:px-6 py-3 items-start">
                     <span className="text-[#f87171] w-6 select-none shrink-0 font-medium">-</span>
                     <span className="text-dark-secondary/70 line-through decoration-dark-secondary/50 break-all sm:break-normal">const [count, setCount] = useState(0);</span>
                   </div>
