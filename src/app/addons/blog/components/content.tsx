@@ -24,10 +24,18 @@ export default function Content({ content }: { content: string }) {
           });
           const style = document.createElement("style");
           style.textContent = `
-            :host { position:absolute; top:.5rem; right:.5rem }
-            button { font:inherit; padding:.25rem .5rem; border-radius:.375rem; border:1px solid currentColor; cursor:pointer }
+            :host { position:absolute; top:.75rem; right:.75rem; opacity:0; transition:opacity .2s }
+            button { font-family:'JetBrains Mono',monospace; font-size:11px; padding:.25rem .6rem; border-radius:6px; border:1px solid rgba(233,180,106,.25); background:rgba(13,13,13,.8); color:#E9B46A; cursor:pointer; transition:all .15s }
+            button:hover { background:rgba(233,180,106,.15); border-color:rgba(233,180,106,.5) }
           `;
           shadow.append(style, btn);
+        }
+        connectedCallback() {
+          const pre = this.parentElement;
+          if (pre) {
+            pre.addEventListener("mouseenter", () => (this.style.opacity = "1"));
+            pre.addEventListener("mouseleave", () => (this.style.opacity = "0"));
+          }
         }
       }
       customElements.define("copy-button", CopyButtonEl);
