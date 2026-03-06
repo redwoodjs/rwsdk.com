@@ -167,8 +167,10 @@ export const Citation = ({
         className="relative z-10 group-hover:z-[100] group-focus:z-[100] inline-flex items-center justify-center align-middle ml-2 -mt-1 w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border-2 border-white shadow-md select-none"
       >
         <img
-          src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}`}
+          src={`https://unavatar.io/${author.platform === 'x' ? 'twitter' : author.platform}/${author.handle}?size=144`}
           alt={author.name}
+          width={144}
+          height={144}
           className="w-full h-full object-cover rounded-full overflow-hidden"
           onError={(e) => {
             (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&background=random`;

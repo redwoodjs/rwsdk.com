@@ -82,8 +82,8 @@ export function Navbar(props: NavbarProps) {
             className="cursor-pointer mb-4 md:mb-0 overflow-hidden"
             href={link("/")}
           >
-            <img src="/images/logo--light.svg" alt="logo" className="w-[186px] dark:hidden" />
-            <img src="/images/logo--dark.svg" alt="logo" className="w-[186px] hidden dark:block" />
+            <img src="/images/logo--light.svg" alt="logo" width={186} height={29} className="w-[186px] dark:hidden" />
+            <img src="/images/logo--dark.svg" alt="logo" width={186} height={29} className="w-[186px] hidden dark:block" />
           </a>
           <div id="main-navbar-links" className="flex flex-wrap md:flex-nowrap whitespace-nowrap items-center justify-center gap-4 md:gap-6 font-sans text-sm font-medium mt-4 md:mt-0">
             {navItems.map((item) => (

@@ -81,10 +81,26 @@ export const Document: React.FC<{
         <meta name="author" content="RedwoodJS" />
         {/* Security */}
         <meta httpEquiv="Content-Security-Policy" content={cspContent} />
-        {/* Fonts */}
+        {/* Fonts — loaded async to avoid blocking FCP/LCP */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=optional" />
+        <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=optional"
+        />
+        <link
+          rel="stylesheet"
+          media="print"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=optional"
+          onLoad={(e) => { (e.currentTarget as HTMLLinkElement).media = "all"; }}
+        />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=optional"
+          />
+        </noscript>
         {/* Styles and Scripts */}
         <style dangerouslySetInnerHTML={{ __html: stylesInline }} />
         <link rel="modulepreload" href="/src/client.tsx" />
