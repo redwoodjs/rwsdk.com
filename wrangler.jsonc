@@ -27,8 +27,20 @@
 				{
 					"binding": "KV_ADDON_CHANGELOG",
 					"id": "c934e8cdc828424f8ccfbdd002fb9a7e"
+				},
+				{
+					"binding": "SYNCED_STATE_KV",
+					"id": "163207d5d49546718cbf4d22fa376916"
 				}
-			]
+			],
+			"durable_objects": {
+				"bindings": [
+					{
+						"name": "SYNCED_STATE",
+						"class_name": "ActivitySyncedStateServer"
+					}
+				]
+			}
 		}
 	},
 	"r2_buckets": [
