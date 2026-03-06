@@ -79,7 +79,6 @@ export function RealtimeCounter() {
 export default function ActivityTrack() {
   const [userId, setUserId] = useState<string | null>(null);
   const [showMinimap, setShowMinimap] = useState(false);
-  const [unreachableBins, setUnreachableBins] = useState(0);
 
   // Animation states
   const [particles, setParticles] = useState<
@@ -93,28 +92,16 @@ export default function ActivityTrack() {
       setShowMinimap(window.scrollY > 200); // 200px down to clear the header
     };
 
-    const updateUnreachable = () => {
-      const sh =
-        document.documentElement.scrollHeight || document.body.scrollHeight;
-      if (sh > 0) {
-        const minPct = (window.innerHeight / sh) * 100;
-        setUnreachableBins(Math.floor(minPct / BIN_SIZE));
-      }
-    };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", updateUnreachable);
     // Initial check
     handleScroll();
-    updateUnreachable();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateUnreachable);
     };
   }, []);
 
-  const { stats, activeViewports, viewportRange } = useActivityData(
+  const { stats, activeViewports, scrollPercent } = useActivityData(
     userId,
     (event) => {
       startTransition(() => {
@@ -137,26 +124,21 @@ export default function ActivityTrack() {
   // Calculate current user's active bin index, clamping it to the maximum bin
   const currentActiveBinIndex = Math.min(
     NUM_BINS - 1,
-    Math.floor(viewportRange.bottom / BIN_SIZE),
+    Math.floor(scrollPercent / BIN_SIZE),
   );
 
   const scrollToPercent = (percent: number) => {
     const scrollHeight =
       document.documentElement.scrollHeight || document.body.scrollHeight;
+    const contentHeight = scrollHeight - window.innerHeight;
+    if (contentHeight <= 0) return;
 
-    // Target the center of the bin to ensure the mathematics reliably floor to the correct active bin
+    // Target the center of the bin for reliable flooring to the correct bin
     const targetPercent = percent + BIN_SIZE / 2;
-    const targetY = (targetPercent / 100) * scrollHeight;
-
-    // The stored percentage corresponds to the BOTTOM of the viewport
-    const maxScroll = scrollHeight - window.innerHeight;
-    const clampedTop = Math.max(
-      0,
-      Math.min(targetY - window.innerHeight, maxScroll),
-    );
+    const targetY = (targetPercent / 100) * contentHeight;
 
     window.scrollTo({
-      top: clampedTop,
+      top: Math.max(0, Math.min(targetY, contentHeight)),
       behavior: "smooth",
     });
   };
@@ -186,16 +168,11 @@ export default function ActivityTrack() {
     return heat;
   });
 
-  const reachableBinsCount = NUM_BINS - unreachableBins;
-  const VISUAL_BIN_SIZE = 100 / Math.max(1, reachableBinsCount);
+  const maxHeat = Math.max(1, ...heatData); // avoid div by zero
 
-  // Slice off unreachable heat data for scaling properly
-  const reachableHeatData = heatData.slice(unreachableBins);
-  const maxHeat = Math.max(1, ...reachableHeatData); // avoid div by zero
-
-  const pointsNormalized = reachableHeatData.map((heat, i) => {
+  const pointsNormalized = heatData.map((heat, i) => {
     return {
-      x: i * VISUAL_BIN_SIZE + VISUAL_BIN_SIZE / 2,
+      x: i * BIN_SIZE + BIN_SIZE / 2,
       // Boost small blips, cap massive spikes so graph stays relatively "organic"
       // Multiply by 0.85 to make provision for the top edge so stroke/glow isn't cut off
       y: Math.pow(heat / maxHeat, 0.4) * 0.85,
@@ -238,21 +215,16 @@ export default function ActivityTrack() {
   const graphD = buildCatmullRomPath(pts, 0.4);
 
   // Calculate dynamic user coordinates along the X-axis for position markers
-  const userXPctRaw = viewportRange.bottom;
-  const userAbsoluteBinIndex = Math.min(
+  const userBinIndex = Math.min(
     NUM_BINS - 1,
-    Math.floor(userXPctRaw / BIN_SIZE),
+    Math.floor(scrollPercent / BIN_SIZE),
   );
-  const userVisualBinIndex = Math.max(
-    0,
-    userAbsoluteBinIndex - unreachableBins,
-  );
-  const userXPct = userVisualBinIndex * VISUAL_BIN_SIZE + VISUAL_BIN_SIZE / 2; // Center of the visual bin
+  const userXPct = userBinIndex * BIN_SIZE + BIN_SIZE / 2; // Center of the bin
 
   // Need to find exactly what percentage height our current bin corresponds to.
   const userBinBaseY = Math.max(
     0,
-    Math.min(1, pointsNormalized[userVisualBinIndex]?.y || 0),
+    Math.min(1, pointsNormalized[userBinIndex]?.y || 0),
   );
 
   // Y pixel = Max Height (60) - (Height * UserBinY)
@@ -342,9 +314,7 @@ export default function ActivityTrack() {
           {/* Beam Animation Layer for particles (clicks and pauses) */}
           <div className="absolute inset-0 z-[15] pointer-events-none">
             {particles.map((p, i) => {
-              if (p.bin < unreachableBins) return null;
-              const visualBinIndex = p.bin - unreachableBins;
-              const startPct = visualBinIndex * VISUAL_BIN_SIZE;
+              const startPct = p.bin * BIN_SIZE;
 
               const isClick = p.type === "click";
               // Clicks get the fiery orange beam, scrolls/pauses get a subtle white beam
@@ -358,7 +328,7 @@ export default function ActivityTrack() {
                   className={`absolute bottom-0 h-full bg-gradient-to-t ${gradientColor} to-transparent animate-[beamFade_0.6s_ease-out_forwards]`}
                   style={{
                     left: `${startPct}%`,
-                    width: `${VISUAL_BIN_SIZE}%`,
+                    width: `${BIN_SIZE}%`,
                   }}
                 />
               );
@@ -370,7 +340,7 @@ export default function ActivityTrack() {
             className="absolute inset-0 z-20 w-full h-full flex"
             title="Activity Track: Click to scroll"
           >
-            {BINS.slice(unreachableBins).map((binIndex) => {
+            {BINS.map((binIndex) => {
               const startPct = binIndex * BIN_SIZE;
               const heat = heatData[binIndex];
               return (
@@ -402,21 +372,15 @@ export default function ActivityTrack() {
             {Object.entries(activeViewports).map(([uid, viewportPercent]) => {
               if (uid === userId) return null; // Handled separately below
 
-              const otherAbsoluteBinIndex = Math.min(
+              const otherBinIndex = Math.min(
                 NUM_BINS - 1,
                 Math.floor(viewportPercent / BIN_SIZE),
               );
-              if (otherAbsoluteBinIndex < unreachableBins) return null;
-
-              const otherVisualBinIndex = Math.max(
-                0,
-                otherAbsoluteBinIndex - unreachableBins,
-              );
               const otherCenterX =
-                otherVisualBinIndex * VISUAL_BIN_SIZE + VISUAL_BIN_SIZE / 2;
+                otherBinIndex * BIN_SIZE + BIN_SIZE / 2;
               const otherBinY = Math.max(
                 0,
-                Math.min(1, pointsNormalized[otherVisualBinIndex]?.y || 0),
+                Math.min(1, pointsNormalized[otherBinIndex]?.y || 0),
               );
               const otherYPx = 60 - 60 * otherBinY;
 

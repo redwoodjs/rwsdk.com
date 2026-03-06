@@ -16,7 +16,7 @@ export function useActivityData(
 ): { 
   stats: GlobalActivityStats;
   activeViewports: Record<string, number>;
-  viewportRange: { top: number; bottom: number };
+  scrollPercent: number;
 } {
   // Read global aggregates
   const [globalStats] = useSyncedState<GlobalActivityStats>({
@@ -33,8 +33,8 @@ export function useActivityData(
   // Heartbeat for presence and expiration cleanup on the server
   const [__, setHeartbeat] = useSyncedState<any>(null, `user-presence-heartbeat:${userId}`);
 
-  // Local state for immediate smooth rendering of the current user's viewport
-  const [viewportRange, setViewportRange] = useState({ top: 0, bottom: 0 });
+  // Local state for immediate smooth rendering of the current user's scroll position
+  const [scrollPercent, setScrollPercent] = useState(0);
 
   // Trigger an animation event
   const fireEvent = (type: 'heat' | 'click', percent: number, clientX?: number, clientY?: number) => {
@@ -52,10 +52,14 @@ export function useActivityData(
   useEffect(() => {
     if (!userId) return;
 
-    // Helper to get relative percentage (0-100) down the document
-    const getPercent = (pageY: number) => {
-       const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-       return (pageY / scrollHeight) * 100;
+    // Helper to get normalized scroll percentage (0=top, 100=fully scrolled)
+    // Uses content height (scrollHeight - innerHeight) so the same content
+    // always maps to the same percentage regardless of viewport size.
+    const getNormalizedPercent = () => {
+       const sh = document.documentElement.scrollHeight || document.body.scrollHeight;
+       const contentHeight = sh - window.innerHeight;
+       if (contentHeight <= 0) return 0;
+       return Math.min(100, (window.scrollY / contentHeight) * 100);
     };
 
     // Helper to flush queues to the server
@@ -89,36 +93,30 @@ export function useActivityData(
 
     // 1. Scroll tracking
     const handleScroll = () => {
-       const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-       const topPercent = (window.scrollY / scrollHeight) * 100;
-       const bottomPercent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
+       const percent = getNormalizedPercent();
        
-       setViewportRange({ top: topPercent, bottom: bottomPercent });
+       setScrollPercent(percent);
 
        // Debounce scroll for live presence marker updates (~200ms is a good "paused scroll" threshold)
        if (scrollTimeoutId.current) clearTimeout(scrollTimeoutId.current);
        scrollTimeoutId.current = setTimeout(() => {
-           flushScrollPresence(bottomPercent);
+           flushScrollPresence(percent);
        }, 200);
     };
 
     // Continuous heat logging while focused
     const heatInterval = setInterval(() => {
         if (document.hasFocus()) {
-            const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-            const bottomPercent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
+            const percent = getNormalizedPercent();
             
-            flushActivity(bottomPercent);
-            fireEvent('heat', bottomPercent);
+            flushActivity(percent);
+            fireEvent('heat', percent);
         }
     }, 1000);
 
     // 2. Click tracking
     const handleClick = (e: MouseEvent) => {
-        // Instead of plotting the click on the absolute document percentage, 
-        // bind the heat exactly to the current "You" anchor (the bottom of the viewport)
-        const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-        const percent = ((window.scrollY + window.innerHeight) / scrollHeight) * 100;
+        const percent = getNormalizedPercent();
 
         fireEvent('click', percent, e.clientX, e.clientY);
         clickQueue.current.push(percent);
@@ -166,5 +164,5 @@ export function useActivityData(
     };
   }, [userId]);
 
-  return { stats: globalStats, activeViewports, viewportRange };
+  return { stats: globalStats, activeViewports, scrollPercent };
 }
