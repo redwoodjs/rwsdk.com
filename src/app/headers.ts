@@ -23,13 +23,13 @@ export const setCommonHeaders =
     );
     // Defines trusted sources for content loading and script execution:
     const baseCsp =
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com; " +
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com; " +
-      "connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://simpleanalyticscdn.com https://queue.simpleanalyticscdn.com; " +
+      "connect-src 'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/*; " +
       "frame-src https://ghbtns.com https://www.youtube.com https://youtube.com https://www.youtube.com/; " +
       "object-src 'none'; " +
-      "img-src 'self' data: https: https://queue.simpleanalyticscdn.com;";
+      "img-src 'self' data: https:";
 
       response.headers.set("Content-Security-Policy", baseCsp);
   };

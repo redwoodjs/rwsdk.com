@@ -5,15 +5,15 @@ import { requestInfo } from "rwsdk/worker";
 // CSP directives organized by type
 const cspDirectives = {
   "script-src":
-    "'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com https://scripts.simpleanalyticscdn.com",
+    "'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://static.cloudflareinsights.com https://kwesforms.com",
   "style-src": "'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src": "'self' https://fonts.gstatic.com",
   "connect-src":
-    "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/* https://simpleanalyticscdn.com https://queue.simpleanalyticscdn.com",
+    "'self' https://api.github.com https://kwesforms.com https://kwesforms.com/api/foreign/forms/*",
   "frame-src":
     "https://ghbtns.com https://www.youtube.com https://youtube.com https://www.youtube.com/",
   "object-src": "'none'",
-  "img-src": "'self' data: https: https://queue.simpleanalyticscdn.com",
+  "img-src": "'self' data: https:",
 };
 
 const cspContent = Object.entries(cspDirectives)
@@ -109,17 +109,7 @@ export const Document: React.FC<{
         />
         <div id="root">{children}</div>
         <script>import("/src/client.tsx")</script>
-        <script
-          async
-          src="https://scripts.simpleanalyticscdn.com/latest.js"
-        ></script>
-        <noscript>
-          <img
-            src="https://queue.simpleanalyticscdn.com/noscript.gif"
-            alt=""
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </noscript>
+
       </body>
     </html>
   );
