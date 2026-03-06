@@ -18,7 +18,7 @@ export function Countdown() {
     return (
         <div className="mt-16 flex flex-col items-center justify-center animate-fade-in relative z-20">
             <div className="font-mono text-sm tracking-widest mb-4 opacity-80 text-charcoal dark:text-dark-secondary">
-                v1.0 shipping on the 7th of March
+                v1.0 shipping on the 11th of March
             </div>
             <div className="flex gap-4 sm:gap-6 text-[#f27d26] dark:text-dark-accent font-mono text-2xl sm:text-3xl md:text-4xl bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border px-6 md:px-8 py-4 md:py-5 rounded-2xl shadow-2xl transition-colors duration-200">
                 <div className="flex flex-col items-center min-w-[3rem] md:min-w-[4rem]">
