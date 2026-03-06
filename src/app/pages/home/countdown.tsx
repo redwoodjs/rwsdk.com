@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Constants from "src/lib/Constants";
 
 export function Countdown() {
-    const targetDate = new Date("2026-03-07T15:00:00Z").getTime();
+    const targetDate = new Date("2026-03-11T15:00:00Z").getTime();
 
     const [timeLeft, setTimeLeft] = useState(() => calculateTimeLeft(targetDate));
 
