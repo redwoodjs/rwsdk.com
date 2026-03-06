@@ -38,7 +38,7 @@ export default function PersonalSoftware() {
         description="The joy of writing software, and the joy of using it - they should go hand in hand. We want to bring that joy back. Join us in the personal software revolution with RedwoodSDK."
         ogTitle="The Personal Software Revolution | RedwoodSDK"
         ogUrl="https://rwsdk.com/personal-software"
-        ogImage="https://rwsdk.com/images/PersonalSoftware-og.png"
+        ogImage="https://rwsdk.com/images/og-image.png"
         structuredData={structuredData}
       />
 

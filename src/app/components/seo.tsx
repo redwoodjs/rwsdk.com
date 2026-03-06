@@ -21,7 +21,7 @@ export function SEO({
   description,
   ogTitle,
   ogDescription,
-  ogImage = "https://rwsdk.com/images/Homepage-og.png",
+  ogImage = "https://rwsdk.com/images/og-image.png",
   ogImageAlt,
   ogUrl,
   ogType = "website",

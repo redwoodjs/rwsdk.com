@@ -340,7 +340,7 @@ export default function Home() {
                   <div className="flex bg-dark-success-bg px-4 md:px-6 py-4 items-start transition-colors duration-200">
                     <span className="text-dark-success-text w-6 select-none shrink-0 font-medium">+</span>
                     <span className="text-dark-success-text break-all sm:break-normal">
-                      const [count, setCount] = useSyncedState('global-count', 0);
+                      const [count, setCount] = useSyncedState(0, 'global-count');
                     </span>
                   </div>
                 </div>
