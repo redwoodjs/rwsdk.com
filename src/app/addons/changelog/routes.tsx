@@ -1,7 +1,7 @@
 import { route } from "rwsdk/router";
 
 import { fetchReleases } from "./githubApi";
-import { ReleaseDetail } from "./components/ReleaseDetail";
+import { ReleaseDetail } from "./components/release-detail";
 
 export const changelogRoutes = [
   route("/", async function () {

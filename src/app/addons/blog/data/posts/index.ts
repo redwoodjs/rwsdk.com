@@ -98,7 +98,15 @@ export async function getBlogPost(slug: BlogPostSlug) {
         throw new Error(`Blog post ${slug} not found`);
     }
     const content = module as string;
-    return parseFrontmatter(content);
+    const parsed = await parseFrontmatter(content);
+    
+    // Remove duplicate h1 title from markdown if it matches the frontmatter title
+    // Escape regex characters in title and allow leading whitespace
+    const escapedTitle = parsed.data.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const titleRegex = new RegExp(`^\\s*#\\s+${escapedTitle}\\s*\\n`, 'i');
+    parsed.content = parsed.content.replace(titleRegex, '');
+    
+    return parsed;
 }
 
 // Get all available blog post slugs

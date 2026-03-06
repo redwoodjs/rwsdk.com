@@ -1,7 +1,7 @@
 import { route, index } from "rwsdk/router";
 
-import  BlogList from "./pages/BlogList";
-import BlogPage from "./pages/BlogPage";
+import  BlogList from "./pages/blog-list";
+import BlogPage from "./pages/blog-page";
 import { notFound } from "src/utils/notFound";
 import { blogPostSlugs, getBlogPost } from "./data/posts";
 

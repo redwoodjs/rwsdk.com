@@ -27,6 +27,7 @@
     "@tailwindcss/vite": "^4.0.15",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^6.0.0",
+    "framer-motion": "^12.28.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "marked": "^15.0.8",
@@ -42,17 +43,18 @@
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.15.2",
     "@cloudflare/workers-types": "4.20251125.0",
+    "@mdx-js/rollup": "^3.1.0",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "~24.5.2",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "typescript": "5.8.3",
-    "vite": "7.2.4",
-    "wrangler": "4.50.0",
-    "@mdx-js/rollup": "^3.1.0",
-    "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.8.1",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.1.0",
-    "vibe-rules": "^0.2.31"
+    "typescript": "5.8.3",
+    "vibe-rules": "^0.2.31",
+    "vite": "7.2.4",
+    "wrangler": "4.50.0"
   },
   "engines": {
     "node": "22.19.0"
