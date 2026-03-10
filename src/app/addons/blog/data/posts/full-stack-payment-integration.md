@@ -4,11 +4,10 @@ description: "How RedwoodSDK simplifies integrating a payment gateway such as Pa
 date: "2025-05-08"
 author: 
   id: "herman"
-heroImage: "5e072198-1834-45c3-0c73-9e91c0854700"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6ac44b33-2e30-416d-703a-dd570d738d00/public"
 tags: ["redwoodsdk", "fullstack", "server components"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a pixelated credit card merging with code brackets, representing payment integration, muted dark plum-gray tones, halftone dots, dark background" -->
 # Full-Stack: RedwoodSDK and Paystack Payment Integration
 
 _Ever done a payment gateway integration? There’s a lot of back and forth between server and client. You could almost call it a **back-and-forth-end**!_
@@ -16,7 +15,6 @@ _Ever done a payment gateway integration? There’s a lot of back and forth betw
 In this very basic guide, I’ll walk through how you might do it using **RedwoodSDK** and [**Paystack**](https://paystack.com/).
 
 ---
-
 ## Traditional Payment Flow
 
 Integrating with a payment gateway the traditional way usually involves:
@@ -29,7 +27,6 @@ Integrating with a payment gateway the traditional way usually involves:
 This setup creates a disjointed workflow, requiring extra boilerplate just to bridge the frontend and backend.
 
 ---
-
 ## A Simpler Approach with RedwoodSDK
 
 With **RedwoodSDK**, a full-stack framework, this complexity is significantly reduced:
@@ -41,7 +38,6 @@ With **RedwoodSDK**, a full-stack framework, this complexity is significantly re
 Everything is handled in one unified project. You get the same separation of concerns, but without the logistical pain of separate deployments and services.
 
 ---
-
 ## Example: Basic Payment Flow with RedwoodSDK
 
 Here’s a minimal example of what this might look like in a RedwoodSDK setup.
@@ -89,7 +85,6 @@ export async function verifyPayment(reference: string) {
 > _Note how we do [DB queries](https://docs.rwsdk.com/core/database/), access [ENV vars](https://docs.rwsdk.com/core/env-vars/), and call secure APIs — all within RedwoodSDK._
 
 ---
-
 Now let’s see what the **client** is doing:
 
 ```tsx
@@ -128,7 +123,6 @@ export default function Subscribe() {
 ```
 
 ---
-
 ## Handling the Callback Route
 
 Let’s register the callback URL in our app:
@@ -204,7 +198,6 @@ export default subscribeRoutes;
 _Note how were are simply sending a valid Response, be it React or a Redirect. This could be done in many ways, but it shows how we think about Request/Response, how you could interrupt and return something else instead based on the outcome of a normal function, DB call and so on._
 
 ---
-
 ## Final Thoughts
 
 You get the **full power of the request/response cycle** with [RedwoodSDK's routing](https://docs.rwsdk.com/core/routing/), while keeping everything in one cohesive codebase.
@@ -212,5 +205,4 @@ You get the **full power of the request/response cycle** with [RedwoodSDK's rout
 Payment integration doesn’t have to be a mess of microservices. RedwoodSDK helps you build secure, full-stack features like this with minimal boilerplate.
 
 ---
-
 Happy building!

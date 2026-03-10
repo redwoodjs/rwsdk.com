@@ -1,6 +1,7 @@
 "use client";
 import { CloudflareImage } from "src/components/cloudflare-image";
 import { BlogPost } from "../data/posts/types";
+import GenerativeHero from "./generative-hero";
 import Content from "./content";
 
 export default function Post({ post }: { post: BlogPost }) {
@@ -33,16 +34,7 @@ export default function Post({ post }: { post: BlogPost }) {
             })}
           </div>
         </div>
-        {post.image && (
-          <div className="w-full mb-8">
-            <CloudflareImage
-              imageId={post.image}
-              alt={post.title}
-              className="w-full h-auto rounded-xl"
-              loading="eager"
-            />
-          </div>
-        )}
+        <GenerativeHero slug={post.slug} title={post.title} />
       </header>
 
       <Content content={post.content} />

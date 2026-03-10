@@ -2,6 +2,7 @@ import { CloudflareImage } from "src/components/cloudflare-image";
 import { blogPostSlugs, getBlogPost } from "../data/posts/index";
 import { link } from "src/shared/links";
 import { SEO } from "src/components/seo";
+import GenerativeHero from "../components/generative-hero";
 
 export default async function BlogList() {
   // Fetch and parse all blog posts
@@ -53,6 +54,7 @@ export default async function BlogList() {
                 className="flex flex-col h-full no-underline"
               >
                 <div className="flex flex-col">
+                  <GenerativeHero slug={topBlog.slug} title={topBlog.title} />
                   <div className="flex flex-row items-center gap-2 mb-6 text-dark-accent font-mono text-xs font-semibold uppercase tracking-widest opacity-80">
                     {topBlog.author && (
                       <div className="flex items-center gap-2">

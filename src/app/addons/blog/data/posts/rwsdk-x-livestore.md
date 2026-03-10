@@ -4,11 +4,10 @@ description: "Redwood is sponsoring LiveStore to build an adapter for Cloudflare
 date: "2025-05-29"
 author:
   id: "peter"
-heroImage: "7ec66c6d-50f9-4ca0-17ff-eb711cd68400"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/7ec66c6d-50f9-4ca0-17ff-eb711cd68400/public"
 tags: ["livestore"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting two pixelated hands shaking or puzzle pieces connecting, representing sponsorship and collaboration, muted dark olive-gray tones" -->
 # Redwood is sponsoring Johannes from LiveStore
 
 Following in the footsteps of Clerk’s [Open Source Fellowship](https://clerk.com/blog/zod-fellowship) program and their sponsorship of Zod, we’re thrilled to announce a sister project! We’ll be sponsoring [Johannes Schickling](https://x.com/schickling) from [LiveStore](https://livestore.dev/) to build an adapter for Cloudflare.

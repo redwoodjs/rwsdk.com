@@ -33,7 +33,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <div className="flex flex-col min-h-screen">
         <Post
           post={{
-            slug: data.slug,
+            slug: slug,
             title: data.title,
             description: data.description,
             date: data.date,

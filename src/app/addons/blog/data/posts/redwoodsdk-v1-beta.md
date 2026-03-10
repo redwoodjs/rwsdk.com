@@ -4,10 +4,10 @@ description: "We're excited to share that RedwoodSDK 1.0 Beta has officially lan
 date: "2025-10-08"
 author:
   id: "herman"
-heroImage: "dfe10477-7c62-4481-49f6-edd20aa03d00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/4b7a124b-6a74-4d9b-aade-b26871b30500/public"
 tags: ["redwoodsdk", "cloudflare", "v1.0.0", "beta"]
 ---
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a rocket launching from the edge of a pixelated planet into space, representing a major milestone beta release at the edge, muted dark navy-gray tones with subtle orange accent" -->
 # RedwoodSDK 1.0 Beta: A Major Milestone at the Edge 🚀
 
 We're excited to share that **RedwoodSDK 1.0 Beta** has officially

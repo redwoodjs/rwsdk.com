@@ -4,11 +4,10 @@ description: "Learn how to easily manage production and staging environments for
 date: "2025-04-10"
 author:
   id: "herman"
-heroImage: "077a4d25-89e1-46f4-6f62-71d8ee160500"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/a90bdff6-ef21-4dbf-93da-6c86e6844e00/public"
 tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting two parallel worlds or mirrored environments, one staging one production, separated by a pixelated dividing line with cloud symbols, muted dark blue-gray tones" -->
 # Managing Production and Staging Environments with RedwoodSDK and Cloudflare
 
 When building applications with RedwoodSDK, you'll often need to maintain separate environments for development, staging, and production. Cloudflare makes this process incredibly simple with their environment-based configuration system. In this guide, we'll walk through how to set up and manage different environments for your RedwoodSDK application.

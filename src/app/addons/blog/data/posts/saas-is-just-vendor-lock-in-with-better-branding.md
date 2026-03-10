@@ -4,11 +4,10 @@ description: "The pitch of modern SaaS is "don't reinvent the wheel." But every 
 date: "2025-06-06"
 author:
   id: "peter"
-heroImage: "6958b1db-b3b7-4073-21c6-dfb65e6b9000"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6958b1db-b3b7-4073-21c6-dfb65e6b9000/public"
 tags: ["saas", "vendor-lock-in", "platforms"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a golden cage with chains breaking open, representing escaping SaaS vendor lock-in, muted dark gray tones with subtle gold accents" -->
 # SaaS Is Just Vendor Lock-In with Better Branding
 
 Developers are told "to focus on the product" and let SaaS vendors handle the rest, but integrating third-party services, whether it's auth, queuing, file storage, or image optimization, comes at a cost. Not just in dollars but in time, friction, and mental overhead.

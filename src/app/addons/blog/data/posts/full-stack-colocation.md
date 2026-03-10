@@ -4,11 +4,10 @@ description: "RedwoodSDK let's you co-locate everything, it makes software easie
 date: "2025-05-09"
 author:
   id: "peter"
-heroImage: "465ce5ca-1241-470a-318c-9a316e155d00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/9efc82a2-2831-4e48-5fd2-238ba2adb000/public"
 tags: ["redwoodsdk", "react"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting stacked layers merging together into one unified block, representing full-stack colocation, muted warm gray-amber tones, geometric pixel grid, dark background" -->
 ## Full stack Co-location
 
 One of the ideas that React popularized was if two things always change together, they should live together. We call this co-location. It means putting your component, your logic, your styles, and your tests all in the same folder. And for many of us, this changed the way we thought about organizing code.
