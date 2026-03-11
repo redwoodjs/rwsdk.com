@@ -466,8 +466,8 @@ const TILE_SIZE = 46; // px
 const TREE_SCALE = 2;
 const TREE_GROUND_OFFSET = 6 * TREE_SCALE;
 
-// We use an 18-hex row pattern originally, now max 18 but wraps on small screens
-const MAX_ROW_SIZE = 18;
+// Fixed row size — consistent across all screen sizes
+const ROW_SIZE = 16;
 const MAX_VISIBLE_ROWS = 10;
 
 function FloorTile({
@@ -690,7 +690,7 @@ export default function RedwoodForest() {
     const [optimisticGrowth, setOptimisticGrowth] = useState<Record<string, number>>({});
 
     const containerRef = useRef<HTMLDivElement>(null);
-    const [rowSize, setRowSize] = useState(MAX_ROW_SIZE);
+    const rowSize = ROW_SIZE;
     const [isScrolling, setIsScrolling] = useState(false);
 
     // ── Scroll detection: hide background rows while scrolling ──
@@ -708,30 +708,7 @@ export default function RedwoodForest() {
         };
     }, []);
 
-    useEffect(() => {
-        let timeoutId: NodeJS.Timeout;
-        const obs = new ResizeObserver((entries) => {
-            if (!entries[0]) return;
-            const entry = entries[0];
-            
-            // Debounce to prevent React state update loops and ResizeObserver limits
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                const width = entry.contentRect.width;
-                // Subtract 40px for padding and buffer
-                const availableWidth = Math.max(0, width - 40);
-                const calculatedRowSize = Math.max(3, Math.floor(availableWidth / TILE_SIZE));
-                setRowSize(Math.min(calculatedRowSize, MAX_ROW_SIZE));
-            }, 50);
-        });
 
-        if (containerRef.current) obs.observe(containerRef.current);
-
-        return () => {
-            clearTimeout(timeoutId);
-            obs.disconnect();
-        };
-    }, []);
 
     // Compute all dynamic slots logic
     const allSlots = useMemo(() => {
