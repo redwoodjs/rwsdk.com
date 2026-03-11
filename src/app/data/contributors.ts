@@ -15,10 +15,10 @@ export type Contributor = {
 export const contributors: Contributor[] = [
   // Featured contributors
   { login: "mojombo", avatarUrl: "https://avatars.githubusercontent.com/u/1?v=4", profileUrl: "https://github.com/mojombo", contributions: 90, featured: true },
-  { login: "peterp", avatarUrl: "https://avatars.githubusercontent.com/u/44849?v=4", profileUrl: "https://github.com/peterp", contributions: 2453, featured: true },
-  { login: "cannikin", avatarUrl: "https://avatars.githubusercontent.com/u/300?v=4", profileUrl: "https://github.com/cannikin", contributions: 339, featured: true },
-  { login: "thedavidprice", avatarUrl: "https://avatars.githubusercontent.com/u/2951?v=4", profileUrl: "https://github.com/thedavidprice", contributions: 1077, featured: true },
   { login: "justinvdm", avatarUrl: "https://avatars.githubusercontent.com/u/1731223?v=4", profileUrl: "https://github.com/justinvdm", contributions: 882, featured: true },
+  { login: "peterp", avatarUrl: "https://avatars.githubusercontent.com/u/44849?v=4", profileUrl: "https://github.com/peterp", contributions: 2453, featured: true },
+  { login: "thedavidprice", avatarUrl: "https://avatars.githubusercontent.com/u/2951?v=4", profileUrl: "https://github.com/thedavidprice", contributions: 1077, featured: true },
+  { login: "cannikin", avatarUrl: "https://avatars.githubusercontent.com/u/300?v=4", profileUrl: "https://github.com/cannikin", contributions: 339, featured: true },
 
   // All other contributors (sorted by total contributions descending)
   { login: "Tobbe", avatarUrl: "https://avatars.githubusercontent.com/u/30793?v=4", profileUrl: "https://github.com/Tobbe", contributions: 1418 },

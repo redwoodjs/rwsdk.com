@@ -106,7 +106,7 @@ function generateTreeImage(seed: number, growth: number): string {
         maxExtraTiers = 3 + Math.floor(canopyVar * 4);
         baseCanopyW = 7 + canopyVar * 4;
         maxExtraCanopyW = 10 + canopyVar * 8;     // widest
-        canopyStart = 0.40 + canopyVar * 0.15;
+        canopyStart = 0.35 + canopyVar * 0.15;
     } else { // ancient
         baseHeight = 9 + heightVar * 5;
         maxExtraHeight = 24 + heightVar * 14;
@@ -116,7 +116,7 @@ function generateTreeImage(seed: number, growth: number): string {
         maxExtraTiers = 2 + Math.floor(canopyVar * 3);
         baseCanopyW = 6 + canopyVar * 3;
         maxExtraCanopyW = 8 + canopyVar * 6;
-        canopyStart = 0.50 + canopyVar * 0.15;
+        canopyStart = 0.45 + canopyVar * 0.2;
     }
 
     const leanDir = r() > 0.5 ? 1 : -1;
@@ -176,12 +176,12 @@ function generateTreeImage(seed: number, growth: number): string {
     const trunkTopY = groundY - trunkHeight;
     const trunkX = cx - Math.floor(trunkWidth / 2);
 
-    // Trunk with gentle taper (slightly wider at base)
+    // Trunk with slight taper (wider at base for large trees)
     for (let y = trunkTopY; y < groundY - (stage > 0.2 ? 3 : 0); y++) {
         const yP = (y - trunkTopY) / Math.max(1, trunkHeight);
         const lean = Math.floor(leanPx * yP);
-        // Subtle taper: gently wider at base, using a soft quadratic curve
-        const taper = stage > 0.3 ? Math.floor(yP * yP * stage * 2) : 0;
+        // Taper: slightly wider at base
+        const taper = stage > 0.4 ? Math.floor(yP * stage * 1.5) : 0;
         const tw = trunkWidth + taper;
         const tx = cx - Math.floor(tw / 2);
 
@@ -324,9 +324,8 @@ function generateTreeImage(seed: number, growth: number): string {
             ? Math.floor(3 + r() * 4 * stage)
             : Math.floor(1 + r() * 3 * stage);
         for (let b = 0; b < maxBranches; b++) {
-            // Branches in the upper exposed trunk zone (pushed higher)
-            const branchStart = canopyStart * 0.6;
-            const by = trunkTopY + Math.floor(trunkHeight * (branchStart + r() * (canopyStart - branchStart)));
+            // Branches in the exposed trunk zone
+            const by = trunkTopY + Math.floor(trunkHeight * (canopyStart * 0.3 + r() * canopyStart * 0.6));
             const dir = r() > 0.5 ? 1 : -1;
             const bLen = Math.floor(2 + r() * 3 * stage);
             const lean = Math.floor(leanPx * ((by - trunkTopY) / Math.max(1, trunkHeight)));
@@ -460,19 +459,15 @@ function FloorTile({
     isOwned,
     isGrowing,
     isBlocked,
-    onClick,
-    onHover,
+    hovered,
 }: {
     isActive: boolean;
     hasTree: boolean;
     isOwned: boolean;
     isGrowing: boolean;
     isBlocked: boolean;
-    onClick?: () => void;
-    onHover?: (hovering: boolean) => void;
+    hovered: boolean;
 }) {
-    const [hovered, setHovered] = useState(false);
-
     const isOtherUser = hasTree && !isOwned;
     const baseBg = isOwned
         ? "rgba(180, 160, 60, 0.25)"
@@ -487,32 +482,126 @@ function FloorTile({
                 ? "rgba(180, 50, 40, 0.3)"
                 : "rgba(120, 170, 60, 0.45)";
 
-    const cursor = isBlocked && hovered
-        ? 'not-allowed'
-        : isActive ? 'pointer' : 'default';
-
     return (
         <div
-            onClick={isBlocked ? undefined : onClick}
-            onMouseEnter={() => {
-                setHovered(true);
-                onHover?.(true);
-            }}
-            onMouseLeave={() => {
-                setHovered(false);
-                onHover?.(false);
-            }}
             style={{
                 width: '100%',
                 height: '100%',
                 backgroundColor: hovered ? hoverBg : baseBg,
                 clipPath: "polygon(50% 1%, 99% 26%, 99% 74%, 50% 99%, 1% 74%, 1% 26%)",
-                cursor,
                 transition: 'background-color 0.1s',
-                pointerEvents: 'all',
+                pointerEvents: 'none',
                 animation: isGrowing ? 'tileGrowPulse 2s ease-in-out infinite' : 'none',
             }}
         />
+    );
+}
+
+// ─── Cell wrapper (hover state lives here, full-square hit area) ─────────────
+
+function CellWithHover({
+    isFrontRow,
+    cellIsBlocked,
+    cellCursor,
+    tree,
+    absoluteSlot,
+    userId,
+    canPlant,
+    dynamicScale,
+    handleGrow,
+    handlePlant,
+    setHoveredTree,
+}: {
+    isFrontRow: boolean;
+    cellIsBlocked: boolean;
+    cellCursor: string;
+    tree: Tree | null;
+    absoluteSlot: number;
+    userId: string;
+    canPlant: boolean;
+    dynamicScale: number;
+    handleGrow: (slotIdx: number) => void;
+    handlePlant: (slotIdx: number) => void;
+    setHoveredTree: (tree: Tree | null) => void;
+}) {
+    const [hovered, setHovered] = useState(false);
+
+    return (
+        <div
+            style={{
+                position: "relative",
+                width: TILE_SIZE,
+                height: TILE_SIZE,
+                transformStyle: "preserve-3d",
+                pointerEvents: "none", // Let the dedicated hit-box handle interaction
+            }}
+        >
+            {isFrontRow && (
+                <div
+                    onClick={!cellIsBlocked ? () => {
+                        if (tree) handleGrow(absoluteSlot);
+                        else handlePlant(absoluteSlot);
+                    } : undefined}
+                    onMouseEnter={() => {
+                        setHovered(true);
+                        if (tree) setHoveredTree(tree);
+                    }}
+                    onMouseLeave={() => {
+                        setHovered(false);
+                        if (tree) setHoveredTree(null);
+                    }}
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        width: TILE_SIZE,
+                        height: TILE_SIZE,
+                        // Shift X to 0% (from center, so -50% + 0% = -50%)
+                        // Shift down 100% (from center, so -50% + 100% = +50%)
+                        transform: "translate(-50%, 50%) translateZ(30px)", // Adjusted offset iteratively
+                        pointerEvents: "auto",
+                        cursor: cellCursor,
+                    }}
+                />
+            )}
+
+            <FloorTile
+                isActive={isFrontRow}
+                hasTree={!!tree}
+                isOwned={!!tree && tree.plantedBy === userId}
+                isGrowing={isFrontRow && !!tree && tree.plantedBy === userId && tree.growth < MAX_GROWTH}
+                isBlocked={cellIsBlocked}
+                hovered={isFrontRow && hovered}
+            />
+
+            {tree && (
+                <div
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        bottom: "50%",
+                        transform: `translate(-50%, ${TREE_GROUND_OFFSET}px) rotateX(-60deg)`,
+                        transformOrigin: "bottom center",
+                        pointerEvents: "none",
+                    }}
+                >
+                    <div
+                        style={{
+                            animation: "treeAppear 0.4s ease-out",
+                            transformOrigin: "bottom center",
+                            transform: `scale(${dynamicScale})`,
+                            transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                        }}
+                    >
+                        <PixelTree
+                            tree={tree}
+                            scale={1}
+                            isToday={true}
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }
 
@@ -525,6 +614,9 @@ export default function RedwoodForest() {
     );
     const userId = useRef(getUserId());
     const [hoveredTree, setHoveredTree] = useState<Tree | null>(null);
+
+    // Optimistic growth: immediately reflect clicks before server round-trip
+    const [optimisticGrowth, setOptimisticGrowth] = useState<Record<string, number>>({});
 
     const containerRef = useRef<HTMLDivElement>(null);
     const [rowSize, setRowSize] = useState(MAX_ROW_SIZE);
@@ -570,9 +662,38 @@ export default function RedwoodForest() {
             lastRowStartIndex = slots.length - rowSize;
             lastRow = slots.slice(lastRowStartIndex);
         }
+
+        // Apply optimistic growth on top of synced state
+        for (const [slotStr, growth] of Object.entries(optimisticGrowth)) {
+            const slotIdx = Number(slotStr);
+            const tree = slots[slotIdx];
+            if (tree && tree.growth < growth) {
+                slots[slotIdx] = { ...tree, growth };
+            }
+        }
         
         return slots;
-    }, [forestState?.globalSlots, rowSize]);
+    }, [forestState?.globalSlots, rowSize, optimisticGrowth]);
+
+    // Clear optimistic entries once server state has caught up
+    useEffect(() => {
+        const serverSlots = forestState?.globalSlots || [];
+        setOptimisticGrowth((prev) => {
+            const next: Record<string, number> = {};
+            let changed = false;
+            for (const [slotStr, growth] of Object.entries(prev)) {
+                const slotIdx = Number(slotStr);
+                const serverTree = serverSlots[slotIdx];
+                if (!serverTree || serverTree.growth < growth) {
+                    // Server hasn't caught up yet, keep the optimistic entry
+                    next[slotStr] = growth;
+                } else {
+                    changed = true;
+                }
+            }
+            return changed ? next : prev;
+        });
+    }, [forestState?.globalSlots]);
 
     // ── Planting allowance: start with 2, +1 per fully grown tree ──
     const myTrees = useMemo(() => allSlots.filter((t): t is Tree => t !== null && t.plantedBy === userId.current), [allSlots]);
@@ -613,19 +734,28 @@ export default function RedwoodForest() {
 
     const handleGrow = useCallback(
         (slotIdx: number) => {
-             setForestState((prev) => {
+            // Optimistic update: reflect the growth instantly in the UI
+            const currentSlots = forestState?.globalSlots || [];
+            const tree = currentSlots[slotIdx];
+            if (!tree || tree.plantedBy !== userId.current) return;
+            const currentGrowth = optimisticGrowth[slotIdx] ?? tree.growth;
+            if (currentGrowth >= MAX_GROWTH) return;
+            const newGrowth = currentGrowth + 1;
+            setOptimisticGrowth((prev) => ({ ...prev, [slotIdx]: newGrowth }));
+
+            // Send to server (will also update local state when server echoes back)
+            setForestState((prev) => {
                 const current = prev ?? { globalSlots: [] };
                 const slots = [...current.globalSlots];
-                const tree = slots[slotIdx];
-                if (!tree || tree.growth >= MAX_GROWTH) return current;
-                // Only the planter can grow their own tree
-                if (tree.plantedBy !== userId.current) return current;
+                const serverTree = slots[slotIdx];
+                if (!serverTree || serverTree.growth >= MAX_GROWTH) return current;
+                if (serverTree.plantedBy !== userId.current) return current;
                 
-                slots[slotIdx] = { ...tree, growth: tree.growth + 1 };
+                slots[slotIdx] = { ...serverTree, growth: serverTree.growth + 1 };
                 return { ...current, globalSlots: slots };
-             });
+            });
         },
-        [setForestState]
+        [setForestState, forestState?.globalSlots, optimisticGrowth]
     );
 
     const totalCount = allSlots.filter((t) => t !== null).length;
@@ -726,6 +856,7 @@ export default function RedwoodForest() {
                         {Array.from({ length: visibleRowsCount }).map((_, i) => {
                             const absoluteRowIndex = startRowIndex + i;
                             const rowSlots = allSlots.slice(absoluteRowIndex * rowSize, (absoluteRowIndex + 1) * rowSize);
+                            const isFrontRow = i === visibleRowsCount - 1;
 
                             return (
                                 <div
@@ -741,62 +872,26 @@ export default function RedwoodForest() {
                                     {rowSlots.map((tree, col) => {
                                         const absoluteSlot = absoluteRowIndex * rowSize + col;
                                         const dynamicScale = tree ? 1 + (tree.growth / MAX_GROWTH) * 3 : 1;
+                                        const cellIsBlocked = isFrontRow && !tree && !canPlant;
+                                        const cellCursor = cellIsBlocked
+                                            ? 'not-allowed'
+                                            : isFrontRow ? 'pointer' : 'default';
 
                                         return (
-                                            <div
+                                            <CellWithHover
                                                 key={absoluteSlot}
-                                                style={{
-                                                    position: "relative",
-                                                    width: TILE_SIZE,
-                                                    height: TILE_SIZE,
-                                                    transformStyle: "preserve-3d",
-                                                }}
-                                            >
-                                                <FloorTile
-                                                    isActive={true}
-                                                    hasTree={!!tree}
-                                                    isOwned={!!tree && tree.plantedBy === userId.current}
-                                                    isGrowing={!!tree && tree.plantedBy === userId.current && tree.growth < MAX_GROWTH}
-                                                    isBlocked={!tree && !canPlant}
-                                                    onClick={() => {
-                                                        if (tree) handleGrow(absoluteSlot);
-                                                        else handlePlant(absoluteSlot);
-                                                    }}
-                                                    onHover={(hovering) => {
-                                                        if (tree && setHoveredTree) {
-                                                            setHoveredTree(hovering ? tree : null);
-                                                        }
-                                                    }}
-                                                />
-
-                                                {tree && (
-                                                    <div
-                                                        style={{
-                                                            position: "absolute",
-                                                            left: "50%",
-                                                            bottom: "50%",
-                                                            transform: `translate(-50%, ${TREE_GROUND_OFFSET}px) rotateX(-60deg)`,
-                                                            transformOrigin: "bottom center",
-                                                            pointerEvents: "none",
-                                                        }}
-                                                    >
-                                                        <div
-                                                            style={{
-                                                                animation: "treeAppear 0.4s ease-out",
-                                                                transformOrigin: "bottom center",
-                                                                transform: `scale(${dynamicScale})`,
-                                                                transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                                                            }}
-                                                        >
-                                                            <PixelTree
-                                                                tree={tree}
-                                                                scale={1}
-                                                                isToday={true}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
+                                                isFrontRow={isFrontRow}
+                                                cellIsBlocked={cellIsBlocked}
+                                                cellCursor={cellCursor}
+                                                tree={tree}
+                                                absoluteSlot={absoluteSlot}
+                                                userId={userId.current}
+                                                canPlant={canPlant}
+                                                dynamicScale={dynamicScale}
+                                                handleGrow={handleGrow}
+                                                handlePlant={handlePlant}
+                                                setHoveredTree={setHoveredTree}
+                                            />
                                         );
                                     })}
                                 </div>

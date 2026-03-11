@@ -68,4 +68,6 @@ RedwoodSDK is designed to stay out of your way so you can focus on the business,
 
 ---
 
+I want to make a special mention of **Justin van der Merwe**, who has tirelessly worked on RedwoodSDK and helped me define the principles that have resulted in something that feels so good. His dedication and craftsmanship are woven into the foundation of what RedwoodSDK is today.
+
 This is my journey. But there are hundreds more people that have [contributed to Redwood](/contributors). It's built by humans. And they all have their own journeys. I am deeply indebted to everyone that has worked with me in my life.
