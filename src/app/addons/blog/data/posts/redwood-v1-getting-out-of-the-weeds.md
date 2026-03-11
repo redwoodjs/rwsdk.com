@@ -58,11 +58,27 @@ We get so obsessed with the "how", the elegant plumbing, that we forget the "why
 
 When I got the opportunity to take over Redwood, I had to be honest about our constraints. With a smaller team and a tighter budget, we couldn't just keep iterating on the original, broad scale. I wanted to build something that reflected success, not just technical elegance.
 
-That is why we built **RedwoodSDK**:
+That is why Justin and I built **RedwoodSDK** around three design principles:
 
-- **Cloudflare Native:** It gives you the four things you actually need: storage, queues, a database, and compute. All of these are shippable with one command.
-- **Understandability:** In an AI-driven world, understandability is your only insurance.
-- **Sound Reasoning:** If your logic is sound and your pieces are traceable, an AI agent is an asset. If your stack is a mess of "nonsense glue," the agent just helps you build a bigger cage.
+### Without Magic
+
+RedwoodSDK avoids all hidden behavior. No code generation. No transpilation side effects. No special treatment of file names or exports. Only explicit import and export statements. Everything respects JavaScript's core contracts.
+
+If the runtime relies on convention instead of clarity, it breaks the language contract. With RedwoodSDK, what you write is what runs.
+
+### Composability Over Configuration
+
+RedwoodSDK gives you primitives, not policy. You build from functions, modules, and types — not opinionated wrappers or rigid folder structures. It prioritizes developer intent and encourages co-location of logic, UI, and infrastructure.
+
+You are in control. RedwoodSDK helps you build the software you want without getting in your way.
+
+### Web-First Architecture
+
+RedwoodSDK is built for the web as it exists today. It uses native Web APIs — fetch, Request, Response, URL — without wrapping them. If the platform already gives you a tool, we don't abstract it. We help you use it directly and idiomatically.
+
+---
+
+This philosophy drives every architectural decision in RedwoodSDK. By staying close to the platform, we reduce complexity, remove hidden behavior, and make code easier to understand and maintain. It's not just about writing software — it's about understanding the software you're writing.
 
 RedwoodSDK is designed to stay out of your way so you can focus on the business, not the weeds.
 

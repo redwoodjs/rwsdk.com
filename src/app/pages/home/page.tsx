@@ -370,6 +370,29 @@ export default function Home() {
         <ActivityTrack />
       </Section>
 
+      {/* Video */}
+      <Section className="max-w-5xl mx-auto px-6 pb-32">
+        <h2 className="font-serif text-4xl md:text-5xl mb-6 font-medium tracking-tight">
+          Marketing
+        </h2>
+        <p className="text-xl text-zinc-500 dark:text-dark-secondary mb-10 font-light leading-relaxed">
+          And if you're not convinced by our technical chops, perhaps you'd be convinced by our marketing.
+        </p>
+        <div className="rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border bg-black">
+          <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/spXKty76Ow4?si=qlB88HN00o60WVGO"
+              title="RedwoodSDK"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </Section>
+
       <LatestBlogs />
     </div>
   );

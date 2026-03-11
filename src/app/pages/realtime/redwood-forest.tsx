@@ -691,6 +691,22 @@ export default function RedwoodForest() {
 
     const containerRef = useRef<HTMLDivElement>(null);
     const [rowSize, setRowSize] = useState(MAX_ROW_SIZE);
+    const [isScrolling, setIsScrolling] = useState(false);
+
+    // ── Scroll detection: hide background rows while scrolling ──
+    useEffect(() => {
+        let scrollTimeout: NodeJS.Timeout;
+        const onScroll = () => {
+            setIsScrolling(true);
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => setIsScrolling(false), 150);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => {
+            clearTimeout(scrollTimeout);
+            window.removeEventListener("scroll", onScroll);
+        };
+    }, []);
 
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
@@ -889,7 +905,12 @@ export default function RedwoodForest() {
             <div
                 ref={containerRef}
                 className="relative w-full max-w-full overflow-hidden bg-gradient-to-b from-[#7CB9D8] via-[#B8D4E3] via-60% to-[#8aad5a] dark:from-[#1a1a2e] dark:via-[#1e2d3d] dark:via-60% dark:to-[#1e3510]"
-                style={{ minHeight: "380px" }}
+                style={{
+                    minHeight: "380px",
+                    contain: "content",
+                    contentVisibility: "auto",
+                    containIntrinsicSize: "auto 380px",
+                } as React.CSSProperties}
             >
                 {/* Fog overlay */}
                 <div
@@ -906,10 +927,6 @@ export default function RedwoodForest() {
                 </div>
 
                 {/* Rows Grid */}
-                {/* 
-                  * To stick to the bottom without clipping the top arrays due to `justify-end`, 
-                  * we can use justify-end but pad out the height safely inside a responsive container. 
-                  */}
                 <div
                     className="flex flex-col items-center justify-end px-4 pt-16 pb-4 relative z-10"
                     style={{ minHeight: "380px" }}
@@ -938,6 +955,7 @@ export default function RedwoodForest() {
                                         marginTop: i > 0 ? -Math.floor(TILE_SIZE / 4) : 0,
                                         // Fixed: applying opacity or zIndex breaks 'preserve-3d' and visually flattens children 
                                         transformStyle: "preserve-3d",
+                                        visibility: isScrolling && !isFrontRow ? "hidden" : "visible",
                                     }}
                                 >
                                     {rowSlots.map((tree, col) => {
