@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, memo } from "react";
 import { useSyncedState } from "rwsdk/use-synced-state/client";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -397,20 +397,36 @@ function getTreeImage(seed: number, growth: number): string {
 
 // ─── PixelTree component ─────────────────────────────────────────────────────
 
-function PixelTree({
+const PixelTree = memo(function PixelTree({
     tree,
     scale = 1,
     isToday,
+    lazy = false,
 }: {
     tree: Tree;
     scale?: number;
     isToday: boolean;
+    lazy?: boolean;
 }) {
     const [src, setSrc] = useState<string | null>(null);
 
     useEffect(() => {
-        setSrc(getTreeImage(tree.seed, tree.growth));
-    }, [tree.seed, tree.growth]);
+        if (!lazy) {
+            setSrc(getTreeImage(tree.seed, tree.growth));
+            return;
+        }
+        // Defer image generation for background trees to idle time
+        if (typeof requestIdleCallback !== "undefined") {
+            const id = requestIdleCallback(() => {
+                setSrc(getTreeImage(tree.seed, tree.growth));
+            });
+            return () => cancelIdleCallback(id);
+        }
+        const timeout = setTimeout(() => {
+            setSrc(getTreeImage(tree.seed, tree.growth));
+        }, 100);
+        return () => clearTimeout(timeout);
+    }, [tree.seed, tree.growth, lazy]);
 
     if (!src) return null;
 
@@ -425,6 +441,7 @@ function PixelTree({
             height={displayH}
             draggable={false}
             className="select-none"
+            loading={lazy ? "lazy" : undefined}
             style={{
                 imageRendering: "pixelated",
                 display: "block",
@@ -438,7 +455,7 @@ function PixelTree({
             }
         />
     );
-}
+});
 
 // ─── Grid Constants ──────────────────────────────────────────────────────────
 
@@ -497,10 +514,69 @@ function FloorTile({
     );
 }
 
+// ─── Lightweight background cell (no hover, no click, no state) ──────────────
+
+const BackgroundCell = memo(function BackgroundCell({
+    tree,
+    userId,
+    dynamicScale,
+}: {
+    tree: Tree | null;
+    userId: string;
+    dynamicScale: number;
+}) {
+    return (
+        <div
+            style={{
+                position: "relative",
+                width: TILE_SIZE,
+                height: TILE_SIZE,
+                transformStyle: "preserve-3d",
+                pointerEvents: "none",
+            }}
+        >
+            <FloorTile
+                isActive={false}
+                hasTree={!!tree}
+                isOwned={!!tree && tree.plantedBy === userId}
+                isGrowing={false}
+                isBlocked={false}
+                hovered={false}
+            />
+
+            {tree && (
+                <div
+                    style={{
+                        position: "absolute",
+                        left: "50%",
+                        bottom: "50%",
+                        transform: `translate(-50%, ${TREE_GROUND_OFFSET}px) rotateX(-60deg)`,
+                        transformOrigin: "bottom center",
+                        pointerEvents: "none",
+                    }}
+                >
+                    <div
+                        style={{
+                            transformOrigin: "bottom center",
+                            transform: `scale(${dynamicScale})`,
+                        }}
+                    >
+                        <PixelTree
+                            tree={tree}
+                            scale={1}
+                            isToday={false}
+                            lazy
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+});
+
 // ─── Cell wrapper (hover state lives here, full-square hit area) ─────────────
 
-function CellWithHover({
-    isFrontRow,
+const CellWithHover = memo(function CellWithHover({
     cellIsBlocked,
     cellCursor,
     tree,
@@ -512,7 +588,6 @@ function CellWithHover({
     handlePlant,
     setHoveredTree,
 }: {
-    isFrontRow: boolean;
     cellIsBlocked: boolean;
     cellCursor: string;
     tree: Tree | null;
@@ -533,45 +608,41 @@ function CellWithHover({
                 width: TILE_SIZE,
                 height: TILE_SIZE,
                 transformStyle: "preserve-3d",
-                pointerEvents: "none", // Let the dedicated hit-box handle interaction
+                pointerEvents: "none",
             }}
         >
-            {isFrontRow && (
-                <div
-                    onClick={!cellIsBlocked ? () => {
-                        if (tree) handleGrow(absoluteSlot);
-                        else handlePlant(absoluteSlot);
-                    } : undefined}
-                    onMouseEnter={() => {
-                        setHovered(true);
-                        if (tree) setHoveredTree(tree);
-                    }}
-                    onMouseLeave={() => {
-                        setHovered(false);
-                        if (tree) setHoveredTree(null);
-                    }}
-                    style={{
-                        position: "absolute",
-                        left: "50%",
-                        top: "50%",
-                        width: TILE_SIZE,
-                        height: TILE_SIZE,
-                        // Shift X to 0% (from center, so -50% + 0% = -50%)
-                        // Shift down 100% (from center, so -50% + 100% = +50%)
-                        transform: "translate(-50%, 50%) translateZ(30px)", // Adjusted offset iteratively
-                        pointerEvents: "auto",
-                        cursor: cellCursor,
-                    }}
-                />
-            )}
+            <div
+                onClick={!cellIsBlocked ? () => {
+                    if (tree) handleGrow(absoluteSlot);
+                    else handlePlant(absoluteSlot);
+                } : undefined}
+                onMouseEnter={() => {
+                    setHovered(true);
+                    if (tree) setHoveredTree(tree);
+                }}
+                onMouseLeave={() => {
+                    setHovered(false);
+                    if (tree) setHoveredTree(null);
+                }}
+                style={{
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    width: TILE_SIZE,
+                    height: TILE_SIZE,
+                    transform: "translate(-50%, 50%) translateZ(30px)",
+                    pointerEvents: "auto",
+                    cursor: cellCursor,
+                }}
+            />
 
             <FloorTile
-                isActive={isFrontRow}
+                isActive={true}
                 hasTree={!!tree}
                 isOwned={!!tree && tree.plantedBy === userId}
-                isGrowing={isFrontRow && !!tree && tree.plantedBy === userId && tree.growth < MAX_GROWTH}
+                isGrowing={!!tree && tree.plantedBy === userId && tree.growth < MAX_GROWTH}
                 isBlocked={cellIsBlocked}
-                hovered={isFrontRow && hovered}
+                hovered={hovered}
             />
 
             {tree && (
@@ -603,7 +674,7 @@ function CellWithHover({
             )}
         </div>
     );
-}
+});
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
@@ -760,9 +831,9 @@ export default function RedwoodForest() {
 
     const totalCount = allSlots.filter((t) => t !== null).length;
     const maxRows = allSlots.length / rowSize;
-    // Render all rows to prevent wrapped items from 'disappearing' outside the rendering bounds
-    const startRowIndex = 0;
-    const visibleRowsCount = maxRows;
+    // Cap rendered rows to prevent rendering dozens of off-screen background rows
+    const visibleRowsCount = Math.min(maxRows, MAX_VISIBLE_ROWS);
+    const startRowIndex = Math.max(0, maxRows - visibleRowsCount);
 
     return (
         <div className="relative w-full min-w-0 max-w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200 isolate z-0">
@@ -872,15 +943,26 @@ export default function RedwoodForest() {
                                     {rowSlots.map((tree, col) => {
                                         const absoluteSlot = absoluteRowIndex * rowSize + col;
                                         const dynamicScale = tree ? 1 + (tree.growth / MAX_GROWTH) * 3 : 1;
-                                        const cellIsBlocked = isFrontRow && !tree && !canPlant;
+
+                                        if (!isFrontRow) {
+                                            return (
+                                                <BackgroundCell
+                                                    key={absoluteSlot}
+                                                    tree={tree}
+                                                    userId={userId.current}
+                                                    dynamicScale={dynamicScale}
+                                                />
+                                            );
+                                        }
+
+                                        const cellIsBlocked = !tree && !canPlant;
                                         const cellCursor = cellIsBlocked
                                             ? 'not-allowed'
-                                            : isFrontRow ? 'pointer' : 'default';
+                                            : 'pointer';
 
                                         return (
                                             <CellWithHover
                                                 key={absoluteSlot}
-                                                isFrontRow={isFrontRow}
                                                 cellIsBlocked={cellIsBlocked}
                                                 cellCursor={cellCursor}
                                                 tree={tree}
