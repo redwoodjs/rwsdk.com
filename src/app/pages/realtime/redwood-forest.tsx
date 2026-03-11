@@ -14,8 +14,7 @@ type Tree = {
 };
 
 type ForestState = {
-    days?: Record<string, (Tree | null)[]>; // Legacy
-    globalSlots?: (Tree | null)[];
+    globalSlots: (Tree | null)[];
 };
 
 const MAX_GROWTH = 10;
@@ -26,10 +25,10 @@ const getToday = () => new Date().toISOString().slice(0, 10);
 
 const getUserId = () => {
     if (typeof window === "undefined") return "anon";
-    let id = sessionStorage.getItem("rwsdk_forest_uid");
+    let id = localStorage.getItem("rwsdk_forest_uid");
     if (!id) {
         id = Math.random().toString(36).substring(2, 10);
-        sessionStorage.setItem("rwsdk_forest_uid", id);
+        localStorage.setItem("rwsdk_forest_uid", id);
     }
     return id;
 };
@@ -107,7 +106,7 @@ function generateTreeImage(seed: number, growth: number): string {
         maxExtraTiers = 3 + Math.floor(canopyVar * 4);
         baseCanopyW = 7 + canopyVar * 4;
         maxExtraCanopyW = 10 + canopyVar * 8;     // widest
-        canopyStart = 0.35 + canopyVar * 0.15;
+        canopyStart = 0.40 + canopyVar * 0.15;
     } else { // ancient
         baseHeight = 9 + heightVar * 5;
         maxExtraHeight = 24 + heightVar * 14;
@@ -117,7 +116,7 @@ function generateTreeImage(seed: number, growth: number): string {
         maxExtraTiers = 2 + Math.floor(canopyVar * 3);
         baseCanopyW = 6 + canopyVar * 3;
         maxExtraCanopyW = 8 + canopyVar * 6;
-        canopyStart = 0.45 + canopyVar * 0.2;
+        canopyStart = 0.50 + canopyVar * 0.15;
     }
 
     const leanDir = r() > 0.5 ? 1 : -1;
@@ -177,12 +176,12 @@ function generateTreeImage(seed: number, growth: number): string {
     const trunkTopY = groundY - trunkHeight;
     const trunkX = cx - Math.floor(trunkWidth / 2);
 
-    // Trunk with slight taper (wider at base for large trees)
+    // Trunk with gentle taper (slightly wider at base)
     for (let y = trunkTopY; y < groundY - (stage > 0.2 ? 3 : 0); y++) {
         const yP = (y - trunkTopY) / Math.max(1, trunkHeight);
         const lean = Math.floor(leanPx * yP);
-        // Taper: slightly wider at base
-        const taper = stage > 0.4 ? Math.floor(yP * stage * 1.5) : 0;
+        // Subtle taper: gently wider at base, using a soft quadratic curve
+        const taper = stage > 0.3 ? Math.floor(yP * yP * stage * 2) : 0;
         const tw = trunkWidth + taper;
         const tx = cx - Math.floor(tw / 2);
 
@@ -325,8 +324,9 @@ function generateTreeImage(seed: number, growth: number): string {
             ? Math.floor(3 + r() * 4 * stage)
             : Math.floor(1 + r() * 3 * stage);
         for (let b = 0; b < maxBranches; b++) {
-            // Branches in the exposed trunk zone
-            const by = trunkTopY + Math.floor(trunkHeight * (canopyStart * 0.3 + r() * canopyStart * 0.6));
+            // Branches in the upper exposed trunk zone (pushed higher)
+            const branchStart = canopyStart * 0.6;
+            const by = trunkTopY + Math.floor(trunkHeight * (branchStart + r() * (canopyStart - branchStart)));
             const dir = r() > 0.5 ? 1 : -1;
             const bLen = Math.floor(2 + r() * 3 * stage);
             const lean = Math.floor(leanPx * ((by - trunkTopY) / Math.max(1, trunkHeight)));
@@ -450,34 +450,52 @@ const TILE_SIZE = 46; // px
 const TREE_SCALE = 2;
 const TREE_GROUND_OFFSET = 6 * TREE_SCALE;
 
-// We use an 18-hex row pattern, with 10 rows visible at time
-const ROW_SIZE = 18;
+// We use an 18-hex row pattern originally, now max 18 but wraps on small screens
+const MAX_ROW_SIZE = 18;
 const MAX_VISIBLE_ROWS = 10;
-const gridWidth = ROW_SIZE * TILE_SIZE;
-
-// ─── Hexagonal Floor Tile ────────────────────────────────────────────────────
 
 function FloorTile({
     isActive,
     hasTree,
+    isOwned,
+    isGrowing,
+    isBlocked,
     onClick,
     onHover,
 }: {
     isActive: boolean;
     hasTree: boolean;
+    isOwned: boolean;
+    isGrowing: boolean;
+    isBlocked: boolean;
     onClick?: () => void;
     onHover?: (hovering: boolean) => void;
 }) {
     const [hovered, setHovered] = useState(false);
 
-    const baseBg = "rgba(90, 122, 46, 0.15)";
-    const hoverBg = "rgba(120, 170, 60, 0.45)";
+    const isOtherUser = hasTree && !isOwned;
+    const baseBg = isOwned
+        ? "rgba(180, 160, 60, 0.25)"
+        : isOtherUser
+            ? "rgba(180, 50, 40, 0.25)"
+            : "rgba(90, 122, 46, 0.15)";
+    const hoverBg = isOwned
+        ? "rgba(200, 180, 70, 0.5)"
+        : isOtherUser
+            ? "rgba(200, 60, 50, 0.45)"
+            : isBlocked
+                ? "rgba(180, 50, 40, 0.3)"
+                : "rgba(120, 170, 60, 0.45)";
+
+    const cursor = isBlocked && hovered
+        ? 'not-allowed'
+        : isActive ? 'pointer' : 'default';
 
     return (
         <div
-            onClick={onClick}
+            onClick={isBlocked ? undefined : onClick}
             onMouseEnter={() => {
-                if (isActive) setHovered(true);
+                setHovered(true);
                 onHover?.(true);
             }}
             onMouseLeave={() => {
@@ -488,11 +506,11 @@ function FloorTile({
                 width: '100%',
                 height: '100%',
                 backgroundColor: hovered ? hoverBg : baseBg,
-                // Hexagonal offset cut leaving an organic visual gap
                 clipPath: "polygon(50% 1%, 99% 26%, 99% 74%, 50% 99%, 1% 74%, 1% 26%)",
-                cursor: isActive ? 'pointer' : 'default',
+                cursor,
                 transition: 'background-color 0.1s',
                 pointerEvents: 'all',
+                animation: isGrowing ? 'tileGrowPulse 2s ease-in-out infinite' : 'none',
             }}
         />
     );
@@ -508,41 +526,81 @@ export default function RedwoodForest() {
     const userId = useRef(getUserId());
     const [hoveredTree, setHoveredTree] = useState<Tree | null>(null);
 
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [rowSize, setRowSize] = useState(MAX_ROW_SIZE);
+
+    useEffect(() => {
+        let timeoutId: NodeJS.Timeout;
+        const obs = new ResizeObserver((entries) => {
+            if (!entries[0]) return;
+            const entry = entries[0];
+            
+            // Debounce to prevent React state update loops and ResizeObserver limits
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                const width = entry.contentRect.width;
+                // Subtract 40px for padding and buffer
+                const availableWidth = Math.max(0, width - 40);
+                const calculatedRowSize = Math.max(3, Math.floor(availableWidth / TILE_SIZE));
+                setRowSize(Math.min(calculatedRowSize, MAX_ROW_SIZE));
+            }, 50);
+        });
+
+        if (containerRef.current) obs.observe(containerRef.current);
+
+        return () => {
+            clearTimeout(timeoutId);
+            obs.disconnect();
+        };
+    }, []);
+
     // Compute all dynamic slots logic
     const allSlots = useMemo(() => {
         let slots = [...(forestState?.globalSlots || [])];
-        if (slots.length === 0) slots = Array(ROW_SIZE).fill(null);
+        if (slots.length === 0) slots = Array(rowSize).fill(null);
         
-        while (slots.length % ROW_SIZE !== 0) slots.push(null);
+        while (slots.length % rowSize !== 0) slots.push(null);
         
-        let lastRowStartIndex = slots.length - ROW_SIZE;
+        let lastRowStartIndex = slots.length - rowSize;
         let lastRow = slots.slice(lastRowStartIndex);
         
         // When an entire row is full, a new row is added
-        while (lastRow.length === ROW_SIZE && lastRow.every(t => t !== null)) {
-            slots.push(...Array(ROW_SIZE).fill(null));
-            lastRowStartIndex = slots.length - ROW_SIZE;
+        while (lastRow.length === rowSize && lastRow.every(t => t !== null)) {
+            slots.push(...Array(rowSize).fill(null));
+            lastRowStartIndex = slots.length - rowSize;
             lastRow = slots.slice(lastRowStartIndex);
         }
         
         return slots;
-    }, [forestState?.globalSlots]);
+    }, [forestState?.globalSlots, rowSize]);
+
+    // ── Planting allowance: start with 2, +1 per fully grown tree ──
+    const myTrees = useMemo(() => allSlots.filter((t): t is Tree => t !== null && t.plantedBy === userId.current), [allSlots]);
+    const fullyGrown = myTrees.filter(t => t.growth >= MAX_GROWTH).length;
+    const allowance = 2 + fullyGrown;
+    const canPlant = myTrees.length < allowance;
 
     const handlePlant = useCallback(
         (slotIdx: number) => {
             setForestState((prev) => {
                 const current = prev || { globalSlots: [] };
                 let slots = [...(current.globalSlots || [])];
-                if (slots.length === 0) slots = Array(ROW_SIZE).fill(null);
+                if (slots.length === 0) slots = Array(rowSize).fill(null);
                 
                 while (slots.length <= slotIdx) slots.push(null);
 
                 if (slots[slotIdx] !== null) return current;
 
+                // Enforce allowance: 2 base + 1 per fully grown
+                const myExisting = slots.filter((t): t is Tree => t !== null && t.plantedBy === userId.current);
+                const myFullyGrown = myExisting.filter(t => t.growth >= MAX_GROWTH).length;
+                const myAllowance = 2 + myFullyGrown;
+                if (myExisting.length >= myAllowance) return current;
+
                 slots[slotIdx] = {
                     id: `${userId.current}-${Date.now()}`,
                     seed: Math.floor(Math.random() * 2147483647),
-                    slot: slotIdx,
+                    slot: slotIdx, // Preserving simple slot logic; wraps automatically structurally
                     growth: 0,
                     plantedBy: userId.current,
                 };
@@ -550,16 +608,18 @@ export default function RedwoodForest() {
                 return { ...current, globalSlots: slots };
             });
         },
-        [setForestState]
+        [setForestState, rowSize]
     );
 
     const handleGrow = useCallback(
         (slotIdx: number) => {
              setForestState((prev) => {
-                const current = prev || { globalSlots: [] };
-                let slots = [...(current.globalSlots || [])];
+                const current = prev ?? { globalSlots: [] };
+                const slots = [...current.globalSlots];
                 const tree = slots[slotIdx];
                 if (!tree || tree.growth >= MAX_GROWTH) return current;
+                // Only the planter can grow their own tree
+                if (tree.plantedBy !== userId.current) return current;
                 
                 slots[slotIdx] = { ...tree, growth: tree.growth + 1 };
                 return { ...current, globalSlots: slots };
@@ -569,17 +629,22 @@ export default function RedwoodForest() {
     );
 
     const totalCount = allSlots.filter((t) => t !== null).length;
-    const maxRows = allSlots.length / ROW_SIZE;
-    const startRowIndex = Math.max(0, maxRows - MAX_VISIBLE_ROWS);
-    const visibleRowsCount = maxRows - startRowIndex;
+    const maxRows = allSlots.length / rowSize;
+    // Render all rows to prevent wrapped items from 'disappearing' outside the rendering bounds
+    const startRowIndex = 0;
+    const visibleRowsCount = maxRows;
 
     return (
-        <div className="relative w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200 isolate z-0">
+        <div className="relative w-full min-w-0 max-w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200 isolate z-0">
             <style>{`
                 @keyframes treeAppear {
                     0% { transform: translateY(10px) scaleY(0); opacity: 0; }
                     60% { transform: translateY(-3px) scaleY(1.05); opacity: 1; }
                     100% { transform: translateY(0) scaleY(1); opacity: 1; }
+                }
+                @keyframes tileGrowPulse {
+                    0%, 100% { background-color: rgba(180, 160, 60, 0.2); }
+                    50% { background-color: rgba(220, 200, 80, 0.45); }
                 }
             `}</style>
             
@@ -591,7 +656,10 @@ export default function RedwoodForest() {
                 </div>
                 <div className="flex items-center gap-4">
                     <span className="font-mono text-[10px] text-[#d4b8a8]/70 dark:text-dark-secondary/70 tracking-widest uppercase flex items-center h-[26px]">
-                        {totalCount} planted across {maxRows} rows
+                        {!canPlant
+                            ? "🌱 Grow your trees to full height to plant more"
+                            : `🌲 ${allowance - myTrees.length} tree${allowance - myTrees.length !== 1 ? 's' : ''} available to plant`
+                        }
                     </span>
                     <div className="relative">
                         <div className="flex items-center gap-2 bg-green-950/30 dark:bg-dark-success-bg text-green-400 dark:text-dark-success-text px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50 dark:border-dark-success-border transition-colors duration-200">
@@ -618,7 +686,8 @@ export default function RedwoodForest() {
 
             {/* Forest area */}
             <div
-                className="relative overflow-hidden bg-gradient-to-b from-[#7CB9D8] via-[#B8D4E3] via-60% to-[#8aad5a] dark:from-[#1a1a2e] dark:via-[#1e2d3d] dark:via-60% dark:to-[#1e3510]"
+                ref={containerRef}
+                className="relative w-full max-w-full overflow-hidden bg-gradient-to-b from-[#7CB9D8] via-[#B8D4E3] via-60% to-[#8aad5a] dark:from-[#1a1a2e] dark:via-[#1e2d3d] dark:via-60% dark:to-[#1e3510]"
                 style={{ minHeight: "380px" }}
             >
                 {/* Fog overlay */}
@@ -636,8 +705,12 @@ export default function RedwoodForest() {
                 </div>
 
                 {/* Rows Grid */}
+                {/* 
+                  * To stick to the bottom without clipping the top arrays due to `justify-end`, 
+                  * we can use justify-end but pad out the height safely inside a responsive container. 
+                  */}
                 <div
-                    className="flex flex-col items-center justify-end px-4 py-6 relative z-10"
+                    className="flex flex-col items-center justify-end px-4 pt-16 pb-4 relative z-10"
                     style={{ minHeight: "380px" }}
                 >
                     <div
@@ -645,14 +718,14 @@ export default function RedwoodForest() {
                             position: "relative",
                             display: "flex",
                             flexDirection: "column",
-                            width: gridWidth + TILE_SIZE / 2,
+                            width: rowSize * TILE_SIZE + TILE_SIZE / 2,
                             transform: "perspective(1200px) rotateX(60deg)",
                             transformStyle: "preserve-3d",
                         }}
                     >
                         {Array.from({ length: visibleRowsCount }).map((_, i) => {
                             const absoluteRowIndex = startRowIndex + i;
-                            const rowSlots = allSlots.slice(absoluteRowIndex * ROW_SIZE, (absoluteRowIndex + 1) * ROW_SIZE);
+                            const rowSlots = allSlots.slice(absoluteRowIndex * rowSize, (absoluteRowIndex + 1) * rowSize);
 
                             return (
                                 <div
@@ -666,7 +739,7 @@ export default function RedwoodForest() {
                                     }}
                                 >
                                     {rowSlots.map((tree, col) => {
-                                        const absoluteSlot = absoluteRowIndex * ROW_SIZE + col;
+                                        const absoluteSlot = absoluteRowIndex * rowSize + col;
                                         const dynamicScale = tree ? 1 + (tree.growth / MAX_GROWTH) * 3 : 1;
 
                                         return (
@@ -682,6 +755,9 @@ export default function RedwoodForest() {
                                                 <FloorTile
                                                     isActive={true}
                                                     hasTree={!!tree}
+                                                    isOwned={!!tree && tree.plantedBy === userId.current}
+                                                    isGrowing={!!tree && tree.plantedBy === userId.current && tree.growth < MAX_GROWTH}
+                                                    isBlocked={!tree && !canPlant}
                                                     onClick={() => {
                                                         if (tree) handleGrow(absoluteSlot);
                                                         else handlePlant(absoluteSlot);

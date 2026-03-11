@@ -47,6 +47,10 @@ export function Footer() {
 
               <FooterLink href={link("/blog")}>Blog</FooterLink>
               <FooterLink href={link("/talks")}>Media</FooterLink>
+              <FooterLink href={link("/contributors")}>Contributors</FooterLink>
+              <FooterLink href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk">
+                SyntaxFM Interview
+              </FooterLink>
             </ul>
           </div>
           <div>
@@ -61,9 +65,7 @@ export function Footer() {
               <FooterLink href={Constants.CLOUDFLARE_DOCS_URL}>
                 Cloudflare RedwoodSDK Docs
               </FooterLink>
-              <FooterLink href="https://syntax.fm/show/902/fullstack-cloudflare-with-react-and-vite-redwood-sdk">
-                SyntaxFM Interview
-              </FooterLink>
+              <FooterLink href={link("/realtime")}>Realtime</FooterLink>
             </ul>
           </div>
           <div>

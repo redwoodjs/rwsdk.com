@@ -2,6 +2,7 @@ import { SEO } from "src/components/seo";
 import { Section } from "src/components/section";
 import { Copy } from "src/components/copy";
 import RedwoodForest from "./redwood-forest";
+import NotificationShowcase from "./notification-showcase";
 
 export default function RealtimePage() {
     return (
@@ -380,60 +381,17 @@ export default function RealtimePage() {
           Section 6: Use Cases
           ═══════════════════════════════════════════ */}
             <Section className="max-w-5xl mx-auto px-6 pb-32">
-                <h2 className="font-serif text-4xl md:text-5xl mb-4 font-medium tracking-tight">
-                    What will you build?
-                </h2>
-                <p className="text-xl text-zinc-500 dark:text-dark-secondary mb-12 font-light leading-relaxed">
-                    Anything where data should update instantly for everyone.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {[
-                        {
-                            emoji: "💬",
-                            title: "Chat",
-                            desc: "Real-time messaging between users",
-                        },
-                        {
-                            emoji: "📊",
-                            title: "Live Dashboards",
-                            desc: "Data that updates for everyone simultaneously",
-                        },
-                        {
-                            emoji: "🎮",
-                            title: "Multiplayer",
-                            desc: "Game state synchronized across players",
-                        },
-                        {
-                            emoji: "✍️",
-                            title: "Collaborative Editing",
-                            desc: "Shared documents and whiteboards",
-                        },
-                        {
-                            emoji: "👥",
-                            title: "Presence",
-                            desc: "See who's online and what they're viewing",
-                        },
-                        {
-                            emoji: "📋",
-                            title: "Live Forms",
-                            desc: "Multi-user form filling and voting",
-                        },
-                    ].map((item) => (
-                        <div
-                            key={item.title}
-                            className="bg-white/50 dark:bg-dark-panel rounded-2xl p-6 border border-zinc-200/60 dark:border-dark-border shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
-                        >
-                            <div className="text-3xl mb-3">{item.emoji}</div>
-                            <h3 className="font-serif text-lg font-medium mb-1 text-zinc-900 dark:text-dark-primary">
-                                {item.title}
-                            </h3>
-                            <p className="text-sm text-zinc-500 dark:text-dark-secondary font-light">
-                                {item.desc}
-                            </p>
-                        </div>
-                    ))}
+                <div className="text-center mb-16">
+                    <h2 className="font-serif text-4xl md:text-5xl mb-4 font-medium tracking-tight">
+                        What will you build?
+                    </h2>
+                    <p className="text-xl text-zinc-500 dark:text-dark-secondary font-light leading-relaxed max-w-2xl mx-auto">
+                        You can build all kinds of live experiences. Anything where data
+                        should update instantly for everyone.
+                    </p>
                 </div>
+
+                <NotificationShowcase />
             </Section>
 
             {/* ═══════════════════════════════════════════

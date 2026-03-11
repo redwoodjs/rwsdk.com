@@ -7,7 +7,8 @@ import {
   Tile2_StreamingBridge,
   Tile3_ActionLoop,
 } from "./async-react-section";
-import ActivityTrack, { RealtimeCounter } from "./activity-track";
+import ActivityTrack from "./activity-track";
+import RedwoodForest from "../realtime/redwood-forest";
 import LatestBlogs from "./latest-blogs";
 import { Copy } from "src/components/copy";
 import { Section } from "src/components/section";
@@ -320,47 +321,52 @@ export default function Home() {
 
         {/* Drop-in replacement section */}
         <div className="mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-stretch">
-            {/* Left Box: Text and Code */}
-            <div className="flex flex-col">
-              <div className="bg-dark-code-bg rounded-[1.5rem] overflow-hidden shadow-xl border border-[#4a2b1f] dark:border-dark-border mb-10 transition-colors duration-200">
-                <div className="flex items-center px-6 py-5 transition-colors duration-200">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-dark-border"></div>
-                    <div className="w-3 h-3 rounded-full bg-dark-border"></div>
-                    <div className="w-3 h-3 rounded-full bg-dark-border"></div>
-                  </div>
-                </div>
-
-                <div className="pb-8 pt-2 font-mono text-[9px] md:text-[11px] tracking-wide">
-                  <div className="flex bg-red-900/50 px-4 md:px-6 py-3 items-start">
-                    <span className="text-[#f87171] w-6 select-none shrink-0 font-medium">-</span>
-                    <span className="text-dark-secondary/70 line-through decoration-dark-secondary/50 break-all sm:break-normal">const [count, setCount] = useState(0);</span>
-                  </div>
-                  <div className="flex bg-dark-success-bg px-4 md:px-6 py-4 items-start transition-colors duration-200">
-                    <span className="text-dark-success-text w-6 select-none shrink-0 font-medium">+</span>
-                    <span className="text-dark-success-text break-all sm:break-normal">
-                      const [count, setCount] = useSyncedState(0, 'global-count');
-                    </span>
-                  </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
+            {/* Left Box: Code */}
+            <div className="bg-dark-code-bg rounded-[1.5rem] overflow-hidden shadow-xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200">
+              <div className="flex items-center px-6 py-5 transition-colors duration-200">
+                <div className="flex space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-dark-border"></div>
+                  <div className="w-3 h-3 rounded-full bg-dark-border"></div>
+                  <div className="w-3 h-3 rounded-full bg-dark-border"></div>
                 </div>
               </div>
 
-              <p className="text-lg md:text-xl text-zinc-500 dark:text-dark-secondary font-light leading-relaxed mt-auto">
-                Transform any local state into a globally synchronized, bi-directional data stream. When you call <code className="bg-black/5 dark:bg-white/10 text-zinc-800 dark:text-dark-primary px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60 dark:border-white/20 transition-colors duration-200">useSyncedState</code>, it persists the state on your server automatically. Your server can push data down to the clients, or the clients can push data up to the server; all without writing a single WebSocket handler.
-              </p>
+              <div className="pb-8 pt-2 font-mono text-[9px] md:text-[11px] tracking-wide">
+                <div className="flex bg-red-900/50 px-4 md:px-6 py-3 items-start">
+                  <span className="text-[#f87171] w-6 select-none shrink-0 font-medium">-</span>
+                  <span className="text-dark-secondary/70 line-through decoration-dark-secondary/50 break-all sm:break-normal">const [count, setCount] = useState(0);</span>
+                </div>
+                <div className="flex bg-dark-success-bg px-4 md:px-6 py-4 items-start transition-colors duration-200">
+                  <span className="text-dark-success-text w-6 select-none shrink-0 font-medium">+</span>
+                  <span className="text-dark-success-text break-all sm:break-normal">
+                    const [count, setCount] = useSyncedState(0, 'global-count');
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* Right Box: Live Counter */}
-            <div className="flex">
-              <RealtimeCounter />
-            </div>
+            {/* Right Box: Text */}
+            <p className="text-lg md:text-xl text-zinc-500 dark:text-dark-secondary font-light leading-relaxed">
+              Transform any local state into a globally synchronized, bi-directional data stream. When you call <code className="bg-black/5 dark:bg-white/10 text-zinc-800 dark:text-dark-primary px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60 dark:border-white/20 transition-colors duration-200">useSyncedState</code>, it persists the state on your server automatically. Your server can push data down to the clients, or the clients can push data up to the server; all without writing a single WebSocket handler.
+            </p>
+          </div>
+
+          {/* Redwood Forest Map */}
+          <div className="flex w-full overflow-hidden rounded-[2rem] shadow-2xl border border-[#4a2b1f] dark:border-dark-border">
+            <RedwoodForest />
           </div>
         </div>
 
-        <p className="italic text-zinc-400 dark:text-dark-secondary mb-12 font-light">
-          Try it: The activity bar below shows multiple users interacting with our website and updates in real-time. Open this page in multiple tabs to see how state is synced from client &rarr; server &rarr; client.
-        </p>
+        <div className="flex justify-center mb-12">
+          <a
+            href="/realtime"
+            className="group inline-flex items-center gap-2 text-zinc-500 hover:text-[#e05236] dark:text-dark-secondary dark:hover:text-dark-accent transition-colors"
+          >
+            <span className="underline underline-offset-4 decoration-zinc-300 dark:decoration-dark-border group-hover:decoration-[#e05236] dark:group-hover:decoration-dark-accent transition-colors">Learn more about Realtime</span>
+            <span className="transform transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+          </a>
+        </div>
         <ActivityTrack />
       </Section>
 

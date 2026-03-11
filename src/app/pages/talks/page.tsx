@@ -36,7 +36,7 @@ export function Talks() {
             url: "https://conf.react.dev/",
         },
         {
-            title: "Peter Pistorius - Redwood SDK",
+            title: "Peter Pistorius - RedwoodSDK",
             date: "Jun 2025",
             source: "DevTools FM",
             speaker: "Peter Pistorius",
@@ -52,7 +52,7 @@ export function Talks() {
             url: "https://shoptalkshow.com/669/",
         },
         {
-            title: "Fullstack Cloudflare with React and Vite (Redwood SDK)",
+            title: "Fullstack Cloudflare with React and Vite (RedwoodSDK)",
             date: "May 2025",
             source: "Syntax.fm",
             speaker: "Peter Pistorius",

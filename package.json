@@ -30,6 +30,7 @@
     "framer-motion": "^12.28.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
+    "lucide-react": "^0.577.0",
     "marked": "^15.0.8",
     "marked-highlight": "^2.2.1",
     "mdx-bundler": "^10.1.1",
