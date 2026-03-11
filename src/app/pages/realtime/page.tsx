@@ -24,7 +24,7 @@ export default function RealtimePage() {
                     <h1 className="font-serif tracking-tight leading-[0.95] font-medium text-zinc-900 dark:text-dark-primary text-5xl md:text-8xl">
                         Hook, line, {" "}
                         <span className="italic font-light text-[#4a2b1f] dark:text-[#d4b8a8]">
-                            and sync.
+                            and sync
                         </span>
                     </h1>
                     <p className="mt-10 text-xl md:text-2xl text-zinc-500 dark:text-dark-secondary max-w-2xl mx-auto leading-relaxed font-light">
@@ -35,7 +35,7 @@ export default function RealtimePage() {
                         <code className="bg-black/5 dark:bg-white/10 text-zinc-800 dark:text-dark-primary px-1.5 py-0.5 rounded text-[0.9em] font-mono border border-zinc-200/60 dark:border-white/20">
                             useState
                         </code>{" "}
-                        that synchronizes state across every connected client — instantly.
+                        that synchronizes state across every connected client, instantly.
                     </p>
 
                     {/* The diff */}
@@ -77,12 +77,12 @@ export default function RealtimePage() {
             <Section className="max-w-6xl mx-auto px-6 pb-16">
                 <div className="text-center mb-10">
                     <h2 className="font-serif text-4xl md:text-5xl mb-4 font-medium tracking-tight">
-                        Plant a forest. One pixel at a time.
+                        Plant a forest. One click at a time.
                     </h2>
                     <p className="text-xl text-zinc-500 dark:text-dark-secondary font-light leading-relaxed max-w-2xl mx-auto">
-                        Every tree is procedurally generated — unique 8-bit pixel art,
-                        no two alike. Plant as many as you want. Each day adds a new row.
-                        Together, we grow a forest — synced across every browser, instantly.
+                        Every tree is procedurally generated (unique 8-bit pixel art,
+                        no two alike.) Plant as many as you want.
+                        Together, we grow a forest, synced across every browser, instantly.
                     </p>
                 </div>
                 <RedwoodForest />
@@ -199,7 +199,7 @@ export default function RealtimePage() {
           ═══════════════════════════════════════════ */}
             <Section className="max-w-5xl mx-auto px-6 pb-32">
                 <h2 className="font-serif text-4xl md:text-5xl mb-4 font-medium tracking-tight">
-                    The client doesn't decide.
+                    Security? The client doesn't decide.
                     <br />
                     <span className="italic font-light text-[#4a2b1f] dark:text-[#d4b8a8]">
                         The server does.
@@ -322,7 +322,7 @@ export default function RealtimePage() {
                     coordination, persistence, and global distribution. You write React.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                     {/* Step 1 */}
                     <div className="bg-[#2b1810] dark:bg-dark-panel rounded-2xl p-8 border border-[#4a2b1f] dark:border-dark-border shadow-xl transition-colors duration-200 text-center">
                         <div className="w-14 h-14 rounded-2xl bg-dark-accent/10 border border-dark-accent/20 flex items-center justify-center mx-auto mb-5">
@@ -442,7 +442,7 @@ export default function RealtimePage() {
             <Section className="max-w-5xl mx-auto px-6 pb-32">
                 <div className="text-center">
                     <h2 className="font-serif text-4xl md:text-5xl mb-4 font-medium tracking-tight">
-                        Start building realtime.
+                        Start building for <i>real</i> this <i>time</i>
                     </h2>
                     <p className="text-xl text-zinc-500 dark:text-dark-secondary mb-10 font-light">
                         Scaffold a project and start syncing state in under a minute.
@@ -466,7 +466,7 @@ export default function RealtimePage() {
                         <span className="text-lg">→</span>
                     </a>
                 </div>
-            </Section>
-        </div>
+            </Section >
+        </div >
     );
 }

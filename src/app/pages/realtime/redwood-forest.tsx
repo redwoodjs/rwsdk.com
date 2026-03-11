@@ -14,11 +14,11 @@ type Tree = {
 };
 
 type ForestState = {
-    days: Record<string, (Tree | null)[]>; // dateString → 16-slot array
+    days?: Record<string, (Tree | null)[]>; // Legacy
+    globalSlots?: (Tree | null)[];
 };
 
-const GRID_COLS = 256;
-const MAX_GROWTH = 30;
+const MAX_GROWTH = 10;
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -425,6 +425,7 @@ function PixelTree({
             width={displayW}
             height={displayH}
             draggable={false}
+            className="select-none"
             style={{
                 imageRendering: "pixelated",
                 display: "block",
@@ -440,320 +441,140 @@ function PixelTree({
     );
 }
 
-// ─── Isometric Grid Constants ────────────────────────────────────────────────
+// ─── Grid Constants ──────────────────────────────────────────────────────────
 
-const ISO_ROWS = 16;
-const ISO_COLS = 16;
-// Tile dimensions (the diamond footprint each tree/slot occupies)
-const TILE_W = 32; // px — width of the diamond
-const TILE_H = 16;  // px — height of the diamond (half of width for 2:1 iso)
+// Tile dimensions for the hexagonal grid
+const TILE_SIZE = 46; // px
 
 // Tree display scale
-const TREE_SCALE = 1.2;
-const TREE_DISPLAY_W = TREE_W * TREE_SCALE;
-const TREE_DISPLAY_H = TREE_H * TREE_SCALE;
-// The tree's visual base (root flare) is ~6 canvas pixels from the bottom of the sprite
+const TREE_SCALE = 2;
 const TREE_GROUND_OFFSET = 6 * TREE_SCALE;
 
-/**
- * Convert grid (row, col) to screen (x, y) for isometric projection.
- * Origin is at top-center of the grid.
- */
-function isoToScreen(row: number, col: number) {
-    return {
-        x: (col - row) * (TILE_W / 2),
-        y: (col + row) * (TILE_H / 2),
-    };
-}
+// We use an 18-hex row pattern, with 10 rows visible at time
+const ROW_SIZE = 18;
+const MAX_VISIBLE_ROWS = 10;
+const gridWidth = ROW_SIZE * TILE_SIZE;
 
-// Compute grid bounding box so we can size the container
-const isoGridWidth = (ISO_ROWS + ISO_COLS) * (TILE_W / 2);
-const isoGridHeight = (ISO_ROWS + ISO_COLS) * (TILE_H / 2);
+// ─── Hexagonal Floor Tile ────────────────────────────────────────────────────
 
-// ─── Isometric Floor Tile ────────────────────────────────────────────────────
-
-function IsoTile({
-    row,
-    col,
-    isToday,
+function FloorTile({
+    isActive,
     hasTree,
     onClick,
+    onHover,
 }: {
-    row: number;
-    col: number;
-    isToday: boolean;
+    isActive: boolean;
     hasTree: boolean;
     onClick?: () => void;
+    onHover?: (hovering: boolean) => void;
 }) {
     const [hovered, setHovered] = useState(false);
 
-    const baseFill =
-        (row + col) % 2 === 0
-            ? "rgba(90,122,46,0.15)"
-            : "rgba(74,107,32,0.15)";
-    const hoverFill = "rgba(120,170,60,0.45)";
-    const baseStroke = "rgba(61,90,24,0.2)";
-    const hoverStroke = "rgba(100,150,40,0.7)";
-
-    return (
-        <svg
-            width={TILE_W}
-            height={TILE_H}
-            viewBox={`0 0 ${TILE_W} ${TILE_H}`}
-            style={{
-                position: "absolute",
-                left: 0,
-                top: 0,
-                cursor: isToday ? "pointer" : "default",
-            }}
-            onClick={onClick}
-            onMouseEnter={() => isToday && setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            <polygon
-                points={`${TILE_W / 2},0 ${TILE_W},${TILE_H / 2} ${TILE_W / 2},${TILE_H} 0,${TILE_H / 2}`}
-                fill={hovered ? hoverFill : baseFill}
-                stroke={hovered ? hoverStroke : baseStroke}
-                strokeWidth={hovered ? "1" : "0.5"}
-                style={{ transition: "fill 0.15s, stroke 0.15s" }}
-            />
-            {/* "+" hint for empty plantable slots */}
-            {!hasTree && isToday && (
-                <text
-                    x={TILE_W / 2}
-                    y={TILE_H / 2 + 5}
-                    textAnchor="middle"
-                    fill={hovered ? "rgba(74,222,128,0.8)" : "rgba(74,222,128,0.3)"}
-                    style={{
-                        fontSize: "16px",
-                        fontFamily: "monospace",
-                        transition: "fill 0.15s",
-                        pointerEvents: "none",
-                    }}
-                >
-                    +
-                </text>
-            )}
-        </svg>
-    );
-}
-
-// ─── Day Row (True Isometric Grid) ───────────────────────────────────────────
-
-function DayRow({
-    date,
-    slots,
-    isToday,
-    depth,
-    onPlant,
-    onGrow,
-}: {
-    date: string;
-    slots: (Tree | null)[];
-    isToday: boolean;
-    depth: number;
-    onPlant: (slot: number) => void;
-    onGrow: (slot: number) => void;
-}) {
-    const scale = Math.pow(0.82, depth);
-    const opacity = Math.max(0.25, 1 - depth * 0.15);
-
-    const label = isToday
-        ? "Today"
-        : depth === 1
-            ? "Yesterday"
-            : new Date(date + "T00:00:00").toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-            });
+    const baseBg = "rgba(90, 122, 46, 0.15)";
+    const hoverBg = "rgba(120, 170, 60, 0.45)";
 
     return (
         <div
-            className="flex flex-col items-center"
-            style={{
-                transform: `scale(${scale})`,
-                opacity,
-                transformOrigin: "bottom center",
-                marginTop: depth > 0 ? `-${Math.floor(40 * scale)}px` : 0,
-                zIndex: 100 - depth,
-                position: "relative",
+            onClick={onClick}
+            onMouseEnter={() => {
+                if (isActive) setHovered(true);
+                onHover?.(true);
             }}
-        >
-            {/* Date label */}
-            <div
-                className="font-mono tracking-widest uppercase mb-2 select-none"
-                style={{
-                    fontSize: `${Math.max(8, 10 * scale)}px`,
-                    color: isToday ? "#F17543" : `rgba(212, 184, 168, ${opacity})`,
-                }}
-            >
-                {label}
-            </div>
-
-            {/* Isometric grid container */}
-            <div
-                style={{
-                    position: "relative",
-                    width: isoGridWidth,
-                    height: isoGridHeight + TREE_DISPLAY_H,
-                }}
-            >
-                {Array.from({ length: ISO_ROWS }).map((_, row) =>
-                    Array.from({ length: ISO_COLS }).map((_, col) => {
-                        const slotIdx = row * ISO_COLS + col;
-                        const tree = slots[slotIdx];
-                        const { x, y } = isoToScreen(row, col);
-
-                        // Center within container
-                        const screenX = x + isoGridWidth / 2 - TILE_W / 2;
-                        const screenY = y + TREE_DISPLAY_H; // offset so trees have room above
-
-                        return (
-                            <div
-                                key={slotIdx}
-                                style={{
-                                    position: "absolute",
-                                    left: screenX,
-                                    top: screenY,
-                                    width: TILE_W,
-                                    height: TILE_H,
-                                    zIndex: row + col, // back-to-front ordering
-                                }}
-                            >
-                                <IsoTile
-                                    row={row}
-                                    col={col}
-                                    isToday={isToday}
-                                    hasTree={!!tree}
-                                    onClick={
-                                        isToday
-                                            ? () => {
-                                                if (tree) onGrow(slotIdx);
-                                                else onPlant(slotIdx);
-                                            }
-                                            : undefined
-                                    }
-                                />
-
-                                {/* Tree drawn above tile — pointer-events: none so clicks hit the floor */}
-                                {tree && (
-                                    <div
-                                        style={{
-                                            position: "absolute",
-                                            left: TILE_W / 2 - TREE_DISPLAY_W / 2,
-                                            top: -(TREE_DISPLAY_H - TREE_GROUND_OFFSET) + TILE_H / 2 + 5,
-                                            zIndex: 10 + row + col,
-                                            pointerEvents: "none",
-                                            animation: isToday
-                                                ? "treeAppear 0.4s ease-out"
-                                                : "none",
-                                        }}
-                                    >
-                                        <PixelTree
-                                            tree={tree}
-                                            scale={1}
-                                            isToday={isToday}
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        );
-                    })
-                )}
-            </div>
-        </div>
+            onMouseLeave={() => {
+                setHovered(false);
+                onHover?.(false);
+            }}
+            style={{
+                width: '100%',
+                height: '100%',
+                backgroundColor: hovered ? hoverBg : baseBg,
+                // Hexagonal offset cut leaving an organic visual gap
+                clipPath: "polygon(50% 1%, 99% 26%, 99% 74%, 50% 99%, 1% 74%, 1% 26%)",
+                cursor: isActive ? 'pointer' : 'default',
+                transition: 'background-color 0.1s',
+                pointerEvents: 'all',
+            }}
+        />
     );
 }
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
-function ensureSlotsArray(data: unknown): (Tree | null)[] {
-    if (Array.isArray(data)) {
-        const arr = data as (Tree | null)[];
-        // Ensure exactly GRID_COLS slots
-        while (arr.length < GRID_COLS) arr.push(null);
-        return arr.slice(0, GRID_COLS);
-    }
-    return new Array(GRID_COLS).fill(null);
-}
-
 export default function RedwoodForest() {
     const [forestState, setForestState] = useSyncedState<ForestState>(
-        { days: {} },
+        { globalSlots: [] },
         "redwood-forest"
     );
     const userId = useRef(getUserId());
+    const [hoveredTree, setHoveredTree] = useState<Tree | null>(null);
 
-    const sortedDays = useMemo(() => {
-        if (!forestState?.days) return [];
-        const today = getToday();
-        const keys = Object.keys(forestState.days).sort();
-        if (!keys.includes(today)) keys.push(today);
-        keys.sort();
-        return keys;
-    }, [forestState?.days]);
-
-    const daysForDisplay = useMemo(() => {
-        const today = getToday();
-        const recent = sortedDays.slice(-7);
-        return recent.map((date) => ({
-            date,
-            slots: ensureSlotsArray(forestState?.days?.[date]),
-            isToday: date === today,
-        }));
-    }, [sortedDays, forestState?.days]);
+    // Compute all dynamic slots logic
+    const allSlots = useMemo(() => {
+        let slots = [...(forestState?.globalSlots || [])];
+        if (slots.length === 0) slots = Array(ROW_SIZE).fill(null);
+        
+        while (slots.length % ROW_SIZE !== 0) slots.push(null);
+        
+        let lastRowStartIndex = slots.length - ROW_SIZE;
+        let lastRow = slots.slice(lastRowStartIndex);
+        
+        // When an entire row is full, a new row is added
+        while (lastRow.length === ROW_SIZE && lastRow.every(t => t !== null)) {
+            slots.push(...Array(ROW_SIZE).fill(null));
+            lastRowStartIndex = slots.length - ROW_SIZE;
+            lastRow = slots.slice(lastRowStartIndex);
+        }
+        
+        return slots;
+    }, [forestState?.globalSlots]);
 
     const handlePlant = useCallback(
-        (slot: number) => {
+        (slotIdx: number) => {
             setForestState((prev) => {
-                const current = prev || { days: {} };
-                const today = getToday();
-                const days = { ...current.days };
-                const todaySlots = ensureSlotsArray(days[today]);
+                const current = prev || { globalSlots: [] };
+                let slots = [...(current.globalSlots || [])];
+                if (slots.length === 0) slots = Array(ROW_SIZE).fill(null);
+                
+                while (slots.length <= slotIdx) slots.push(null);
 
-                // Slot already taken
-                if (todaySlots[slot] !== null) return current;
+                if (slots[slotIdx] !== null) return current;
 
-                todaySlots[slot] = {
+                slots[slotIdx] = {
                     id: `${userId.current}-${Date.now()}`,
                     seed: Math.floor(Math.random() * 2147483647),
-                    slot,
+                    slot: slotIdx,
                     growth: 0,
                     plantedBy: userId.current,
                 };
 
-                days[today] = todaySlots;
-                return { days };
+                return { ...current, globalSlots: slots };
             });
         },
         [setForestState]
     );
 
     const handleGrow = useCallback(
-        (slot: number) => {
-            setForestState((prev) => {
-                const current = prev || { days: {} };
-                const today = getToday();
-                const days = { ...current.days };
-                const todaySlots = ensureSlotsArray(days[today]);
-
-                const tree = todaySlots[slot];
+        (slotIdx: number) => {
+             setForestState((prev) => {
+                const current = prev || { globalSlots: [] };
+                let slots = [...(current.globalSlots || [])];
+                const tree = slots[slotIdx];
                 if (!tree || tree.growth >= MAX_GROWTH) return current;
-
-                todaySlots[slot] = { ...tree, growth: tree.growth + 1 };
-                days[today] = todaySlots;
-                return { days };
-            });
+                
+                slots[slotIdx] = { ...tree, growth: tree.growth + 1 };
+                return { ...current, globalSlots: slots };
+             });
         },
         [setForestState]
     );
 
-    // Count today's trees
-    const todaySlots = ensureSlotsArray(forestState?.days?.[getToday()]);
-    const todayCount = todaySlots.filter((t) => t !== null).length;
+    const totalCount = allSlots.filter((t) => t !== null).length;
+    const maxRows = allSlots.length / ROW_SIZE;
+    const startRowIndex = Math.max(0, maxRows - MAX_VISIBLE_ROWS);
+    const visibleRowsCount = maxRows - startRowIndex;
 
     return (
-        <div className="relative w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200">
+        <div className="relative w-full rounded-[2rem] overflow-hidden shadow-2xl border border-[#4a2b1f] dark:border-dark-border transition-colors duration-200 isolate z-0">
             <style>{`
                 @keyframes treeAppear {
                     0% { transform: translateY(10px) scaleY(0); opacity: 0; }
@@ -761,20 +582,36 @@ export default function RedwoodForest() {
                     100% { transform: translateY(0) scaleY(1); opacity: 1; }
                 }
             `}</style>
-
+            
             {/* Header */}
-            <div className="flex items-center justify-between px-6 py-4 bg-[#2b1810] dark:bg-dark-panel border-b border-[#4a2b1f] dark:border-dark-border">
+            <div className="flex items-center justify-between px-6 py-4 bg-[#2b1810] dark:bg-dark-panel border-b border-[#4a2b1f] dark:border-dark-border relative z-50">
                 <div className="flex items-center gap-3 font-mono text-[10px] text-[#d4b8a8] dark:text-dark-secondary tracking-widest uppercase">
                     <div className="w-2 h-2 rounded-full bg-dark-accent"></div>
                     Redwood Forest
                 </div>
                 <div className="flex items-center gap-4">
-                    <span className="font-mono text-[10px] text-[#d4b8a8]/70 dark:text-dark-secondary/70 tracking-widest uppercase">
-                        {todayCount}/{GRID_COLS} planted today
+                    <span className="font-mono text-[10px] text-[#d4b8a8]/70 dark:text-dark-secondary/70 tracking-widest uppercase flex items-center h-[26px]">
+                        {totalCount} planted across {maxRows} rows
                     </span>
-                    <div className="flex items-center gap-2 bg-green-950/30 dark:bg-dark-success-bg text-green-400 dark:text-dark-success-text px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50 dark:border-dark-success-border transition-colors duration-200">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-400 dark:bg-dark-success-text animate-pulse"></div>
-                        LIVE
+                    <div className="relative">
+                        <div className="flex items-center gap-2 bg-green-950/30 dark:bg-dark-success-bg text-green-400 dark:text-dark-success-text px-3 py-1.5 rounded-md text-[10px] font-mono border border-green-900/50 dark:border-dark-success-border transition-colors duration-200">
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-400 dark:bg-dark-success-text animate-pulse"></div>
+                            LIVE
+                        </div>
+                        {/* Tooltip */}
+                        {hoveredTree && (
+                            <div className="absolute top-full right-0 mt-3 bg-black/80 dark:bg-dark-panel/90 backdrop-blur-md border border-[#4a2b1f]/30 dark:border-dark-border/50 px-4 py-3 rounded-xl shadow-2xl z-50 pointer-events-none flex flex-col gap-1 min-w-[120px]">
+                                <div className="font-mono text-[9px] text-green-400 tracking-widest uppercase">
+                                    Tree Growth
+                                </div>
+                                <div className="text-white text-sm font-mono flex items-end gap-1">
+                                    <span className="text-lg leading-none">
+                                        {allSlots[hoveredTree.slot]?.growth ?? hoveredTree.growth}
+                                    </span>
+                                    <span className="text-zinc-500 leading-none">/ {MAX_GROWTH}</span>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -786,35 +623,114 @@ export default function RedwoodForest() {
             >
                 {/* Fog overlay */}
                 <div
-                    className="absolute inset-0 pointer-events-none"
+                    className="absolute inset-0 pointer-events-none z-10"
                     style={{
                         background: "linear-gradient(to bottom, rgba(180,200,220,0.12) 0%, transparent 35%)",
                     }}
                 />
 
-                {/* Day rows */}
+                {/* Night time overlay */}
+                <div className="absolute inset-0 pointer-events-none hidden dark:block z-0">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/30 to-[#020617]/10 mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-blue-900/5 mix-blend-color" />
+                </div>
+
+                {/* Rows Grid */}
                 <div
-                    className="flex flex-col items-center justify-end px-4 py-6"
+                    className="flex flex-col items-center justify-end px-4 py-6 relative z-10"
                     style={{ minHeight: "380px" }}
                 >
-                    {daysForDisplay.map((day, i) => {
-                        const depth = daysForDisplay.length - 1 - i;
-                        return (
-                            <DayRow
-                                key={day.date}
-                                date={day.date}
-                                slots={day.slots}
-                                isToday={day.isToday}
-                                depth={depth}
-                                onPlant={handlePlant}
-                                onGrow={handleGrow}
-                            />
-                        );
-                    })}
+                    <div
+                        style={{
+                            position: "relative",
+                            display: "flex",
+                            flexDirection: "column",
+                            width: gridWidth + TILE_SIZE / 2,
+                            transform: "perspective(1200px) rotateX(60deg)",
+                            transformStyle: "preserve-3d",
+                        }}
+                    >
+                        {Array.from({ length: visibleRowsCount }).map((_, i) => {
+                            const absoluteRowIndex = startRowIndex + i;
+                            const rowSlots = allSlots.slice(absoluteRowIndex * ROW_SIZE, (absoluteRowIndex + 1) * ROW_SIZE);
+
+                            return (
+                                <div
+                                    key={`row-${absoluteRowIndex}`}
+                                    style={{
+                                        display: "flex",
+                                        marginLeft: absoluteRowIndex % 2 !== 0 ? TILE_SIZE / 2 : 0,
+                                        marginTop: i > 0 ? -Math.floor(TILE_SIZE / 4) : 0,
+                                        // Fixed: applying opacity or zIndex breaks 'preserve-3d' and visually flattens children 
+                                        transformStyle: "preserve-3d",
+                                    }}
+                                >
+                                    {rowSlots.map((tree, col) => {
+                                        const absoluteSlot = absoluteRowIndex * ROW_SIZE + col;
+                                        const dynamicScale = tree ? 1 + (tree.growth / MAX_GROWTH) * 3 : 1;
+
+                                        return (
+                                            <div
+                                                key={absoluteSlot}
+                                                style={{
+                                                    position: "relative",
+                                                    width: TILE_SIZE,
+                                                    height: TILE_SIZE,
+                                                    transformStyle: "preserve-3d",
+                                                }}
+                                            >
+                                                <FloorTile
+                                                    isActive={true}
+                                                    hasTree={!!tree}
+                                                    onClick={() => {
+                                                        if (tree) handleGrow(absoluteSlot);
+                                                        else handlePlant(absoluteSlot);
+                                                    }}
+                                                    onHover={(hovering) => {
+                                                        if (tree && setHoveredTree) {
+                                                            setHoveredTree(hovering ? tree : null);
+                                                        }
+                                                    }}
+                                                />
+
+                                                {tree && (
+                                                    <div
+                                                        style={{
+                                                            position: "absolute",
+                                                            left: "50%",
+                                                            bottom: "50%",
+                                                            transform: `translate(-50%, ${TREE_GROUND_OFFSET}px) rotateX(-60deg)`,
+                                                            transformOrigin: "bottom center",
+                                                            pointerEvents: "none",
+                                                        }}
+                                                    >
+                                                        <div
+                                                            style={{
+                                                                animation: "treeAppear 0.4s ease-out",
+                                                                transformOrigin: "bottom center",
+                                                                transform: `scale(${dynamicScale})`,
+                                                                transition: "transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                                                            }}
+                                                        >
+                                                            <PixelTree
+                                                                tree={tree}
+                                                                scale={1}
+                                                                isToday={true}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
 
                 {/* Empty state prompt */}
-                {todayCount === 0 && (
+                {totalCount === 0 && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div className="bg-[#2b1810]/85 dark:bg-dark-panel/85 backdrop-blur-sm text-dark-primary px-6 py-3 rounded-xl font-mono text-sm border border-[#4a2b1f] dark:border-dark-border animate-pulse">
                             Click a slot to plant your first redwood 🌲
@@ -833,3 +749,4 @@ export default function RedwoodForest() {
         </div>
     );
 }
+
