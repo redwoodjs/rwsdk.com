@@ -4,10 +4,10 @@ description: "In this article we explore how we assist in monitoring Elephants i
 date: "2025-07-16"
 author:
   id: "herman"
-heroImage: "ddc0df82-3a1d-4897-2f05-2f7c1fc6bc00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/6729edba-1110-4595-dd1c-4fd8de0cfe00/public"
 tags: ["redwoodsdk", "cloudflare", "coding for good", "conservation"]
 ---
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting an elephant silhouette in a savanna landscape with tech circuit patterns woven through, muted dark teal-gray tones, halftone dots over dark background, Victoria Falls inspired" -->
 # Using RedwoodSDK to Help Elephants and Humans Coexist in Victoria Falls
 
 In the world of software development, it’s not every day you get to contribute to something that helps protect one of the planet’s most iconic species. I have been fortunate to spend years in the field in Southern Africa implementing technology to prevent wildlife crime and Human-Wildlife Conflict (HWC) with my degree in Nature Conservation and Software development background. And this is exactly what I got to do through our recent work with the [Connected Conservation Trust (CCT)](https://www.connectedconservation.com/) and [**cbio**](https://za.linkedin.com/in/craig-beech-98101318) in Zimbabwe.
@@ -52,5 +52,4 @@ Prior to this their stack was running on 3 separate services in Google Cloud and
 At the core of this project is a belief that **technology can—and should—serve a purpose greater than itself**. By using tools like RedwoodSDK to bridge data collection and spatial analysis, we’re proud to support the people on the ground who are working tirelessly to ensure a future where **both people and elephants can thrive**.
 
 ---
-
 _If you’re a technologist, GIS analyst, or conservation partner interested in similar collaborations, we’d love to connect. Sometimes, a few lines of code can go a long way—especially when they help protect a species._

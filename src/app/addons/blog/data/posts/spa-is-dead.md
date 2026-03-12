@@ -4,10 +4,9 @@ description: "We spent a decade rebuilding the browser by hijacking routing, man
 date: "2025-08-01"
 author:
   id: "peter"
-heroImage: "a2a0ca5a-69b4-409f-bab9-ba31110c8f00"
 tags: ["redwoodsdk", "streaming", "html", "forms", "performance"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a pixelated browser window cracking and rebuilding itself from the server side, representing the death of SPAs, muted dark blue-gray tones" -->
 We spent a decade rebuilding the browser by hijacking routing, manually syncing state, rebuilding forms and transitions in JavaScript to match native app expectations. Now the browser has caught up. It's time to stop the hacks and build on the web again, but properly.
 
 When a "single-page app" is picked for the tech stack it's not because of performance, it's because of usability: In a previous life, I was an iOS developer, and every year Apple released the Human Interface Guidelines. I read them cover to cover, because they taught you how Apple thought about interaction design. That design philosophy was enforced in the APIs. One of the key principles was view transitions. When a user tapped on a row, the next screen slid into view. It helped users stay oriented. They understood where they came from, and how to go back.

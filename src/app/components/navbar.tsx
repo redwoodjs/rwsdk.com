@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { href: Constants.DOCS_URL, label: "Docs" },
   { href: "/#get-started", label: "Get started" },
   { href: link("/blog"), label: "Blog" },
+  { href: link("/realtime"), label: "Realtime" },
   { href: link("/personal-software"), label: "Manifesto" },
 ];
 
@@ -90,14 +91,6 @@ export function Navbar(props: NavbarProps) {
               <NavLink key={item.label} href={item.href} label={item.label} />
             ))}
             <div className="inline-flex items-center gap-2 leading-none">
-              <a
-                href={Constants.GITHUB_REPO}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-orange-medium transition-colors"
-              >
-                GitHub
-              </a>
               <span className="text-zinc-500 dark:text-dark-secondary !no-underline">
                 <GitHubStarWidget />
               </span>

@@ -295,7 +295,7 @@ export default function ActivityTrack() {
               stroke="#000000"
               strokeWidth="0.04" /* Thicker than the white line */
               strokeLinecap="round"
-              className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] dark:stroke-dark-bg"
+              className="dark:stroke-dark-bg"
               pointerEvents="none"
             />
 
@@ -306,7 +306,7 @@ export default function ActivityTrack() {
               stroke="#ffffff"
               strokeWidth="0.015" /* ~ 1.5px in viewbox scaling coords */
               strokeLinecap="round"
-              className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] dark:stroke-dark-primary/60 dark:drop-shadow-[0_0_8px_rgba(244,235,225,0.4)]"
+              className="dark:stroke-dark-primary/60"
               pointerEvents="none"
             />
           </svg>

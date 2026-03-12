@@ -14,6 +14,13 @@ interface GitHubStarWidgetUIProps {
   error: string | null;
 }
 
+function formatStarCount(count: number): string {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "k";
+  }
+  return count.toString();
+}
+
 function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
   return (
     <div className="flex items-center gap-2">
@@ -45,10 +52,10 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
         </svg>
         <span className="font-medium no-underline text-dark-accent">
           {error
-            ? "1376"
+            ? "1.4k"
             : starCount === null
-              ? "1376"
-              : starCount.toLocaleString()}
+              ? "1.4k"
+              : formatStarCount(starCount)}
         </span>
       </a>
     </div>

@@ -18,6 +18,8 @@ import { blogRoutes } from "./app/addons/blog";
 import StartPage from "./app/pages/start/page";
 import Layout from "./app/components/layout";
 import { Talks } from "./app/pages/talks/page";
+import RealtimePage from "./app/pages/realtime/page";
+import ContributorsPage from "./app/pages/contributors/page";
 
 import { SyncedStateServer, syncedStateRoutes } from "rwsdk/use-synced-state/worker";
 import { env } from "cloudflare:workers";
@@ -56,6 +58,7 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
   private initialized = false;
   private activityBuckets: ActivityHourBucket[] = [];
   private activityWriteTimeout: any = null;
+  private forestWriteTimeout: any = null;
 
   /** Hydrate in-memory state from KV before serving the first request. */
   private async ensureInitialized() {
@@ -79,6 +82,12 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     if (persistedActivity && Array.isArray(persistedActivity.buckets)) {
       this.activityBuckets = persistedActivity.buckets;
       this.recalculateActivityStats();
+    }
+
+    // Hydrate redwood-forest state
+    const persistedForest = await kv.get<any>("redwood-forest", "json");
+    if (persistedForest) {
+      super.setState(persistedForest, "redwood-forest");
     }
   }
 
@@ -149,10 +158,28 @@ export class ActivitySyncedStateServer extends SyncedStateServer {
     }, 10000);
   }
 
+  private scheduleForestSave() {
+    if (this.forestWriteTimeout) return;
+    this.forestWriteTimeout = setTimeout(() => {
+      this.forestWriteTimeout = null;
+      const kv = (env as any).SYNCED_STATE_KV as KVNamespace;
+      const forestState = super.getState("redwood-forest");
+      if (forestState) {
+        kv.put("redwood-forest", JSON.stringify(forestState)).catch(err => {
+          console.error("[ActivitySyncedStateServer] KV put for redwood-forest failed:", err);
+        });
+      }
+    }, 5000);
+  }
+
   override setState(value: unknown, key: string): void {
     super.setState(value, key);
 
     if (typeof key !== "string") return;
+
+    if (key === "redwood-forest") {
+      this.scheduleForestSave();
+    }
 
     if (key.startsWith("user-counter:")) {
       void this.aggregateUserCounter(key, value);
@@ -310,8 +337,10 @@ export default defineApp([
     ...layout(Layout, [
       route("/", Home),
       route("/personal-software", PersonalSoftware),
+      route("/realtime", RealtimePage),
       prefix("/blog", blogRoutes),
       route("/talks", Talks),
+      route("/contributors", ContributorsPage),
     ]),
 
     route("/start", StartPage),

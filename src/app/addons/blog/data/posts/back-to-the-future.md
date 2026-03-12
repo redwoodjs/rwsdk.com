@@ -4,10 +4,10 @@ description: "Bare with me as I smash some burgers, mash some movies and get pun
 date: "2025-05-06"
 author:
   id: "herman"
-heroImage: "3e1d4578-e67b-4444-b056-70b495fce800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/0a0d9656-f074-43bc-110d-1d1a35338c00/public"
 tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 ---
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting time travel and web evolution: a pixelated DeLorean-like silhouette dissolving into browser code, muted dark blue-gray tones, halftone dots, dark background, retro digital aesthetic" -->
 # The web evolution, a personal account  
 ## Back to the Future
 

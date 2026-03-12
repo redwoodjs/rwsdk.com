@@ -4,10 +4,10 @@ description: "At RedwoodSDK, we're embracing the latest patterns recommended by 
 date: "2025-05-14"
 author:
   id: "herman"
-heroImage: "d16e15d2-102f-43f1-fd54-69fc743eb300"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/048929e3-2c10-4243-5741-51fb94fb7100/public"
 tags: ["redwoodsdk", "cloudflare", "deployment", "environments"]
 ---
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a React atom logo dissolving into server-side pixel streams, representing React Server Components, muted cool slate-blue tones, halftone dots and squares, dark background" -->
 # Building with React Server Components and Client Components in RedwoodSDK
 
 At RedwoodSDK, we're embracing the latest patterns recommended by the React team by combining React Server Components (RSC) with client components to build efficient and scalable interfaces.

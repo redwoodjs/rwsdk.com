@@ -2,6 +2,7 @@ import { CloudflareImage } from "src/components/cloudflare-image";
 import { blogPostSlugs, getBlogPost } from "../../addons/blog/data/posts/index";
 import { link } from "src/shared/links";
 import { Section } from "src/components/section";
+import GenerativeHero from "../../addons/blog/components/generative-hero";
 
 export default async function LatestBlogs() {
     // Fetch and parse all blog posts

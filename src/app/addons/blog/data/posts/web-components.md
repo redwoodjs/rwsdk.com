@@ -4,18 +4,16 @@ description: "How to add a copy-to-clipboard button to Markdown code blocks usin
 date: "2025-08-25"
 author: 
   id: "herman"
-heroImage: "549cf820-5dba-4a30-56e4-37b23dde3300"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/b206f340-ab90-4e0c-7a8d-df498a91d300/public"
 tags: ["redwoodsdk", "markdown", "webcomponents"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting pixelated Lego-like web component blocks being sprinkled onto a markdown document like magic sparkles, muted cool blue-gray tones" -->
 # Sprinkle some Interactivity into Markdown with Web Components in RedwoodSDK
 
 _When your Markdown becomes HTML, how do you keep it interactive?_  
 Let’s add a **Copy to clipboard** button to every code block in a RedwoodSDK blog without MDX or heavy remark plugins.
 
 ---
-
 ## The Problem
 
 Rendering Markdown in RedwoodSDK is simple: turn it into HTML and drop it into the page. But:
@@ -27,7 +25,6 @@ Rendering Markdown in RedwoodSDK is simple: turn it into HTML and drop it into t
 Classic example: **copy-to-clipboard buttons on code blocks.**
 
 ---
-
 ## The Trick: Web Components
 
 Browsers natively support **Custom Elements**. That means:
@@ -41,7 +38,6 @@ This makes Web Components a perfect match for Markdown:
 they can be embedded in static HTML, yet still work interactively.
 
 ---
-
 ## Step 1: Markdown Renderer
 
 Here’s a RedwoodSDK client component that highlights code with `highlight.js`:
@@ -72,7 +68,6 @@ export default function Content({ content }: { content: string }) {
 ```
 
 ---
-
 ## Step 2: Define `<copy-button>`
 
 Inside the same component, register the custom element on the client:
@@ -102,7 +97,6 @@ useEffect(() => {
 ```
 
 ---
-
 ## Step 3: Inject Buttons into Code Blocks
 
 Still inside the effect, loop through `<pre>` tags and append:
@@ -120,7 +114,6 @@ pres.forEach((pre) => {
 Now every `<pre>` gets its own button.
 
 ---
-
 ## Why This Works (and Why It’s Cool)
 
 - **No MDX required.** Keep Markdown as Markdown.  
@@ -131,7 +124,6 @@ Now every `<pre>` gets its own button.
 This trick applies to more than copy buttons: think tabs, spoilers, tooltips, callouts, etc.
 
 ---
-
 ## Final Thoughts
 
 Web Components are the simplest way to sprinkle interactivity into Markdown-rendered content.  
@@ -140,5 +132,4 @@ With RedwoodSDK’s RSC/SSR model, you get the best of both worlds:
 - Server-rendered HTML for performance.  
 - Lightweight client-side upgrades for interactivity.  
 ---
-
 Happy building!

@@ -4,11 +4,10 @@ description: "Lets shine the spotlite on some of the true fullstack features of 
 date: "2025-05-25"
 author: 
   id: "peter"
-heroImage: "23343616-ea1c-4f38-7bb2-c21f95439900"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/23343616-ea1c-4f38-7bb2-c21f95439900/public"
 tags: ["redwoodsdk", "fullstack", "server components", "remix", "next"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a fractured and glitching framework scaffold with cracks revealing a cleaner simpler architecture underneath, muted dark red-gray tones with subtle glitch effects" -->
 # Your React Meta-Framework Feels Broken, Here's Why
 
 <!-- have you felt this pain?,

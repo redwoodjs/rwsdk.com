@@ -4,16 +4,15 @@ description: "Lets shine the spotlite on some of the true fullstack features of 
 date: "2025-05-07"
 author:
   id: "herman"
-heroImage: "e35b945c-dd4e-42ad-e635-04ef2d475800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/d80b1b68-f5a9-4af6-5cf0-924663a2e000/public"
 tags: ["redwoodsdk", "fullstack", "server components"]
 ---
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a complete vertical stack from database to server to browser all connected as one unified pixelated tower, representing true JavaScript fullstack, muted dark warm-gray tones" -->
 # Fullstack in the true sense
 
 In this post, I'd like to focus on some specifics why **RedwoodSDK is truly a fullstack framework**, and why that matters.
 
 ---
-
 ### The "Problem" with "Fullstack" Frontends
 
 Classical front-end frameworks are often disjointed. There's considerable overhead just to get started:
@@ -26,7 +25,6 @@ Classical front-end frameworks are often disjointed. There's considerable overhe
 This fragmented approach slows things down and introduces complexity.
 
 ---
-
 ### RedwoodSDK: The Fullstack Reimagined
 
 RedwoodSDK uses **React Server Components** (when you need them), eliminating much of that overhead.
@@ -38,7 +36,6 @@ And the exciting part?
 No more "but it works on my machine" headaches. Your local dev environment mirrors production so that you can be more at ease with deployments.
 
 ---
-
 ### Classic vs RedwoodSDK
 
 Let's compare a typical setup in a classic React frontend vs. a RedwoodSDK app.

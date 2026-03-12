@@ -4,11 +4,10 @@ description: "RedwoodSDK is here. RedwoodJS is not going anywhere."
 date: "2025-04-01"
 author:
   id: "peter"
-heroImage: "86a788b0-00dd-481b-30c3-e05e9d372800"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/4a6417ff-e764-40aa-cfaa-80cc5e4d6900/public"
 tags: ["redwoodjs", "redwoodsdk"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting a metamorphosis, old framework structure dissolving and reforming into a sleek SDK crystal, representing evolution from RedwoodJS to RedwoodSDK, muted dark rose-gray tones" -->
 # RedwoodSDK is here. RedwoodJS is not going anywhere.
 
 ## Redwood is Evolving
@@ -18,7 +17,6 @@ Since the early days of [RedwoodJS](https://redwoodjs.com), our mission has been
 We are excited to share that our **focus is evolving** to a new direction: **[RedwoodSDK](https://rwsdk.com)** 🚀
 
 ---
-
 ## Why RedwoodSDK?
 
 [RedwoodSDK](https://rwsdk.com) is the natural evolution of everything we learned while building and supporting RedwoodJS:
@@ -42,7 +40,6 @@ Simple. Predictable. Powerful.
 > "From idea to live app, RedwoodSDK is the fastest path we've ever built."
 
 ---
-
 ## RedwoodJS Isn't Going Anywhere
 
 RedwoodJS will remain **fully supported**, with active maintenance and updates.
@@ -56,7 +53,6 @@ If you're building with RedwoodJS today:
 But if you're starting something new — or want the latest in speed, developer experience, and edge-native architecture — you'll love [RedwoodSDK](https://rwsdk.com).
 
 ---
-
 ## Where to Start
 
 Explore everything RedwoodSDK has to offer:
@@ -67,7 +63,6 @@ Explore everything RedwoodSDK has to offer:
 - 🧪 [Try the real-time Kitchensink demo](https://github.com/redwoodjs/kitchensink) - A demo for some features of RedwoodSDK
 
 ---
-
 ## TL;DR
 
 - **RedwoodJS** is stable and supported ✅

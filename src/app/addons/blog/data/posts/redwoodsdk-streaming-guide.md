@@ -4,11 +4,10 @@ description: "RedwoodSDK introduces a powerful feature: React Server Function St
 date: "2025-04-22"
 author:
   id: "herman"
-heroImage: "7a9d155b-1d08-4158-2f45-f42a723fbc00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8126e54a-237d-4c60-ee27-182ea5b29900/public"
 tags: ["redwoodsdk", "cloudflare", "streaming", "guide", "realtime"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting data streams flowing like a waterfall of pixels from a server to a browser, representing React server function streaming, muted dark cyan-gray tones" -->
 # Streaming AI Responses with RedwoodSDK
 
 RedwoodSDK introduces a powerful feature: **React Server Function Streams**. This allows developers to stream partial responses from the server to the client, enabling real-time updates and improved user experiences.

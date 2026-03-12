@@ -4,11 +4,10 @@ description: "Most frameworks give you a fixed HTML document: a `<!DOCTYPE html>
 date: "2025-04-23"
 author:
   id: "peter"
-heroImage: "a63a9f22-bb6f-440d-36a4-c230a784bd00"
 ogImage: "https://imagedelivery.net/EBSSfnGYYD9-tGTmYMjDgg/8725384b-c535-4a75-b119-c16856f6c800/public"
 tags: ["redwoodsdk", "html", "guide"]
 ---
-
+<!-- heroImagePrompt: "8-bit pixel art dithered pattern depicting multiple overlapping HTML document windows fanning out like cards, each with different layouts, representing per-route documents, muted cool slate-gray tones" -->
 # Per-Route Documents in RedwoodSDK: Total Control Over Your HTML
 
 Most frameworks give you a fixed HTML document: a `<!DOCTYPE html>` page with a `<head>`, a `<body>`, and a root div for React to hydrate into. You might be able to tweak the title or inject a meta tag—but the structure? That’s locked down.
@@ -43,7 +42,6 @@ export const Document: React.FC<{ children: React.ReactNode }> = ({
 Simple, explicit, and powerful.
 
 ---
-
 ## Why This Matters
 
 Let’s break it down:
@@ -61,7 +59,6 @@ Want to hydrate a dynamic dashboard? Just include the right script.
 Want to replace the `<script>` with a socket-based hydration strategy? Nothing’s stopping you.
 
 ---
-
 ## One App, Many Modes
 
 Because you define the document per route, you can build:
@@ -101,7 +98,6 @@ All in the same app. All running in the same Cloudflare worker.
 That’s not common. Most frameworks treat the document as a global, one-size-fits-all concern. RedwoodSDK treats it as just another component—one you control.
 
 ---
-
 ## Why We Designed It This Way
 
 RedwoodSDK is built for Cloudflare, where the edge is the server. That means low-latency rendering, streaming responses, and precise control over what gets sent down the wire.
@@ -113,7 +109,6 @@ This model encourages you to think like a browser. To optimize where it matters.
 It’s personal software thinking applied to web apps.
 
 ---
-
 ## TL;DR
 
 RedwoodSDK gives you full control over your HTML document, per route.

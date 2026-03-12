@@ -19,7 +19,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
   }
 
   const { data, content } = await getBlogPost(slug);
-  const trimmedContent = await marked(content.trim());
+  const rawHtml = await marked(content.trim());
+  // Strip the first <h1> from rendered markdown to avoid duplicating the title
+  // that the Post component already renders from frontmatter.
+  const trimmedContent = rawHtml.replace(/<h1[^>]*>.*?<\/h1>\s*/, "");
   return (
     <>
       <SEO
@@ -33,7 +36,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
       <div className="flex flex-col min-h-screen">
         <Post
           post={{
-            slug: data.slug,
+            slug: slug,
             title: data.title,
             description: data.description,
             date: data.date,
