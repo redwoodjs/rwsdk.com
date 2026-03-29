@@ -117,7 +117,7 @@ export default function RealtimePage() {
                                 1. Your Component
                             </div>
                         </div>
-                        <pre className="p-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
+                        <pre className="px-4 py-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
                             <code>
                                 <span className="text-[#3B82F6] italic">
                                     {"// That's it. Really."}
@@ -143,7 +143,7 @@ export default function RealtimePage() {
                                 2. Worker Routes
                             </div>
                         </div>
-                        <pre className="p-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
+                        <pre className="px-4 py-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
                             <code>
                                 <span className="text-[#C55447]">{"export"}</span>
                                 {" { "}
@@ -171,7 +171,7 @@ export default function RealtimePage() {
                                 3. Wrangler Config
                             </div>
                         </div>
-                        <pre className="p-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
+                        <pre className="px-4 py-5 font-mono text-[11px] md:text-[12px] leading-relaxed overflow-x-auto text-[#E9B46A]">
                             <code>
                                 <span className="text-[#3B82F6] italic">
                                     {"// wrangler.jsonc"}
