@@ -55,7 +55,7 @@ export function ThemeToggle({ initialTheme }: { initialTheme: Theme | "system" }
         <div className="flex items-center gap-4">
             <button
                 onClick={toggleTheme}
-                className="transition-colors text-zinc-500 dark:text-dark-secondary hover:text-orange-medium flex items-center justify-center p-2 rounded-md"
+                className="cursor-pointer transition-colors text-zinc-500 dark:text-dark-secondary hover:text-orange-medium dark:hover:text-orange-medium focus-visible:text-orange-medium dark:focus-visible:text-orange-medium flex items-center justify-center p-2 rounded-md"
                 aria-label="Toggle theme"
             >
                 {theme === "dark" ? (
