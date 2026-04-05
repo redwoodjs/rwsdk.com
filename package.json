@@ -27,6 +27,7 @@
     "@tailwindcss/vite": "^4.0.15",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^6.0.0",
+    "capnweb": "~0.5.0",
     "framer-motion": "^12.28.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
@@ -35,15 +36,15 @@
     "marked-highlight": "^2.2.1",
     "mdx-bundler": "^10.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "19.3.0-canary-fd524fe0-20251121",
-    "react-dom": "19.3.0-canary-fd524fe0-20251121",
-    "react-server-dom-webpack": "19.3.0-canary-fd524fe0-20251121",
-    "rwsdk": "1.0.0-beta.42",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-server-dom-webpack": "19.2.4",
+    "rwsdk": "1.0.5",
     "tailwindcss": "^4.0.15"
   },
   "devDependencies": {
-    "@cloudflare/vite-plugin": "1.15.2",
-    "@cloudflare/workers-types": "4.20251125.0",
+    "@cloudflare/vite-plugin": "1.31.0",
+    "@cloudflare/workers-types": "4.20260405.1",
     "@mdx-js/rollup": "^3.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "~24.5.2",
@@ -55,7 +56,7 @@
     "typescript": "5.8.3",
     "vibe-rules": "^0.2.31",
     "vite": "7.2.4",
-    "wrangler": "4.50.0"
+    "wrangler": "4.80.0"
   },
   "engines": {
     "node": "22.19.0"
