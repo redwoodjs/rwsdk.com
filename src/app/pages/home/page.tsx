@@ -361,10 +361,10 @@ export default function Home() {
         <div className="flex justify-center mb-12">
           <a
             href="/realtime"
-            className="group inline-flex items-center gap-2 text-zinc-500 hover:text-[#e05236] dark:text-dark-secondary dark:hover:text-dark-accent transition-colors"
+            className="group inline-flex items-center gap-2 text-zinc-500 hover:text-[#e05236] focus-visible:text-[#e05236] dark:text-dark-secondary dark:hover:text-dark-accent dark:focus-visible:text-dark-accent transition-colors"
           >
-            <span className="underline underline-offset-4 decoration-zinc-300 dark:decoration-dark-border group-hover:decoration-[#e05236] dark:group-hover:decoration-dark-accent transition-colors">Learn more about Realtime</span>
-            <span className="transform transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+            <span className="underline underline-offset-4 decoration-zinc-300 dark:decoration-dark-border group-hover:decoration-[#e05236] group-focus-visible:decoration-[#e05236] dark:group-hover:decoration-dark-accent dark:group-focus-visible:decoration-dark-accent transition-colors">Learn more about Realtime</span>
+            <span className="transform transition-transform duration-300 group-hover:translate-x-1 group-focus-visible:translate-x-1">&rarr;</span>
           </a>
         </div>
         <ActivityTrack />
