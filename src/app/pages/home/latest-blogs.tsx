@@ -84,7 +84,7 @@ export default async function LatestBlogs() {
             <div className="mt-16 text-center">
                 <a
                     href={link("/blog")}
-                    className="font-mono text-xs text-zinc-400 dark:text-dark-secondary tracking-widest hover:text-zinc-600 dark:hover:text-dark-primary transition-colors uppercase border-b border-zinc-300 dark:border-dark-border pb-1"
+                    className="font-mono text-xs text-zinc-400 dark:text-dark-secondary tracking-widest hover:text-zinc-600 focus-visible:text-zinc-600 dark:hover:text-dark-primary dark:focus-visible:text-dark-primary transition-colors uppercase border-b border-zinc-300 dark:border-dark-border pb-1"
                 >
                     View All Posts
                 </a>
