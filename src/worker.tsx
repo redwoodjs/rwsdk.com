@@ -3,6 +3,11 @@ import { render, route, prefix, layout } from "rwsdk/router";
 import { Document } from "src/document";
 import Home from "src/pages/home/page";
 import { setCommonHeaders } from "src/headers";
+import {
+  markdownForAgents,
+  setAgentDiscoveryHeaders,
+} from "src/agents/middleware";
+import { apiCatalog, agentSkillsIndex } from "src/agents/wellKnown";
 import sitemap from "./sitemap";
 import PersonalSoftware from "src/pages/readme/personal-software/page";
 import { notFound } from "src/utils/notFound";
@@ -330,6 +335,10 @@ export default defineApp([
     ctx.theme = (match?.[1] as "dark" | "light" | "system") || "system";
   },
   setCommonHeaders(),
+  setAgentDiscoveryHeaders(),
+  // Short-circuits HTML rendering for agent clients that send
+  // `Accept: text/markdown`. Must run before `render(Document, ...)`.
+  markdownForAgents(),
 
   ...syncedStateRoutes((env: any) => env.SYNCED_STATE),
 
@@ -372,10 +381,22 @@ export default defineApp([
       });
     }),
     route("/robots.txt", async () => {
-      const robotsTxt = `User-agent: *
-        Allow: /
-        Disallow: /start
-        Sitemap: https://rwsdk.com/sitemap.xml`;
+      // Content-Signal directives declare our AI-usage preferences per the
+      // contentsignals.org / draft-romm-aipref-contentsignals spec:
+      //   search=yes   — indexing for traditional search is welcome
+      //   ai-train=no  — don't use our content to train models
+      //   ai-input=yes — agents can read pages at request time (RAG etc.)
+      const robotsTxt = [
+        "# AI content-usage preferences (contentsignals.org)",
+        "Content-Signal: search=yes, ai-train=no, ai-input=yes",
+        "",
+        "User-agent: *",
+        "Content-Signal: search=yes, ai-train=no, ai-input=yes",
+        "Allow: /",
+        "Disallow: /start",
+        "",
+        "Sitemap: https://rwsdk.com/sitemap.xml",
+      ].join("\n");
 
       return new Response(robotsTxt, {
         status: 200,
@@ -384,6 +405,9 @@ export default defineApp([
         },
       });
     }),
+
+    route("/.well-known/api-catalog", apiCatalog),
+    route("/.well-known/agent-skills/index.json", agentSkillsIndex),
 
     prefix("/changelog", changelogRoutes),
 
