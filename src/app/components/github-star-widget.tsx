@@ -28,7 +28,7 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
         href="https://github.com/redwoodjs/sdk"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center leading-none gap-1 !no-underline"
+        className="group/star inline-flex items-center leading-none gap-1 !no-underline focus-visible:text-[#e05236] dark:focus-visible:text-dark-accent"
       >
         <svg
           id="github-star"
@@ -47,7 +47,7 @@ function GitHubStarWidgetUI({ starCount, error }: GitHubStarWidgetUIProps) {
             strokeLinecap="square"
             strokeLinejoin="bevel"
             strokeWidth="2"
-            className="hover:fill-orange"
+            className="group-hover/star:fill-dark-accent group-focus-visible/star:fill-dark-accent"
           />
         </svg>
         <span className="font-medium no-underline text-dark-accent">

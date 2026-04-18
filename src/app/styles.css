@@ -190,10 +190,15 @@ body {
   font-family: var(--font-mono);
 }
 
+
+footer a img[src$=".svg"] {
+  @apply transition-all duration-150;
+  filter: invert(75%) sepia(0%) saturate(0%) hue-rotate(344deg) brightness(100%) contrast(100%);
+}
+
 footer a:hover img[src$=".svg"],
-footer a:focus img[src$=".svg"] {
-  @apply transition;
-  filter: invert(15%) sepia(39%) saturate(4504%) hue-rotate(321deg) brightness(96%) contrast(88%);
+footer a:focus-visible img[src$=".svg"] {
+  filter: invert(55%) sepia(67%) saturate(2218%) hue-rotate(344deg) brightness(96%) contrast(94%);
 }
 
 /* ===== Syntax highlighting (rwsdkCodeTheme) ===== */

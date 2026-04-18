@@ -35,7 +35,7 @@ export default async function LatestBlogs() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {latestBlogs.map((blog: any) => (
-                    <article key={blog.slug} className="group flex flex-col h-full bg-[#fcfaf8] dark:bg-dark-panel rounded-3xl border border-zinc-200/60 dark:border-dark-border overflow-hidden relative transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-zinc-300/80 dark:hover:border-dark-primary/20">
+                    <article key={blog.slug} className="group flex flex-col h-full bg-[#fcfaf8] dark:bg-dark-panel rounded-3xl border border-zinc-200/60 dark:border-dark-border overflow-hidden relative transition-all duration-300 hover:-translate-y-1 has-[:focus-visible]:-translate-y-1 hover:shadow-xl has-[:focus-visible]:shadow-xl hover:border-zinc-300/80 has-[:focus-visible]:border-zinc-300/80 dark:hover:border-dark-primary/20 dark:has-[:focus-visible]:border-dark-primary/20">
                         <a
                             href={link("/blog/:slug", { slug: blog.slug })}
                             className="flex flex-col h-full no-underline"
@@ -64,7 +64,7 @@ export default async function LatestBlogs() {
                                     </div>
                                 </div>
 
-                                <h3 className="font-serif text-2xl font-medium mb-4 group-hover:text-dark-accent dark:group-hover:text-dark-accent transition-colors text-zinc-900 dark:text-dark-primary leading-tight">
+                                <h3 className="font-serif text-2xl font-medium mb-4 group-hover:text-dark-accent group-has-[:focus-visible]:text-dark-accent dark:group-hover:text-dark-accent dark:group-has-[:focus-visible]:text-dark-accent transition-colors text-zinc-900 dark:text-dark-primary leading-tight">
                                     {blog.title}
                                 </h3>
 
@@ -72,7 +72,7 @@ export default async function LatestBlogs() {
                                     {blog.description}
                                 </p>
 
-                                <div className="mt-auto font-mono text-xs text-dark-accent font-medium tracking-widest uppercase flex items-center group-hover:translate-x-1 transition-transform">
+                                <div className="mt-auto font-mono text-xs text-dark-accent font-medium tracking-widest uppercase flex items-center group-hover:translate-x-1 group-has-[:focus-visible]:translate-x-1 transition-transform">
                                     Read post <span className="ml-2 font-serif text-sm">&rarr;</span>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ export default async function LatestBlogs() {
             <div className="mt-16 text-center">
                 <a
                     href={link("/blog")}
-                    className="font-mono text-xs text-zinc-400 dark:text-dark-secondary tracking-widest hover:text-zinc-600 dark:hover:text-dark-primary transition-colors uppercase border-b border-zinc-300 dark:border-dark-border pb-1"
+                    className="font-mono text-xs text-zinc-400 dark:text-dark-secondary tracking-widest hover:text-zinc-600 focus-visible:text-zinc-600 dark:hover:text-dark-primary dark:focus-visible:text-dark-primary transition-colors uppercase border-b border-zinc-300 dark:border-dark-border pb-1"
                 >
                     View All Posts
                 </a>

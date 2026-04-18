@@ -384,7 +384,7 @@ export default function RouterWalkthrough() {
               <button
                 onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                 disabled={currentStep === 0}
-                className="p-2 text-dark-accent hover:text-white dark:hover:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent dark:disabled:hover:text-dark-accent transition-colors"
+                className="p-2 text-dark-accent hover:text-white focus-visible:text-white dark:hover:text-dark-primary dark:focus-visible:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent disabled:focus-visible:text-dark-accent dark:disabled:hover:text-dark-accent dark:disabled:focus-visible:text-dark-accent transition-colors"
                 aria-label="Previous step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -399,7 +399,7 @@ export default function RouterWalkthrough() {
               <button
                 onClick={() => setCurrentStep(Math.min(routerWalkthroughSteps.length - 1, currentStep + 1))}
                 disabled={currentStep === routerWalkthroughSteps.length - 1}
-                className="p-2 text-dark-accent hover:text-white dark:hover:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent dark:disabled:hover:text-dark-accent transition-colors"
+                className="p-2 text-dark-accent hover:text-white focus-visible:text-white dark:hover:text-dark-primary dark:focus-visible:text-dark-primary disabled:opacity-30 disabled:hover:text-dark-accent disabled:focus-visible:text-dark-accent dark:disabled:hover:text-dark-accent dark:disabled:focus-visible:text-dark-accent transition-colors"
                 aria-label="Next step"
               >
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

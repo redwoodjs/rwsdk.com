@@ -26,7 +26,7 @@ interface NavLinkProps {
 
 function NavLink({ href, label }: NavLinkProps) {
   return (
-    <a href={href} className="hover:text-[#e05236] dark:hover:text-dark-accent transition-colors">
+    <a href={href} className="hover:text-[#e05236] focus-visible:text-[#e05236] dark:hover:text-dark-accent dark:focus-visible:text-dark-accent transition-colors">
       {label}
     </a>
   );

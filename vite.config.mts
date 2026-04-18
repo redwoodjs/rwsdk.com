@@ -15,6 +15,7 @@ export default defineConfig({
     redwood(),
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+      include: /\.mdx$/,
     }),
   ],
 });

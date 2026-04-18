@@ -15,7 +15,7 @@ function FooterLink({
     <li>
       <a
         href={href}
-        className={`hover:text-dark-primary transition-colors ${className || ""
+        className={`hover:text-dark-primary focus-visible:text-dark-primary transition-colors ${className || ""
           }`}
       >
         {children}
@@ -75,32 +75,32 @@ export function Footer() {
             <ul className="list-none text-sm text-dark-secondary font-light space-y-4">
               <FooterLink
                 href={Constants.GITHUB_REPO}
-                className="flex items-center"
+                className="inline-flex items-baseline gap-2"
               >
                 <img
                   src="/images/github.svg"
-                  alt="Github"
-                  className="w-4 h-4 inline-block mr-2 invert"
-                />{" "}
+                  alt=""
+                  className="w-4 h-4 shrink-0 translate-y-[0.15em]"
+                />
                 GitHub
               </FooterLink>
               <FooterLink
                 href={Constants.DISCORD_URL}
-                className="flex items-center"
+                className="inline-flex items-baseline gap-2"
               >
                 <img
                   src="/images/discord.svg"
-                  alt="Discord"
-                  className="w-4 h-4 inline-block mr-2 invert"
-                />{" "}
+                  alt=""
+                  className="w-4 h-4 shrink-0 translate-y-[0.15em]"
+                />
                 Discord
               </FooterLink>
-              <FooterLink href={Constants.X_URL} className="flex items-center">
+              <FooterLink href={Constants.X_URL} className="inline-flex items-baseline gap-2">
                 <img
                   src="/images/x.svg"
-                  alt="X"
-                  className="w-4 h-4 inline-block mr-2 invert"
-                />{" "}
+                  alt=""
+                  className="w-4 h-4 shrink-0 translate-y-[0.15em]"
+                />
                 X
               </FooterLink>
             </ul>

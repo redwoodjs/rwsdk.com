@@ -69,7 +69,7 @@ interface StageProps {
 
 const LayoutWrapper = ({ children, title, description, isLoading, overlay, serverActivity, variant = "default" }: StageProps) => (
     <div className="flex flex-col items-center text-center">
-        <div className="w-full h-[340px] bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border rounded-[2rem] mb-8 relative overflow-hidden shadow-2xl">
+        <div className="w-full h-[340px] bg-[#2b1810] dark:bg-dark-panel border border-[#4a2b1f] dark:border-dark-border rounded-[2rem] mb-8 relative overflow-hidden shadow-2xl" inert>
             {/* Background Grid */}
             <div className="absolute inset-0 opacity-10"
                 style={{
