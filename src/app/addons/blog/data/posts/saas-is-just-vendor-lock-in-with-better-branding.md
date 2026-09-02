@@ -20,7 +20,7 @@ Before you can integrate anything, you first have to figure out what they're act
 
 1.  What problems are they solving?
 2.  Is it compatible with your stack?
-3.  Is their price sane at your scale? a
+3.  Is their price sane at your scale?
 4.  Are their docs clear and do they reveal any implementation weirdness?
 
 This unpaid research work is usually non-transferable. What you learn about "Uploady" or "MegaQueue" doesn't help you next time when you're evaluating something else. It's also subjective. It's marketing, and does the marketing message resonate with you?
